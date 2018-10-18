@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        app:showAsAction="always">
+
+            <menu>
+            <item
+                android:id="@+id/action_myprofile"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="MyProfile"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/action_logout"
+                android:icon="@drawable/view"
+                android:title="Logout"
+                app:showAsAction="ifRoom" />
+            </menu>
+
+
+    </item>
+
+
+
+
+
+</menu>
