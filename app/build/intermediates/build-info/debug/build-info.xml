@@ -5,33 +5,26 @@
     build-mode="COLD"
     density="xxhdpi"
     format="10"
-    ir-eligibility="R_CLASS_CHANGE"
     plugin-version="3.1.4"
-    timestamp="1539871248879"
+    timestamp="1539874548045"
     token="2223274806914652484"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="535" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="31" />
+        duration="0" />
     <task
         name="verifier"
-        duration="102" />
+        duration="0" />
 
     <artifact
         location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
-        type="SPLIT" />
-    <artifact
-        location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
-        type="SPLIT" />
-    <artifact
-        location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
         type="SPLIT" />
 
     <build
@@ -87,16 +80,13 @@
             location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
             type="SPLIT" />
         <artifact
-            location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
-            type="SPLIT" />
-        <artifact
             location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
             type="SPLIT_MAIN" />
     </build>
     <build
         build-mode="COLD"
         ir-eligibility="R_CLASS_CHANGE"
-        timestamp="1539870032349"
+        timestamp="1539874447424"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
@@ -105,10 +95,19 @@
             location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
             type="SPLIT" />
         <artifact
-            location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
+            type="SPLIT" />
+        <artifact
+            location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
             type="SPLIT" />
         <artifact
             location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+            type="SPLIT" />
+        <artifact
+            location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
             type="SPLIT" />
         <artifact
             location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
@@ -116,17 +115,10 @@
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="R_CLASS_CHANGE"
-        timestamp="1539871248879"
+        timestamp="1539874548045"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
-            type="SPLIT" />
-        <artifact
-            location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
-            type="SPLIT" />
-        <artifact
-            location="E:\work\sleepingpatnerbinarymlm\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
             type="SPLIT" />
     </build>
 

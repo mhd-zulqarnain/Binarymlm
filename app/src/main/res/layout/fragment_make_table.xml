@@ -258,7 +258,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:padding="10dp"
-                        android:src="@drawable/multiple_users_silhouette" />
+                        android:src="@drawable/money_bag" />
 
                     <TextView
                         style="@style/CustomBlacktextStyle"
@@ -271,7 +271,7 @@
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0 PKR"
+                        android:text="0"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -323,7 +323,98 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4.7"></LinearLayout>
+            android:layout_weight="4.3"
+            android:weightSum="6"
+            android:orientation="vertical">
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".3"
+                 />
+            <LinearLayout
+                android:id="@+id/seller_table_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".5"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="#50000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="19dp"
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="User"
+                       style="@style/CustomBlacktextStyle"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:gravity="center"
+                        android:text="Amount"
+                        style="@style/CustomBlacktextStyle"
+ />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Price"
+                        style="@style/CustomBlacktextStyle"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:gravity="center"
+                        android:text="Limit"
+                        style="@style/CustomBlacktextStyle"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="action"
+                        style="@style/CustomBlacktextStyle"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="#50000000"
+                    />
+
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4.2"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                style="@style/CustomBlacktextStyle"
+                android:text="Total: 12312"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

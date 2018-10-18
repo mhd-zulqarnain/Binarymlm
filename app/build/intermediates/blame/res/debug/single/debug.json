@@ -4,24 +4,28 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_checked.png.flat",
-        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-mdpi\\checked.png"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_secondary_text_material_dark.xml.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\color\\abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_checked.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-mdpi\\checked.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_arrow_back_black_24dp.png.flat",
         "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_arrow_back_black_24dp.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_add_black_24dp.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_add_black_24dp.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_menu_hardkey_panel_mtrl_mult.9.png.flat",
@@ -36,16 +40,16 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-mdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_black_16dp.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_btn_default_mtrl_shape.xml.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_black_16dp.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-hdpi-v4\\abc_ic_star_black_16dp.png"
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-mdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
@@ -60,12 +64,12 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-mdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_arrow_up.png.flat",
-        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-xxxhdpi\\arrow_up.png"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_arrow_up.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-xxxhdpi\\arrow_up.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_action.xml.flat",
@@ -84,24 +88,24 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_left_arrow.png.flat",
-        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-mdpi\\left_arrow.png"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_left_arrow.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-mdpi\\left_arrow.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable_abc_item_background_holo_light.xml.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable\\abc_item_background_holo_light.xml"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_screenshot_1.png.flat",
-        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-xxxhdpi\\screenshot_1.png"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\color-v23_abc_tint_edittext.xml.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\color-v23\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_screenshot_1.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-xxxhdpi\\screenshot_1.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-mdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -128,12 +132,12 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable\\abc_ic_go_search_api_material.xml"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xxhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_tooltip.xml.flat",
@@ -240,16 +244,16 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\color-v21\\abc_btn_colored_borderless_text_material.xml"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-mdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_normal_pressed.9.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0.aar\\2b36fb50c7438c7d2a265e5f590ca0b9\\res\\drawable-xhdpi-v4\\notification_bg_normal_pressed.9.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_half_black_36dp.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png"
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-mdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
@@ -280,24 +284,24 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-hdpi-v4\\abc_ic_star_black_36dp.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-hdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_big_media_custom.xml.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-28.0.0.aar\\df7841b99910906a35b97cf412100ce3\\res\\layout\\notification_template_big_media_custom.xml"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_right_arrow.png.flat",
         "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-xhdpi\\right_arrow.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_big_media_custom.xml.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-28.0.0.aar\\df7841b99910906a35b97cf412100ce3\\res\\layout\\notification_template_big_media_custom.xml"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_hint_foreground_material_dark.xml.flat",
@@ -344,12 +348,12 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-28.0.0.aar\\df7841b99910906a35b97cf412100ce3\\res\\layout\\notification_media_cancel_action.xml"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_down_arrow.png.flat",
         "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-xhdpi\\down_arrow.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notification_bg_low_normal.9.png.flat",
@@ -380,16 +384,16 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_checked.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-xxxhdpi\\checked.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-mdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_checked.png.flat",
-        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-xxxhdpi\\checked.png"
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-hdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
@@ -402,6 +406,10 @@
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_screenshot_1.png.flat",
         "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\drawable-xhdpi\\screenshot_1.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_add_black_24dp.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_add_black_24dp.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_arrow_back_black_24dp.xml.flat",
@@ -472,12 +480,12 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-mdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-hdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-ldrtl-hdpi-v17\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-watch-v20_abc_dialog_material_background.xml.flat",
@@ -496,12 +504,12 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-ldrtl-xxhdpi-v17\\abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
-        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
-    },
-    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_half_black_48dp.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
+        "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_part_time.xml.flat",
@@ -522,6 +530,10 @@
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_grow_fade_in_from_bottom.xml.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\font_ralewaybold.ttf.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\font\\ralewaybold.ttf"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_notify_panel_notification_icon_bg.png.flat",
@@ -580,6 +592,10 @@
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-hdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_add_black_24dp.xml.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_add_black_24dp.xml"
+    },
+    {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
         "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
@@ -602,6 +618,10 @@
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\anim_abc_fade_in.xml.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_add_black_24dp.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_add_black_24dp.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_wallet.png.flat",
@@ -746,6 +766,10 @@
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\color_abc_background_cache_hint_selector_material_light.xml.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\color\\abc_background_cache_hint_selector_material_light.xml"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_add_black_24dp.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_add_black_24dp.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\layout-watch-v20_abc_alert_dialog_title_material.xml.flat",
@@ -1198,6 +1222,10 @@
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable_tooltip_frame_dark.xml.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable\\tooltip_frame_dark.xml"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_add_black_24dp.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_add_black_24dp.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_star_black_48dp.png.flat",
@@ -1934,6 +1962,10 @@
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_015.png.flat",
         "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_add_black_24dp.png.flat",
+        "source": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_add_black_24dp.png"
     },
     {
         "merged": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
