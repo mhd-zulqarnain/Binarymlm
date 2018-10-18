@@ -1,6 +1,6 @@
 #Internal package file, do not edit.
-#Thu Oct 18 13:11:18 PKT 2018
-1.base=E\:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\11
+#Thu Oct 18 18:09:58 PKT 2018
+1.base=E\:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
 2.path=classes.dex
 0.baseType=DIRECTORY
 3.baseType=DIRECTORY
@@ -14,6 +14,6 @@ count=4
 0.path=classes.dex
 3.base=E\:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12
 0.set=DEX
-0.base=E\:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
+0.base=E\:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\15
 2.baseType=DIRECTORY
 1.path=classes.dex

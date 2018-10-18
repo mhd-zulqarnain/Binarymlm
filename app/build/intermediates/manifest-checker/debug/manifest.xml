@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.redcodetechnologies.mlm.MainActivity" >
+        <activity android:name="com.redcodetechnologies.mlm.ui.DashboardActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
