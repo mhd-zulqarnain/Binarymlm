@@ -1,16 +1,33 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "D:\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\MiR\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\cb230878e88ed646a5cd136de15a2b1f\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
                         "startOffsets": "55,212",
                         "endColumns": "156,134",
                         "endOffsets": "207,342"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\MiR\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-28.0.0.aar\\228dd64d7705bee22da998aaa2b6237f\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,121,182,248",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "116,177,243,310"
+                    },
+                    "to": {
+                        "startLines": "4,5,6,7",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "347,413,474,540",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "408,469,535,602"
                     }
                 }
             ]

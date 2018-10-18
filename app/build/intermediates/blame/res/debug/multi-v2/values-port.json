@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\work\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "outputFile": "D:\\sleepingpatnerbinarymlm\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ZulqurNain\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\36076fd8fc8569db8f2183bfd17ec053\\res\\values-port\\values-port.xml",
+                    "source": "C:\\Users\\MiR\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\cb230878e88ed646a5cd136de15a2b1f\\res\\values-port\\values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
