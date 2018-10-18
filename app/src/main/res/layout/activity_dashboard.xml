@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="6dp"
     android:orientation="vertical"
-    android:weightSum="10.6"
+    android:weightSum="10.8"
     tools:context=".ui.DashboardActivity">
 
     <include
