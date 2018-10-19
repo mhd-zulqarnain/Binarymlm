@@ -105,7 +105,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 
 
         TextView lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
+        //lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
         group = ((ImageView) convertView.findViewById(R.id.group));
 //        if ( getChildrenCount( groupPosition ) == 0 ) {
@@ -117,26 +117,38 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
 //        }
 
         icon = (ImageView) convertView.findViewById(R.id.icon1);
-        if (headerTitle == "Home") {
-            //    icon.setImageResource(R.drawable.ic_home_black_24dp);
+        if (headerTitle == "Dashboard") {
+            icon.setImageResource(R.drawable.icon_dashboard);
             group.setVisibility(View.INVISIBLE);
         }
-        if (headerTitle == "Faqeer Parbirham") {
-            icon.setImageResource(R.drawable.ic_menu_camera);
+        if (headerTitle == "Network") {
+            icon.setImageResource(R.drawable.icon_network);
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
-        if (headerTitle == "Pithoro") {
+        if (headerTitle == "E-Wallet") {
             icon.setImageResource(R.drawable.ic_menu_send);
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
-        if (headerTitle == "Product4") {
+        if (headerTitle == "Payments") {
             icon.setImageResource(R.drawable.ic_menu_gallery);
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
-        if (headerTitle == "Product5") {
+        if (headerTitle == "Settings") {
+            icon.setImageResource(R.drawable.ic_menu_share);
+            group.setVisibility(View.INVISIBLE);
+        }
+        if (headerTitle == "Reports") {
+            icon.setImageResource(R.drawable.ic_menu_share);
+            group.setVisibility(View.INVISIBLE);
+        }
+        if (headerTitle == "Sponsor") {
+            icon.setImageResource(R.drawable.ic_menu_share);
+            group.setVisibility(View.INVISIBLE);
+        }
+        if (headerTitle == "IT Support") {
             icon.setImageResource(R.drawable.ic_menu_share);
             group.setVisibility(View.INVISIBLE);
         }

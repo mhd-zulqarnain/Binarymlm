@@ -134,34 +134,37 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
 
         // Adding child data
-        listDataHeader.add("Home")
-        listDataHeader.add("Faqeer Parbirham")
-        listDataHeader.add("Pithoro")
-        listDataHeader.add("Product4")
-        listDataHeader.add("Product5")
+        listDataHeader.add("Dashboard")
+        listDataHeader.add("Network")
+        listDataHeader.add("E-Wallet")
+        listDataHeader.add("Payments")
+        listDataHeader.add("Settings")
+        listDataHeader.add("Reports")
+        listDataHeader.add("Sponsor")
+        listDataHeader.add("IT Support")
 
         // Adding child data
-        val top = ArrayList<String>()
-        top.add("Follower1")
-        top.add("Follower2")
-        top.add("Follower3")
+        val dashboard = ArrayList<String>()
 
 
-        val mid = ArrayList<String>()
-        mid.add("y1")
-        mid.add("y2")
-        mid.add("y3")
+        val network = ArrayList<String>()
+        network.add("All Members")
+        network.add("Add New Member")
+        network.add("Users Tree")
+        network.add("Users Downliners")
+        network.add("Sign-Up Users List")
 
-        val bottom = ArrayList<String>()
-        bottom.add("z1")
-        bottom.add("z2")
-        bottom.add("z3")
+        val ewallet = ArrayList<String>()
+        ewallet.add("E-Wallet Summary")
+        ewallet.add("Transactions")
+        ewallet.add("E-Wallet Debits")
+        ewallet.add("E-Wallet Credits")
 
 
         //   listDataChild[listDataHeader[0]] = null
-        listDataChild[listDataHeader[1]] = top // Header, Child data
-        listDataChild[listDataHeader[2]] = mid
-        listDataChild[listDataHeader[3]] = bottom
+        listDataChild[listDataHeader[0]] = dashboard // Header, Child data
+        listDataChild[listDataHeader[1]] = network
+        listDataChild[listDataHeader[2]] = ewallet
 
 
     }
