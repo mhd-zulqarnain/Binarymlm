@@ -354,7 +354,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="User"
+                        android:text="Name"
                        style="@style/CustomBlacktextStyle"
                         />
 
@@ -363,7 +363,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:gravity="center"
-                        android:text="Amount"
+                        android:text="Phone"
                         style="@style/CustomBlacktextStyle"
  />
 
@@ -372,7 +372,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Price"
+                        android:text="Bank Name"
                         style="@style/CustomBlacktextStyle"
                         />
 
@@ -381,7 +381,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:gravity="center"
-                        android:text="Limit"
+                        android:text="Account Number"
                         style="@style/CustomBlacktextStyle"
                         />
 
@@ -390,7 +390,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="action"
+                        android:text="Paid Amount"
                         style="@style/CustomBlacktextStyle"
                         />
 
