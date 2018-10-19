@@ -79,18 +79,18 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\MiR\.gradl
 		ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
 		ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:11:9-40
-activity#com.redcodetechnologies.mlm.SignIn
+activity#com.redcodetechnologies.mlm.Activity_SignIn
 ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:13:9-16:20
 	android:screenOrientation
 		ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:15:13-49
 	android:name
-		ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:14:13-35
-activity#com.redcodetechnologies.mlm.Splash
+		ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:14:13-44
+activity#com.redcodetechnologies.mlm.Activity_Splash
 ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:18:9-28:20
 	android:screenOrientation
 		ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:19:13-49
 	android:name
-		ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:18:19-41
+		ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:18:19-50
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from D:\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:22:13-26:29
 action#android.intent.action.MAIN

@@ -20,11 +20,11 @@
         android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.redcodetechnologies.mlm.SignIn"
+            android:name="com.redcodetechnologies.mlm.Activity_SignIn"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.redcodetechnologies.mlm.Splash"
+            android:name="com.redcodetechnologies.mlm.Activity_Splash"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
