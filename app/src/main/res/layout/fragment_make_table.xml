@@ -7,19 +7,11 @@
     android:layout_margin="6dp"
     android:orientation="vertical"
     android:weightSum="10.8"
-    tools:context=".ui.DashboardActivity">
-
-    <include
-        android:id="@+id/some_id_if_needed"
-        layout="@layout/menubar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".8" />
+   >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="10">
 

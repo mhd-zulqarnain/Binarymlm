@@ -1,5 +1,6 @@
 package com.redcodetechnologies.mlm
 
+import android.content.Intent
 import android.os.Bundle
 
 import android.support.design.widget.NavigationView
@@ -66,6 +67,12 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_settings -> return true
+            R.id.action_logout ->{
+                startActivity(Intent(this@DrawerActivity,SignInActivity::class.java))
+                finish()
+                return true
+            }
+
             else -> return super.onOptionsItemSelected(item)
         }
     }
