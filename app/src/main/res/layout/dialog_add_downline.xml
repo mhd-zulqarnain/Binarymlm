@@ -221,7 +221,7 @@
                     <Button
                         android:id="@+id/btn_cancel"
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="35dp"
                         android:text="Close"
                         android:background="@drawable/border_theme_red"
                         style="@style/CustomBlacktextStyle"
@@ -230,7 +230,7 @@
                     <Button
                         android:id="@+id/btn_ok"
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="35dp"
                         android:text="Save"
                         android:layout_marginLeft="5dp"
                         android:background="@color/colorRed"
