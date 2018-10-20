@@ -29,7 +29,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Name"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:maxLines="1"
                         style="@style/CustomBlacktextStyle"
                         android:singleLine="true"
