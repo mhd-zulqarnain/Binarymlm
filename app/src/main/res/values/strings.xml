@@ -1,0 +1,31 @@
+<resources>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="app_name">sleepingpatnerbinarymlm</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="down_line_text"><u>Down-line Members List</u></string>
+
+    <string-array name="spinner_country">
+        <item>Select Country</item>
+        <item>Pakistan</item>
+        <item>India</item>
+        <item>Afganistan</item>
+    </string-array>
+    <string-array name="spinner_package">
+        <item>Select Package</item>
+        <item>none</item>
+    </string-array>
+
+    <string-array name="spinner_downliner">
+        <item>Select downliner</item>
+        <item>none</item>
+    </string-array>
+
+</resources>
