@@ -18,7 +18,17 @@ out/
 .gradle/
 .gradle
 build/
-app/build
+/build
+.idea
+out
+target
+*.iml
+log
+local.properties
+build
+android/libs
+/.gradle
+
 
 # Local configuration file (sdk path, etc)
 local.properties

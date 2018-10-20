@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-35:12
+ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-40:12
 MERGED from [com.android.support:multidex:1.0.2] C:\Users\ZulqurNain\.gradle\caches\transforms-1\files-1.1\multidex-1.0.2.aar\45226e121ed8af244b21882d0bd47ec9\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:28.0.0] C:\Users\ZulqurNain\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\376fade03aa636ec100ba1b28490df5b\AndroidManifest.xml:17:1-24:12
 MERGED from [gr.pantrif:easy-android-splash-screen:0.0.1] C:\Users\ZulqurNain\.gradle\caches\transforms-1\files-1.1\easy-android-splash-screen-0.0.1.aar\2814df84aef34b532268161b9438c1fa\AndroidManifest.xml:2:1-19:12
@@ -40,25 +40,25 @@ MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\ZulqurNain\.grad
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\ZulqurNain\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\4c3964b6a6f785d84448ecf48e9fecb2\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\ZulqurNain\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\8c376904052dab89b1da8d6313a654a6\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\ZulqurNain\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\8542b56e263e6725754da71ef9352c54\AndroidManifest.xml:17:1-22:12
-INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-40:12
 	package
 		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:3:5-42
 		INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml
 		INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml
-		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-35:12
+		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-40:12
 		INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml
-		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-35:12
+		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:1-40:12
 		INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:5:5-33:19
+ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:5:5-38:19
 MERGED from [com.android.support:design:28.0.0] C:\Users\ZulqurNain\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\376fade03aa636ec100ba1b28490df5b\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] C:\Users\ZulqurNain\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\376fade03aa636ec100ba1b28490df5b\AndroidManifest.xml:22:5-20
 MERGED from [gr.pantrif:easy-android-splash-screen:0.0.1] C:\Users\ZulqurNain\.gradle\caches\transforms-1\files-1.1\easy-android-splash-screen-0.0.1.aar\2814df84aef34b532268161b9438c1fa\AndroidManifest.xml:12:5-17:19
@@ -88,33 +88,33 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\ZulqurNain
 	android:theme
 		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:11:9-40
 activity#com.redcodetechnologies.mlm.SignInActivity
-ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:13:9-16:20
+ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:13:9-25:20
 	android:screenOrientation
 		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:15:13-49
 	android:name
 		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:14:13-43
-activity#com.redcodetechnologies.mlm.SplashActivity
-ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:18:9-22:20
-	android:screenOrientation
-		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:19:13-49
-	android:name
-		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:18:19-49
-activity#com.redcodetechnologies.mlm.DrawerActivity
-ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:24:1-31:12
-	android:screenOrientation
-		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:25:5-41
-	android:name
-		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:24:11-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:26:5-30:21
+ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:19:13-23:29
 action#android.intent.action.MAIN
-ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:27:9-61
+ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:20:17-69
 	android:name
-		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:27:17-58
+		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:20:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:29:9-69
+ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:22:17-77
 	android:name
-		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:29:19-66
+		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:22:27-74
+activity#com.redcodetechnologies.mlm.SplashActivity
+ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:27:9-31:20
+	android:screenOrientation
+		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:28:13-49
+	android:name
+		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:27:19-49
+activity#com.redcodetechnologies.mlm.DrawerActivity
+ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:33:1-36:12
+	android:screenOrientation
+		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:34:5-41
+	android:name
+		ADDED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml:33:11-41
 uses-sdk
 INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\work\sleepingpatnerbinarymlm\app\src\main\AndroidManifest.xml
