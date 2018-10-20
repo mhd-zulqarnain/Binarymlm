@@ -289,27 +289,61 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
+                android:id="@+id/layout_add_right"
+                android:orientation="horizontal"
                 android:background="@color/colorRed"
-                android:text="ADD LEFT"
-                android:fontFamily="@font/ralewaybold"
-                android:drawableLeft="@drawable/ic_add_black_24dp"
-                android:textColor="@color/colorWhite"
-                android:layout_marginRight="6px"/>
+                android:layout_marginRight="6px"
 
-            <Button
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LEFT"
+                    android:textColor="@color/colorWhite"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="@font/ralewaybold"
+                    />
+                <ImageView
+                    android:id="@+id/add_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add_black_24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="72dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_add_left"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@color/colorRed"
-                android:text="ADD RIGHT"
-                android:fontFamily="@font/ralewaybold"
-                android:drawableLeft="@drawable/ic_add_black_24dp"
-                android:textColor="@color/colorWhite"
-                />
+                android:orientation="horizontal"
+                android:background="@color/colorGray"
+                android:layout_marginRight="6px"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RIGHT"
+                    android:textColor="@color/colorWhite"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="@font/ralewaybold"
+                    />
+                <ImageView
+                    android:id="@+id/add_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add_black_24dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="70dp"/>
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -321,13 +355,13 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight=".3"
+                android:layout_weight=".2"
                  />
             <LinearLayout
                 android:id="@+id/seller_table_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight=".5"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <View
@@ -337,7 +371,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="19dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="6">
 
@@ -347,7 +381,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Name"
-                       style="@style/CustomBlacktextStyle"
+                       style="@style/CustomHeaderBlacktextStyle"
                         />
 
                     <TextView
@@ -356,7 +390,7 @@
                         android:layout_weight="1.5"
                         android:gravity="center"
                         android:text="Phone"
-                        style="@style/CustomBlacktextStyle"
+                        style="@style/CustomHeaderBlacktextStyle"
  />
 
                     <TextView
@@ -365,7 +399,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Bank Name"
-                        style="@style/CustomBlacktextStyle"
+                        style="@style/CustomHeaderBlacktextStyle"
                         />
 
                     <TextView
@@ -374,7 +408,7 @@
                         android:layout_weight="1.5"
                         android:gravity="center"
                         android:text="Account Number"
-                        style="@style/CustomBlacktextStyle"
+                        style="@style/CustomHeaderBlacktextStyle"
                         />
 
                     <TextView
@@ -383,7 +417,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Paid Amount"
-                        style="@style/CustomBlacktextStyle"
+                        style="@style/CustomHeaderBlacktextStyle"
                         />
 
                 </LinearLayout>
@@ -398,7 +432,13 @@
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4.2"/>
+                android:id="@+id/recylcer_down_member"
+                android:layout_weight="4"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="#50000000" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -406,6 +446,7 @@
                 android:gravity="right"
                 style="@style/CustomBlacktextStyle"
                 android:text="Total: 12312"/>
+
         </LinearLayout>
     </LinearLayout>
 

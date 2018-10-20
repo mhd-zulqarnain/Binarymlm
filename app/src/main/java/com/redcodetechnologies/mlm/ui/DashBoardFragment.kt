@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.redcodetechnologies.mlm.R
+import android.app.Activity
+import com.redcodetechnologies.mlm.DrawerActivity
+
 
 class DashBoardFragment : Fragment() {
 
@@ -15,5 +18,10 @@ class DashBoardFragment : Fragment() {
 
         return view
 
+    }
+
+    override fun onAttach(activity: Activity?) {
+        super.onAttach(activity)
+        (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Dashboard")
     }
 }

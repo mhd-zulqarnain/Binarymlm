@@ -42,6 +42,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         nav_view = findViewById(R.id.nav_view) as NavigationView
         nav_view!!.setNavigationItemSelectedListener(this)
         enableExpandableList();
+        getSupportActionBar()!!.setTitle("Dashboard")
         supportFragmentManager.beginTransaction().add(R.id.main_layout, DashBoardFragment()).commit()
 
     }
@@ -62,9 +63,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         when (item.itemId) {
             R.id.action_settings -> return true
             R.id.action_logout ->{
@@ -96,7 +95,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         expListView!!.setOnGroupExpandListener(OnGroupExpandListener { groupPosition ->
 
-            if (lastExpandedPosition !== -1 && groupPosition != lastExpandedPosition) {
+            if (lastExpandedPosition != -1 && groupPosition != lastExpandedPosition) {
                 expListView!!.collapseGroup(lastExpandedPosition)
             }
             lastExpandedPosition = groupPosition
@@ -172,5 +171,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
 
     }
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
+        fragment!!.onActivityResult(requestCode, resultCode, data)
+    }
 }
