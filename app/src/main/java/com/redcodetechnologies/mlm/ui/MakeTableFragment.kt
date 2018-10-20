@@ -22,6 +22,8 @@ import java.util.*
 
 
 
+
+
 class MakeTableFragment : Fragment() {
     var recylcer_down_member: RecyclerView? = null
     var adapter:DownMemberAdapter? = null
@@ -88,16 +90,12 @@ class MakeTableFragment : Fragment() {
         var dialog_title: TextView = view.findViewById(R.id.dialog_title)
         var ed_name: EditText = view.findViewById(R.id.ed_name)
         var ed_uname: EditText = view.findViewById(R.id.ed_uname)
+        var ed_pass: EditText = view.findViewById(R.id.ed_pass)
 
         ed_name!!.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
-            }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (!ed_name!!.text.toString().trim().isEmpty() && ed_name!!.text.toString().trim() != "") {
 
                     var name = ed_name.text.toString().trim()
@@ -105,10 +103,20 @@ class MakeTableFragment : Fragment() {
                     val r = Random(System.currentTimeMillis())
                     var id= (1 + r.nextInt(2)) * 10000 + r.nextInt(10000)
                     name = name+id
-                    ed_uname.setText(name);
-                    var pas =getRandomPassword(9)
-                    print(pas)
+                    var ran =UUID.randomUUID().toString()
+                    var pas = ran.split("-")
+                    ed_pass.setText(pas[0])
+                    ed_uname.setText(name)
+
+
                 }
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
             }
         })
         if(type=="right"){
@@ -129,8 +137,8 @@ class MakeTableFragment : Fragment() {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             activity!!.startActivityForResult(intent, REQUSET_GALLERY_CODE)
-
         }
+
         dialog.show()
 
     }
@@ -146,15 +154,4 @@ class MakeTableFragment : Fragment() {
         }
     }
 
-
-    private fun getRandomPassword(size: Int): String {
-        val random = Random()
-        val sb = StringBuilder(size)
-
-        for (i in 0 until 8) {
-            sb.append(ALLOWED_CHARACTERS[random.nextInt(ALLOWED_CHARACTERS.length)])
-            return sb.toString()
-        }
-    return  ""
-    }
 }
