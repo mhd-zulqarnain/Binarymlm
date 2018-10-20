@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout
 import android.widget.ExpandableListView.OnGroupExpandListener
 import com.redcodetechnologies.mlm.adapter.ExpandListAdapter
 import com.redcodetechnologies.mlm.ui.DashBoardFragment
+import com.redcodetechnologies.mlm.ui.ItSupportFragment
 import com.redcodetechnologies.mlm.ui.MakeTableFragment
 
 
@@ -41,7 +42,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         nav_view = findViewById(R.id.nav_view) as NavigationView
         nav_view!!.setNavigationItemSelectedListener(this)
         enableExpandableList();
-        supportFragmentManager.beginTransaction().add(R.id.main_layout, DashBoardFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.main_layout, ItSupportFragment()).commit()
 
     }
 
@@ -137,7 +138,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataHeader.add("Home")
         listDataHeader.add("Faqeer Parbirham")
         listDataHeader.add("Pithoro")
-        listDataHeader.add("Product4")
+        listDataHeader.add("It Support")
         listDataHeader.add("Product5")
 
         // Adding child data
@@ -153,9 +154,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         mid.add("y3")
 
         val bottom = ArrayList<String>()
-        bottom.add("z1")
-        bottom.add("z2")
-        bottom.add("z3")
+        bottom.add("Inbox")
+        bottom.add("Sent Box")
 
 
         //   listDataChild[listDataHeader[0]] = null

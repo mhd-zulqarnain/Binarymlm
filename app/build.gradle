@@ -40,4 +40,5 @@ dependencies {
 
     //SplashActivity Screen
     implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
+    implementation 'com.github.mancj:MaterialSearchBar:0.7.1'
 }
