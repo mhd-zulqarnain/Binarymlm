@@ -46,14 +46,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        style="@style/CustomBlacktextStyle"
                         android:text="Cash withdraw" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                           
-                        android:text="0 PKR
-"
+                        style="@style/CustomBlacktextStyle"
+                        android:text="0 PKR"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -86,12 +86,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        style="@style/CustomBlacktextStyle"
                         android:text="DownLine Members" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6"
+                        style="@style/CustomBlacktextStyle"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -124,12 +126,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        style="@style/CustomBlacktextStyle"
                         android:text="Total Direct Commision" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6"
+                        style="@style/CustomBlacktextStyle"
                         android:textStyle="bold" />
 
                 </LinearLayout>

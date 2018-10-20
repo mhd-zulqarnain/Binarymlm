@@ -6,13 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Users
 
-class DownMemberAdapter( var ctx:Context,var list:ArrayList<Users>):RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder{
-        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_downline_member_view,parent,false))
+class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
+    var customFilter: CustomNameSearch? = null
+
+    override fun getFilter(): Filter {
+        if (customFilter == null)
+            customFilter = CustomNameSearch(list, this
+            )
+        else
+            customFilter
+        return customFilter!!
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {
+        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_downline_member_view, parent, false))
         return v
     }
 
@@ -20,10 +33,11 @@ class DownMemberAdapter( var ctx:Context,var list:ArrayList<Users>):RecyclerView
         return list.size
     }
 
-    override fun onBindViewHolder(p0:MyViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: MyViewHolder, p1: Int) {
         p0.bindView(list[p1])
     }
-    class MyViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
+
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var tv_name: TextView? = null
         var tv_phone: TextView? = null

@@ -95,6 +95,7 @@
                         android:inputType="number"
                         android:imeOptions="actionNext"
                         android:maxLines="1"
+                        android:maxLength="11"
                         style="@style/CustomBlacktextStyle"
                         android:singleLine="true"
                         />
@@ -127,6 +128,7 @@
                         android:inputType="number"
                         android:imeOptions="actionNext"
                         android:maxLines="1"
+                        android:maxLength="20"
                         style="@style/CustomBlacktextStyle"
                         android:singleLine="true"
                         />

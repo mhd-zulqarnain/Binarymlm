@@ -49,4 +49,8 @@
         <item name="android:fontFamily">@font/ralewayregular</item>
     </style>
 
+    <style name="SeachViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/ralewayregular</item>
+    </style>
 </resources>

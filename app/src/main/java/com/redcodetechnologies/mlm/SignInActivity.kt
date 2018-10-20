@@ -12,7 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-import com.redcodetechnologies.mlm.utills.Apputils
+import com.company.redcode.royalcryptoexchange.utils.Apputils
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : AppCompatActivity() {
@@ -46,10 +46,8 @@ class SignInActivity : AppCompatActivity() {
                 ed_password.requestFocus()
             }
             else{
-
                     val intent = Intent(this, DrawerActivity::class.java)
                     startActivity(intent)
-
             }
 
 
