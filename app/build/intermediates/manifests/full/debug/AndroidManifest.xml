@@ -35,7 +35,8 @@
         </activity>
         <activity
             android:name="com.redcodetechnologies.mlm.DrawerActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
     </application>
 

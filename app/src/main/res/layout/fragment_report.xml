@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="6dp"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/border_theme_red"
+        android:theme="@style/SeachViewStyle"
+        app:defaultQueryHint="Search.." />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp">
+
+        <Button
+            style="@style/CustomWhitetextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="6px"
+            android:background="@color/colorRed"
+            android:text="CSV"
+            android:textSize="15sp" />
+
+        <Button
+            style="@style/CustomWhitetextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="6px"
+            android:background="@color/colorRed"
+            android:text="Excel"
+            android:textSize="15sp" />
+
+        <Button
+            style="@style/CustomWhitetextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="6px"
+            android:background="@color/colorRed"
+            android:text="PDF"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/seller_table_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="8">
+
+            <TextView
+                style="@style/CustomHeaderBlacktextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="User Name" />
+
+            <TextView
+                style="@style/CustomHeaderBlacktextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="Payment Method" />
+
+            <TextView
+                style="@style/CustomHeaderBlacktextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Account Number" />
+
+            <TextView
+                style="@style/CustomHeaderBlacktextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="Bank Name" />
+
+            <TextView
+                style="@style/CustomHeaderBlacktextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Net Amount Payble" />
+            <TextView
+                style="@style/CustomHeaderBlacktextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Withdrawal Charges" />
+            <TextView
+                style="@style/CustomHeaderBlacktextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Approved Request Date" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recylcer_down_member"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4" />
+
+
+</LinearLayout>
+
+    <!--android:src="@drawable/ic_arrow_back_black_24dp"-->

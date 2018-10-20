@@ -18,6 +18,7 @@ import android.widget.ExpandableListView.OnGroupExpandListener
 import com.redcodetechnologies.mlm.adapter.ExpandListAdapter
 import com.redcodetechnologies.mlm.ui.DashBoardFragment
 import com.redcodetechnologies.mlm.ui.MakeTableFragment
+import com.redcodetechnologies.mlm.ui.ReportFragment
 
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +44,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         nav_view!!.setNavigationItemSelectedListener(this)
         enableExpandableList();
         getSupportActionBar()!!.setTitle("Dashboard")
-        supportFragmentManager.beginTransaction().add(R.id.main_layout, MakeTableFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.main_layout, ReportFragment()).commit()
 
     }
 
