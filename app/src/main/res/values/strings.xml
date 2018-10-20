@@ -23,7 +23,7 @@
         <item>none</item>
     </string-array>
 
-  <string-array name="spinner_downliner">
+    <string-array name="spinner_downliner">
         <item>Select downliner</item>
         <item>none</item>
     </string-array>

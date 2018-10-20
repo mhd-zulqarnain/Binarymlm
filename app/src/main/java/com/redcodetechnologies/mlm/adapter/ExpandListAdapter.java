@@ -126,31 +126,35 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
+        if (headerTitle == "Genealogy Table") {
+            icon.setImageResource(R.drawable.icon_network);
+            group.setVisibility(View.VISIBLE);
+            group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
+        }
         if (headerTitle == "E-Wallet") {
             icon.setImageResource(R.drawable.ic_menu_send);
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
-        if (headerTitle == "Payments") {
+        if (headerTitle == "Notication List") {
             icon.setImageResource(R.drawable.ic_menu_gallery);
+            group.setVisibility(View.INVISIBLE);
+        }
+
+        if (headerTitle == "Reports") {
+            icon.setImageResource(R.drawable.ic_menu_share);
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
-        if (headerTitle == "Settings") {
+        if (headerTitle == "Sponsor Support") {
             icon.setImageResource(R.drawable.ic_menu_share);
-            group.setVisibility(View.INVISIBLE);
-        }
-        if (headerTitle == "Reports") {
-            icon.setImageResource(R.drawable.ic_menu_share);
-            group.setVisibility(View.INVISIBLE);
-        }
-        if (headerTitle == "Sponsor") {
-            icon.setImageResource(R.drawable.ic_menu_share);
-            group.setVisibility(View.INVISIBLE);
+            group.setVisibility(View.VISIBLE);
+            group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
         if (headerTitle == "IT Support") {
             icon.setImageResource(R.drawable.ic_menu_share);
-            group.setVisibility(View.INVISIBLE);
+            group.setVisibility(View.VISIBLE);
+            group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
 
         return convertView;

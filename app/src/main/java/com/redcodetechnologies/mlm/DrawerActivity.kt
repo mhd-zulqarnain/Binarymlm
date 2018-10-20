@@ -13,12 +13,9 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.widget.ExpandableListView
-import android.support.v4.widget.DrawerLayout
 import android.widget.ExpandableListView.OnGroupExpandListener
 import com.redcodetechnologies.mlm.adapter.ExpandListAdapter
-import com.redcodetechnologies.mlm.ui.DashBoardFragment
-import com.redcodetechnologies.mlm.ui.MakeTableFragment
-import com.redcodetechnologies.mlm.ui.ReportFragment
+import com.redcodetechnologies.mlm.ui.*
 
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -110,15 +107,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 if (id == 0L) {
                     // for non-child parents
                     drawer_layout.closeDrawer(GravityCompat.START)
-                 supportFragmentManager.beginTransaction().replace(R.id.main_layout, DashBoardFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, DashBoardFragment()).commit()
 
                     return true
-                } else if(id == 4L) {
+                } else if (id == 4L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
-                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, MakeTableFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, NoficationListFragment()).commit()
                     return true
-                }
-                 else   // for child parents
+                } else   // for child parents
                     return false
 
 
@@ -131,6 +127,105 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             override fun onChildClick(parent: ExpandableListView, v: View,
                                       groupPosition: Int, childPosition: Int, id: Long): Boolean {
                 drawer_layout.closeDrawer(GravityCompat.START)
+
+                var args: Bundle = Bundle();
+
+                if (groupPosition == 1) {
+                    var gt: NetworkFragment = NetworkFragment()
+                    if (childPosition == 0) {
+                        args.putString("Fragment", "MakeTable")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    } else if (childPosition == 1) {
+                        args.putString("Fragment", "DownlineMembers")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    } else if (childPosition == 2) {
+                        args.putString("Fragment", "ReferredMembers")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }
+                } else if (groupPosition == 2) {
+
+                    var gt: GeneologyTableFragment = GeneologyTableFragment()
+                    if (childPosition == 0) {
+                        args.putString("Fragment", "MyPackageCommisionList")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    } else if (childPosition == 1) {
+                        args.putString("Fragment", "MyDirectCommisionList")
+                        gt!!.arguments = args
+
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    } else if (childPosition == 2) {
+                        args.putString("Fragment", "MyTableCommisionList")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }
+                } else if (groupPosition == 3) {
+                    if (childPosition == 1 || childPosition == 2 || childPosition == 3) {
+                        var gt: WalletFragment = WalletFragment()
+                        if (childPosition == 1) {
+                            args.putString("Fragment", "Transactions")
+                            gt!!.arguments = args
+
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        } else if (childPosition == 2) {
+                            args.putString("Fragment", "EWalletCredit")
+                            gt!!.arguments = args
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        } else if (childPosition == 3) {
+                            args.putString("Fragment", "EWalletDebits")
+                            gt!!.arguments = args
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        }
+                    } else {
+                        if (childPosition == 0)
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, EWalletSummaryFragment()).commit()
+                        else if (childPosition == 4)
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
+                        else if (childPosition == 5)
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
+                    }
+                } else if (groupPosition == 5) {
+                    var gt: ReportFragment = ReportFragment()
+                    if (childPosition == 0) {
+                        args.putString("Fragment", "ActivePayout")
+                        gt!!.arguments = args
+
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    } else if (childPosition == 1) {
+                        args.putString("Fragment", "PayoutHistory")
+                        gt!!.arguments = args
+
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    } else if (childPosition == 2) {
+                        args.putString("Fragment", "PayoutWithdrawalinProcess")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }
+                } else if (groupPosition == 6  || groupPosition== 7) {
+                    var gt: InboxFragment = InboxFragment()
+                    var gta: SentFragment = SentFragment()
+
+                    if (childPosition == 0 && groupPosition == 6) {
+                        args.putString("Inbox","Sponser")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }else if (childPosition == 0 && groupPosition ==7 ) {
+                        args.putString("Inbox","IT")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    } else if (childPosition == 1 && groupPosition ==6 ) {
+                        args.putString("Sent","Sponser")
+                        gta!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta!!).commit()
+                    }else if (childPosition == 1 && groupPosition ==7 ) {
+                        args.putString("Sent","IT")
+                        gta!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta!!).commit()
+                    }
+                }
                 return true
             }
         })
@@ -143,38 +238,55 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Adding child data
         listDataHeader.add("Dashboard")
         listDataHeader.add("Network")
+        listDataHeader.add("Genealogy Table")
         listDataHeader.add("E-Wallet")
-        listDataHeader.add("Payments")
-        listDataHeader.add("Settings")
+        listDataHeader.add("Notication List")
         listDataHeader.add("Reports")
-        listDataHeader.add("Sponsor")
+        listDataHeader.add("Sponsor Support")
         listDataHeader.add("IT Support")
 
         // Adding child data
-        val dashboard = ArrayList<String>()
 
 
         val network = ArrayList<String>()
-        network.add("All Members")
-        network.add("Add New Member")
-        network.add("Users Tree")
-        network.add("Users Downliners")
-        network.add("Sign-Up Users List")
+        network.add("Make Table")
+        network.add("Down-line Members")
+        network.add("Referred Members")
+
+        val gtable = ArrayList<String>()
+        gtable.add("My Package Commision List")
+        gtable.add("My Direct Commision List")
+        gtable.add("My Table Commision List")
 
         val ewallet = ArrayList<String>()
         ewallet.add("E-Wallet Summary")
         ewallet.add("Transactions")
-        ewallet.add("E-Wallet Debits")
         ewallet.add("E-Wallet Credits")
+        ewallet.add("E-Wallet Debits")
+        ewallet.add("Withdrawal Fund")
+        ewallet.add("My Withdrawal Request")
 
+        val reports = ArrayList<String>()
+        reports.add("Active Payout")
+        reports.add("Payout History")
+        reports.add("Payout/Withdrawal in Process ")
+
+        val support = ArrayList<String>()
+        support.add("Inbox")
+        support.add("Sent")
 
         //   listDataChild[listDataHeader[0]] = null
-        listDataChild[listDataHeader[0]] = dashboard // Header, Child data
+        // Header, Child data
         listDataChild[listDataHeader[1]] = network
-        listDataChild[listDataHeader[2]] = ewallet
+        listDataChild[listDataHeader[2]] = gtable
+        listDataChild[listDataHeader[3]] = ewallet
+        listDataChild[listDataHeader[5]] = reports
+        listDataChild[listDataHeader[6]] = support
+        listDataChild[listDataHeader[7]] = support
 
 
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
         fragment!!.onActivityResult(requestCode, resultCode, data)
