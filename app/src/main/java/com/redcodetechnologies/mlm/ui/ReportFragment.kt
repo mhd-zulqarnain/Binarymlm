@@ -50,8 +50,9 @@ class ReportFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_report, container, false)
+        /*recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
         recylcer_down_member!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
-
+*/
         return view
     }
 

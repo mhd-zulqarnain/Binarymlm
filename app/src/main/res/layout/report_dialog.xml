@@ -6,7 +6,6 @@
     android:background="@drawable/dialog_background"
     android:orientation="vertical"
 >
-
     <TextView
         android:id="@+id/dialog_title"
         android:layout_width="wrap_content"
@@ -23,7 +22,6 @@
         android:id="@+id/et_rd_uname"
         android:gravity="center"
         android:text="User Name" />
-
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
@@ -32,7 +30,6 @@
         android:layout_margin="5dp"
         android:gravity="center"
         android:text="Payment Method" />
-
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
@@ -41,7 +38,6 @@
         android:layout_margin="5dp"
         android:gravity="center"
         android:text="Account Number" />
-
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
@@ -50,7 +46,6 @@
         android:id="@+id/et_rd_bn"
         android:layout_margin="5dp"
         android:text="Bank Name" />
-
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
@@ -75,7 +70,6 @@
         android:id="@+id/et_rd_nap"
         android:layout_margin="5dp"
         android:text="Net Amount Payble" />
-
     <Button
         android:id="@+id/btn_rd_ok"
         android:layout_width="wrap_content"
@@ -86,5 +80,4 @@
         android:layout_gravity="center"
         style="@style/CustomWhitetextStyle"
         />
-
-</>
+</LinearLayout>
