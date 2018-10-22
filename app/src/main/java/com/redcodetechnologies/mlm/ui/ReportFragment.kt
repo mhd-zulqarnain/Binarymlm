@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import android.support.v7.widget.SearchView
+import com.evrencoskun.tableview.TableView
 import com.redcodetechnologies.mlm.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.adapter.DownMemberAdapter
@@ -40,10 +41,14 @@ class ReportFragment : Fragment() {
     var ed_cnic: EditText? = null
     var search_view: SearchView? = null
     var dialog: AlertDialog? = null
+    var content_container_table_view: TableView? = null
+
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_report, container, false)
-
+        content_container_table_view = view.findViewById(R.id.content_container_table_view);
         return view
     }
 

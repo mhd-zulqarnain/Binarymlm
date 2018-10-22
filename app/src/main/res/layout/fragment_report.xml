@@ -132,11 +132,10 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylcer_down_member"
+    <com.evrencoskun.tableview.TableView
+        android:id="@+id/content_container_table_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4" />
+        android:layout_height="wrap_content"/>
 
 
 </LinearLayout>

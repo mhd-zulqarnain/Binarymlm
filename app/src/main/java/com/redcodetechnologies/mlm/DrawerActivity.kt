@@ -41,7 +41,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         nav_view!!.setNavigationItemSelectedListener(this)
         enableExpandableList();
         getSupportActionBar()!!.setTitle("Dashboard")
-        supportFragmentManager.beginTransaction().add(R.id.main_layout, NetworkFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.main_layout, ReportFragment()).commit()
 
     }
 
