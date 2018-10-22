@@ -11,13 +11,18 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SignInActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
+
+
+
+
 
         </activity>
+
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name=".DrawerActivity"
             android:screenOrientation="portrait"
@@ -28,6 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
