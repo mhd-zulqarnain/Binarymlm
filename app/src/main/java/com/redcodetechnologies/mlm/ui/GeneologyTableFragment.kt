@@ -13,6 +13,12 @@ class GeneologyTableFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_geneologytable, container, false)
         // initView(view)
+       var fragment = arguments!!.getString("Fragment")
+        if(fragment== "MyPackageCommisionList") {   // status visibility gone
+
+        } else if(fragment== "MyDirectCommisionList" || fragment== "MyTableCommisionList") {
+            //view all
+        }
         return view
 }
 
