@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.redcodetechnologies.mlm.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.models.Users
+import kotlinx.android.synthetic.main.fragment_report.view.*
 import java.util.*
 
 
@@ -43,6 +45,7 @@ class ReportFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_report, container, false)
+        recylcer_down_member!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
 
         return view
     }
