@@ -64,7 +64,7 @@ class NetworkFragment : Fragment() {
         add_left = view!!.findViewById(R.id.add_left)
         recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
         search_view = view.findViewById(R.id.search_view)
-
+    
         recylcer_down_member!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = DownMemberAdapter(activity!!, list)
         recylcer_down_member!!.adapter = adapter

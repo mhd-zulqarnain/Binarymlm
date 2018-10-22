@@ -368,6 +368,7 @@
                 app:defaultQueryHint="Search.." />
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -447,6 +448,7 @@
                 android:id="@+id/recylcer_down_member"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:scrollbars="horizontal"
                 android:layout_weight="4" />
 
             <View
@@ -463,6 +465,9 @@
                 android:text="Total: 12312" />
 
         </LinearLayout>
+
+
+
     </LinearLayout>
 
 </LinearLayout>
