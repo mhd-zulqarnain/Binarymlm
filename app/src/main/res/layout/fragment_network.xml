@@ -275,6 +275,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/fragment_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".8"
@@ -364,6 +365,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
+                android:clickable="true"
                 android:background="@drawable/border_theme_red"
                 app:defaultQueryHint="Search.." />
         </LinearLayout>
