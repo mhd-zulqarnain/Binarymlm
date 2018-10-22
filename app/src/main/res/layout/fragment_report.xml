@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="8">
+            android:weightSum="6">
 
             <TextView
                 style="@style/CustomHeaderBlacktextStyle"
@@ -107,21 +107,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Net Amount Payble" />
-            <TextView
-                style="@style/CustomHeaderBlacktextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Withdrawal Charges" />
-            <TextView
-                style="@style/CustomHeaderBlacktextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Approved Request Date" />
+                android:text="View" />
+
 
         </LinearLayout>
 
