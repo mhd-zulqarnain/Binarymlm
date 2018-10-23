@@ -43,8 +43,9 @@ class NetworkFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_network, container, false)
+        frgement_type = arguments?.getString("Fragment").toString()
         initView(view)
-        frgement_type = arguments?.getString("Fragment").toString();
+
         return view
 
     }

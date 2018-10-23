@@ -15,13 +15,14 @@ import com.redcodetechnologies.mlm.models.Users
 class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
     var customFilter: CustomNameSearch? = null
 
-    override fun getFilter(): Filter {
+       override fun getFilter(): Filter{
         if (customFilter == null)
             customFilter = CustomNameSearch(list, this
             )
         else
             customFilter
-        return customFilter!!
+
+            return customFilter!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {

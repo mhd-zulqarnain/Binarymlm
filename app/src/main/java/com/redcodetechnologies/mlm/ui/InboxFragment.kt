@@ -46,6 +46,7 @@ class InboxFragment : Fragment() {
         recyclerView.layoutManager= LinearLayoutManager(context,LinearLayout.VERTICAL,false) as RecyclerView.LayoutManager?
         var adopter = InboxAdapter(data)
         recyclerView.adapter=adopter
+
         searchBar = view!!.findViewById(R.id.ed_search_bar) as EditText
         searchBar!!.setHint("Search..")
 

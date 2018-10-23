@@ -5,21 +5,28 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Filter
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Report
-import com.redcodetechnologies.mlm.models.Users
 
-class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>): RecyclerView.Adapter<ReportAdapter.MyViewHolder>() {
+class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private val onItemClick: (Int) -> Unit): RecyclerView.Adapter<ReportAdapter.MyViewHolder>() {
     override fun onBindViewHolder(p0: MyViewHolder, p1: Int) {
         p0.bindView(datalist[p1])
+        p0.btn_rd_view!!.setOnClickListener{
+        onItemClick(p1)
+
+        }
+
+
     }
 
     var customFilter: CustomNameSearch? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {
-        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.report_dialog, parent, false))
+        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_row_report, parent, false))
         return v
     }
 
@@ -30,29 +37,42 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>): Recycler
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-/*
-        var tv_name: TextView? = null
-        var tv_phone: TextView? = null
-        var tv_bank: TextView? = null
-        var tv_account: TextView? = null
-        var tv_paid: TextView? = null
-*/
+
+
+        var et_rd_uname: TextView? = null
+        var et_rd_pm: TextView? = null
+        var et_rd_an: TextView? = null
+        var et_rd_bn: TextView? = null
+
+        var btn_rd_view: Button? = null
+
         fun bindView(users: Report) {
 
-   /*         tv_name = itemView.findViewById(R.id.tv_name)
-            tv_phone = itemView.findViewById(R.id.tv_phone)
-            tv_bank = itemView.findViewById(R.id.tv_bank)
-            tv_account = itemView.findViewById(R.id.tv_account)
-            tv_paid = itemView.findViewById(R.id.tv_paid)
-            tv_name!!.text = users.name
-            tv_phone!!.text = users.phone
-            tv_bank!!.text = users.bank
-            tv_account!!.text = users.account
-            tv_paid!!.text = users.paid
-*/
+
+
+            et_rd_uname = itemView.findViewById(R.id.et_rd_uname)
+            et_rd_pm = itemView.findViewById(R.id.et_rd_pm)
+            et_rd_an = itemView.findViewById(R.id.et_rd_an)
+            et_rd_bn = itemView.findViewById(R.id.et_rd_bn)
+
+            btn_rd_view = itemView.findViewById(R.id.btn_rd_view)
+
+
+
+
+
+            et_rd_uname!!.text = users.UserName
+            et_rd_pm!!.text = users.PaymentMethod
+            et_rd_an!!.text = users.AccountNumber
+            et_rd_bn!!.text = users.BankName
+
+
+
 
             //  tv_price!!.text = order.BitPrice
 
         }
     }
 }
+
+
