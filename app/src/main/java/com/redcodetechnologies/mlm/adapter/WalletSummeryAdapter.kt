@@ -15,7 +15,7 @@ import com.redcodetechnologies.mlm.models.Inbox
 import com.redcodetechnologies.mlm.utils.InboxSearch
 
 
-class InboxAdapter (var ctx: Context, var datalist: ArrayList<Inbox>,private val onItemClick: (Int,String) -> Unit): RecyclerView.Adapter<InboxAdapter.ViewHolder>(), Filterable {
+class WalletSummeryAdapter (var ctx: Context, var datalist: ArrayList<Inbox>, private val onItemClick: (Int, String) -> Unit): RecyclerView.Adapter<WalletSummeryAdapter.ViewHolder>(), Filterable {
     var inboxFilter: InboxSearch? = null
 
     override fun getFilter(): Filter {
