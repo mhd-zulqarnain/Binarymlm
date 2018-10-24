@@ -1,247 +1,384 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/colorWhite"
+        android:minHeight="?attr/actionBarSize">
 
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/CustomBlacktextStyle"
+            android:text="Add members" />
+
+    </android.support.v7.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:layout_below="@id/toolbar_top">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="15dp">
+
+
         <TextView
             android:id="@+id/dialog_title"
+            style="@style/CustomHeadingtextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Left Member"
-            style="@style/CustomHeadingtextStyle"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="left"
+            android:text="Add Left Member" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/ed_name"
+                style="@style/CustomBlacktextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Name"
                 android:imeOptions="actionDone"
                 android:maxLines="1"
-                style="@style/CustomBlacktextStyle"
-                android:singleLine="true"
-                />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/ed_uname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="User name"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                style="@style/CustomBlacktextStyle"
-                android:singleLine="true"
-                android:enabled="false"
-                />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/ed_pass"
-                style="@style/CustomBlacktextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:hint="Password"
-                android:imeOptions="actionNext"
-                android:inputType="textPassword"
-                android:maxLines="1"
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="3dp">
+
+                <EditText
+                    android:id="@+id/ed_uname"
+                    style="@style/CustomBlacktextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="User name"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/ed_pass"
+                    style="@style/CustomBlacktextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:hint="Password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/ed_email"
+                style="@style/CustomBlacktextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:inputType="textEmailAddress"
                 android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
-                style="@style/CustomBlacktextStyle"
-                android:singleLine="true"
-                />
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/ed_phone"
+                style="@style/CustomBlacktextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone"
-                android:inputType="number"
                 android:imeOptions="actionNext"
-                android:maxLines="1"
+                android:inputType="number"
                 android:maxLength="11"
-                style="@style/CustomBlacktextStyle"
-                android:singleLine="true"
-                />
+                android:maxLines="1"
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/ed_address"
+                style="@style/CustomBlacktextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address"
-                android:inputType="text"
                 android:imeOptions="actionNext"
+                android:inputType="text"
                 android:maxLines="1"
-                style="@style/CustomBlacktextStyle"
-                android:singleLine="true"
-                />
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/ed_account"
+                style="@style/CustomBlacktextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Account Number"
-                android:inputType="number"
                 android:imeOptions="actionNext"
-                android:maxLines="1"
+                android:inputType="number"
                 android:maxLength="20"
-                style="@style/CustomBlacktextStyle"
-                android:singleLine="true"
-                />
+                android:maxLines="1"
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/ed_bank_name"
+                style="@style/CustomBlacktextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Bank Name"
-                android:inputType="text"
                 android:imeOptions="actionNext"
+                android:inputType="text"
                 android:maxLines="1"
-                style="@style/CustomBlacktextStyle"
-                android:singleLine="true"
-                />
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/ed_cnic"
+                style="@style/CustomBlacktextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Cnic"
-                android:inputType="number"
                 android:imeOptions="actionDone"
+                android:inputType="number"
                 android:maxLines="1"
-                style="@style/CustomBlacktextStyle"
-                android:singleLine="true"
-                />
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
+
             <android.support.v7.widget.AppCompatSpinner
+                style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:entries="@array/spinner_downliner"
-                android:theme="@style/CustomSpinner"
-                />
+                android:theme="@style/CustomSpinner" />
+
             <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spinner_package"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_weight="1"
-                android:theme="@style/CustomSpinner"
                 android:entries="@array/spinner_package"
-                />
+                android:theme="@style/CustomSpinner" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
+
             <android.support.v7.widget.AppCompatSpinner
-                android:layout_width="0dp"
                 style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:theme="@style/CustomSpinner"
                 android:entries="@array/spinner_country"
-                />
+                android:theme="@style/CustomSpinner" />
+
             <Button
                 android:id="@+id/btn_add_image"
+                style="@style/CustomWhitetextStyle"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
-                android:text="Choose Image"
-                style="@style/CustomWhitetextStyle"
                 android:layout_weight="1"
                 android:background="@color/colorRed"
-                />
+                android:text="Choose Image" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_margin="10dp"
-            android:orientation="horizontal"
-            >
-
-            <Button
-                android:id="@+id/btn_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:text="Close"
-                android:background="@drawable/border_theme_red"
-                style="@style/CustomBlacktextStyle"
-                />
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_ok"
-                android:layout_width="wrap_content"
+                style="@style/CustomWhitetextStyle"
+                android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:text="Save"
                 android:layout_marginLeft="5dp"
                 android:background="@color/colorRed"
-                style="@style/CustomWhitetextStyle"
-                />
+                android:text="Save" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/layout_package"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="#50000000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorDarkGrey"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    style="@style/CustomHeaderLighttextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Percent" />
+
+                <TextView
+                    style="@style/CustomHeaderLighttextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Price" />
+
+                <TextView
+                    style="@style/CustomHeaderLighttextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Validity" />
+
+                <TextView
+                    style="@style/CustomHeaderLighttextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Min Withdrawal" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    style="@style/CustomHeaderBlacktextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="20%" />
+
+                <TextView
+                    style="@style/CustomHeaderBlacktextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="100 PKR" />
+
+                <TextView
+                    style="@style/CustomHeaderBlacktextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="12 hours" />
+
+                <TextView
+                    style="@style/CustomHeaderBlacktextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="1000 PKR" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="#50000000" />
         </LinearLayout>
     </LinearLayout>
 
+    </LinearLayout>
+    </ScrollView>
 
-
-
-</LinearLayout>
+</RelativeLayout>
