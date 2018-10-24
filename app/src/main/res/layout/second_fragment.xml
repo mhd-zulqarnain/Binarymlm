@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_margin="12dp"
+    >
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="14"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Password"
+        android:fontFamily="@font/ralewaybold"
+        android:textSize="17sp"
+        android:textColor="#313131"
+        android:layout_marginTop="10dp"
+        />
+
+    <EditText
+        android:id="@+id/ed_password"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:backgroundTint="#a0a1a1"
+        android:fontFamily="@font/ralewayregular"
+        android:hint="..........."
+        android:inputType="textPassword"
+        android:textColor="#313131"
+        android:textColorHint="#565656"
+        android:textSize="17sp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        />
+
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Phone"
+        android:fontFamily="@font/ralewaybold"
+        android:textSize="17sp"
+        android:textColor="#313131"
+        />
+
+    <EditText
+        android:id="@+id/ed_phone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:backgroundTint="#a0a1a1"
+        android:fontFamily="@font/ralewayregular"
+        android:hint="0336183628"
+        android:textColor="#313131"
+        android:textColorHint="#565656"
+        android:textSize="17sp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Email"
+        android:fontFamily="@font/ralewaybold"
+        android:textSize="17sp"
+        android:textColor="#313131"
+        />
+
+    <EditText
+        android:id="@+id/ed_email"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:backgroundTint="#a0a1a1"
+        android:fontFamily="@font/ralewayregular"
+        android:hint="shk@gmaik.moc "
+        android:inputType="textEmailAddress"
+        android:textColor="#313131"
+        android:textColorHint="#565656"
+        android:textSize="17sp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Bank Name "
+        android:fontFamily="@font/ralewaybold"
+        android:textSize="17sp"
+        android:textColor="#313131"
+        />
+
+    <EditText
+        android:id="@+id/ed_bankname"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:backgroundTint="#a0a1a1"
+        android:fontFamily="@font/ralewayregular"
+        android:hint="ABD"
+        android:textColor="#313131"
+        android:textColorHint="#565656"
+        android:textSize="17sp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Account Number"
+        android:fontFamily="@font/ralewaybold"
+        android:textSize="17sp"
+        android:textColor="#313131"
+        />
+
+    <EditText
+        android:id="@+id/ed_accountnumber"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:backgroundTint="#a0a1a1"
+        android:fontFamily="@font/ralewayregular"
+        android:hint="8971-238723982"
+        android:textColor="#313131"
+        android:textColorHint="#565656"
+        android:textSize="17sp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        />
+
+
+    <Button
+        android:id="@+id/btn_updateprivacy"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1.3"
+        android:background="@color/colorRed"
+        android:fontFamily="@font/ralewaybold"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Update Privacy"
+        android:textColor="@color/colorWhite" />
+
+
+
+</LinearLayout>
+
+
+
+</LinearLayout>

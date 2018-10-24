@@ -69,6 +69,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 finish()
                 return true
             }
+            R.id.action_myprofile ->{
+                supportFragmentManager.beginTransaction().replace(R.id.main_layout, ProfileFragment()).commit()
+                return true
+            }
 
             else -> return super.onOptionsItemSelected(item)
         }
