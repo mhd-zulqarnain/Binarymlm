@@ -75,6 +75,7 @@ android:layout_margin="12dp"
         android:singleLine="true"
         android:imeOptions="actionNext"
         android:inputType="number"
+        android:maxLength="12"
         />
 
     <TextView
@@ -154,6 +155,8 @@ android:layout_margin="12dp"
         android:maxLines="1"
         android:singleLine="true"
         android:imeOptions="actionDone"
+        android:maxLength="18"
+        android:inputType="number"
         />
 
 

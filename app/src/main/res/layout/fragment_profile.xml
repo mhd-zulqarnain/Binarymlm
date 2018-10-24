@@ -5,7 +5,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="12dp"
+    android:layout_marginTop="12dp"
         >
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:background="@drawable/background_pagertabstrip"
+            android:background="@color/colorRed"
             android:padding="13dp"
             android:textAppearance="@style/pagertabstrip"
             />

@@ -7,11 +7,11 @@ android:layout_height="match_parent"
 android:layout_margin="12dp"
     >
 
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:weightSum="11.6"
+
+    android:layout_weight="11.6"
     android:orientation="vertical"
     android:layout_margin="10dp"
     >
@@ -112,22 +112,15 @@ android:layout_margin="12dp"
         android:textColor="#313131"
         />
 
-    <EditText
-        android:id="@+id/ed_country"
+    <android.support.v7.widget.AppCompatSpinner
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"
-        android:backgroundTint="#a0a1a1"
-        android:fontFamily="@font/ralewayregular"
-        android:hint="Pakistan"
-        android:textColor="#313131"
-        android:textColorHint="#565656"
-        android:textSize="17sp"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:imeOptions="actionDone"
-        android:digits="abcdefghijklmnopqrstuvwxyz"
-        />
+        android:entries="@array/country_arrays"
+        >
+
+    </android.support.v7.widget.AppCompatSpinner>
+
 
 
     <Button
