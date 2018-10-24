@@ -5,12 +5,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Users
+import com.redcodetechnologies.mlm.utils.CustomNameSearch
 
 class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
     var customFilter: CustomNameSearch? = null

@@ -1,0 +1,6 @@
+package com.redcodetechnologies.mlm.models
+
+data class WalletSummery (var Catagory:String, var Balance:String)
+
+
+

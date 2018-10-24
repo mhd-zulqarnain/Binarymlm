@@ -214,6 +214,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
                     if (childPosition == 0 && groupPosition == 6) {
                         args.putString("Inbox","Sponser")
+
                         gt!!.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                     }else if (childPosition == 0 && groupPosition ==7 ) {

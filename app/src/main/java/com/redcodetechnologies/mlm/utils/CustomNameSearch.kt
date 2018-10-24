@@ -1,12 +1,11 @@
-package com.redcodetechnologies.mlm.adapter
+package com.redcodetechnologies.mlm.utils
 
 import android.widget.Filter;
+import com.redcodetechnologies.mlm.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.models.Users
-import java.nio.file.Files.size
 
 
-
-class CustomNameSearch(var filterList :ArrayList<Users>,var adapter: DownMemberAdapter): Filter() {
+class CustomNameSearch(var filterList: ArrayList<Users>, var adapter: DownMemberAdapter): Filter() {
     override fun performFiltering(constraint: CharSequence?): Filter.FilterResults {
         var constraint = constraint
         val results = Filter.FilterResults()

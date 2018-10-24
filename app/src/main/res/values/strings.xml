@@ -28,4 +28,9 @@
         <item>none</item>
     </string-array>
 
+    <string-array name="spinner_time">
+        <item>ALL</item>
+        <item>This Month</item>
+        <item>This Year</item>
+    </string-array>
 </resources>
