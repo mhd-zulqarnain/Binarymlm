@@ -2,6 +2,7 @@ package com.redcodetechnologies.mlm.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.PagerTabStrip
 import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,8 @@ class ProfileFragment : Fragment() {
 
 
        val viewPager = view.findViewById<ViewPager>(R.id.viewPager)
+        val strip = view.findViewById<PagerTabStrip>(R.id.pager_header)
+        strip.setPadding(-280,0,0,0)
 
 
          val adapter = ViewPagerAdapter(activity!!.supportFragmentManager)

@@ -3,13 +3,15 @@ package com.example.mir.viewpager
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 
-class ViewPagerAdapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class ViewPagerAdapter internal constructor(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     private val COUNT = 2
 
     override fun getItem(position: Int): Fragment? {
         var fragment: Fragment? = null
+
         when (position) {
             0 -> fragment = FirstFragment()
             1 -> fragment = SecondFragment()
