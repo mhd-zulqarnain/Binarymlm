@@ -54,103 +54,15 @@ class SecondFragment : android.support.v4.app.Fragment() {
 
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------
 
-        var keyDel2 : Int? =  0;
-
-        accountnumber!!.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                accountnumber!!.setOnKeyListener(object : View.OnKeyListener{
-                    override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-                        if (keyCode == KeyEvent.KEYCODE_DEL)
-                            keyDel2 = 1;
-                        return false;
-                    }
-
-                });
-                if (keyDel2 == 0) {
-                    var len : Int? = accountnumber!!.text.toString().length
-
-                    if(len == 4 || len == 15) {
-                        accountnumber!!.setText(accountnumber!!.getText().toString() + "-");
-                        accountnumber!!.setSelection(accountnumber!!.getText().toString().length);
-
-                    }
-                    else {
-                        keyDel2 = 0;
-                    }
-                }
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-
-            }
-
-
-
-        });
-        //-------------------------------------------------------------------------------------------------------------------------------------------
-
-        var keyDel : Int? =  0;
-
-
-
-        phone!!.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                phone!!.setOnKeyListener(object : View.OnKeyListener{
-                    override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-                        if (keyCode == KeyEvent.KEYCODE_DEL)
-                            keyDel = 1;
-                        return false;
-                    }
-
-                });
-                if (keyDel == 0) {
-                    var len : Int? = phone!!.text.toString().length
-
-                    if(len == 4) {
-                        phone!!.setText(phone!!.getText().toString() + "-");
-                        phone!!.setSelection(phone!!.getText().toString().length);
-
-                    }
-                    else {
-                        keyDel = 0;
-                    }
-                }
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-
-
-            }
-
-
-
-        });
 
         return view
-    }
+    }//oncreate()
 
 
 
 
-
-
-
-fun validiation(){
+    fun validiation(){
 
     if(password!!.text.toString().trim(' ').length < 1) {
         password!!.error = Html.fromHtml("<font color='#E0796C'>Password could not be empty</font>")
@@ -197,3 +109,69 @@ fun validiation(){
 }
 
 }
+
+////-------------------------------------------------------------------------------------------------------------------------------------------
+//
+//        var keyDel2 : Int? =  0;
+//
+//        accountnumber!!.addTextChangedListener(object : TextWatcher{
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//
+//                accountnumber!!.setOnKeyListener(object : View.OnKeyListener{
+//                    override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+//                        if (keyCode == KeyEvent.KEYCODE_DEL)
+//                            keyDel2 = 1;
+//                        return false;
+//                    }
+//
+//                });
+//                if (keyDel2 == 0) {
+//                    var len : Int? = accountnumber!!.text.toString().length
+//
+//                    if(len == 4 || len == 15) {
+//                        accountnumber!!.setText(accountnumber!!.getText().toString() + "-");
+//                        accountnumber!!.setSelection(accountnumber!!.getText().toString().length);
+//
+//                    }
+//                    else {
+//                        keyDel2 = 0;
+//                    }
+//                }
+//
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//
+//
+//            }
+//
+//
+//
+//        });
+////-------------------------------------------------------------------------------------------------------------------------------------------
+//
+//        var flag : Boolean? = false;
+//
+//
+//        phone!!.addTextChangedListener(object : TextWatcher{
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//            override fun afterTextChanged(s: Editable?) {}
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//
+//
+//
+//                var len : Int? = phone!!.text.toString().length
+//
+//                if(len == 4 ){
+//                    phone!!.setText(phone!!.getText().toString() + "-809809898798798797");
+//                    phone!!.setSelection(phone!!.getText().toString().length);
+//                }
+//
+//                }
+//
+//        });

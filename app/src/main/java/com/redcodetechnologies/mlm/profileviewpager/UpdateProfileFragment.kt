@@ -28,6 +28,7 @@ class FirstFragment : Fragment() {
     var name : EditText? = null
     var username : EditText? = null
     var address : EditText? = null
+    var country : Spinner? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,6 +39,7 @@ class FirstFragment : Fragment() {
         name = view!!.findViewById<EditText>(R.id.ed_name)
         username = view!!.findViewById<EditText>(R.id.ed_username)
         address = view!!.findViewById<EditText>(R.id.ed_address)
+        country = view!!.findViewById<Spinner>(R.id.spn_country)
 
         updateprofile!!.setOnClickListener(View.OnClickListener {
 
