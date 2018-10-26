@@ -56,6 +56,7 @@ class ReportFragment : Fragment() {
         reportList.add(Report("Ali","EasyPaisa","21212321321","Habib","12","0.5","12-10-2018","12-10-2018"))
         reportList.add(Report("Zulqarnain","EasyPaisa","132231231","Metro","16","1","10-8-2018","12-10-2018"))
         reportList.add(Report("Arif","JazzCash","546546545454","Alfalah","10","1.5","11-10-2018","12-10-2018"))
+
         var type:String = "View";
         report = ReportAdapter(activity!!,reportList){ post->
             openreportdialog(reportList[post])
