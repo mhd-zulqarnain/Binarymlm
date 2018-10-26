@@ -7,7 +7,7 @@
 
     <string name="app_name">sleepingpatnerbinarymlm</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="down_line_text"><u>Down-line Members List</u></string>
@@ -26,6 +26,18 @@
     <string-array name="spinner_downliner">
         <item>Select downliner</item>
         <item>none</item>
+    </string-array>
+
+
+    <string-array name="spinner_time">
+        <item>ALL</item>
+        <item>This Month</item>
+        <item>This Year</item>
+    </string-array>
+    <string-array name="spinner_perority">
+        <item>Normal</item>
+        <item>Lowest</item>
+        <item>Highest</item>
     </string-array>
 
     <string-array name="country_arrays">

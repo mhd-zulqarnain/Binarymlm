@@ -1,6 +1,7 @@
 package com.redcodetechnologies.mlm.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,10 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import android.support.v7.widget.SearchView
-import com.evrencoskun.tableview.TableView
+
 import com.redcodetechnologies.mlm.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.adapter.DownMemberAdapter
+import com.redcodetechnologies.mlm.adapter.ReportAdapter
+import com.redcodetechnologies.mlm.models.Report
 import com.redcodetechnologies.mlm.models.Users
 import kotlinx.android.synthetic.main.fragment_report.view.*
 import java.util.*
@@ -23,14 +26,11 @@ import java.util.*
 
 class ReportFragment : Fragment() {
     var recylcer_down_member: RecyclerView? = null
-    var adapter: DownMemberAdapter? = null
-    var layout_add_right: LinearLayout? = null
-    var layout_add_left: LinearLayout? = null
-    var add_left: ImageView? = null
-    var add_right: ImageView? = null
-    var list: ArrayList<Users> = ArrayList()
-    val REQUSET_GALLERY_CODE: Int = 43
 
+    var report:ReportAdapter? =null
+
+    val REQUSET_GALLERY_CODE: Int = 43
+    var reportList: ArrayList<Report> = ArrayList()
     var dialog_title: TextView? = null
     var ed_name: EditText? = null
     var ed_uname: EditText? = null
@@ -43,17 +43,75 @@ class ReportFragment : Fragment() {
     var ed_cnic: EditText? = null
     var search_view: SearchView? = null
     var dialog: AlertDialog? = null
-    var content_container_table_view: TableView? = null
+
 
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_report, container, false)
-        /*recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
-        recylcer_down_member!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
-*/
+        recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
+        recylcer_down_member!!.layoutManager = LinearLayoutManager((activity as Context?)!!, LinearLayout.VERTICAL, false)
+
+        reportList.add(Report("Ali","EasyPaisa","21212321321","Habib","12","0.5","12-10-2018","12-10-2018"))
+        reportList.add(Report("Zulqarnain","EasyPaisa","132231231","Metro","16","1","10-8-2018","12-10-2018"))
+        reportList.add(Report("Arif","JazzCash","546546545454","Alfalah","10","1.5","11-10-2018","12-10-2018"))
+
+        var type:String = "View";
+        report = ReportAdapter(activity!!,reportList){ post->
+            openreportdialog(reportList[post])
+        }
+        recylcer_down_member!!.adapter = report
+
+
+    
+
+
         return view
+    }
+
+    private fun openreportdialog(report: Report) {
+        val view: View = LayoutInflater.from((activity as Context?)!!).inflate(R.layout.report_dialog,null)
+        val alertBox = android.support.v7.app.AlertDialog.Builder((activity as Context?)!!)
+        alertBox.setView(view)
+        dialog = alertBox.create()
+        dialog!!.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+            dialog!!.setCancelable(false);
+       val  dialog_title :TextView = view.findViewById(R.id.dialog_title)
+
+       val  et_rd_uname :TextView = view.findViewById(R.id.et_rd_uname)
+       val  et_rd_pm :TextView = view.findViewById(R.id.et_rd_pm)
+       val  et_rd_an :TextView = view.findViewById(R.id.et_rd_an)
+       val  et_rd_bn :TextView = view.findViewById(R.id.et_rd_bn)
+        val  et_rd_wc :TextView = view.findViewById(R.id.et_rd_wc)
+        val  et_rd_ard :TextView = view.findViewById(R.id.et_rd_ard)
+        val  et_rd_nap :TextView = view.findViewById(R.id.et_rd_nap)
+        val  et_rd_pd :TextView = view.findViewById(R.id.et_rd_pd)
+        val  btn_rd_ok :Button = view.findViewById(R.id.btn_rd_ok)
+
+        dialog_title.text = arguments!!.getString("Fragment")
+
+
+        et_rd_uname.text = et_rd_uname.text.toString() + report.UserName
+        et_rd_pm.text = et_rd_pm.text.toString()+ report.PaymentMethod
+        et_rd_an.text =  et_rd_an.text.toString()+ report.AccountNumber
+        et_rd_bn.text =et_rd_bn.text.toString()+  report.BankName
+        et_rd_wc.text = et_rd_wc.text.toString()+ report.WithdrawalCharges
+        et_rd_ard.text = et_rd_ard.text.toString()+  report.ApprovedRequestDate
+        et_rd_nap.text =et_rd_nap.text.toString()+  report.NetAmountPayble
+        et_rd_pd.text =et_rd_pd.text.toString()+  report.PaidDate
+
+        if(dialog_title.text!= "PayoutHistory")
+            et_rd_pd.visibility=View.GONE
+
+        btn_rd_ok.setOnClickListener{
+            dialog!!.dismiss()
+        }
+
+        dialog!!.show()
+
+
     }
 
 
