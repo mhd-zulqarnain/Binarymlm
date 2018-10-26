@@ -34,7 +34,9 @@ class GetHelp : Fragment() {
         initView(view)
         return view
     }
+
     private fun initView(view: View?) {
+        activity!!.actionBar?.setTitle("Get Help")
         message = view?.findViewById(R.id.ed_message)
         peroritySpini = view?.findViewById(R.id.perority)
         description = view?.findViewById(R.id.ed_description)
@@ -46,7 +48,7 @@ class GetHelp : Fragment() {
                 ed_message?.error = Html.fromHtml("<font color='#E0796C'>Message could not be empty</font>")
                 ed_message?.requestFocus()
             }
-            if (description?.text.toString().trim(' ').length < 1) {
+            if (ed_description?.text.toString().trim(' ').length < 1) {
                 ed_description?.error = Html.fromHtml("<font color='#E0796C'>Description could not be empty</font>")
                 ed_description?.requestFocus()
             }
@@ -54,6 +56,7 @@ class GetHelp : Fragment() {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = "image/*"
                 startActivityForResult(intent, REQUSET_GALLERY_CODE)
+
             }
 
         }
