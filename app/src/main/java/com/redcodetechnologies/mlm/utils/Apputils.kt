@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.text.TextUtils
 import android.widget.Toast
+import java.lang.Exception
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -54,20 +55,13 @@ class Apputils {
 
                     .replace("(?:[0-9] ?){11,11}".toRegex(), "") // Replace any digit by an empty string
 
-           /* for (i in items.indices) {
-                if (output.contains(items[i])) {
-                    return true
-                }
-            }*/
+            /* for (i in items.indices) {
+                 if (output.contains(items[i])) {
+                     return true
+                 }
+             }*/
             return output
         }
-        fun isNetworkAvailable(context: Context): Boolean {
-            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            var netInfo: NetworkInfo? = null
-            if (cm != null) {
-                netInfo= cm.activeNetworkInfo
-            }
-            return netInfo != null && netInfo.isConnectedOrConnecting
-        }
+
     }
 }
