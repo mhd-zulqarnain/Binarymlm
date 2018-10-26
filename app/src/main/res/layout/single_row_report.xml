@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <TextView
+            android:id="@+id/et_rd_uname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Date/Time"
+            style="@style/CustomHeaderBlacktextStyle"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/et_rd_pm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="Order Description"
+            style="@style/CustomHeaderBlacktextStyle"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/et_rd_an"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Price"
+            style="@style/CustomHeaderBlacktextStyle"
+
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/et_rd_bn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="Status"
+            style="@style/CustomHeaderBlacktextStyle"
+            android:textSize="12dp" />
+        <Button
+            android:id="@+id/btn_rd_view"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:background="@drawable/eye"
+
+            android:layout_marginBottom="5dp"
+            />
+
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

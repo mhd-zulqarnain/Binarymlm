@@ -15,7 +15,7 @@
                 app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/action_logout"
-                android:icon="@drawable/view"
+                android:icon="@drawable/eye"
                 android:title="Logout"
                 app:showAsAction="ifRoom" />
             </menu>
