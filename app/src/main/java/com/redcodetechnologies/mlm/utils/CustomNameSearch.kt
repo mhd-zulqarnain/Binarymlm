@@ -15,9 +15,9 @@ class CustomNameSearch(var filterList: ArrayList<Users>, var adapter: DownMember
 
             for (i in 0 until filterList.size) {
                 //CHECK
-                if (filterList.get(i).name?.toUpperCase()!!.contains(constraint)) {
+                if (filterList!!.get(i).name?.toUpperCase()!!.contains(constraint)) {
                     //ADD PLAYER TO FILTERED PLAYERS
-                    filtered.add(filterList.get(i))
+                    filtered.add(filterList!!.get(i))
                 }
             }
 
@@ -33,7 +33,7 @@ class CustomNameSearch(var filterList: ArrayList<Users>, var adapter: DownMember
 
     override fun publishResults(constraint: CharSequence, results: Filter.FilterResults) {
 
-        adapter.list = results.values as ArrayList<Users>
-        adapter.notifyDataSetChanged()
+        adapter!!.list = results.values as ArrayList<Users>
+        adapter!!.notifyDataSetChanged()
     }
 }
