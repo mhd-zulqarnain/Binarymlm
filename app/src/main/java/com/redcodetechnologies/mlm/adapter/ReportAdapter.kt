@@ -74,6 +74,11 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
 
         }
     }
+
+    fun filterList(filteredList: ArrayList<Report>) {
+        datalist = filteredList
+        notifyDataSetChanged()
+    }
 }
 
 

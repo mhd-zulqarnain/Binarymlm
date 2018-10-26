@@ -22,6 +22,10 @@ import com.redcodetechnologies.mlm.models.Report
 import com.redcodetechnologies.mlm.models.Users
 import kotlinx.android.synthetic.main.fragment_report.view.*
 import java.util.*
+import android.text.Editable
+import android.text.TextWatcher
+
+
 
 
 class ReportFragment : Fragment() {
@@ -41,7 +45,7 @@ class ReportFragment : Fragment() {
     var ed_account: EditText? = null
     var ed_bank_name: EditText? = null
     var ed_cnic: EditText? = null
-    var search_view: SearchView? = null
+    var search_view: EditText? = null
     var dialog: AlertDialog? = null
 
 
@@ -57,6 +61,8 @@ class ReportFragment : Fragment() {
         reportList.add(Report("Zulqarnain","EasyPaisa","132231231","Metro","16","1","10-8-2018","12-10-2018"))
         reportList.add(Report("Arif","JazzCash","546546545454","Alfalah","10","1.5","11-10-2018","12-10-2018"))
 
+
+
         var type:String = "View";
         report = ReportAdapter(activity!!,reportList){ post->
             openreportdialog(reportList[post])
@@ -64,12 +70,36 @@ class ReportFragment : Fragment() {
         recylcer_down_member!!.adapter = report
 
 
-    
+        search_view  = view.findViewById(R.id.search_view)
+        search_view!!.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                filter(s.toString())
+            }
+        })
 
 
         return view
     }
 
+    private fun filter(text: String) {
+        val filteredList = ArrayList<Report>()
+
+        for (item in reportList) {
+            if (item.UserName!!.toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item)
+            }
+        }
+
+        report!!.filterList(filteredList)
+    }
     private fun openreportdialog(report: Report) {
         val view: View = LayoutInflater.from((activity as Context?)!!).inflate(R.layout.report_dialog,null)
         val alertBox = android.support.v7.app.AlertDialog.Builder((activity as Context?)!!)

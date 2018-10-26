@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="6">
 
         <TextView
             android:id="@+id/et_rd_uname"
@@ -24,7 +24,7 @@
             android:id="@+id/et_rd_pm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:text="Order Description"
             style="@style/CustomHeaderBlacktextStyle"
@@ -45,7 +45,7 @@
             android:id="@+id/et_rd_bn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:text="Status"
             style="@style/CustomHeaderBlacktextStyle"
@@ -54,7 +54,7 @@
             android:id="@+id/btn_rd_view"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_weight="0.8"
+            android:layout_weight="1"
             android:gravity="right"
             android:background="@drawable/eye"
 
