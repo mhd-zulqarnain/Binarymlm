@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Report
-import com.redcodetechnologies.mlm.models.Users
+import com.redcodetechnologies.mlm.utils.CustomNameSearch
 
 class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>): RecyclerView.Adapter<ReportAdapter.MyViewHolder>() {
     override fun onBindViewHolder(p0: MyViewHolder, p1: Int) {
