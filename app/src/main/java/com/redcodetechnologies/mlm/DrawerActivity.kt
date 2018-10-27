@@ -16,15 +16,19 @@ import android.widget.ExpandableListView
 import android.widget.ExpandableListView.OnGroupExpandListener
 import com.redcodetechnologies.mlm.adapter.ExpandListAdapter
 import com.redcodetechnologies.mlm.ui.*
+import com.redcodetechnologies.mlm.utils.SharedPrefs
+
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var listDataHeader: ArrayList<String>? = null
     var listDataChild: HashMap<String, List<String>>? = null
     var expListView: ExpandableListView? = null
     var nav_view: NavigationView? = null
     var lastExpandedPosition = -1
+    var mPref:SharedPrefs?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mPref = SharedPrefs.getInstance()
         setSupportActionBar(toolbar)
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -54,6 +58,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         when (item.itemId) {
             R.id.action_settings -> return true
             R.id.action_logout ->{
+
+                mPref!!.clearToken(this@DrawerActivity)
+                startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
+                finish()
                 startActivity(Intent(this@DrawerActivity,SignInActivity::class.java))
                 finish()
                 return true
