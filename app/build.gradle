@@ -42,4 +42,6 @@ dependencies {
     //SplashActivity Screen
     implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
     implementation 'com.evrencoskun.library:tableview:0.8.8'
+    //format edittexts
+    implementation 'ru.egslava:MaskedEditText:1.0.5'
 }

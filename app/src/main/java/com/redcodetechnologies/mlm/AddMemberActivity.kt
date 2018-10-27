@@ -63,6 +63,10 @@ class AddMemberActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
+
+        btn_ok.setOnClickListener {
+            validation()
+        }
     }
 
     private fun validation() {

@@ -25,7 +25,7 @@ class ProfileFragment : Fragment() {
 
        val viewPager = view.findViewById<ViewPager>(R.id.viewPager)
         val strip = view.findViewById<PagerTabStrip>(R.id.pager_header)
-        strip.setPadding(-280,0,0,0)
+        strip.setPadding(-400,0,0,0)
 
 
          val adapter = ViewPagerAdapter(activity!!.supportFragmentManager)

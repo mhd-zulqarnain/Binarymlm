@@ -1,5 +1,4 @@
 package com.redcodetechnologies.mlm.ui
-
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -15,8 +14,6 @@ import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.adapter.InboxAdapter
 import com.redcodetechnologies.mlm.models.Inbox
 import java.util.*
-
-
 class InboxFragment : Fragment() {
     var search_view: SearchView? = null
     var inboxAdapater: InboxAdapter? = null
@@ -28,7 +25,6 @@ class InboxFragment : Fragment() {
         initView(view)
         return view
     }
-
     private fun initView(view:View) {
 
         var data = ArrayList<Inbox>()
@@ -45,8 +41,6 @@ class InboxFragment : Fragment() {
         var recyclerView = view!!.findViewById(R.id.unread_inbox_recycler) as RecyclerView
         recyclerView.layoutManager= LinearLayoutManager(activity!!,LinearLayout.VERTICAL,false) as RecyclerView.LayoutManager?
 
-
-
         var report = InboxAdapter(activity!!,data){postion,type->
             if(type=="reply") {
                 editmesseage(data[postion])
@@ -58,15 +52,10 @@ class InboxFragment : Fragment() {
             openreportdialog(data[post])
         }*/
         recyclerView!!.adapter = report
-
-
-
         report.notifyDataSetChanged()
-
         search_view!!.setOnClickListener {
             search_view!!.setIconified(false)
         }
-
         search_view!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
@@ -76,10 +65,7 @@ class InboxFragment : Fragment() {
                 return false
             }
         })
-
-
     }
-
     private fun editmesseage(inbox: Inbox) {
         var v:View = LayoutInflater.from(activity!!).inflate(R.layout.reply_dialoge,null)
         val alertBox = android.support.v7.app.AlertDialog.Builder((activity as Context?)!!)
@@ -94,16 +80,12 @@ class InboxFragment : Fragment() {
 
         message.setText("")
         usser_view.text = inbox.Sender_Name
-
         btn!!.setOnClickListener{
-
             dialog!!.dismiss()
             // api call to send message
         }
         dialog!!.show()
-
     }
-
     fun viewmesseage(inbox:Inbox){
 
         var v:View = LayoutInflater.from(activity!!).inflate(R.layout.inbox_view_message,null)
@@ -121,14 +103,8 @@ class InboxFragment : Fragment() {
         usser_view.text = inbox.Sender_Name
 
         btn!!.setOnClickListener{
-
             dialog!!.dismiss()
         }
         dialog!!.show()
-
     }
-
-
-
-
 }
