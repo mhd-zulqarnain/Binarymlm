@@ -127,7 +127,7 @@ class NetworkFragment : Fragment() {
 
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
-        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Make Table")
+        (activity as DrawerActivity).getSupportActionBar()?.setTitle(frgement_type)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
