@@ -62,7 +62,7 @@ class SignInActivity : AppCompatActivity() {
                         print("success")
                         var pref = SharedPrefs.getInstance()
                         pref!!.setToken(this@SignInActivity,obj)
-                        val intent = Intent(this@SignInActivity, DrawerActivity::class.java)
+                        val intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
                         startActivity(intent)
                     }
                     override fun fail(error: ServiceError) {
@@ -137,5 +137,17 @@ class SignInActivity : AppCompatActivity() {
                 })
 
 
+    }
+    override fun onStart() {
+        super.onStart()
+//        if()
+        var pref = SharedPrefs.getInstance()
+        var userId = pref!!.getToken(this@SignInActivity).tokenType
+        if (userId != null) {
+            val intent = Intent(this@SignInActivity, DrawerActivity::class.java)
+//            intent.putExtra("user id", userId)
+            startActivity(intent)
+            finish()
+        }
     }
 }
