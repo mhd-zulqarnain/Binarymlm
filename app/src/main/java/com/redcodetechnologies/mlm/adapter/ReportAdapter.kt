@@ -65,7 +65,7 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
 
             et_rd_uname!!.text = users.UserName
             et_rd_pm!!.text = users.PaymentMethod
-            var an :String = users.AccountNumber!!.substring(0,9) +".."
+            var an :String = users.AccountNumber!!.substring(0,7) +".."
             et_rd_an!!.text = an
             et_rd_bn!!.text = users.BankName
 
