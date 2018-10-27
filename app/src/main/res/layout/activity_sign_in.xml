@@ -141,7 +141,6 @@
                 android:background="#C42D2D"
                 android:fontFamily="@font/ralewayregular"
                 android:gravity="center"
-                android:onClick="signIn"
                 android:text="SUBMIT"
                 android:textColor="#FFFBFB"
                 android:textSize="20sp"
