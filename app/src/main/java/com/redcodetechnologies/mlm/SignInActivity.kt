@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.text.Html
+import android.text.InputType
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.util.Log
@@ -84,7 +85,8 @@ class SignInActivity : AppCompatActivity() {
 
         var ed_email_address: EditText =view.findViewById(R.id.ed_email)
         var button_submit: Button = view.findViewById(R.id.btn_submit)
-
+//        ed_email_address.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+//        ed_email_address.inputType = InputType.TYPE_CLASS_TEXT
         button_submit.setOnClickListener {
             if(ed_email_address.text.toString().trim(' ').length < 1){
                 ed_email_address.error = Html.fromHtml("<font color='#E0796C'>Email address cant be null</font>")
