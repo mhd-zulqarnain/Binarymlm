@@ -13,7 +13,6 @@ import android.support.v7.widget.CardView
 import android.text.Html
 import android.text.InputType
 import android.widget.*
-import com.company.redcode.royalcryptoexchange.utils.Apputils
 import com.redcodetechnologies.mlm.DrawerActivity
 
 
@@ -27,7 +26,7 @@ class DashBoardFragment : Fragment() {
         tv!!.setOnClickListener{
             if(click){
                 showSendDialog(view)
-                click=false
+
             }
 
 
@@ -65,11 +64,21 @@ class DashBoardFragment : Fragment() {
             }
 
             else{
-                (Toast.makeText(activity!!, "Under Process", Toast.LENGTH_SHORT).show())
+                Toast.makeText(activity!!, "Under Process", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
+var sucess:Boolean=false;
 
-               var  tv_wallet_balance : TextView = v1.findViewById(R.id.tv_wallet_balance)
-               tv_wallet_balance.visibility=View.VISIBLE
+
+                sucess=true;
+                if(sucess) {
+                    var tv_wallet_balance: TextView = v1.findViewById(R.id.tv_wallet_balance)
+                    tv_wallet_balance.visibility = View.VISIBLE
+                    click=false
+                } else{
+                    Toast.makeText(activity!!, "Wrong-Password", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                }
+
 
             }
         }
