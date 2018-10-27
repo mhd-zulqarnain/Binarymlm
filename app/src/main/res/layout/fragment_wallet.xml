@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorRed"
-        android:text=" E-wallet Credits"
+        android:text=" E-Wallet Credits"
         android:textColor="@color/colorWhite"
         android:fontFamily="@font/ralewaybold"
         android:textSize="17sp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:id="@+id/tv_walt_header"
+        android:id="@+id/tv_header"
         />
 
 
@@ -94,7 +93,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylcer_down"
+        android:id="@+id/recylcer_walt_down"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="horizontal"
