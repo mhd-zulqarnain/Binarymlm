@@ -46,8 +46,9 @@ class SignInActivity : AppCompatActivity() {
                 ed_password.requestFocus()
             }
             else{
-                    val intent = Intent(this, DrawerActivity::class.java)
+                    val intent = Intent(this, UserCategoryActivity::class.java)
                     startActivity(intent)
+
             }
 
 
@@ -70,6 +71,7 @@ class SignInActivity : AppCompatActivity() {
     fun signIn(v:View){
         startActivity(Intent(this@SignInActivity,DrawerActivity::class.java))
         finish()
+
     }
 
     private fun showSendDialog() {

@@ -135,7 +135,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         gt!!.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                          }
-                         } else if (groupPosition == 2) {
+                         }
+                    else if (groupPosition == 2) {
 
                     var gt: GeneologyTableFragment = GeneologyTableFragment()
                         if (childPosition == 0) {
@@ -152,36 +153,36 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         gt!!.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                     }
-                     } else if (groupPosition == 3) {
-                          if (childPosition == 0 || childPosition == 1 || childPosition == 2 || childPosition == 3) {
-                             var gt: WalletFragment = WalletFragment()
-                            if (childPosition == 0) {
+                     }
+                    else if (groupPosition == 3) {
+                        var gt: WalletFragment = WalletFragment()
+                        if (childPosition == 0) {
                             args.putString("Fragment", "E-Wallet Summary")
                             gt!!.arguments = args
-                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                              }else if (childPosition == 1) {
-                            args.putString("Fragment", "Transactions")
-                            gt!!.arguments = args
-
-                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                        } else if (childPosition == 2) {
-                            args.putString("Fragment", "EWalletCredit")
-                            gt!!.arguments = args
-                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                        } else if (childPosition == 3) {
-                            args.putString("Fragment", "EWalletDebits")
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, EWalletSummaryFragment()).commit()
+                        }
+                        else if (childPosition == 1) {
+                            args.putString("Fragment", "wallet_transactions")
                             gt!!.arguments = args
                             supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                         }
-                    } else {
-                        if (childPosition == 0)
-                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, EWalletSummaryFragment()).commit()
-                        else if (childPosition == 4)
+                        else if (childPosition == 2) {
+                              args.putString("Fragment", "wallet_credits")
+                              gt!!.arguments = args
+                              supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                          }
+                          else if (childPosition == 3) {
+                              args.putString("Fragment", "wallet_debits")
+                              gt!!.arguments = args
+                              supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                          }
+                          else if (childPosition == 4)
                             supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
-                        else if (childPosition == 5)
-                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
+                          else if (childPosition == 5)
+
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
                     }
-                } else if (groupPosition == 5) {
+                 else if (groupPosition == 5) {
                     var gt: ReportFragment = ReportFragment()
                     if (childPosition == 0) {
                         args.putString("Fragment", "ActivePayout")

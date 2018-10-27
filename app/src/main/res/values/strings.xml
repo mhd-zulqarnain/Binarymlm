@@ -282,5 +282,9 @@
 
     </string-array>
 
+    <string name="title_activity_user_category">UserCategoryActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
 
 </resources>
