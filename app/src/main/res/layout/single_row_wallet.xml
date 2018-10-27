@@ -1,37 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="12dp"
     >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorRed"
-        android:text=" E-Wallet Credits"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/ralewaybold"
-        android:textSize="17sp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:id="@+id/tv_walt_header"
-        />
-
-
-    <View
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="#50000000" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="5.5">
+        android:weightSum="5.5"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        >
 
         <TextView
             android:layout_width="0dp"
@@ -40,9 +21,10 @@
             android:gravity="center"
             android:text="Transaction Source"
             android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
+            android:fontFamily="@font/ralewayregular"
             android:textSize="12sp"
             android:id="@+id/tv_walt_source"
+            android:layout_gravity="center_vertical"
             />
 
         <TextView
@@ -52,9 +34,10 @@
             android:gravity="center"
             android:text="Transaction Name"
             android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
+            android:fontFamily="@font/ralewayregular"
             android:textSize="12sp"
             android:id="@+id/tv_walt_name"
+            android:layout_gravity="center_vertical"
             />
 
         <TextView
@@ -64,7 +47,7 @@
             android:gravity="center"
             android:text="Amount"
             android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
+            android:fontFamily="@font/ralewayregular"
             android:textSize="12sp"
             android:layout_gravity="center_vertical"
             android:id="@+id/tv_walt_amount"
@@ -77,29 +60,19 @@
             android:gravity="center"
             android:text="Transaction Date"
             android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
+            android:fontFamily="@font/ralewayregular"
             android:textSize="12sp"
             android:id="@+id/tv_walt_date"
+            android:layout_gravity="center_vertical"
             />
 
 
 
     </LinearLayout>
-
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="#494A4B" />
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylcer_walt_down"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scrollbars="horizontal"
-        android:layout_weight="4" />
-
+        android:background="#1a000000" />
 
 
 </LinearLayout>
-

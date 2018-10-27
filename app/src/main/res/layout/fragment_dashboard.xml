@@ -297,7 +297,6 @@
                         android:layout_height="50dp"
                         android:padding="10dp"
                         android:src="@drawable/buy" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -320,10 +319,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:layout_margin="2dp"
-
                 android:clickable="true"
                 android:foreground="@drawable/custom_ripple_view"
-
                 android:padding="10dp">
 
                 <LinearLayout

@@ -10,12 +10,12 @@
             <menu>
             <item
                 android:id="@+id/action_myprofile"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/icon_profile"
                 android:title="MyProfile"
                 app:showAsAction="ifRoom" />
             <item
                 android:id="@+id/action_logout"
-                android:icon="@drawable/eye"
+                android:icon="@drawable/icon_logout"
                 android:title="Logout"
                 app:showAsAction="ifRoom" />
             </menu>

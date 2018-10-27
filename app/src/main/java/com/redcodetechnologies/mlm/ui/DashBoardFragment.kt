@@ -20,8 +20,9 @@ class DashBoardFragment : Fragment() {
 
     }
 
-    override fun onAttach(activity: Activity?) {
+  /*  override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Dashboard")
-    }
+    }*/
+
 }

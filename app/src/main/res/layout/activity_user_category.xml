@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserCategoryActivity"
+    android:weightSum="2"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#313131"
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:src="@drawable/executive"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sales Executive"
+            android:fontFamily="@font/ralewaybold"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:layout_marginTop="7dp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.16"
+            android:background="@color/colorRed"
+            android:fontFamily="@font/ralewaybold"
+            android:textSize="17sp"
+            android:text="Continue"
+            android:textColor="@color/colorWhite"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="7dp"
+            android:id="@+id/btn_sales_executive"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorRed"
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:src="@drawable/normal"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sleeping Partner"
+            android:fontFamily="@font/ralewaybold"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:layout_marginTop="7dp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.16"
+            android:background="#313131"
+            android:fontFamily="@font/ralewaybold"
+            android:textSize="17sp"
+            android:text="Continue"
+            android:textColor="@color/colorWhite"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="7dp"
+            android:id="@+id/btn_sleeping_partner"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>
