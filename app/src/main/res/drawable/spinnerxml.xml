@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item>
+                <color android:color="#fac2c2" />
+            </item>
+            <item>
+                <bitmap android:gravity="end" android:src="@drawable/arif" />
+            </item>
+        </layer-list>
+    </item>
+</selector>

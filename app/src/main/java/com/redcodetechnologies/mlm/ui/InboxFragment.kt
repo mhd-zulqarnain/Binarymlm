@@ -1,4 +1,5 @@
 package com.redcodetechnologies.mlm.ui
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.redcodetechnologies.mlm.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.adapter.InboxAdapter
 import com.redcodetechnologies.mlm.models.Inbox
@@ -107,4 +109,8 @@ class InboxFragment : Fragment() {
         }
         dialog!!.show()
     }
+    override fun onAttach(activity: Activity?) {
+        super.onAttach(activity)
+        (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Inbox")
+}
 }

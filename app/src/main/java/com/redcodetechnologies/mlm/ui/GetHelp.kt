@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import com.redcodetechnologies.mlm.DrawerActivity
 
 import com.redcodetechnologies.mlm.R
 import kotlinx.android.synthetic.main.fragment_get_help.*
@@ -33,6 +34,7 @@ class GetHelp : Fragment() {
 
         initView(view)
         return view
+
     }
 
     private fun initView(view: View?) {
@@ -43,7 +45,9 @@ class GetHelp : Fragment() {
         addimage = view?.findViewById(R.id.addImage)
         send = view?.findViewById(R.id.bsend)
 
+
         send?.setOnClickListener {
+
             if (ed_message?.text.toString().trim(' ').length < 1) {
                 ed_message?.error = Html.fromHtml("<font color='#E0796C'>Message could not be empty</font>")
                 ed_message?.requestFocus()
@@ -56,14 +60,20 @@ class GetHelp : Fragment() {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = "image/*"
                 startActivityForResult(intent, REQUSET_GALLERY_CODE)
-
             }
 
         }
+
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
             println("data " + data.data)
         }
+    }
+
+    override fun onAttach(activity: Activity?) {
+        super.onAttach(activity)
+        (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Get Help")
     }
 }
