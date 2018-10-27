@@ -33,7 +33,6 @@ class GeneologyTableFragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_geneologytable, container, false)
         frgement_type = arguments?.getString("Fragment").toString();
         initView(view)
-
         return view
 }
     private fun initView(view: View?) {
