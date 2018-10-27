@@ -100,6 +100,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -206,6 +207,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Advertisement.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -240,26 +244,156 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="BinaryMLMSystemEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BinaryMLMSystemEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BinaryMLMSystemEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BinaryMLMSystemEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BinaryMLMSystemEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="BonusSetting.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Country.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EWalletPayoutConfig.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EWalletTransaction.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EWalletWithdrawalFund.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelpRequest.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Account\LoginModel.cs" />
+    <Compile Include="Models\Account\RegisterModel.cs" />
+    <Compile Include="Models\Account\UserModel.cs" />
+    <Compile Include="Models\Account\UserPackageModel.cs" />
+    <Compile Include="Models\Account\UserTableLevelModel.cs" />
+    <Compile Include="Models\Advertisement\AdvertisementModel.cs" />
+    <Compile Include="Models\CountryModel.cs" />
+    <Compile Include="Models\DownlineMemberModel.cs" />
+    <Compile Include="Models\EWallet\EWalletPayoutConfigModel.cs" />
+    <Compile Include="Models\EWallet\EWalletTransactionModel.cs" />
+    <Compile Include="Models\EWallet\EWalletWithdrawalFundModel.cs" />
+    <Compile Include="Models\GenealogyTable\AdminViewUserDownlinersModel.cs" />
+    <Compile Include="Models\GenealogyTable\SignUpUserModel.cs" />
+    <Compile Include="Models\GenealogyTable\TreeModel.cs" />
+    <Compile Include="Models\GenealogyTable\UserGenealogyTableLeftModel.cs" />
+    <Compile Include="Models\GenealogyTable\UserGenealogyTableModel.cs" />
+    <Compile Include="Models\GenealogyTable\UserGenealogyTableRightModel.cs" />
+    <Compile Include="Models\GeneralHelp\HelpRequestModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\NewsTicker\NewsTickerModel.cs" />
+    <Compile Include="Models\NotificationExtensions.cs" />
+    <Compile Include="Models\Notification\NotificationModel.cs" />
+    <Compile Include="Models\Packages\PackageModel.cs" />
+    <Compile Include="Models\ReceiveAdminMessageModel.cs" />
+    <Compile Include="Models\ReciveUserMessageModel.cs" />
+    <Compile Include="Models\Reports\ActivePayoutModel.cs" />
+    <Compile Include="Models\Reports\PayoutHistoryModel.cs" />
+    <Compile Include="Models\Reports\PayoutWithdrawalInProccessModel.cs" />
+    <Compile Include="Models\Rewards\RewardsModel.cs" />
+    <Compile Include="Models\SentAdminMessageModel.cs" />
+    <Compile Include="Models\SentUserMessageModel.cs" />
+    <Compile Include="Models\SponsorModel.cs" />
+    <Compile Include="Models\TableLevel\TableLevelModel.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="NewsTicker.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewUserRegistration.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Package.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\OAuthProvider.cs" />
+    <Compile Include="ReceiveAdminMessage.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiveUserMessage.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Reward.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SentAdminMessage.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SentUserMessage.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="SignUpUser.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="TableLevel.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserGenealogyTable.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserGenealogyTableLeft.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserGenealogyTableRight.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserLoginInfo.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserNotification.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserPackage.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserPosition.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserTableLevel.cs">
+      <DependentUpon>BinaryMLMSystemEntities.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="BinaryMLMSystemEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BinaryMLMSystemEntities.edmx</DependentUpon>
+      <LastGenOutput>BinaryMLMSystemEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BinaryMLMSystemEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BinaryMLMSystemEntities.edmx</DependentUpon>
+      <LastGenOutput>BinaryMLMSystemEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -291,6 +425,13 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EntityDeploy Include="BinaryMLMSystemEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BinaryMLMSystemEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="BinaryMLMSystemEntities.edmx.diagram">
+      <DependentUpon>BinaryMLMSystemEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\redcodetechnologies.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\sleepingpartner - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\sleepingpartner - Web Deploy.pubxml" />
@@ -305,7 +446,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -332,6 +475,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

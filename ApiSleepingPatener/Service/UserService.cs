@@ -30,7 +30,7 @@ namespace TokenAuth.Services
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["remote"].ConnectionString);
             if (connect.State != ConnectionState.Open)
                 connect.Open();
-            SqlCommand cmd = new SqlCommand("select * from NewUserRegistration where  Username= '" + email + "' and Password = '" + password + "'", connect);
+            SqlCommand cmd = new SqlCommand("select * from NewUserRegistration where  UserCode = 'Usr' and Username= '" + email + "' and Password = '" + password + "'", connect);
             try
             {
                 SqlDataReader sdr = cmd.ExecuteReader();
