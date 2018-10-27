@@ -13,7 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.R
 import kotlin.math.log
 

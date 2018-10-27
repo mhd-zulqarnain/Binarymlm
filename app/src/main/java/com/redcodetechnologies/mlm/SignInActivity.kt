@@ -2,18 +2,28 @@ package com.redcodetechnologies.mlm
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.text.Html
+import android.text.InputType
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
-import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.redcodetechnologies.mlm.utils.Apputils
+
+import com.redcodetechnologies.mlm.models.ApiToken
+import com.redcodetechnologies.mlm.retrofit.ApiClint
+import com.redcodetechnologies.mlm.utils.ServiceError
+import com.redcodetechnologies.mlm.utils.ServiceListener
+import com.redcodetechnologies.mlm.utils.SharedPrefs
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import retrofit2.Call
+import retrofit2.Callback
 
 class SignInActivity : AppCompatActivity() {
    // var  ctx: Context? = null
@@ -46,8 +56,21 @@ class SignInActivity : AppCompatActivity() {
                 ed_password.requestFocus()
             }
             else{
-                    val intent = Intent(this, UserCategoryActivity::class.java)
-                    startActivity(intent)
+
+
+                getuserData(object : ServiceListener<ApiToken> {
+                    override fun success(obj: ApiToken) {
+                        print("success")
+                        var pref = SharedPrefs.getInstance()
+                        pref!!.setToken(this@SignInActivity,obj)
+                        val intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+                        startActivity(intent)
+                    }
+                    override fun fail(error: ServiceError) {
+
+                        Apputils.showMsg(this@SignInActivity,"Wrong password or username")
+                    }
+                })
 
             }
 
@@ -61,18 +84,8 @@ class SignInActivity : AppCompatActivity() {
 
         })
 
-
-
-
-
-
     }// onCreate();
 
-    fun signIn(v:View){
-        startActivity(Intent(this@SignInActivity,DrawerActivity::class.java))
-        finish()
-
-    }
 
     private fun showSendDialog() {
         val view: View = LayoutInflater.from(this).inflate(R.layout.dialogue_forget_password, null)
@@ -86,7 +99,8 @@ class SignInActivity : AppCompatActivity() {
 
         var ed_email_address: EditText =view.findViewById(R.id.ed_email)
         var button_submit: Button = view.findViewById(R.id.btn_submit)
-
+//        ed_email_address.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+//        ed_email_address.inputType = InputType.TYPE_CLASS_TEXT
         button_submit.setOnClickListener {
             if(ed_email_address.text.toString().trim(' ').length < 1){
                 ed_email_address.error = Html.fromHtml("<font color='#E0796C'>Email address cant be null</font>")
@@ -104,5 +118,38 @@ class SignInActivity : AppCompatActivity() {
         dialog.show()
 
     }
+    private fun getuserData(serviceListener: ServiceListener<ApiToken>) {
+        ApiClint.getInstance()?.getService()?.verifyEmail("password",ed_username.text.toString(), ed_password.text.toString())
+                ?.enqueue(object : Callback<ApiToken> {
+                    override fun onFailure(call: Call<ApiToken>?, t: Throwable?) {
+                        println("error")
+                    }
+                    override fun onResponse(call: Call<ApiToken>?, response: retrofit2.Response<ApiToken>?) {
+                        print("object success ")
+                        var code:Int = response!!.code()
+                        if (code == 200) {
+                            serviceListener.success(response.body()!!)
+                            print("success")
+                        }
+                        else{
+                         serviceListener.fail(ServiceError())
+                        }
 
+                    }
+                })
+
+
+    }
+    override fun onStart() {
+        super.onStart()
+//        if()
+        var pref = SharedPrefs.getInstance()
+        var userId = pref!!.getToken(this@SignInActivity).tokenType
+        if (userId != null) {
+            val intent = Intent(this@SignInActivity, DrawerActivity::class.java)
+//            intent.putExtra("user id", userId)
+            startActivity(intent)
+            finish()
+        }
+    }
 }

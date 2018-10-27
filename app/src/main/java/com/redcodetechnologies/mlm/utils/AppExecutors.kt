@@ -1,4 +1,4 @@
-package com.company.redcode.royalcryptoexchange.utils
+package com.redcodetechnologies.mlm.utils
 
 import android.os.Handler
 import android.os.Looper
