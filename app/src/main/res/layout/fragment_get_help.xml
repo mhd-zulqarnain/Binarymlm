@@ -17,6 +17,7 @@
             android:orientation="horizontal"
             android:background="@color/colorRed">
             <TextView
+                android:fontFamily="@font/ralewayregular"
                 android:layout_gravity="center"
                 android:layout_weight="0.1"
                 android:paddingLeft="18dip"
@@ -67,6 +68,17 @@
                 android:textColor="#000"
                 android:textColorHint="#8A8A8A"
                 android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/tv_perority"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="0.4"
+                android:text="Perority: "
+                android:textColor="#8D9EA7"
+                android:fontFamily="@font/ralewayregular"
+                android:textSize="20sp"
+                />
             <Spinner
                 android:id="@+id/perority"
                 android:layout_width="match_parent"
@@ -77,8 +89,10 @@
                 android:entries="@array/spinner_perority"
                 android:fontFamily="@font/ralewayregular"
                 android:textSize="20sp"
-                android:background="#efd8d8"/>
+                style="@style/CustomHeaderBlacktextStyle"
+                android:background="@drawable/spinnerxml" />
             <TextView
+                style="@style/CustomHeaderBlacktextStyle"
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

@@ -16,10 +16,8 @@ class EWalletSummaryFragment() : Fragment() {
         var view = inflater.inflate(R.layout.fragment_ewalletsummary, container, false)
         // initView(view)
         return view
-
     }
-
-    private fun initView(view: View) {
+        private fun initView(view: View) {
 
         var wData = ArrayList<WalletSummery>()
         wData.add(WalletSummery("Bonus", "10PKR"))

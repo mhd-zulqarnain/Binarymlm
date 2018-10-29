@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import com.redcodetechnologies.mlm.DrawerActivity
 
 import com.redcodetechnologies.mlm.R
 import kotlinx.android.synthetic.main.fragment_get_help.*
@@ -33,20 +34,25 @@ class GetHelp : Fragment() {
 
         initView(view)
         return view
+
     }
+
     private fun initView(view: View?) {
+        activity!!.actionBar?.setTitle("Get Help")
         message = view?.findViewById(R.id.ed_message)
         peroritySpini = view?.findViewById(R.id.perority)
         description = view?.findViewById(R.id.ed_description)
         addimage = view?.findViewById(R.id.addImage)
         send = view?.findViewById(R.id.bsend)
 
+
         send?.setOnClickListener {
+
             if (ed_message?.text.toString().trim(' ').length < 1) {
                 ed_message?.error = Html.fromHtml("<font color='#E0796C'>Message could not be empty</font>")
                 ed_message?.requestFocus()
             }
-            if (description?.text.toString().trim(' ').length < 1) {
+            if (ed_description?.text.toString().trim(' ').length < 1) {
                 ed_description?.error = Html.fromHtml("<font color='#E0796C'>Description could not be empty</font>")
                 ed_description?.requestFocus()
             }
@@ -57,10 +63,17 @@ class GetHelp : Fragment() {
             }
 
         }
+
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
             println("data " + data.data)
         }
+    }
+
+    override fun onAttach(activity: Activity?) {
+        super.onAttach(activity)
+        (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Get Help")
     }
 }

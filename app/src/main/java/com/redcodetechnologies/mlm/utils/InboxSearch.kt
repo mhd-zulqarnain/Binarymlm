@@ -6,7 +6,7 @@ import com.redcodetechnologies.mlm.adapter.InboxAdapter
 import com.redcodetechnologies.mlm.models.Inbox
 
 
-class InboxSearch(var filterList:ArrayList<Inbox>, var adapter: InboxAdapter): Filter() {
+class InboxSearch(var filterList: java.util.ArrayList<Inbox>, var adapter: InboxAdapter): Filter() {
     override fun performFiltering(constraint: CharSequence?): Filter.FilterResults {
         var constraint = constraint
         val results = Filter.FilterResults()
