@@ -147,7 +147,7 @@ class SignInActivity : AppCompatActivity() {
         var userId = pref!!.getToken(this@SignInActivity).tokenType
         if (userId != null) {
             val intent = Intent(this@SignInActivity, DrawerActivity::class.java)
-//            intent.putExtra("user id", userId)
+            intent.putExtra("Category", "Sales")
             startActivity(intent)
             finish()
         }

@@ -156,11 +156,6 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
-        if (headerTitle == "General Help") {
-            icon.setImageResource(R.drawable.it_support);
-            group.setVisibility(View.VISIBLE);
-            group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
-        }
 
         return convertView;
     }
