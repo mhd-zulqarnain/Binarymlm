@@ -1,31 +1,28 @@
 package com.redcodetechnologies.mlm.ui
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.CardView
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.redcodetechnologies.mlm.R
-import android.app.Activity
-import android.app.AlertDialog
-import android.graphics.Typeface
-import android.support.v7.widget.CardView
-import android.text.Html
-import android.text.InputType
 import android.widget.*
 import com.redcodetechnologies.mlm.DrawerActivity
+import com.redcodetechnologies.mlm.R
 
-
-class DashBoardFragment : Fragment() {
-    var tv:CardView?=null
+class SleepingDashboardFragment : Fragment() {
+    var tv: CardView?=null
     var click:Boolean=true;
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view  =inflater.inflate(R.layout.fragment_dashboard, container, false)
+        var view  =inflater.inflate(R.layout.fragment_sleeping_dashboard, container, false)
         tv = view.findViewById(R.id.dashboardbalance) as CardView;
         tv!!.setOnClickListener{
             if(click){
                 showSendDialog(view)
+
 
             }
 
@@ -36,7 +33,7 @@ class DashBoardFragment : Fragment() {
 
     }
 
-    private fun showSendDialog(v1:View) {
+    private fun showSendDialog(v1: View) {
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialogue_forget_password, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
         alertBox.setView(view)
@@ -52,9 +49,9 @@ class DashBoardFragment : Fragment() {
         tvdescription.text=""
 
         var ed_email_address: EditText =view.findViewById(R.id.ed_email)
-        ed_email_address.visibility=View.GONE
+        ed_email_address.visibility= View.GONE
         var pass: EditText =view.findViewById(R.id.ed_pass)
-        pass.visibility=View.VISIBLE
+        pass.visibility= View.VISIBLE
         var button_submit: Button = view.findViewById(R.id.btn_submit)
 
         button_submit.setOnClickListener {
@@ -66,7 +63,7 @@ class DashBoardFragment : Fragment() {
             else{
                 Toast.makeText(activity!!, "Under Process", Toast.LENGTH_SHORT).show()
 
-var sucess:Boolean=false;
+                var sucess:Boolean=false;
 
 
                 sucess=true;

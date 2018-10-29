@@ -14,28 +14,26 @@ class UserCategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_category)
+        btn_sales_executive = findViewById(R.id.btn_sales_executive)
+        btn_sleeping_partner = findViewById(R.id.btn_sleeping_partner)
 
-        init()
 
         btn_sales_executive!!.setOnClickListener(View.OnClickListener {
-
-            startActivity(Intent(this@UserCategoryActivity,DrawerActivity::class.java))
+            var i :Intent  = Intent(this@UserCategoryActivity,DrawerActivity::class.java)
+            i.putExtra("Category","Sales")
+            startActivity(i)
             finish()
 
         })
 
         btn_sleeping_partner!!.setOnClickListener(View.OnClickListener {
-
-            startActivity(Intent(this@UserCategoryActivity,DrawerActivity::class.java))
+            var i :Intent  = Intent(this@UserCategoryActivity,DrawerActivity::class.java)
+            i.putExtra("Category","Sleeping")
+            startActivity(i)
             finish()
 
         })
 
     }
 
-    fun init(){
-        btn_sales_executive = findViewById(R.id.btn_sales_executive)
-        btn_sleeping_partner = findViewById(R.id.btn_sleeping_partner)
-
-    }
 }
