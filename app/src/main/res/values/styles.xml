@@ -12,6 +12,12 @@
         <item name="color">@android:color/background_dark</item>
     </style>
 
+    <style name="ProgressBarTheme">
+
+        <item name="colorAccent">@color/colorRed</item>
+
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>

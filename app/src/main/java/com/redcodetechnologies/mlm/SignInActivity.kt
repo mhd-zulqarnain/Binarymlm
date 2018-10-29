@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AlertDialog
 import android.text.Html
 import android.text.SpannableString
@@ -14,6 +15,7 @@ import android.view.View
 import android.widget.*
 import com.company.redcode.royalcryptoexchange.utils.Apputils
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import java.util.*
 
 class SignInActivity : AppCompatActivity() {
    // var  ctx: Context? = null
@@ -102,6 +104,31 @@ class SignInActivity : AppCompatActivity() {
         }
 
         dialog.show()
+
+    }
+    private fun showProgressDialog() {
+        val view: View = LayoutInflater.from(this).inflate(R.layout.progress_bar, null)
+        val alertBox = AlertDialog.Builder(this)
+        alertBox.setView(view)
+
+        var progressbar : ProgressBar? = findViewById(R.id.progressbar)
+        progressbar!!.setVisibility(ProgressBar.VISIBLE)
+        var handler : Handler? = null
+        var runnable : Runnable? = null
+        var timer : Timer? = null
+
+        runnable!!.run(){
+            progressbar!!.setVisibility(ProgressBar.INVISIBLE)
+            timer!!.cancel()
+
+        }
+        timer = Timer()
+
+
+        val dialog = alertBox.create()
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show()
+
 
     }
 
