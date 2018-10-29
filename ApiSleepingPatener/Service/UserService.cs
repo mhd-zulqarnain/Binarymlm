@@ -26,7 +26,7 @@ namespace TokenAuth.Services
         public User GetUserList(String email, String password)
         {
 
-            List<NewUserRegistration> list = new List<NewUserRegistration>();
+          //  List<NewUserRegistration> list = new List<NewUserRegistration>();
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["remote"].ConnectionString);
             if (connect.State != ConnectionState.Open)
                 connect.Open();

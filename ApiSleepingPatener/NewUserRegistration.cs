@@ -14,18 +14,6 @@ namespace ApiSleepingPatener
     
     public partial class NewUserRegistration
     {
-        private int id;
-        private string uname;
-        private string pass;
-
-        public NewUserRegistration(int id, string uname, string email, string pass)
-        {
-            this.id = id;
-            this.uname = uname;
-            Email = email;
-            this.pass = pass;
-        }
-
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }

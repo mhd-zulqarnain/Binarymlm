@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2d5c57b0904942ceac10746c92558652" Name="Diagram1">
+      <Diagram DiagramId="35b1485529734b599aa196d8c6917c77" Name="Diagram1">
         <EntityTypeShape EntityType="SleepingPartnermanagementModel.Advertisement" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SleepingPartnermanagementModel.BonusSetting" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SleepingPartnermanagementModel.Country" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
