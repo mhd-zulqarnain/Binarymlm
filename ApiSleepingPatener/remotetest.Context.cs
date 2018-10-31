@@ -13,10 +13,10 @@ namespace ApiSleepingPatener
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SleepingPartnermanagementEntities : DbContext
+    public partial class SleepingtestEntities : DbContext
     {
-        public SleepingPartnermanagementEntities()
-            : base("name=SleepingPartnermanagementEntities")
+        public SleepingtestEntities()
+            : base("name=SleepingtestEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace ApiSleepingPatener
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<NewUserRegistration> NewUserRegistrations { get; set; }
         public virtual DbSet<Advertisement> Advertisements { get; set; }
         public virtual DbSet<BonusSetting> BonusSettings { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
@@ -33,7 +34,6 @@ namespace ApiSleepingPatener
         public virtual DbSet<EWalletWithdrawalFund> EWalletWithdrawalFunds { get; set; }
         public virtual DbSet<HelpRequest> HelpRequests { get; set; }
         public virtual DbSet<NewsTicker> NewsTickers { get; set; }
-        public virtual DbSet<NewUserRegistration> NewUserRegistrations { get; set; }
         public virtual DbSet<Package> Packages { get; set; }
         public virtual DbSet<ReceiveAdminMessage> ReceiveAdminMessages { get; set; }
         public virtual DbSet<ReceiveUserMessage> ReceiveUserMessages { get; set; }

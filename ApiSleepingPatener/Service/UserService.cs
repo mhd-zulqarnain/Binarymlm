@@ -50,8 +50,18 @@ namespace TokenAuth.Services
             {
                 return null;
             }
-            return null;
+           
          
         }
     }
 }
+
+
+//SleepingtestEntities dce = new SleepingtestEntities();
+////NewUserRegistration newuser = dce.NewUserRegistrations.Where(a => a.UserId.Equals(model.UserId)).FirstOrDefault();
+//NewUserRegistration newuser = dce.NewUserRegistrations.SingleOrDefault(x => x.Username == username && x.Password.Equals(password));
+//            if (newuser != null) {
+//                return new User(newuser.UserId, newuser.Name, newuser.Email, newuser.Password, newuser.Username);
+//            }
+//            else
+//            { }

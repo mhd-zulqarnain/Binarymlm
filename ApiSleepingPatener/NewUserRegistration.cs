@@ -41,5 +41,6 @@ namespace ApiSleepingPatener
         public Nullable<bool> IsSleepingPartner { get; set; }
         public Nullable<bool> IsSalesExecutive { get; set; }
         public string UserDesignation { get; set; }
+        public Nullable<bool> IsWithdrawalOpen { get; set; }
     }
 }

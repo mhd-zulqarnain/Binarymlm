@@ -4,9 +4,9 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SleepingPartnermanagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="sleepingtestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.Advertisement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.Advertisement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Advertisement">
           <Key>
             <PropertyRef Name="AdvertisementId" />
@@ -19,7 +19,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.Advertisement' does 
           <Property Name="CreateDate" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.BonusSetting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.BonusSetting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BonusSetting">
           <Key>
             <PropertyRef Name="BonusSettingId" />
@@ -29,7 +29,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.BonusSetting' does n
           <Property Name="BonusSettingPercent" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.Country' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.Country' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="CountryID" />
@@ -40,7 +40,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.Country' does not ha
           <Property Name="ThreeCharCountryCode" Type="char" MaxLength="3" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.EWalletPayoutConfig' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.EWalletPayoutConfig' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EWalletPayoutConfig">
           <Key>
             <PropertyRef Name="ConfigId" />
@@ -51,7 +51,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.EWalletPayoutConfig'
           <Property Name="PayoutChargesPercent" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.EWalletTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.EWalletTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EWalletTransaction">
           <Key>
             <PropertyRef Name="TransactionId" />
@@ -76,7 +76,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.EWalletTransaction' 
           <Property Name="AdminTransactionName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.EWalletWithdrawalFund' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.EWalletWithdrawalFund' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EWalletWithdrawalFund">
           <Key>
             <PropertyRef Name="WithdrawalFundId" />
@@ -102,7 +102,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.EWalletWithdrawalFun
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.HelpRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.HelpRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="HelpRequest">
           <Key>
             <PropertyRef Name="HelpRequestId" />
@@ -118,7 +118,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.HelpRequest' does no
           <Property Name="IsCheckByAdmin" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.NewsTicker' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.NewsTicker' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="NewsTicker">
           <Key>
             <PropertyRef Name="NewsTickerId" />
@@ -129,15 +129,11 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.NewsTicker' does not
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreateDate" Type="smalldatetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.NewUserRegistration' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="NewUserRegistration">
           <Key>
             <PropertyRef Name="UserId" />
-            <PropertyRef Name="SponsorId" />
-            <PropertyRef Name="DownlineMemberId" />
           </Key>
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
@@ -153,7 +149,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.NewUserRegistration'
           <Property Name="DownlineMemberId" Type="int" Nullable="false" />
           <Property Name="UpperId" Type="int" />
           <Property Name="PaidAmount" Type="money" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="UserCode" Type="nvarchar" MaxLength="50" />
           <Property Name="IsUserActive" Type="bit" />
           <Property Name="IsNewRequest" Type="bit" />
@@ -164,9 +160,10 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.NewUserRegistration'
           <Property Name="IsSleepingPartner" Type="bit" />
           <Property Name="IsSalesExecutive" Type="bit" />
           <Property Name="UserDesignation" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsWithdrawalOpen" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.Packages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.Packages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Packages">
           <Key>
             <PropertyRef Name="PackageId" />
@@ -184,7 +181,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.Packages' does not h
           <Property Name="MaximumMatchingBonusAmount" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.ReceiveAdminMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.ReceiveAdminMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ReceiveAdminMessages">
           <Key>
             <PropertyRef Name="Id" />
@@ -200,7 +197,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.ReceiveAdminMessages
           <Property Name="CreateDate" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.ReceiveUserMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.ReceiveUserMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ReceiveUserMessages">
           <Key>
             <PropertyRef Name="Id" />
@@ -215,7 +212,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.ReceiveUserMessages'
           <Property Name="CreateDate" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.Rewards' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.Rewards' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Rewards">
           <Key>
             <PropertyRef Name="Id" />
@@ -228,12 +225,12 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.Rewards' does not ha
           <Property Name="Isactive" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'SleepingPartnerManagement.dbo.script' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'sleepingtest.dbo.script' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="script">
           <Property Name="USE  master " Type="nvarchar" MaxLength="50" />
         </EntityType>-->
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.SentAdminMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.SentAdminMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SentAdminMessages">
           <Key>
             <PropertyRef Name="Id" />
@@ -249,7 +246,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.SentAdminMessages' d
           <Property Name="CreateDate" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.SentUserMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.SentUserMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SentUserMessages">
           <Key>
             <PropertyRef Name="Id" />
@@ -264,7 +261,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.SentUserMessages' do
           <Property Name="CreateDate" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.SignUpUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.SignUpUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SignUpUsers">
           <Key>
             <PropertyRef Name="SignUpId" />
@@ -282,7 +279,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.SignUpUsers' does no
           <Property Name="CreateDate" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.TableLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.TableLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TableLevel">
           <Key>
             <PropertyRef Name="TableLevelId" />
@@ -293,7 +290,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.TableLevel' does not
           <Property Name="TableLevelNum" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserGenealogyTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.UserGenealogyTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserGenealogyTable">
           <Key>
             <PropertyRef Name="GenealogyTableId" />
@@ -317,7 +314,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserGenealogyTable' 
           <Property Name="MatchingCommision" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserGenealogyTableLeft' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.UserGenealogyTableLeft' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserGenealogyTableLeft">
           <Key>
             <PropertyRef Name="GenealogyTableLeftId" />
@@ -341,7 +338,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserGenealogyTableLe
           <Property Name="MatchingCommision" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserGenealogyTableRight' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.UserGenealogyTableRight' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserGenealogyTableRight">
           <Key>
             <PropertyRef Name="GenealogyTableRightId" />
@@ -365,7 +362,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserGenealogyTableRi
           <Property Name="MatchingCommision" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserLoginInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.UserLoginInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserLoginInfo">
           <Key>
             <PropertyRef Name="UserId" />
@@ -381,7 +378,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserLoginInfo' does 
           <Property Name="AccountLocked" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserNotification' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.UserNotification' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserNotification">
           <Key>
             <PropertyRef Name="NotificationId" />
@@ -395,7 +392,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserNotification' do
           <Property Name="IsSaveByUser" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserPackages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.UserPackages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserPackages">
           <Key>
             <PropertyRef Name="UserPackageId" />
@@ -416,7 +413,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserPackages' does n
           <Property Name="LastCommisionDate" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserPosition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.UserPosition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserPosition">
           <Key>
             <PropertyRef Name="UserPositionId" />
@@ -425,7 +422,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserPosition' does n
           <Property Name="UserPositionName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserTableLevel">
           <Key>
             <PropertyRef Name="UserTableLevelId" />
@@ -444,7 +441,8 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
           <Property Name="TotalRemainingRightUserAmount" Type="money" />
           <Property Name="LastModifiedDate" Type="smalldatetime" />
         </EntityType>
-        <EntityContainer Name="SleepingPartnermanagementModelStoreContainer">
+        <EntityContainer Name="sleepingtestModelStoreContainer">
+          <EntitySet Name="NewUserRegistration" EntityType="Self.NewUserRegistration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Advertisement" EntityType="Self.Advertisement" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Advertisement].[AdvertisementId] AS [AdvertisementId], 
@@ -544,37 +542,6 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
     [NewsTicker].[IsActive] AS [IsActive], 
     [NewsTicker].[CreateDate] AS [CreateDate]
     FROM [dbo].[NewsTicker] AS [NewsTicker]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="NewUserRegistration" EntityType="Self.NewUserRegistration" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [NewUserRegistration].[UserId] AS [UserId], 
-    [NewUserRegistration].[Name] AS [Name], 
-    [NewUserRegistration].[Username] AS [Username], 
-    [NewUserRegistration].[Password] AS [Password], 
-    [NewUserRegistration].[Country] AS [Country], 
-    [NewUserRegistration].[Address] AS [Address], 
-    [NewUserRegistration].[Phone] AS [Phone], 
-    [NewUserRegistration].[Email] AS [Email], 
-    [NewUserRegistration].[CNIC] AS [CNIC], 
-    [NewUserRegistration].[AccountNumber] AS [AccountNumber], 
-    [NewUserRegistration].[BankName] AS [BankName], 
-    [NewUserRegistration].[IsThisFirstUser] AS [IsThisFirstUser], 
-    [NewUserRegistration].[SponsorId] AS [SponsorId], 
-    [NewUserRegistration].[DownlineMemberId] AS [DownlineMemberId], 
-    [NewUserRegistration].[UpperId] AS [UpperId], 
-    [NewUserRegistration].[PaidAmount] AS [PaidAmount], 
-    [NewUserRegistration].[CreateDate] AS [CreateDate], 
-    [NewUserRegistration].[UserCode] AS [UserCode], 
-    [NewUserRegistration].[IsUserActive] AS [IsUserActive], 
-    [NewUserRegistration].[IsNewRequest] AS [IsNewRequest], 
-    [NewUserRegistration].[UserPosition] AS [UserPosition], 
-    [NewUserRegistration].[IsEmailConfirmed] AS [IsEmailConfirmed], 
-    [NewUserRegistration].[UserPackage] AS [UserPackage], 
-    [NewUserRegistration].[DocumentImage] AS [DocumentImage], 
-    [NewUserRegistration].[IsSleepingPartner] AS [IsSleepingPartner], 
-    [NewUserRegistration].[IsSalesExecutive] AS [IsSalesExecutive], 
-    [NewUserRegistration].[UserDesignation] AS [UserDesignation]
-    FROM [dbo].[NewUserRegistration] AS [NewUserRegistration]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Packages" EntityType="Self.Packages" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -807,7 +774,40 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SleepingPartnermanagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="sleepingtestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="NewUserRegistration">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CNIC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsThisFirstUser" Type="Boolean" />
+          <Property Name="SponsorId" Type="Int32" Nullable="false" />
+          <Property Name="DownlineMemberId" Type="Int32" Nullable="false" />
+          <Property Name="UpperId" Type="Int32" />
+          <Property Name="PaidAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsUserActive" Type="Boolean" />
+          <Property Name="IsNewRequest" Type="Boolean" />
+          <Property Name="UserPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsEmailConfirmed" Type="Boolean" />
+          <Property Name="UserPackage" Type="Int32" />
+          <Property Name="DocumentImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsSleepingPartner" Type="Boolean" />
+          <Property Name="IsSalesExecutive" Type="Boolean" />
+          <Property Name="UserDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsWithdrawalOpen" Type="Boolean" />
+        </EntityType>
         <EntityType Name="Advertisement">
           <Key>
             <PropertyRef Name="AdvertisementId" />
@@ -915,40 +915,6 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
           <Property Name="NewsTickerDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreateDate" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="NewUserRegistration">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="SponsorId" />
-            <PropertyRef Name="DownlineMemberId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="Int32" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CNIC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsThisFirstUser" Type="Boolean" />
-          <Property Name="SponsorId" Type="Int32" Nullable="false" />
-          <Property Name="DownlineMemberId" Type="Int32" Nullable="false" />
-          <Property Name="UpperId" Type="Int32" />
-          <Property Name="PaidAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
-          <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsUserActive" Type="Boolean" />
-          <Property Name="IsNewRequest" Type="Boolean" />
-          <Property Name="UserPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsEmailConfirmed" Type="Boolean" />
-          <Property Name="UserPackage" Type="Int32" />
-          <Property Name="DocumentImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="IsSleepingPartner" Type="Boolean" />
-          <Property Name="IsSalesExecutive" Type="Boolean" />
-          <Property Name="UserDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Package">
           <Key>
@@ -1192,7 +1158,8 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
           <Property Name="TotalRemainingRightUserAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityContainer Name="SleepingPartnermanagementEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SleepingtestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="NewUserRegistrations" EntityType="Self.NewUserRegistration" />
           <EntitySet Name="Advertisements" EntityType="Self.Advertisement" />
           <EntitySet Name="BonusSettings" EntityType="Self.BonusSetting" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
@@ -1201,7 +1168,6 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
           <EntitySet Name="EWalletWithdrawalFunds" EntityType="Self.EWalletWithdrawalFund" />
           <EntitySet Name="HelpRequests" EntityType="Self.HelpRequest" />
           <EntitySet Name="NewsTickers" EntityType="Self.NewsTicker" />
-          <EntitySet Name="NewUserRegistrations" EntityType="Self.NewUserRegistration" />
           <EntitySet Name="Packages" EntityType="Self.Package" />
           <EntitySet Name="ReceiveAdminMessages" EntityType="Self.ReceiveAdminMessage" />
           <EntitySet Name="ReceiveUserMessages" EntityType="Self.ReceiveUserMessage" />
@@ -1224,125 +1190,9 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SleepingPartnermanagementModelStoreContainer" CdmEntityContainer="SleepingPartnermanagementEntities">
-          <EntitySetMapping Name="Advertisements">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.Advertisement">
-              <MappingFragment StoreEntitySet="Advertisement">
-                <ScalarProperty Name="AdvertisementId" ColumnName="AdvertisementId" />
-                <ScalarProperty Name="AdvertisementName" ColumnName="AdvertisementName" />
-                <ScalarProperty Name="AdvertisementDescription" ColumnName="AdvertisementDescription" />
-                <ScalarProperty Name="AdvertisementImage" ColumnName="AdvertisementImage" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BonusSettings">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.BonusSetting">
-              <MappingFragment StoreEntitySet="BonusSetting">
-                <ScalarProperty Name="BonusSettingId" ColumnName="BonusSettingId" />
-                <ScalarProperty Name="BonusSettingName" ColumnName="BonusSettingName" />
-                <ScalarProperty Name="BonusSettingPercent" ColumnName="BonusSettingPercent" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.Country">
-              <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-                <ScalarProperty Name="TwoCharCountryCode" ColumnName="TwoCharCountryCode" />
-                <ScalarProperty Name="ThreeCharCountryCode" ColumnName="ThreeCharCountryCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EWalletPayoutConfigs">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.EWalletPayoutConfig">
-              <MappingFragment StoreEntitySet="EWalletPayoutConfig">
-                <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
-                <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
-                <ScalarProperty Name="MinimumPayout" ColumnName="MinimumPayout" />
-                <ScalarProperty Name="PayoutChargesPercent" ColumnName="PayoutChargesPercent" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EWalletTransactions">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.EWalletTransaction">
-              <MappingFragment StoreEntitySet="EWalletTransaction">
-                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
-                <ScalarProperty Name="TransactionSource" ColumnName="TransactionSource" />
-                <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
-                <ScalarProperty Name="AsscociatedMember" ColumnName="AsscociatedMember" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-                <ScalarProperty Name="Credit" ColumnName="Credit" />
-                <ScalarProperty Name="Debit" ColumnName="Debit" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="IsPackageBonus" ColumnName="IsPackageBonus" />
-                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
-                <ScalarProperty Name="IsMatchingBonus" ColumnName="IsMatchingBonus" />
-                <ScalarProperty Name="IsParentBonus" ColumnName="IsParentBonus" />
-                <ScalarProperty Name="IsWithdrawlRequestByUser" ColumnName="IsWithdrawlRequestByUser" />
-                <ScalarProperty Name="IsWithdrawlPaidByAdmin" ColumnName="IsWithdrawlPaidByAdmin" />
-                <ScalarProperty Name="AdminCredit" ColumnName="AdminCredit" />
-                <ScalarProperty Name="AdminDebit" ColumnName="AdminDebit" />
-                <ScalarProperty Name="AdminTransactionName" ColumnName="AdminTransactionName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EWalletWithdrawalFunds">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.EWalletWithdrawalFund">
-              <MappingFragment StoreEntitySet="EWalletWithdrawalFund">
-                <ScalarProperty Name="WithdrawalFundId" ColumnName="WithdrawalFundId" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="BankName" ColumnName="BankName" />
-                <ScalarProperty Name="WithdrawalFundMethod" ColumnName="WithdrawalFundMethod" />
-                <ScalarProperty Name="AmountPayble" ColumnName="AmountPayble" />
-                <ScalarProperty Name="WithdrawalFundDescription" ColumnName="WithdrawalFundDescription" />
-                <ScalarProperty Name="WithdrawalFundCharge" ColumnName="WithdrawalFundCharge" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="RequestedDate" ColumnName="RequestedDate" />
-                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
-                <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
-                <ScalarProperty Name="RejectedDate" ColumnName="RejectedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsPending" ColumnName="IsPending" />
-                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
-                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
-                <ScalarProperty Name="IsRejected" ColumnName="IsRejected" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HelpRequests">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.HelpRequest">
-              <MappingFragment StoreEntitySet="HelpRequest">
-                <ScalarProperty Name="HelpRequestId" ColumnName="HelpRequestId" />
-                <ScalarProperty Name="HelpRequestName" ColumnName="HelpRequestName" />
-                <ScalarProperty Name="HelpRequestDescription" ColumnName="HelpRequestDescription" />
-                <ScalarProperty Name="HelpRequestImage" ColumnName="HelpRequestImage" />
-                <ScalarProperty Name="HelpRequestPriority" ColumnName="HelpRequestPriority" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="IsCheckByAdmin" ColumnName="IsCheckByAdmin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NewsTickers">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.NewsTicker">
-              <MappingFragment StoreEntitySet="NewsTicker">
-                <ScalarProperty Name="NewsTickerId" ColumnName="NewsTickerId" />
-                <ScalarProperty Name="NewsTickerName" ColumnName="NewsTickerName" />
-                <ScalarProperty Name="NewsTickerDescription" ColumnName="NewsTickerDescription" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="sleepingtestModelStoreContainer" CdmEntityContainer="SleepingtestEntities">
           <EntitySetMapping Name="NewUserRegistrations">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.NewUserRegistration">
+            <EntityTypeMapping TypeName="sleepingtestModel.NewUserRegistration">
               <MappingFragment StoreEntitySet="NewUserRegistration">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1371,11 +1221,128 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
                 <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
                 <ScalarProperty Name="IsSalesExecutive" ColumnName="IsSalesExecutive" />
                 <ScalarProperty Name="UserDesignation" ColumnName="UserDesignation" />
+                <ScalarProperty Name="IsWithdrawalOpen" ColumnName="IsWithdrawalOpen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Advertisements">
+            <EntityTypeMapping TypeName="sleepingtestModel.Advertisement">
+              <MappingFragment StoreEntitySet="Advertisement">
+                <ScalarProperty Name="AdvertisementId" ColumnName="AdvertisementId" />
+                <ScalarProperty Name="AdvertisementName" ColumnName="AdvertisementName" />
+                <ScalarProperty Name="AdvertisementDescription" ColumnName="AdvertisementDescription" />
+                <ScalarProperty Name="AdvertisementImage" ColumnName="AdvertisementImage" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BonusSettings">
+            <EntityTypeMapping TypeName="sleepingtestModel.BonusSetting">
+              <MappingFragment StoreEntitySet="BonusSetting">
+                <ScalarProperty Name="BonusSettingId" ColumnName="BonusSettingId" />
+                <ScalarProperty Name="BonusSettingName" ColumnName="BonusSettingName" />
+                <ScalarProperty Name="BonusSettingPercent" ColumnName="BonusSettingPercent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="sleepingtestModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="TwoCharCountryCode" ColumnName="TwoCharCountryCode" />
+                <ScalarProperty Name="ThreeCharCountryCode" ColumnName="ThreeCharCountryCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EWalletPayoutConfigs">
+            <EntityTypeMapping TypeName="sleepingtestModel.EWalletPayoutConfig">
+              <MappingFragment StoreEntitySet="EWalletPayoutConfig">
+                <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+                <ScalarProperty Name="TimePeriod" ColumnName="TimePeriod" />
+                <ScalarProperty Name="MinimumPayout" ColumnName="MinimumPayout" />
+                <ScalarProperty Name="PayoutChargesPercent" ColumnName="PayoutChargesPercent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EWalletTransactions">
+            <EntityTypeMapping TypeName="sleepingtestModel.EWalletTransaction">
+              <MappingFragment StoreEntitySet="EWalletTransaction">
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="TransactionSource" ColumnName="TransactionSource" />
+                <ScalarProperty Name="TransactionName" ColumnName="TransactionName" />
+                <ScalarProperty Name="AsscociatedMember" ColumnName="AsscociatedMember" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsPackageBonus" ColumnName="IsPackageBonus" />
+                <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+                <ScalarProperty Name="IsMatchingBonus" ColumnName="IsMatchingBonus" />
+                <ScalarProperty Name="IsParentBonus" ColumnName="IsParentBonus" />
+                <ScalarProperty Name="IsWithdrawlRequestByUser" ColumnName="IsWithdrawlRequestByUser" />
+                <ScalarProperty Name="IsWithdrawlPaidByAdmin" ColumnName="IsWithdrawlPaidByAdmin" />
+                <ScalarProperty Name="AdminCredit" ColumnName="AdminCredit" />
+                <ScalarProperty Name="AdminDebit" ColumnName="AdminDebit" />
+                <ScalarProperty Name="AdminTransactionName" ColumnName="AdminTransactionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EWalletWithdrawalFunds">
+            <EntityTypeMapping TypeName="sleepingtestModel.EWalletWithdrawalFund">
+              <MappingFragment StoreEntitySet="EWalletWithdrawalFund">
+                <ScalarProperty Name="WithdrawalFundId" ColumnName="WithdrawalFundId" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="WithdrawalFundMethod" ColumnName="WithdrawalFundMethod" />
+                <ScalarProperty Name="AmountPayble" ColumnName="AmountPayble" />
+                <ScalarProperty Name="WithdrawalFundDescription" ColumnName="WithdrawalFundDescription" />
+                <ScalarProperty Name="WithdrawalFundCharge" ColumnName="WithdrawalFundCharge" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="RequestedDate" ColumnName="RequestedDate" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
+                <ScalarProperty Name="RejectedDate" ColumnName="RejectedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsPending" ColumnName="IsPending" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="IsRejected" ColumnName="IsRejected" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HelpRequests">
+            <EntityTypeMapping TypeName="sleepingtestModel.HelpRequest">
+              <MappingFragment StoreEntitySet="HelpRequest">
+                <ScalarProperty Name="HelpRequestId" ColumnName="HelpRequestId" />
+                <ScalarProperty Name="HelpRequestName" ColumnName="HelpRequestName" />
+                <ScalarProperty Name="HelpRequestDescription" ColumnName="HelpRequestDescription" />
+                <ScalarProperty Name="HelpRequestImage" ColumnName="HelpRequestImage" />
+                <ScalarProperty Name="HelpRequestPriority" ColumnName="HelpRequestPriority" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsCheckByAdmin" ColumnName="IsCheckByAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsTickers">
+            <EntityTypeMapping TypeName="sleepingtestModel.NewsTicker">
+              <MappingFragment StoreEntitySet="NewsTicker">
+                <ScalarProperty Name="NewsTickerId" ColumnName="NewsTickerId" />
+                <ScalarProperty Name="NewsTickerName" ColumnName="NewsTickerName" />
+                <ScalarProperty Name="NewsTickerDescription" ColumnName="NewsTickerDescription" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Packages">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.Package">
+            <EntityTypeMapping TypeName="sleepingtestModel.Package">
               <MappingFragment StoreEntitySet="Packages">
                 <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="PackageName" ColumnName="PackageName" />
@@ -1392,7 +1359,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReceiveAdminMessages">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.ReceiveAdminMessage">
+            <EntityTypeMapping TypeName="sleepingtestModel.ReceiveAdminMessage">
               <MappingFragment StoreEntitySet="ReceiveAdminMessages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Sender" ColumnName="Sender" />
@@ -1407,7 +1374,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReceiveUserMessages">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.ReceiveUserMessage">
+            <EntityTypeMapping TypeName="sleepingtestModel.ReceiveUserMessage">
               <MappingFragment StoreEntitySet="ReceiveUserMessages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Sender" ColumnName="Sender" />
@@ -1421,7 +1388,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rewards">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.Reward">
+            <EntityTypeMapping TypeName="sleepingtestModel.Reward">
               <MappingFragment StoreEntitySet="Rewards">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
@@ -1433,7 +1400,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SentAdminMessages">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.SentAdminMessage">
+            <EntityTypeMapping TypeName="sleepingtestModel.SentAdminMessage">
               <MappingFragment StoreEntitySet="SentAdminMessages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Sender" ColumnName="Sender" />
@@ -1448,7 +1415,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SentUserMessages">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.SentUserMessage">
+            <EntityTypeMapping TypeName="sleepingtestModel.SentUserMessage">
               <MappingFragment StoreEntitySet="SentUserMessages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Sender" ColumnName="Sender" />
@@ -1462,7 +1429,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SignUpUsers">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.SignUpUser">
+            <EntityTypeMapping TypeName="sleepingtestModel.SignUpUser">
               <MappingFragment StoreEntitySet="SignUpUsers">
                 <ScalarProperty Name="SignUpId" ColumnName="SignUpId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -1479,7 +1446,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TableLevels">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.TableLevel">
+            <EntityTypeMapping TypeName="sleepingtestModel.TableLevel">
               <MappingFragment StoreEntitySet="TableLevel">
                 <ScalarProperty Name="TableLevelId" ColumnName="TableLevelId" />
                 <ScalarProperty Name="TableLevelName" ColumnName="TableLevelName" />
@@ -1489,7 +1456,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserGenealogyTables">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.UserGenealogyTable">
+            <EntityTypeMapping TypeName="sleepingtestModel.UserGenealogyTable">
               <MappingFragment StoreEntitySet="UserGenealogyTable">
                 <ScalarProperty Name="GenealogyTableId" ColumnName="GenealogyTableId" />
                 <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
@@ -1512,7 +1479,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserGenealogyTableLefts">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.UserGenealogyTableLeft">
+            <EntityTypeMapping TypeName="sleepingtestModel.UserGenealogyTableLeft">
               <MappingFragment StoreEntitySet="UserGenealogyTableLeft">
                 <ScalarProperty Name="GenealogyTableLeftId" ColumnName="GenealogyTableLeftId" />
                 <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
@@ -1535,7 +1502,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserGenealogyTableRights">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.UserGenealogyTableRight">
+            <EntityTypeMapping TypeName="sleepingtestModel.UserGenealogyTableRight">
               <MappingFragment StoreEntitySet="UserGenealogyTableRight">
                 <ScalarProperty Name="GenealogyTableRightId" ColumnName="GenealogyTableRightId" />
                 <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
@@ -1558,7 +1525,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserLoginInfoes">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.UserLoginInfo">
+            <EntityTypeMapping TypeName="sleepingtestModel.UserLoginInfo">
               <MappingFragment StoreEntitySet="UserLoginInfo">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -1573,7 +1540,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserNotifications">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.UserNotification">
+            <EntityTypeMapping TypeName="sleepingtestModel.UserNotification">
               <MappingFragment StoreEntitySet="UserNotification">
                 <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
                 <ScalarProperty Name="NotificationName" ColumnName="NotificationName" />
@@ -1586,7 +1553,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserPackages">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.UserPackage">
+            <EntityTypeMapping TypeName="sleepingtestModel.UserPackage">
               <MappingFragment StoreEntitySet="UserPackages">
                 <ScalarProperty Name="UserPackageId" ColumnName="UserPackageId" />
                 <ScalarProperty Name="PackageName" ColumnName="PackageName" />
@@ -1606,7 +1573,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserPositions">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.UserPosition">
+            <EntityTypeMapping TypeName="sleepingtestModel.UserPosition">
               <MappingFragment StoreEntitySet="UserPosition">
                 <ScalarProperty Name="UserPositionId" ColumnName="UserPositionId" />
                 <ScalarProperty Name="UserPositionName" ColumnName="UserPositionName" />
@@ -1614,7 +1581,7 @@ warning 6002: The table/view 'SleepingPartnerManagement.dbo.UserTableLevel' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserTableLevels">
-            <EntityTypeMapping TypeName="SleepingPartnermanagementModel.UserTableLevel">
+            <EntityTypeMapping TypeName="sleepingtestModel.UserTableLevel">
               <MappingFragment StoreEntitySet="UserTableLevel">
                 <ScalarProperty Name="UserTableLevelId" ColumnName="UserTableLevelId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
