@@ -1,10 +1,447 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="12dp"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Withdrawal Fund"
+        android:orientation="vertical"
+        android:weightSum="22"
+        >
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.8"
+        android:background="@color/colorRed"
+        android:text="    E-Wallet Withdrawal Fund"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/ralewaybold"
+        android:textSize="17sp"
+        android:id="@+id/tv_walt_header"
+        android:gravity="center_vertical"
         />
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Amount to be withdraw *(PKR)"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="@font/ralewayregular"
+        />
+
+    <EditText
+        android:id="@+id/ed_amount_withdrawn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ralewayregular"
+        android:textColor="#000"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/edittext_style1"
+        android:textSize="17sp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4"
+                android:text="Particulars"
+                android:textSize="17sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewaybold"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:text="Amount"
+                android:textSize="17sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewaybold"
+                android:paddingLeft="10dp"
+                />
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4"
+                android:text="Your current package amount"
+                android:textSize="13sp"
+                android:fontFamily="@font/ralewayregular"
+                />
+            <TextView
+                android:id="@+id/tv_current_pkg_amount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:text="0 PKR"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewayregular"
+                android:paddingLeft="10dp"
+                />
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.4"
+                android:text="Package amount limit for withdrawal"
+                android:textSize="13sp"
+                android:fontFamily="@font/ralewayregular"
+                />
+            <TextView
+                android:id="@+id/tv_pkg_amount_limit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="10000 PKR"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewayregular"
+                android:paddingLeft="10dp"
+                />
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.3"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4"
+                android:text="E-wallet amount already in payout process"
+                android:textSize="13sp"
+                android:fontFamily="@font/ralewayregular"
+                />
+            <TextView
+                android:id="@+id/tv_amount_already_payout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:text="0 PKR"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewayregular"
+                android:paddingLeft="10dp"
+                />
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.4"
+                android:text="Preferred Payment Method"
+                android:textSize="13sp"
+                android:fontFamily="@font/ralewayregular"
+                />
+            <TextView
+                android:id="@+id/tv_prefered_pay_method"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="Bank Account"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewayregular"
+                android:paddingLeft="10dp"
+                />
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.4"
+                android:text="Processing Charges - Bank Account"
+                android:textSize="13sp"
+                android:fontFamily="@font/ralewayregular"
+                />
+            <TextView
+                android:id="@+id/tv_processing_charges"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="10 %"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewayregular"
+                android:paddingLeft="10dp"
+                />
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.4"
+                android:text="Minimum withdrawal Amount"
+                android:textSize="13sp"
+                android:fontFamily="@font/ralewayregular"
+                />
+            <TextView
+                android:id="@+id/tv_min_withdraw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="10 PKR"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewayregular"
+                android:paddingLeft="10dp"
+                />
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.4"
+                android:text="Maximum withdrawal Percentage / Amount"
+                android:textSize="13sp"
+                android:fontFamily="@font/ralewayregular"
+                />
+            <TextView
+                android:id="@+id/tv_max_withdraw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="100%"
+                android:textSize="13sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewayregular"
+                android:paddingLeft="10dp"
+                />
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_weight="1.8"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:background="@color/colorRed"
+        android:text="Submit withdrawal request"
+        android:fontFamily="@font/ralewaybold"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        />
+    </LinearLayout>
+
+
+</LinearLayout>
+

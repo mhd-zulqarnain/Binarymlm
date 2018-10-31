@@ -7,18 +7,6 @@
     android:layout_margin="12dp"
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorRed"
-        android:text=" Notification List"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/ralewaybold"
-        android:textSize="17sp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:id="@+id/tv_notific_header"
-        />
 
 
     <View
@@ -31,30 +19,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="4.5">
+        android:weightSum="4.8">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="0.8"
             android:gravity="center"
-            android:text="Notification Name"
+            android:text="User Name"
             android:textColor="#494A4B"
             android:fontFamily="@font/ralewaybold"
             android:textSize="12sp"
-            android:id="@+id/tv_notifi_name"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:text="Notification Description"
-            android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
-            android:textSize="12sp"
-            android:id="@+id/tv_notifi_desc"
             />
 
         <TextView
@@ -62,14 +37,44 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Actions"
+            android:text="Payment Method"
+            android:textColor="#494A4B"
+            android:fontFamily="@font/ralewaybold"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Amount Payable"
             android:textColor="#494A4B"
             android:fontFamily="@font/ralewaybold"
             android:textSize="12sp"
             android:layout_gravity="center_vertical"
-            android:id="@+id/tv_notifi_action"
             />
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Withdrawal Charges"
+            android:textColor="#494A4B"
+            android:fontFamily="@font/ralewaybold"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Requested Date"
+            android:textColor="#494A4B"
+            android:fontFamily="@font/ralewaybold"
+            android:textSize="12sp"
+            />
 
 
     </LinearLayout>
@@ -81,7 +86,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylcer_notification"
+        android:id="@+id/recylcer_pendingwd_request"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="horizontal"
