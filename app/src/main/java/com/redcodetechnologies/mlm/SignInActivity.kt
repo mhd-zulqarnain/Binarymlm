@@ -1,14 +1,10 @@
 package com.redcodetechnologies.mlm
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.support.v7.app.AlertDialog
 import android.text.Html
-import android.text.InputType
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.util.Log
@@ -18,16 +14,19 @@ import android.widget.*
 import com.redcodetechnologies.mlm.utils.Apputils
 
 import com.redcodetechnologies.mlm.models.ApiToken
+import com.redcodetechnologies.mlm.models.NewUserRegistration
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.utils.ServiceError
 import com.redcodetechnologies.mlm.utils.ServiceListener
 import com.redcodetechnologies.mlm.utils.SharedPrefs
+import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
 
 class SignInActivity : AppCompatActivity() {
    // var  ctx: Context? = null
+   var progressdialog: android.app.AlertDialog?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +35,11 @@ class SignInActivity : AppCompatActivity() {
         val udata = "Forget Your Password"
         val content = SpannableString(udata)
         content.setSpan(UnderlineSpan(), 0, 20, 0)
+         progressdialog = SpotsDialog.Builder()
+                 .setContext(this@SignInActivity)
+                 .setMessage("Authenticating Please wait")
+                 .setTheme(R.style.CustomProgess)
+                 .build()
 
         tv_forgetpassword.setText(content)
 
@@ -64,8 +68,11 @@ class SignInActivity : AppCompatActivity() {
                         print("success")
                         var pref = SharedPrefs.getInstance()
                         pref!!.setToken(this@SignInActivity,obj)
-                        val intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
-                        startActivity(intent)
+                        getUserObject(ed_username!!.text.toString())
+                       // val intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+                       // startActivity(intent)
+
+
                     }
                     override fun fail(error: ServiceError) {
 
@@ -86,7 +93,6 @@ class SignInActivity : AppCompatActivity() {
         })
 
     }// onCreate();
-
 
     private fun showSendDialog() {
         val view: View = LayoutInflater.from(this).inflate(R.layout.dialogue_forget_password, null)
@@ -120,10 +126,13 @@ class SignInActivity : AppCompatActivity() {
 
     }
     private fun getuserData(serviceListener: ServiceListener<ApiToken>) {
+        progressdialog!!.show()
         ApiClint.getInstance()?.getService()?.verifyEmail("password",ed_username.text.toString(), ed_password.text.toString())
                 ?.enqueue(object : Callback<ApiToken> {
                     override fun onFailure(call: Call<ApiToken>?, t: Throwable?) {
                         println("error")
+                        progressdialog!!.dismiss()
+
                     }
                     override fun onResponse(call: Call<ApiToken>?, response: retrofit2.Response<ApiToken>?) {
                         print("object success ")
@@ -134,7 +143,9 @@ class SignInActivity : AppCompatActivity() {
                         }
                         else{
                          serviceListener.fail(ServiceError())
+
                         }
+                        progressdialog!!.dismiss()
 
                     }
                 })
@@ -143,7 +154,6 @@ class SignInActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-//        if()
         var pref = SharedPrefs.getInstance()
         var userId = pref!!.getToken(this@SignInActivity).tokenType
         if (userId != null) {
@@ -152,5 +162,30 @@ class SignInActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+    private fun getUserObject(username:String){
+        var token = SharedPrefs.getInstance()!!.getToken(this@SignInActivity).accessToken
+        progressdialog!!.show()
+        ApiClint.getInstance()?.getService()?.getNewRegistoredUser("bearer "+token!!,username)
+                ?.enqueue(object : Callback<NewUserRegistration> {
+                    override fun onFailure(call: Call<NewUserRegistration>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss()
+
+                    }
+                    override fun onResponse(call: Call<NewUserRegistration>?, response: retrofit2.Response<NewUserRegistration>?) {
+                        print("object success ")
+                        var code:Int = response!!.code()
+                        if (code == 200) {
+                            print("success")
+                        }
+                        else{
+                            print("error")
+                        }
+                        progressdialog!!.dismiss()
+                    }
+                })
+
+
     }
 }

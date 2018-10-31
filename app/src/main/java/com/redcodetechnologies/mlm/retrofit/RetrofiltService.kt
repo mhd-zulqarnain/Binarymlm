@@ -17,6 +17,10 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getUser(@Header("Authorization")auth:String,@Path("userid") userid: String):  Call<NewUserRegistration>
 
+    @GET("/mlmapi/api/getuser/{username}")
+    @Headers("Content-Type:application/json")
+    fun getNewRegistoredUser(@Header("Authorization")auth:String,@Path("username") username: String): Call<NewUserRegistration>
+
 }
 
 //"irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}"
