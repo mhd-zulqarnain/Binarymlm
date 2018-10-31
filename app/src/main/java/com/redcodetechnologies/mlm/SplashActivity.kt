@@ -1,5 +1,6 @@
 package com.redcodetechnologies.mlm
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import gr.net.maroulis.library.EasySplashScreen
@@ -9,6 +10,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
 
         val config = EasySplashScreen(this@SplashActivity)
                 .withFullScreen()

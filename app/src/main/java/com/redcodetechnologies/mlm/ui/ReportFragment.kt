@@ -63,7 +63,6 @@ class ReportFragment : Fragment() {
 
 
 
-        var type:String = "View";
         report = ReportAdapter(activity!!,reportList){ post->
             openreportdialog(reportList[post])
         }

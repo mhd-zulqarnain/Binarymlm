@@ -18,7 +18,7 @@ import android.view.ViewGroup
 import android.widget.*
 import android.support.v7.widget.SearchView
 import android.util.AttributeSet
-import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.AddMemberActivity
 import com.redcodetechnologies.mlm.DrawerActivity
 import com.redcodetechnologies.mlm.R
@@ -127,7 +127,7 @@ class NetworkFragment : Fragment() {
 
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
-        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Make Table")
+        (activity as DrawerActivity).getSupportActionBar()?.setTitle(frgement_type)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

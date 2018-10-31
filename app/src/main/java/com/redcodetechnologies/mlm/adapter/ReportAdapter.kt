@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Filter
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Report
@@ -55,7 +56,7 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
             et_rd_pm = itemView.findViewById(R.id.et_rd_pm)
             et_rd_an = itemView.findViewById(R.id.et_rd_an)
             et_rd_bn = itemView.findViewById(R.id.et_rd_bn)
-
+       //     et_rd_bn!!.layoutParams = LinearLayout.LayoutParams(30, 30, 0f)
             btn_rd_view = itemView.findViewById(R.id.btn_rd_view)
 
 
@@ -64,7 +65,8 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
 
             et_rd_uname!!.text = users.UserName
             et_rd_pm!!.text = users.PaymentMethod
-            et_rd_an!!.text = users.AccountNumber
+            var an :String = users.AccountNumber!!.substring(0,7) +".."
+            et_rd_an!!.text = an
             et_rd_bn!!.text = users.BankName
 
 

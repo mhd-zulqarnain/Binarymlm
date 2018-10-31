@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="12dp"
+    >
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="4.8"
+    android:layout_marginBottom="5dp"
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".8"
+        android:gravity="center"
+        android:text="User Name"
+        android:textColor="#494A4B"
+        android:fontFamily="@font/ralewayregular"
+        android:textSize="12sp"
+        android:id="@+id/wd_username"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Payment Method"
+        android:textColor="#494A4B"
+        android:fontFamily="@font/ralewayregular"
+        android:textSize="12sp"
+        android:id="@+id/wd_pay_method"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Amount Payable"
+        android:textColor="#494A4B"
+        android:fontFamily="@font/ralewayregular"
+        android:textSize="12sp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/wd_amount_pay"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Withdrawal Charges"
+        android:textColor="#494A4B"
+        android:fontFamily="@font/ralewayregular"
+        android:textSize="12sp"
+        android:id="@+id/wd_charges"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Rejected Date"
+        android:textColor="#494A4B"
+        android:fontFamily="@font/ralewayregular"
+        android:textSize="12sp"
+        android:id="@+id/wd_date"
+        />
+
+
+</LinearLayout>
+
+<View
+android:layout_width="wrap_content"
+android:layout_height="1dp"
+android:background="#494A4B" />
+</LinearLayout>

@@ -10,7 +10,7 @@ import android.text.Html
 import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
-import com.company.redcode.royalcryptoexchange.utils.Apputils
+import com.redcodetechnologies.mlm.utils.Apputils
 import kotlinx.android.synthetic.main.activity_add_member.*
 import java.util.*
 

@@ -16,15 +16,21 @@ import android.widget.ExpandableListView
 import android.widget.ExpandableListView.OnGroupExpandListener
 import com.redcodetechnologies.mlm.adapter.ExpandListAdapter
 import com.redcodetechnologies.mlm.ui.*
+import com.redcodetechnologies.mlm.utils.SharedPrefs
+
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var listDataHeader: ArrayList<String>? = null
     var listDataChild: HashMap<String, List<String>>? = null
     var expListView: ExpandableListView? = null
+    var expListViewright: ExpandableListView? = null
     var nav_view: NavigationView? = null
     var lastExpandedPosition = -1
+    var category:String?=null
+    var mPref:SharedPrefs?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mPref = SharedPrefs.getInstance()
         setSupportActionBar(toolbar)
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -33,9 +39,17 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp)
         nav_view = findViewById(R.id.nav_view) as NavigationView
         nav_view!!.setNavigationItemSelectedListener(this)
-        enableExpandableList();
+        category = intent.getStringExtra("Category");
+
+        if(category == "Sales"){
+         enableExpandableList()
+            supportFragmentManager.beginTransaction().add(R.id.main_layout, DashBoardFragment()).commit()
+        }
+        else if(category == "Sleeping"){
+            enableExpandableListSleeping()
+            supportFragmentManager.beginTransaction().add(R.id.main_layout, SleepingDashboardFragment()).commit()
+        }
         getSupportActionBar()!!.setTitle("Dashboard")
-        supportFragmentManager.beginTransaction().add(R.id.main_layout, DashBoardFragment()).commit()
 
     }
     override fun onBackPressed() {
@@ -54,6 +68,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         when (item.itemId) {
             R.id.action_settings -> return true
             R.id.action_logout ->{
+
+                mPref!!.clearToken(this@DrawerActivity)
+                startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
+                finish()
                 startActivity(Intent(this@DrawerActivity,SignInActivity::class.java))
                 finish()
                 return true
@@ -220,13 +238,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         gta!!.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta!!).commit()
                     }
-                    } else if (groupPosition == 8) {
-                        var gt: GetHelp = GetHelp()
-                        if (childPosition == 1 ) {
-                            args.putString("Fragment", "Get Help")
-                            gt!!.arguments = args
-                          supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                        }
                     }
 
                 return true
@@ -247,7 +258,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataHeader.add("Reports")
         listDataHeader.add("Sponsor Support")
         listDataHeader.add("IT Support")
-        listDataHeader.add("General Help")
+
 
         // Adding child data
 
@@ -280,9 +291,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         support.add("Sent")
 
 
-        val genralhelp = ArrayList<String>()
-        genralhelp.add("My Help Request")
-        genralhelp.add("Get Help")
+
         //   listDataChild[listDataHeader[0]] = null
         // Header, Child data
         listDataChild[listDataHeader[1]] = network
@@ -291,8 +300,183 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataChild[listDataHeader[5]] = reports
         listDataChild[listDataHeader[6]] = support
         listDataChild[listDataHeader[7]] = support
-        listDataChild[listDataHeader[8]] = genralhelp
+
     }
+
+
+
+    private fun enableExpandableListSleeping() {
+        listDataHeader = ArrayList()
+        listDataChild = HashMap()
+        expListView = findViewById(R.id.left_drawer) as ExpandableListView
+        expListView!!.visibility = View.GONE
+        expListViewright = findViewById(R.id.right_drawer) as ExpandableListView
+        expListViewright!!.visibility = View.VISIBLE
+        prepareListDataSleeping(listDataHeader!!, listDataChild!!)
+
+        val listAdapter = ExpandListAdapter(this, listDataHeader, listDataChild)
+        // setting list_group adapter
+        expListViewright!!.setAdapter(listAdapter)
+
+
+        expListViewright!!.setOnGroupExpandListener(OnGroupExpandListener { groupPosition ->
+
+            if (lastExpandedPosition != -1 && groupPosition != lastExpandedPosition) {
+                expListViewright!!.collapseGroup(lastExpandedPosition)
+            }
+            lastExpandedPosition = groupPosition
+        })
+
+        expListViewright!!.setOnGroupClickListener(object : ExpandableListView.OnGroupClickListener {
+
+            override fun onGroupClick(parent: ExpandableListView, v: View,
+                                      groupPosition: Int, id: Long): Boolean {
+
+                if (id == 0L) {
+                    // for non-child parents
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, SleepingDashboardFragment()).commit()
+
+                    return true
+                } else if (id == 3L) {
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, NoficationListFragment()).commit()
+                    return true
+                } else   // for child parents
+                    return false
+            }
+        })
+
+        // Listview on child click listener
+        expListViewright!!.setOnChildClickListener(object : ExpandableListView.OnChildClickListener {
+
+            override fun onChildClick(parent: ExpandableListView, v: View,
+                                      groupPosition: Int, childPosition: Int, id: Long): Boolean {
+                drawer_layout.closeDrawer(GravityCompat.START)
+
+                var args: Bundle = Bundle();
+
+                if (groupPosition == 1) {
+
+                    var gt: GeneologyTableFragment = GeneologyTableFragment()
+                    if (childPosition == 0) {
+                        args.putString("Fragment", "MyPackageCommisionList")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }
+                }
+                else if (groupPosition == 2) {
+                    var gt: WalletFragment = WalletFragment()
+                    if (childPosition == 0) {
+                        args.putString("Fragment", "E-Wallet Summary")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, EWalletSummaryFragment()).commit()
+                    }
+                    else if (childPosition == 1) {
+                        args.putString("Fragment", "wallet_transactions")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }
+                    else if (childPosition == 2) {
+                        args.putString("Fragment", "wallet_credits")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }
+                    else if (childPosition == 3) {
+                        args.putString("Fragment", "wallet_debits")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }
+                    else if (childPosition == 4)
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
+                    else if (childPosition == 5)
+
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
+                }
+                else if (groupPosition == 4) {
+                    var gt: ReportFragment = ReportFragment()
+                    if (childPosition == 0) {
+                        args.putString("Fragment", "ActivePayout")
+                        gt!!.arguments = args
+
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    } else if (childPosition == 1) {
+                        args.putString("Fragment", "PayoutHistory")
+                        gt!!.arguments = args
+
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    } else if (childPosition == 2) {
+                        args.putString("Fragment", "PayoutWithdrawalinProcess")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }
+                } else if (groupPosition == 5) {
+                    var gt: InboxFragment = InboxFragment()
+                    var gta: SentFragment = SentFragment()
+
+                    if (childPosition == 0) {
+                        args.putString("Inbox", "IT")
+                        gt!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                    }  else if (childPosition == 1 ) {
+                        args.putString("Sent", "IT")
+                        gta!!.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta!!).commit()
+                    }
+                }
+
+                return true
+            }
+        })
+    }
+
+
+    private fun prepareListDataSleeping(listDataHeader: MutableList<String>, listDataChild: MutableMap<String, List<String>>) {
+
+
+        // Adding child data
+        listDataHeader.add("Dashboard")
+        listDataHeader.add("Genealogy Table")
+        listDataHeader.add("E-Wallet")
+        listDataHeader.add("Notication List")
+        listDataHeader.add("Reports")
+        listDataHeader.add("IT Support")
+
+        // Adding child data
+
+
+
+        val gtable = ArrayList<String>()
+        gtable.add("My Package Commision List")
+
+        val ewallet = ArrayList<String>()
+        ewallet.add("E-Wallet Summary")
+        ewallet.add("Transactions")
+        ewallet.add("E-Wallet Credits")
+        ewallet.add("E-Wallet Debits")
+        ewallet.add("Withdrawal Fund")
+        ewallet.add("My Withdrawal Request")
+
+        val reports = ArrayList<String>()
+        reports.add("Active Payout")
+        reports.add("Payout History")
+        reports.add("Payout/Withdrawal in Process ")
+
+        val support = ArrayList<String>()
+        support.add("Inbox")
+        support.add("Sent")
+
+        //   listDataChild[listDataHeader[0]] = null
+        // Header, Child data
+
+        listDataChild[listDataHeader[1]] = gtable
+        listDataChild[listDataHeader[2]] = ewallet
+        listDataChild[listDataHeader[4]] = reports
+        listDataChild[listDataHeader[5]] = support
+
+    }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
