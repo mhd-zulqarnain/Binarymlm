@@ -173,8 +173,16 @@ class SignInActivity : AppCompatActivity() {
                         var code: Int = response!!.code()
                         if (code == 200) {
                             print("success")
-                             val intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
-                             startActivity(intent)
+                            var obj:NewUserRegistration = response.body()!!
+                            SharedPrefs.getInstance()!!.setUser(this@SignInActivity,obj)
+                            var intent:Intent?=null
+                            if (obj.isSleepingPartner=="0" && obj.isSalesExecutive=="0")
+                                intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+                            else if (obj.isSleepingPartner=="1" && obj.isSalesExecutive=="0")
+                                intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+
+
+                            startActivity(intent)
 
                         } else {
                             print("error")

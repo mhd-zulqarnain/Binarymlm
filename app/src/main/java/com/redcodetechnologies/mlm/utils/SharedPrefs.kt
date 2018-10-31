@@ -7,6 +7,7 @@ import com.redcodetechnologies.mlm.models.ApiToken
 import com.redcodetechnologies.mlm.models.NewUserRegistration
 
 private const val USER_TOKEN = "usertoken"
+private const val USER_REGISTRATION = "newUserRegistration"
 
 class SharedPrefs private constructor(){
     var mPrefs:SharedPreferences?= null
@@ -41,4 +42,28 @@ class SharedPrefs private constructor(){
         editor.clear()
         editor.apply()
     }
+
+    fun setUser(context: Context,newUserRegistration: NewUserRegistration){
+        mPrefs = context.getSharedPreferences(USER_REGISTRATION,Context.MODE_PRIVATE)
+        val editor =mPrefs!!.edit();
+        var obj = Gson().toJson(newUserRegistration)
+        editor.putString(USER_REGISTRATION,obj)
+        editor.apply()
+    }
+    fun getUser(context: Context):NewUserRegistration{
+        mPrefs = context.getSharedPreferences(USER_REGISTRATION,Context.MODE_PRIVATE)
+        val str= mPrefs!!.getString(USER_REGISTRATION,null)
+        if(str==null)
+            return NewUserRegistration()
+        var obj = Gson().fromJson<NewUserRegistration>(str,NewUserRegistration::class.java)
+        return  obj
+    }
+
+    fun clearUser(context: Context){
+        mPrefs = context.getSharedPreferences(USER_REGISTRATION,Context.MODE_PRIVATE)
+        var editor = mPrefs!!.edit()
+        editor.clear()
+        editor.apply()
+    }
+
 }

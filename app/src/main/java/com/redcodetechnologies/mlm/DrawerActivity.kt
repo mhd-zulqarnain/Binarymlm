@@ -251,7 +251,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         })
     }
 
-
     private fun prepareListData(listDataHeader: MutableList<String>, listDataChild: MutableMap<String, List<String>>) {
 
 
@@ -308,8 +307,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataChild[listDataHeader[7]] = support
 
     }
-
-
 
     private fun enableExpandableListSleeping() {
         listDataHeader = ArrayList()
@@ -440,10 +437,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         })
     }
 
-
     private fun prepareListDataSleeping(listDataHeader: MutableList<String>, listDataChild: MutableMap<String, List<String>>) {
-
-
         // Adding child data
         listDataHeader.add("Dashboard")
         listDataHeader.add("Genealogy Table")
@@ -453,12 +447,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataHeader.add("IT Support")
 
         // Adding child data
-
-
-
         val gtable = ArrayList<String>()
         gtable.add("My Package Commision List")
-
         val ewallet = ArrayList<String>()
         ewallet.add("E-Wallet Summary")
         ewallet.add("Transactions")
@@ -485,8 +475,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataChild[listDataHeader[5]] = support
 
     }
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
