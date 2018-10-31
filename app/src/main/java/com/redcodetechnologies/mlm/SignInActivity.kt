@@ -25,8 +25,8 @@ import retrofit2.Call
 import retrofit2.Callback
 
 class SignInActivity : AppCompatActivity() {
-   // var  ctx: Context? = null
-   var progressdialog: android.app.AlertDialog?=null
+    // var  ctx: Context? = null
+    var progressdialog: android.app.AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,53 +35,49 @@ class SignInActivity : AppCompatActivity() {
         val udata = "Forget Your Password"
         val content = SpannableString(udata)
         content.setSpan(UnderlineSpan(), 0, 20, 0)
-         progressdialog = SpotsDialog.Builder()
-                 .setContext(this@SignInActivity)
-                 .setMessage("Authenticating Please wait")
-                 .setTheme(R.style.CustomProgess)
-                 .build()
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this@SignInActivity)
+                .setMessage("Authenticating Please wait")
+                .setTheme(R.style.CustomProgess)
+                .build()
 
         tv_forgetpassword.setText(content)
 
 
         btn_submit.setOnClickListener(View.OnClickListener {
 
-            Log.wtf("","Validiate password!")
+            Log.wtf("", "Validiate password!")
 
-            if(ed_username.text.toString().trim(' ').length < 1){
+            if (ed_username.text.toString().trim(' ').length < 1) {
                 ed_username.error = Html.fromHtml("<font color='#E0796C'>User name could not be empty</font>")
                 ed_username.requestFocus()
-            }
-            else if(ed_password.text.toString().trim(' ').length < 1){
+            } else if (ed_password.text.toString().trim(' ').length < 1) {
                 ed_password.error = Html.fromHtml("<font color='#E0796C'>Password could not be empty</font>")
                 ed_password.requestFocus()
-            }
-           else if(ed_password.text.toString().trim(' ').length < 8){
+            } else if (ed_password.text.toString().trim(' ').length < 8) {
                 ed_password.error = Html.fromHtml("<font color='#E0796C'>Password must contain 8 characters</font>")
                 ed_password.requestFocus()
-            }
-            else{
+            } else {
 
 
                 getuserData(object : ServiceListener<ApiToken> {
                     override fun success(obj: ApiToken) {
                         print("success")
                         var pref = SharedPrefs.getInstance()
-                        pref!!.setToken(this@SignInActivity,obj)
+                        pref!!.setToken(this@SignInActivity, obj)
                         getUserObject(ed_username!!.text.toString())
-                       // val intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
-                       // startActivity(intent)
-
+                        // val intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+                        // startActivity(intent)
 
                     }
+
                     override fun fail(error: ServiceError) {
 
-                        Apputils.showMsg(this@SignInActivity,"Wrong password or username")
+                        Apputils.showMsg(this@SignInActivity, "Wrong password or username")
                     }
                 })
 
             }
-
 
         })
 
@@ -101,23 +97,21 @@ class SignInActivity : AppCompatActivity() {
         alertBox.setCancelable(true)
         val dialog = alertBox.create()
 
-         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
 
-        var ed_email_address: EditText =view.findViewById(R.id.ed_email)
+        var ed_email_address: EditText = view.findViewById(R.id.ed_email)
         var button_submit: Button = view.findViewById(R.id.btn_submit)
 //        ed_email_address.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 //        ed_email_address.inputType = InputType.TYPE_CLASS_TEXT
         button_submit.setOnClickListener {
-            if(ed_email_address.text.toString().trim(' ').length < 1){
+            if (ed_email_address.text.toString().trim(' ').length < 1) {
                 ed_email_address.error = Html.fromHtml("<font color='#E0796C'>Email address cant be null</font>")
                 ed_email_address.requestFocus()
-            }
-            else if(!Apputils.isValidEmail(ed_email_address.text.toString())){
+            } else if (!Apputils.isValidEmail(ed_email_address.text.toString())) {
                 ed_email_address.error = Html.fromHtml("<font color='#E0796C'>Please enter correct Email Address</font>")
                 ed_email_address.requestFocus()
-            }
-            else{
+            } else {
                 (Toast.makeText(this, "Under Process", Toast.LENGTH_SHORT).show())
             }
         }
@@ -125,33 +119,32 @@ class SignInActivity : AppCompatActivity() {
         dialog.show()
 
     }
+
     private fun getuserData(serviceListener: ServiceListener<ApiToken>) {
         progressdialog!!.show()
-        ApiClint.getInstance()?.getService()?.verifyEmail("password",ed_username.text.toString(), ed_password.text.toString())
+        ApiClint.getInstance()?.getService()?.verifyEmail("password", ed_username.text.toString(), ed_password.text.toString())
                 ?.enqueue(object : Callback<ApiToken> {
                     override fun onFailure(call: Call<ApiToken>?, t: Throwable?) {
                         println("error")
                         progressdialog!!.dismiss()
 
                     }
+
                     override fun onResponse(call: Call<ApiToken>?, response: retrofit2.Response<ApiToken>?) {
                         print("object success ")
-                        var code:Int = response!!.code()
+                        var code: Int = response!!.code()
                         if (code == 200) {
                             serviceListener.success(response.body()!!)
                             print("success")
-                        }
-                        else{
-                         serviceListener.fail(ServiceError())
+                        } else {
+                            serviceListener.fail(ServiceError())
 
                         }
                         progressdialog!!.dismiss()
-
                     }
                 })
-
-
     }
+
     override fun onStart() {
         super.onStart()
         var pref = SharedPrefs.getInstance()
@@ -163,29 +156,31 @@ class SignInActivity : AppCompatActivity() {
             finish()
         }
     }
-    private fun getUserObject(username:String){
+
+    private fun getUserObject(username: String) {
         var token = SharedPrefs.getInstance()!!.getToken(this@SignInActivity).accessToken
         progressdialog!!.show()
-        ApiClint.getInstance()?.getService()?.getNewRegistoredUser("bearer "+token!!,username)
+        ApiClint.getInstance()?.getService()?.getNewRegistoredUser("bearer " + token!!, username)
                 ?.enqueue(object : Callback<NewUserRegistration> {
                     override fun onFailure(call: Call<NewUserRegistration>?, t: Throwable?) {
                         println("error")
                         progressdialog!!.dismiss()
 
                     }
+
                     override fun onResponse(call: Call<NewUserRegistration>?, response: retrofit2.Response<NewUserRegistration>?) {
                         print("object success ")
-                        var code:Int = response!!.code()
+                        var code: Int = response!!.code()
                         if (code == 200) {
                             print("success")
-                        }
-                        else{
+                             val intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+                             startActivity(intent)
+
+                        } else {
                             print("error")
                         }
                         progressdialog!!.dismiss()
                     }
                 })
-
-
     }
 }

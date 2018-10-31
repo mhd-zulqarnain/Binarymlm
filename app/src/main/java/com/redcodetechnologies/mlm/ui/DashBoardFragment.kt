@@ -10,19 +10,40 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Typeface
 import android.support.v7.widget.CardView
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.text.InputType
 import android.widget.*
 import com.redcodetechnologies.mlm.DrawerActivity
+import com.redcodetechnologies.mlm.adapter.DashboardAdapter
+import com.redcodetechnologies.mlm.models.AddsModal
 
 
 class DashBoardFragment : Fragment() {
+    var frgement_type = "MyPackageCommisionList"
     var tv:CardView?=null
     var click:Boolean=true;
+    var recycler_adds : RecyclerView? = null
+    var list: ArrayList<AddsModal> = ArrayList()
+    var adapter: DashboardAdapter? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view  =inflater.inflate(R.layout.fragment_dashboard, container, false)
         tv = view.findViewById(R.id.dashboardbalance) as CardView;
+
+        list.add(AddsModal("One Plus"))
+        list.add(AddsModal("I phone"))
+        list.add(AddsModal("Black berry"))
+        list.add(AddsModal("Oppo"))
+        recycler_adds = view.findViewById(R.id.recylcer_adds)
+        val manager = GridLayoutManager(activity!!, 2)
+        recycler_adds!!.layoutManager =manager
+        adapter = DashboardAdapter(activity!!,frgement_type, list)
+        recycler_adds!!.adapter = adapter
+
         tv!!.setOnClickListener{
             if(click){
                 showSendDialog(view)
