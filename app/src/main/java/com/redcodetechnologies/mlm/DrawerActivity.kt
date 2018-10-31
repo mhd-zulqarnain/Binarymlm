@@ -14,9 +14,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.widget.ExpandableListView
 import android.widget.ExpandableListView.OnGroupExpandListener
+import android.widget.LinearLayout
 import com.redcodetechnologies.mlm.adapter.ExpandListAdapter
 import com.redcodetechnologies.mlm.ui.*
 import com.redcodetechnologies.mlm.utils.SharedPrefs
+import kotlinx.android.synthetic.main.activity_umano_slider.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var listDataHeader: ArrayList<String>? = null
@@ -117,7 +120,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 if (id == 0L) {
                     // for non-child parents
                     drawer_layout.closeDrawer(GravityCompat.START)
+
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, DashBoardFragment()).commit()
+
 
                     return true
                 } else if (id == 4L) {
@@ -141,15 +146,16 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     if (groupPosition == 1) {
                         var gt: NetworkFragment = NetworkFragment()
                         if (childPosition == 0) {
+
                         args.putString("Fragment", "MakeTable")
                         gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                         } else if (childPosition == 1) {
-                        args.putString("Fragment", "DownlineMembers")
+                            args.putString("Fragment", "DownlineMembers")
                         gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                         } else if (childPosition == 2) {
-                        args.putString("Fragment", "ReferredMembers")
+                            args.putString("Fragment", "ReferredMembers")
                         gt!!.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                          }
@@ -194,18 +200,18 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                               gt!!.arguments = args
                               supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                           }
-                          else if (childPosition == 4)
+                          else if (childPosition == 4) {
                             supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
-                          else if (childPosition == 5)
-
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
+                        }
+                          else if (childPosition == 5) {
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
+                        }
                     }
                  else if (groupPosition == 5) {
-                    var gt: ReportFragment = ReportFragment()
+                        var gt: ReportFragment = ReportFragment()
                     if (childPosition == 0) {
                         args.putString("Fragment", "ActivePayout")
                         gt!!.arguments = args
-
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                     } else if (childPosition == 1) {
                         args.putString("Fragment", "PayoutHistory")
@@ -218,7 +224,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                     }
                      } else if (groupPosition == 6  || groupPosition== 7) {
-                      var gt: InboxFragment = InboxFragment()
+                        var gt: InboxFragment = InboxFragment()
                     var gta: SentFragment = SentFragment()
 
                     if (childPosition == 0 && groupPosition == 6) {
@@ -309,7 +315,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataHeader = ArrayList()
         listDataChild = HashMap()
         expListView = findViewById(R.id.left_drawer) as ExpandableListView
-        expListView!!.visibility = View.GONE
         expListViewright = findViewById(R.id.right_drawer) as ExpandableListView
         expListViewright!!.visibility = View.VISIBLE
         prepareListDataSleeping(listDataHeader!!, listDataChild!!)
@@ -335,6 +340,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 if (id == 0L) {
                     // for non-child parents
                     drawer_layout.closeDrawer(GravityCompat.START)
+
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, SleepingDashboardFragment()).commit()
 
                     return true
@@ -357,7 +363,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 var args: Bundle = Bundle();
 
                 if (groupPosition == 1) {
-
                     var gt: GeneologyTableFragment = GeneologyTableFragment()
                     if (childPosition == 0) {
                         args.putString("Fragment", "MyPackageCommisionList")
@@ -387,13 +392,17 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         gt!!.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                     }
-                    else if (childPosition == 4)
+                    else if (childPosition == 4){
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
-                    else if (childPosition == 5)
+                    }
 
+                    else if (childPosition == 5){
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
+                    }
                 }
                 else if (groupPosition == 4) {
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
                     var gt: ReportFragment = ReportFragment()
                     if (childPosition == 0) {
                         args.putString("Fragment", "ActivePayout")
@@ -411,6 +420,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
                     }
                 } else if (groupPosition == 5) {
+
                     var gt: InboxFragment = InboxFragment()
                     var gta: SentFragment = SentFragment()
 

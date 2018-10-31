@@ -8,11 +8,10 @@
     tools:context="com.redcodetechnologies.mlm.DrawerActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/main_layout"
-
-        />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main_layout"
+            />
 
 </android.support.constraint.ConstraintLayout>
