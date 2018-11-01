@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +22,6 @@
             android:text="Full Name"
             android:textColor="#313131"
             android:textSize="17sp" />
-
         <EditText
             android:id="@+id/ed_name"
             android:layout_width="match_parent"

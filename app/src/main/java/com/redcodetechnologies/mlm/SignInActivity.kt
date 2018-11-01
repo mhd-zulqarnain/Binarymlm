@@ -15,6 +15,7 @@ import com.redcodetechnologies.mlm.utils.Apputils
 
 import com.redcodetechnologies.mlm.models.ApiToken
 import com.redcodetechnologies.mlm.models.NewUserRegistration
+import com.redcodetechnologies.mlm.models.Response
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.utils.ServiceError
 import com.redcodetechnologies.mlm.utils.ServiceListener
@@ -25,7 +26,7 @@ import retrofit2.Call
 import retrofit2.Callback
 
 class SignInActivity : AppCompatActivity() {
-    // var  ctx: Context? = null
+
     var progressdialog: android.app.AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,15 +35,15 @@ class SignInActivity : AppCompatActivity() {
 
         val udata = "Forget Your Password"
         val content = SpannableString(udata)
+
         content.setSpan(UnderlineSpan(), 0, 20, 0)
         progressdialog = SpotsDialog.Builder()
                 .setContext(this@SignInActivity)
-                .setMessage("Authenticating Please wait")
+                .setMessage("Authenticating please wait!!")
                 .setTheme(R.style.CustomProgess)
                 .build()
 
         tv_forgetpassword.setText(content)
-
 
         btn_submit.setOnClickListener(View.OnClickListener {
 
@@ -66,13 +67,9 @@ class SignInActivity : AppCompatActivity() {
                         var pref = SharedPrefs.getInstance()
                         pref!!.setToken(this@SignInActivity, obj)
                         getUserObject(ed_username!!.text.toString())
-                        // val intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
-                        // startActivity(intent)
-
                     }
 
                     override fun fail(error: ServiceError) {
-
                         Apputils.showMsg(this@SignInActivity, "Wrong password or username")
                     }
                 })
@@ -88,7 +85,7 @@ class SignInActivity : AppCompatActivity() {
 
         })
 
-    }// onCreate();
+    }
 
     private fun showSendDialog() {
         val view: View = LayoutInflater.from(this).inflate(R.layout.dialogue_forget_password, null)
@@ -99,11 +96,9 @@ class SignInActivity : AppCompatActivity() {
 
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
-
         var ed_email_address: EditText = view.findViewById(R.id.ed_email)
         var button_submit: Button = view.findViewById(R.id.btn_submit)
-//        ed_email_address.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-//        ed_email_address.inputType = InputType.TYPE_CLASS_TEXT
+
         button_submit.setOnClickListener {
             if (ed_email_address.text.toString().trim(' ').length < 1) {
                 ed_email_address.error = Html.fromHtml("<font color='#E0796C'>Email address cant be null</font>")
@@ -112,12 +107,20 @@ class SignInActivity : AppCompatActivity() {
                 ed_email_address.error = Html.fromHtml("<font color='#E0796C'>Please enter correct Email Address</font>")
                 ed_email_address.requestFocus()
             } else {
-                (Toast.makeText(this, "Under Process", Toast.LENGTH_SHORT).show())
+
+                forgetPassword(ed_email_address.text.toString(), object : ServiceListener<Response> {
+                    override fun fail(error: ServiceError) {
+
+                        Apputils.showMsg(this@SignInActivity,"User not exists")
+                    }
+                    override fun success(obj: Response) {
+                        Apputils.showMsg(this@SignInActivity,obj.message.toString())
+
+                    }
+                })
             }
         }
-
         dialog.show()
-
     }
 
     private fun getuserData(serviceListener: ServiceListener<ApiToken>) {
@@ -125,6 +128,7 @@ class SignInActivity : AppCompatActivity() {
         ApiClint.getInstance()?.getService()?.verifyEmail("password", ed_username.text.toString(), ed_password.text.toString())
                 ?.enqueue(object : Callback<ApiToken> {
                     override fun onFailure(call: Call<ApiToken>?, t: Throwable?) {
+
                         println("error")
                         progressdialog!!.dismiss()
 
@@ -145,18 +149,6 @@ class SignInActivity : AppCompatActivity() {
                 })
     }
 
-    override fun onStart() {
-        super.onStart()
-        var pref = SharedPrefs.getInstance()
-        var userId = pref!!.getToken(this@SignInActivity).tokenType
-        if (userId != null) {
-            val intent = Intent(this@SignInActivity, DrawerActivity::class.java)
-            intent.putExtra("Category", "Sales")
-            startActivity(intent)
-            finish()
-        }
-    }
-
     private fun getUserObject(username: String) {
         var token = SharedPrefs.getInstance()!!.getToken(this@SignInActivity).accessToken
         progressdialog!!.show()
@@ -173,17 +165,17 @@ class SignInActivity : AppCompatActivity() {
                         var code: Int = response!!.code()
                         if (code == 200) {
                             print("success")
-                            var obj:NewUserRegistration = response.body()!!
-                            SharedPrefs.getInstance()!!.setUser(this@SignInActivity,obj)
-                            var intent:Intent?=null
-                            if (obj.isSleepingPartner=="0" && obj.isSalesExecutive=="0")
-                                intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
-                            else if (obj.isSleepingPartner=="1" && obj.isSalesExecutive=="0")
-                                intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
-
-
-                            startActivity(intent)
-
+                            var obj: NewUserRegistration = response.body()!!
+                            SharedPrefs.getInstance()!!.setUser(this@SignInActivity, obj)
+                            if (obj.isSleepingPartner == true)
+                                sleepingPatnerActivity()
+                            else if (obj.isSalesExecutive == true)
+                                salesExecutiveActivity()
+                            else {
+                                var i: Intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+                                startActivity(i)
+                                finish()
+                            }
                         } else {
                             print("error")
                         }
@@ -191,4 +183,62 @@ class SignInActivity : AppCompatActivity() {
                     }
                 })
     }
+
+    //Forget Password
+    private fun forgetPassword(email: String, serviceListener: ServiceListener<Response>) {
+
+        progressdialog!!.show()
+        ApiClint.getInstance()?.getService()?.forgetPassword(email)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss()
+                    }
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                            print("success")
+                            serviceListener.success(response.body()!!)
+
+                        } else {
+                            serviceListener.fail(ServiceError())
+                        }
+
+                    }
+                })
+    }
+
+    fun salesExecutiveActivity() {
+        var i: Intent = Intent(this@SignInActivity, DrawerActivity::class.java)
+        i.putExtra("Category", "Sales")
+        startActivity(i)
+        finish()
+    }
+
+    fun sleepingPatnerActivity() {
+        var i: Intent = Intent(this@SignInActivity, DrawerActivity::class.java)
+        i.putExtra("Category", "Sleeping")
+        startActivity(i)
+        finish()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        var pref = SharedPrefs.getInstance()
+        var obj = pref!!.getUser(this@SignInActivity)
+        if (obj.userCode != null) {
+
+            if (obj.isSleepingPartner == true)
+                sleepingPatnerActivity()
+            else if (obj.isSalesExecutive == true)
+                salesExecutiveActivity()
+            else {
+                var i: Intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+                startActivity(i)
+                finish()
+            }
+        }
+
+    }
+
 }

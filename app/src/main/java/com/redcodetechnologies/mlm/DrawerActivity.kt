@@ -18,8 +18,6 @@ import android.widget.LinearLayout
 import com.redcodetechnologies.mlm.adapter.ExpandListAdapter
 import com.redcodetechnologies.mlm.ui.*
 import com.redcodetechnologies.mlm.utils.SharedPrefs
-import kotlinx.android.synthetic.main.activity_umano_slider.*
-import kotlinx.android.synthetic.main.content_main.*
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var listDataHeader: ArrayList<String>? = null
@@ -30,6 +28,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     var lastExpandedPosition = -1
     var category:String?=null
     var mPref:SharedPrefs?= null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -63,7 +62,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
@@ -73,9 +71,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.action_logout ->{
 
                 mPref!!.clearToken(this@DrawerActivity)
+                mPref!!.clearUser(this@DrawerActivity)
                 startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
-                finish()
-                startActivity(Intent(this@DrawerActivity,SignInActivity::class.java))
                 finish()
                 return true
             }
@@ -88,11 +85,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
-    //    drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
-
     private fun enableExpandableList() {
         listDataHeader = ArrayList()
         listDataChild = HashMap()

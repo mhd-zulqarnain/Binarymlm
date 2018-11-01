@@ -18,18 +18,14 @@ class ProfileFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         var view = inflater.inflate(R.layout.fragment_profile, container, false)
-        //initView(view)
 
-
-
-
-       val viewPager = view.findViewById<ViewPager>(R.id.viewPager)
+        val viewPager = view.findViewById<ViewPager>(R.id.viewPager)
         val strip = view.findViewById<PagerTabStrip>(R.id.pager_header)
-        strip.setPadding(-400,0,0,0)
+        strip.setPadding(-400, 0, 0, 0)
 
 
-         val adapter = ViewPagerAdapter(activity!!.supportFragmentManager)
-            viewPager.adapter = adapter
+        val adapter = ViewPagerAdapter(activity!!.supportFragmentManager)
+        viewPager.adapter = adapter
 
 
         return view
