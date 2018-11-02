@@ -1,4 +1,4 @@
-package com.redcodetechnologies.mlm.ui
+package com.redcodetechnologies.mlm.ui.support
 import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment

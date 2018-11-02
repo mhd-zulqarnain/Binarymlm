@@ -5,7 +5,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="app_name">sleepingpatnerbinarymlm</string>
+    <string name="app_name">Binary MLM</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -41,7 +41,6 @@
     </string-array>
 
     <string-array name="country_arrays">
-        <item>	Pakistan	</item>
         <item>	Afghanistan	</item>
         <item>	Albania	</item>
         <item>	Algeria	</item>
@@ -200,7 +199,8 @@
         <item>	North Korea	</item>
         <item>	Northern Mariana Islands	</item>
         <item>	Norway	</item>
-        <item>	Oman	</item>
+        <item>	Oman</item>
+        <item>	Pakistan</item>
         <item>	Palau	</item>
         <item>	Panama	</item>
         <item>	Papua New Guinea	</item>

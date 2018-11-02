@@ -14,9 +14,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.widget.ExpandableListView
 import android.widget.ExpandableListView.OnGroupExpandListener
-import android.widget.LinearLayout
+import android.widget.TextView
 import com.redcodetechnologies.mlm.adapter.ExpandListAdapter
 import com.redcodetechnologies.mlm.ui.*
+import com.redcodetechnologies.mlm.ui.support.InboxFragment
+import com.redcodetechnologies.mlm.ui.support.SentFragment
+import com.redcodetechnologies.mlm.ui.profile.ProfileFragment
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -28,6 +31,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     var lastExpandedPosition = -1
     var category:String?=null
     var mPref:SharedPrefs?= null
+    lateinit var headerView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +46,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         nav_view = findViewById(R.id.nav_view) as NavigationView
         nav_view!!.setNavigationItemSelectedListener(this)
         category = intent.getStringExtra("Category");
-
+        headerView  =  nav_view!!.getHeaderView(0)
         if(category == "Sales"){
          enableExpandableList()
             supportFragmentManager.beginTransaction().add(R.id.main_layout, DashBoardFragment()).commit()
@@ -53,6 +57,19 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
         getSupportActionBar()!!.setTitle("Dashboard")
 
+        makeView()
+
+    }
+
+    fun makeView(){
+
+        var obj = mPref!!.getUser(this@DrawerActivity);
+        if(obj.username!=null)
+        headerView.findViewById<TextView>(R.id.tv_username).setText(obj.username);
+        if(obj.email!=null)
+        headerView.findViewById<TextView>(R.id.tv_email).setText(obj.email);
+        if(obj.userDesignation!=null)
+        headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
     }
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {

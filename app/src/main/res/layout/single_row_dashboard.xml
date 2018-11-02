@@ -11,6 +11,7 @@
         android:weightSum="1"
         >
         <ImageView
+            android:layout_marginTop="5dp"
             android:id="@+id/first_image"
             android:layout_width="0dp"
             android:layout_height="match_parent"
