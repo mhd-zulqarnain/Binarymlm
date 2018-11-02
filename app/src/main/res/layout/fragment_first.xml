@@ -98,10 +98,10 @@
             android:textSize="17sp" />
 
         <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/spn_country"
+            android:id="@+id/spinner_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/country_arrays">
+            >
 
         </android.support.v7.widget.AppCompatSpinner>
 

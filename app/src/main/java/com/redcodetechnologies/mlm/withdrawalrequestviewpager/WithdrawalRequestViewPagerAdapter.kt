@@ -3,8 +3,6 @@ package com.redcodetechnologies.mlm.withdrawalrequestviewpager
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.example.mir.viewpager.FirstFragment
-import com.example.mir.viewpager.SecondFragment
 
 class ViewPagerAdapterWD internal constructor(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 

@@ -1,21 +1,15 @@
-package com.example.mir.viewpager
+package com.redcodetechnologies.mlm.ui.profile
 
 
 import android.os.Bundle
 import android.app.Fragment
-import android.text.Editable
 import android.text.Html
-import android.text.TextUtils
-import android.text.TextWatcher
-import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.R
-import kotlin.math.log
 
 
 // TODO: Rename parameter arguments, choose names that match

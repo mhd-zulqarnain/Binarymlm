@@ -110,12 +110,12 @@ class SignInActivity : AppCompatActivity() {
 
                 forgetPassword(ed_email_address.text.toString(), object : ServiceListener<Response> {
                     override fun fail(error: ServiceError) {
-
-                        Apputils.showMsg(this@SignInActivity,"User not exists")
+                        dialog.dismiss()
+                        Apputils.showMsg(this@SignInActivity,"Email not exists")
                     }
                     override fun success(obj: Response) {
                         Apputils.showMsg(this@SignInActivity,obj.message.toString())
-
+                        dialog.dismiss()
                     }
                 })
             }
@@ -159,7 +159,6 @@ class SignInActivity : AppCompatActivity() {
                         progressdialog!!.dismiss()
 
                     }
-
                     override fun onResponse(call: Call<NewUserRegistration>?, response: retrofit2.Response<NewUserRegistration>?) {
                         print("object success ")
                         var code: Int = response!!.code()
@@ -183,7 +182,6 @@ class SignInActivity : AppCompatActivity() {
                     }
                 })
     }
-
     //Forget Password
     private fun forgetPassword(email: String, serviceListener: ServiceListener<Response>) {
 
@@ -203,7 +201,7 @@ class SignInActivity : AppCompatActivity() {
                         } else {
                             serviceListener.fail(ServiceError())
                         }
-
+                        progressdialog!!.dismiss()
                     }
                 })
     }
