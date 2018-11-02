@@ -50,7 +50,7 @@
                         android:text="Left Amount Remaing" />
 
                     <TextView
-                        android:id="@+id/tv_"
+                        android:id="@+id/tv_leftRemaingAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/CustomBlacktextStyle"
@@ -92,6 +92,7 @@
                         android:text="Right Remaining Amount" />
 
                     <TextView
+                        android:id="@+id/tv_rightRemaingAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6"
@@ -133,6 +134,7 @@
                         android:text="Total Left Users" />
 
                     <TextView
+                        android:id="@+id/tv_totalLeftUsers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6"
@@ -175,6 +177,7 @@
                         android:src="@drawable/multiple_users_silhouette" />
 
                     <TextView
+
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -182,6 +185,7 @@
                         android:text="Total Right Users" />
 
                     <TextView
+                        android:id="@+id/tv_totalRightUsers"
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -215,6 +219,7 @@
                         android:src="@drawable/money_bag" />
 
                     <TextView
+
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -223,6 +228,7 @@
                         android:text="Total Amount Right Users" />
 
                     <TextView
+                        android:id="@+id/tv_totalAmountRightUsers"
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -264,6 +270,7 @@
                         android:text="Total Amount Left Users" />
 
                     <TextView
+                        android:id="@+id/tv_totalAmountLeftUsers"
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

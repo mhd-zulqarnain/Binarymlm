@@ -53,11 +53,11 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>) : Recycler
             tv_bank = itemView.findViewById(R.id.tv_bank)
             tv_account = itemView.findViewById(R.id.tv_account)
             tv_paid = itemView.findViewById(R.id.tv_paid)
-            tv_name!!.text = users.name
-            tv_phone!!.text = users.phone
-            tv_bank!!.text = users.bank
-            tv_account!!.text = users.account
-            tv_paid!!.text = users.paid
+            tv_name!!.text = users.UserName
+            tv_phone!!.text = users.Phone
+            tv_bank!!.text = users.BankName
+            tv_account!!.text = users.AccountNumber
+            tv_paid!!.text = users.PaidAmount
 
 
             //  tv_price!!.text = order.BitPrice

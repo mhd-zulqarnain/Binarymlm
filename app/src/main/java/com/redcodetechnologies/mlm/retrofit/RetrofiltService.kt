@@ -1,11 +1,9 @@
 package com.redcodetechnologies.mlm.retrofit
 
-import com.redcodetechnologies.mlm.models.ApiToken
-import com.redcodetechnologies.mlm.models.MakeTableData
-import com.redcodetechnologies.mlm.models.NewUserRegistration
-import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.models.*
 import retrofit2.Call
 import retrofit2.http.*
+import java.lang.reflect.Array
 
 interface RetrofiltService {
 
@@ -26,6 +24,14 @@ interface RetrofiltService {
     @GET("maketabledetails/{userid}")
     @Headers("Content-Type:application/json")
     fun getMaketableData(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<MakeTableData>
+
+    @GET("getAllDownlineMembersRight/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getAllDownlineMembersRight(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<Users>>
+
+    @GET("getAllDownlineMembersLeft/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getAllDownlineMembersLeft(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<Users>>
 
 }
 

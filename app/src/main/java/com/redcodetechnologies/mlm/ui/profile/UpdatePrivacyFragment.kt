@@ -15,15 +15,6 @@ import com.redcodetechnologies.mlm.models.NewUserRegistration
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class SecondFragment : android.support.v4.app.Fragment() {
     var ed_password: EditText? = null
     var phone: EditText? = null
