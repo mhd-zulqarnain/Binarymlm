@@ -25,7 +25,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="2.5"
                 android:orientation="horizontal"
                 android:weightSum="6">
 
@@ -155,7 +155,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="2.5"
                 android:orientation="horizontal"
                 android:weightSum="6">
 
@@ -285,17 +285,61 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="2.5"
                 android:orientation="horizontal"
                 android:weightSum="6">
 
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="2"
+                    android:clickable="true"
+                    android:foreground="@drawable/custom_ripple_view"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="10dp"
+                            android:src="@drawable/bill" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/CustomBlacktextStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Payments In Process" />
+
+                            <TextView
+                                style="@style/CustomBlacktextStyle"
+                                android:layout_width="wrap_content"
+
+                                android:layout_height="wrap_content"
+                                android:text="0 PKR"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/dashboardbalance"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
-                    android:layout_weight="4"
+                    android:layout_weight="2"
                     android:clickable="true"
                     android:foreground="@drawable/custom_ripple_view"
                     android:padding="10dp">
@@ -377,98 +421,65 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
-                android:orientation="horizontal"
-                android:weightSum="6">
+                android:layout_weight="0.5"
+                android:layout_marginTop="20dp"
+                >
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="2dp"
-                    android:layout_weight="4"
-                    android:clickable="true"
-                    android:foreground="@drawable/custom_ripple_view"
-                    android:padding="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:padding="10dp"
-                            android:src="@drawable/bill" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                style="@style/CustomBlacktextStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="Payments In Process" />
-
-                            <TextView
-                                style="@style/CustomBlacktextStyle"
-                                android:layout_width="wrap_content"
-
-                                android:layout_height="wrap_content"
-                                android:text="0 PKR"
-                                android:textStyle="bold" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="2dp"
-                    android:layout_weight="2"
-
-                    android:clickable="true"
-                    android:foreground="@drawable/custom_ripple_view"
-
-                    android:padding="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:padding="10dp"
-                            android:src="@drawable/screenshot_1" />
-
-                        <TextView
-                            style="@style/CustomBlacktextStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Daily" />
-
-
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
+                    android:text="Rewards for Team Manager"
+                    android:fontFamily="@font/ralewayregular"
+                    android:textSize="17sp"
+                    android:background="@color/colorRed"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp"
+                    />
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:orientation="horizontal"
-                android:weightSum="6">
+                android:weightSum="8">
 
+                <android.support.v7.widget.CardView
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="2"
+                    android:clickable="true"
+                    android:foreground="@drawable/custom_ripple_view"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="10dp"
+                            android:src="@drawable/left_arrow" />
+
+                        <TextView
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Total Left Amount" />
+
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -488,14 +499,14 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:padding="10dp"
-                            android:src="@drawable/screenshot_1" />
+                            android:src="@drawable/right_arrow" />
 
                         <TextView
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Weekly" />
+                            android:gravity="center"
+                            android:text="Total Right Amount" />
 
 
                     </LinearLayout>
@@ -522,14 +533,15 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:padding="10dp"
-                            android:src="@drawable/screenshot_1" />
+                            android:src="@drawable/money" />
 
                         <TextView
+                            style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="Monthly" />
+                            android:text="Remaining Left Amount" />
 
 
                     </LinearLayout>
@@ -557,14 +569,14 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:padding="10dp"
-                            android:src="@drawable/screenshot_1" />
+                            android:src="@drawable/money" />
 
                         <TextView
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Yearly" />
+                            android:text="Remaining Right Amount" />
 
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
