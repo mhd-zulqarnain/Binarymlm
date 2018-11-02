@@ -5,63 +5,53 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="sleepingtestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.Advertisement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Advertisement">
           <Key>
             <PropertyRef Name="AdvertisementId" />
           </Key>
-          <Property Name="AdvertisementId" Type="int" Nullable="false" />
+          <Property Name="AdvertisementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AdvertisementName" Type="nvarchar" MaxLength="50" />
           <Property Name="AdvertisementDescription" Type="nvarchar(max)" />
           <Property Name="AdvertisementImage" Type="image" />
           <Property Name="IsActive" Type="bit" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.BonusSetting' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BonusSetting">
           <Key>
             <PropertyRef Name="BonusSettingId" />
           </Key>
-          <Property Name="BonusSettingId" Type="int" Nullable="false" />
+          <Property Name="BonusSettingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BonusSettingName" Type="nvarchar" MaxLength="50" />
           <Property Name="BonusSettingPercent" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.Country' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="CountryID" />
           </Key>
-          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CountryName" Type="varchar" MaxLength="50" />
           <Property Name="TwoCharCountryCode" Type="char" MaxLength="2" />
           <Property Name="ThreeCharCountryCode" Type="char" MaxLength="3" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.EWalletPayoutConfig' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EWalletPayoutConfig">
           <Key>
             <PropertyRef Name="ConfigId" />
           </Key>
-          <Property Name="ConfigId" Type="int" Nullable="false" />
+          <Property Name="ConfigId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TimePeriod" Type="nvarchar" MaxLength="50" />
           <Property Name="MinimumPayout" Type="money" />
           <Property Name="PayoutChargesPercent" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.EWalletTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EWalletTransaction">
           <Key>
             <PropertyRef Name="TransactionId" />
           </Key>
-          <Property Name="TransactionId" Type="int" Nullable="false" />
+          <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TransactionSource" Type="nvarchar" MaxLength="50" />
           <Property Name="TransactionName" Type="nvarchar" MaxLength="50" />
           <Property Name="AsscociatedMember" Type="int" />
           <Property Name="Amount" Type="money" />
-          <Property Name="TransactionDate" Type="smalldatetime" />
+          <Property Name="TransactionDate" Type="datetime" />
           <Property Name="Credit" Type="bit" />
           <Property Name="Debit" Type="bit" />
           <Property Name="UserId" Type="int" />
@@ -75,13 +65,11 @@ warning 6002: The table/view 'sleepingtest.dbo.EWalletTransaction' does not have
           <Property Name="AdminDebit" Type="bit" />
           <Property Name="AdminTransactionName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.EWalletWithdrawalFund' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EWalletWithdrawalFund">
           <Key>
             <PropertyRef Name="WithdrawalFundId" />
           </Key>
-          <Property Name="WithdrawalFundId" Type="int" Nullable="false" />
+          <Property Name="WithdrawalFundId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccountNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="BankName" Type="nvarchar" MaxLength="50" />
           <Property Name="WithdrawalFundMethod" Type="nvarchar" MaxLength="50" />
@@ -89,10 +77,10 @@ warning 6002: The table/view 'sleepingtest.dbo.EWalletWithdrawalFund' does not h
           <Property Name="WithdrawalFundDescription" Type="nvarchar(max)" />
           <Property Name="WithdrawalFundCharge" Type="money" />
           <Property Name="Country" Type="int" />
-          <Property Name="RequestedDate" Type="smalldatetime" />
-          <Property Name="ApprovedDate" Type="smalldatetime" />
-          <Property Name="PaidDate" Type="smalldatetime" />
-          <Property Name="RejectedDate" Type="smalldatetime" />
+          <Property Name="RequestedDate" Type="datetime" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="PaidDate" Type="datetime" />
+          <Property Name="RejectedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="IsPending" Type="bit" />
           <Property Name="IsApproved" Type="bit" />
@@ -101,33 +89,29 @@ warning 6002: The table/view 'sleepingtest.dbo.EWalletWithdrawalFund' does not h
           <Property Name="UserId" Type="int" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.HelpRequest' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="HelpRequest">
           <Key>
             <PropertyRef Name="HelpRequestId" />
           </Key>
-          <Property Name="HelpRequestId" Type="int" Nullable="false" />
+          <Property Name="HelpRequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HelpRequestName" Type="nvarchar" MaxLength="50" />
           <Property Name="HelpRequestDescription" Type="nvarchar(max)" />
           <Property Name="HelpRequestImage" Type="image" />
           <Property Name="HelpRequestPriority" Type="nvarchar" MaxLength="50" />
           <Property Name="UserId" Type="int" />
           <Property Name="IsActive" Type="bit" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="IsCheckByAdmin" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.NewsTicker' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="NewsTicker">
           <Key>
             <PropertyRef Name="NewsTickerId" />
           </Key>
-          <Property Name="NewsTickerId" Type="int" Nullable="false" />
+          <Property Name="NewsTickerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NewsTickerName" Type="nvarchar" MaxLength="200" />
           <Property Name="NewsTickerDescription" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <EntityType Name="NewUserRegistration">
           <Key>
@@ -162,13 +146,11 @@ warning 6002: The table/view 'sleepingtest.dbo.NewsTicker' does not have a prima
           <Property Name="UserDesignation" Type="nvarchar" MaxLength="50" />
           <Property Name="IsWithdrawalOpen" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.Packages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Packages">
           <Key>
             <PropertyRef Name="PackageId" />
           </Key>
-          <Property Name="PackageId" Type="int" Nullable="false" />
+          <Property Name="PackageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
           <Property Name="PackagePercent" Type="int" />
           <Property Name="PackagePrice" Type="money" />
@@ -176,17 +158,15 @@ warning 6002: The table/view 'sleepingtest.dbo.Packages' does not have a primary
           <Property Name="PackageMinWithdrawalAmount" Type="money" />
           <Property Name="PackageMaxWithdrawalAmount" Type="money" />
           <Property Name="IsActive" Type="bit" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="AddMemberLimit" Type="int" />
           <Property Name="MaximumMatchingBonusAmount" Type="money" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.ReceiveAdminMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ReceiveAdminMessages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Sender" Type="int" />
           <Property Name="UserId" Type="int" />
           <Property Name="SponserId" Type="int" />
@@ -194,48 +174,39 @@ warning 6002: The table/view 'sleepingtest.dbo.ReceiveAdminMessages' does not ha
           <Property Name="Message" Type="text" />
           <Property Name="MessageImage" Type="image" />
           <Property Name="IsRead" Type="bit" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.ReceiveUserMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ReceiveUserMessages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Sender" Type="int" />
           <Property Name="Sender_Name" Type="varchar" MaxLength="50" />
           <Property Name="UserId" Type="int" />
           <Property Name="SponserId" Type="int" />
           <Property Name="Message" Type="text" />
           <Property Name="IsRead" Type="bit" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.Rewards' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Rewards">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+          <Property Name="RewardName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Leftlimit" Type="money" />
           <Property Name="Rightlimit" Type="money" />
           <Property Name="Rewardimage" Type="image" />
           <Property Name="Isactive" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'sleepingtest.dbo.script' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="script">
-          <Property Name="USE  master " Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.SentAdminMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SentAdminMessages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Sender" Type="int" />
           <Property Name="UserId" Type="int" />
           <Property Name="SponserId" Type="int" />
@@ -243,59 +214,51 @@ warning 6002: The table/view 'sleepingtest.dbo.SentAdminMessages' does not have 
           <Property Name="Message" Type="text" />
           <Property Name="MessageImage" Type="image" />
           <Property Name="IsRead" Type="bit" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.SentUserMessages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SentUserMessages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Sender" Type="int" />
           <Property Name="Sender_Name" Type="varchar" MaxLength="50" />
           <Property Name="UserId" Type="int" />
           <Property Name="SponserId" Type="int" />
           <Property Name="Message" Type="text" />
           <Property Name="IsRead" Type="bit" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.SignUpUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SignUpUsers">
           <Key>
             <PropertyRef Name="SignUpId" />
           </Key>
-          <Property Name="SignUpId" Type="int" Nullable="false" />
+          <Property Name="SignUpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateOfBirth" Type="smalldatetime" />
+          <Property Name="DateOfBirth" Type="datetime" />
           <Property Name="NICnumber" Type="nvarchar" MaxLength="50" />
           <Property Name="Package" Type="nvarchar" MaxLength="50" />
           <Property Name="AmountRange" Type="money" />
           <Property Name="PhoneNumber" Type="int" />
           <Property Name="Message" Type="nvarchar(max)" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.TableLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TableLevel">
           <Key>
             <PropertyRef Name="TableLevelId" />
           </Key>
-          <Property Name="TableLevelId" Type="int" Nullable="false" />
+          <Property Name="TableLevelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TableLevelName" Type="nvarchar" MaxLength="50" />
           <Property Name="TableLevelLimit" Type="int" />
           <Property Name="TableLevelNum" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.UserGenealogyTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserGenealogyTable">
           <Key>
             <PropertyRef Name="GenealogyTableId" />
           </Key>
-          <Property Name="GenealogyTableId" Type="int" Nullable="false" />
+          <Property Name="GenealogyTableId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NoOfPerson" Type="nvarchar" MaxLength="50" />
           <Property Name="CommissionDescription" Type="nvarchar(max)" />
           <Property Name="CommissionAmount" Type="money" />
@@ -308,18 +271,16 @@ warning 6002: The table/view 'sleepingtest.dbo.UserGenealogyTable' does not have
           <Property Name="SponsorName" Type="nvarchar" MaxLength="50" />
           <Property Name="DownlineMemberId" Type="int" />
           <Property Name="DownlineMemberName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="TableLevel" Type="int" />
           <Property Name="DirectCommision" Type="bit" />
           <Property Name="MatchingCommision" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.UserGenealogyTableLeft' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserGenealogyTableLeft">
           <Key>
             <PropertyRef Name="GenealogyTableLeftId" />
           </Key>
-          <Property Name="GenealogyTableLeftId" Type="int" Nullable="false" />
+          <Property Name="GenealogyTableLeftId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NoOfPerson" Type="nvarchar" MaxLength="50" />
           <Property Name="CommissionDescription" Type="nvarchar(max)" />
           <Property Name="CommissionAmount" Type="money" />
@@ -332,18 +293,16 @@ warning 6002: The table/view 'sleepingtest.dbo.UserGenealogyTableLeft' does not 
           <Property Name="SponsorName" Type="nvarchar" MaxLength="50" />
           <Property Name="DownlineMemberId" Type="int" />
           <Property Name="DownlineMemberName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="TableLevel" Type="int" />
           <Property Name="DirectCommision" Type="bit" />
           <Property Name="MatchingCommision" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.UserGenealogyTableRight' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserGenealogyTableRight">
           <Key>
             <PropertyRef Name="GenealogyTableRightId" />
           </Key>
-          <Property Name="GenealogyTableRightId" Type="int" Nullable="false" />
+          <Property Name="GenealogyTableRightId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NoOfPerson" Type="nvarchar" MaxLength="50" />
           <Property Name="CommissionDescription" Type="nvarchar(max)" />
           <Property Name="CommissionAmount" Type="money" />
@@ -356,13 +315,11 @@ warning 6002: The table/view 'sleepingtest.dbo.UserGenealogyTableRight' does not
           <Property Name="SponsorName" Type="nvarchar" MaxLength="50" />
           <Property Name="DownlineMemberId" Type="int" />
           <Property Name="DownlineMemberName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="TableLevel" Type="int" />
           <Property Name="DirectCommision" Type="bit" />
           <Property Name="MatchingCommision" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.UserLoginInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserLoginInfo">
           <Key>
             <PropertyRef Name="UserId" />
@@ -370,34 +327,30 @@ warning 6002: The table/view 'sleepingtest.dbo.UserLoginInfo' does not have a pr
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="20" />
           <Property Name="Password" Type="nvarchar" MaxLength="20" />
-          <Property Name="LastLoginDate" Type="smalldatetime" />
+          <Property Name="LastLoginDate" Type="datetime" />
           <Property Name="LoginFailedCount" Type="int" />
           <Property Name="LoginIPAddress" Type="nvarchar" MaxLength="20" />
           <Property Name="CustomerTimeZone" Type="nvarchar" MaxLength="20" />
-          <Property Name="LastAccessedDate" Type="smalldatetime" />
+          <Property Name="LastAccessedDate" Type="datetime" />
           <Property Name="AccountLocked" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.UserNotification' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserNotification">
           <Key>
             <PropertyRef Name="NotificationId" />
           </Key>
-          <Property Name="NotificationId" Type="int" Nullable="false" />
+          <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NotificationName" Type="nvarchar" MaxLength="50" />
           <Property Name="NotificationDescription" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="UserId" Type="int" />
-          <Property Name="CreateDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="IsSaveByUser" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.UserPackages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserPackages">
           <Key>
             <PropertyRef Name="UserPackageId" />
           </Key>
-          <Property Name="UserPackageId" Type="int" Nullable="false" />
+          <Property Name="UserPackageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PackageName" Type="nvarchar" MaxLength="50" />
           <Property Name="PackagePercent" Type="int" />
           <Property Name="PackagePrice" Type="money" />
@@ -407,27 +360,41 @@ warning 6002: The table/view 'sleepingtest.dbo.UserPackages' does not have a pri
           <Property Name="PackageId" Type="int" />
           <Property Name="UserId" Type="int" />
           <Property Name="IsInCurrentUse" Type="bit" />
-          <Property Name="PurchaseDate" Type="smalldatetime" />
+          <Property Name="PurchaseDate" Type="datetime" />
           <Property Name="PackagePurchaseMethod" Type="nvarchar" MaxLength="50" />
           <Property Name="BankSlipImage" Type="image" />
-          <Property Name="LastCommisionDate" Type="smalldatetime" />
+          <Property Name="LastCommisionDate" Type="datetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.UserPosition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserPosition">
           <Key>
             <PropertyRef Name="UserPositionId" />
           </Key>
-          <Property Name="UserPositionId" Type="int" Nullable="false" />
+          <Property Name="UserPositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserPositionName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserRewards">
+          <Key>
+            <PropertyRef Name="UserRewardId" />
+          </Key>
+          <Property Name="UserRewardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserRewardName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserRewardDesignation" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLeftAmount" Type="money" />
+          <Property Name="UserRightAmount" Type="money" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="RewardId" Type="int" />
+          <Property Name="IsClaimByUser" Type="bit" />
+          <Property Name="IsRewardedByAdmin" Type="bit" />
+          <Property Name="ClaimDate" Type="datetime" />
+          <Property Name="RewardedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="UserTableLevel">
           <Key>
             <PropertyRef Name="UserTableLevelId" />
           </Key>
-          <Property Name="UserTableLevelId" Type="int" Nullable="false" />
+          <Property Name="UserTableLevelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="TableLevel" Type="int" />
           <Property Name="NoOfUsers" Type="int" />
@@ -439,342 +406,213 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="TotalRightUserAmount" Type="money" />
           <Property Name="TotalRemainingLeftUserAmount" Type="money" />
           <Property Name="TotalRemainingRightUserAmount" Type="money" />
-          <Property Name="LastModifiedDate" Type="smalldatetime" />
+          <Property Name="LastModifiedDate" Type="datetime" />
         </EntityType>
+        <Function Name="check_parent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="node_id" Type="int" Mode="In" />
+          <Parameter Name="parent_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="convert_integer_to_roma" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="i" Type="int" Mode="In" />
+        </Function>
+        <Function Name="count_tree_full_index" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="tree_node_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="count_tree_level" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="tree_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="get_reverse_ascii" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="Ascii_pattern" Type="nvarchar" Mode="In" />
+          <Parameter Name="seq_to_convert" Type="int" Mode="In" />
+        </Function>
+        <Function Name="get_seq_by_level" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="treelevel" Type="int" Mode="In" />
+          <Parameter Name="seq_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetParentChildsLeftSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetParentChildsRightSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetParentChildsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserLoginInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetUserParentsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserTreeLeft" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserTreeRight" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="insert_tree_node" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tree_name" Type="nvarchar" Mode="In" />
+          <Parameter Name="parent_ID" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="DownlineMemberId" Type="int" Mode="In" />
+          <Parameter Name="UserPosition" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="move_node_down" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tree_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="move_node_up" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tree_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="remove_node" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tree_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="view_human_tree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="view_tree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="sleepingtestModelStoreContainer">
+          <EntitySet Name="Advertisement" EntityType="Self.Advertisement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BonusSetting" EntityType="Self.BonusSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EWalletPayoutConfig" EntityType="Self.EWalletPayoutConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EWalletTransaction" EntityType="Self.EWalletTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EWalletWithdrawalFund" EntityType="Self.EWalletWithdrawalFund" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HelpRequest" EntityType="Self.HelpRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsTicker" EntityType="Self.NewsTicker" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewUserRegistration" EntityType="Self.NewUserRegistration" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Advertisement" EntityType="Self.Advertisement" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Advertisement].[AdvertisementId] AS [AdvertisementId], 
-    [Advertisement].[AdvertisementName] AS [AdvertisementName], 
-    [Advertisement].[AdvertisementDescription] AS [AdvertisementDescription], 
-    [Advertisement].[AdvertisementImage] AS [AdvertisementImage], 
-    [Advertisement].[IsActive] AS [IsActive], 
-    [Advertisement].[CreateDate] AS [CreateDate]
-    FROM [dbo].[Advertisement] AS [Advertisement]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="BonusSetting" EntityType="Self.BonusSetting" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [BonusSetting].[BonusSettingId] AS [BonusSettingId], 
-    [BonusSetting].[BonusSettingName] AS [BonusSettingName], 
-    [BonusSetting].[BonusSettingPercent] AS [BonusSettingPercent]
-    FROM [dbo].[BonusSetting] AS [BonusSetting]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Country" EntityType="Self.Country" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Country].[CountryID] AS [CountryID], 
-    [Country].[CountryName] AS [CountryName], 
-    [Country].[TwoCharCountryCode] AS [TwoCharCountryCode], 
-    [Country].[ThreeCharCountryCode] AS [ThreeCharCountryCode]
-    FROM [dbo].[Country] AS [Country]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="EWalletPayoutConfig" EntityType="Self.EWalletPayoutConfig" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [EWalletPayoutConfig].[ConfigId] AS [ConfigId], 
-    [EWalletPayoutConfig].[TimePeriod] AS [TimePeriod], 
-    [EWalletPayoutConfig].[MinimumPayout] AS [MinimumPayout], 
-    [EWalletPayoutConfig].[PayoutChargesPercent] AS [PayoutChargesPercent]
-    FROM [dbo].[EWalletPayoutConfig] AS [EWalletPayoutConfig]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="EWalletTransaction" EntityType="Self.EWalletTransaction" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [EWalletTransaction].[TransactionId] AS [TransactionId], 
-    [EWalletTransaction].[TransactionSource] AS [TransactionSource], 
-    [EWalletTransaction].[TransactionName] AS [TransactionName], 
-    [EWalletTransaction].[AsscociatedMember] AS [AsscociatedMember], 
-    [EWalletTransaction].[Amount] AS [Amount], 
-    [EWalletTransaction].[TransactionDate] AS [TransactionDate], 
-    [EWalletTransaction].[Credit] AS [Credit], 
-    [EWalletTransaction].[Debit] AS [Debit], 
-    [EWalletTransaction].[UserId] AS [UserId], 
-    [EWalletTransaction].[IsPackageBonus] AS [IsPackageBonus], 
-    [EWalletTransaction].[PackageId] AS [PackageId], 
-    [EWalletTransaction].[IsMatchingBonus] AS [IsMatchingBonus], 
-    [EWalletTransaction].[IsParentBonus] AS [IsParentBonus], 
-    [EWalletTransaction].[IsWithdrawlRequestByUser] AS [IsWithdrawlRequestByUser], 
-    [EWalletTransaction].[IsWithdrawlPaidByAdmin] AS [IsWithdrawlPaidByAdmin], 
-    [EWalletTransaction].[AdminCredit] AS [AdminCredit], 
-    [EWalletTransaction].[AdminDebit] AS [AdminDebit], 
-    [EWalletTransaction].[AdminTransactionName] AS [AdminTransactionName]
-    FROM [dbo].[EWalletTransaction] AS [EWalletTransaction]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="EWalletWithdrawalFund" EntityType="Self.EWalletWithdrawalFund" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [EWalletWithdrawalFund].[WithdrawalFundId] AS [WithdrawalFundId], 
-    [EWalletWithdrawalFund].[AccountNumber] AS [AccountNumber], 
-    [EWalletWithdrawalFund].[BankName] AS [BankName], 
-    [EWalletWithdrawalFund].[WithdrawalFundMethod] AS [WithdrawalFundMethod], 
-    [EWalletWithdrawalFund].[AmountPayble] AS [AmountPayble], 
-    [EWalletWithdrawalFund].[WithdrawalFundDescription] AS [WithdrawalFundDescription], 
-    [EWalletWithdrawalFund].[WithdrawalFundCharge] AS [WithdrawalFundCharge], 
-    [EWalletWithdrawalFund].[Country] AS [Country], 
-    [EWalletWithdrawalFund].[RequestedDate] AS [RequestedDate], 
-    [EWalletWithdrawalFund].[ApprovedDate] AS [ApprovedDate], 
-    [EWalletWithdrawalFund].[PaidDate] AS [PaidDate], 
-    [EWalletWithdrawalFund].[RejectedDate] AS [RejectedDate], 
-    [EWalletWithdrawalFund].[IsActive] AS [IsActive], 
-    [EWalletWithdrawalFund].[IsPending] AS [IsPending], 
-    [EWalletWithdrawalFund].[IsApproved] AS [IsApproved], 
-    [EWalletWithdrawalFund].[IsPaid] AS [IsPaid], 
-    [EWalletWithdrawalFund].[IsRejected] AS [IsRejected], 
-    [EWalletWithdrawalFund].[UserId] AS [UserId], 
-    [EWalletWithdrawalFund].[UserName] AS [UserName]
-    FROM [dbo].[EWalletWithdrawalFund] AS [EWalletWithdrawalFund]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="HelpRequest" EntityType="Self.HelpRequest" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [HelpRequest].[HelpRequestId] AS [HelpRequestId], 
-    [HelpRequest].[HelpRequestName] AS [HelpRequestName], 
-    [HelpRequest].[HelpRequestDescription] AS [HelpRequestDescription], 
-    [HelpRequest].[HelpRequestImage] AS [HelpRequestImage], 
-    [HelpRequest].[HelpRequestPriority] AS [HelpRequestPriority], 
-    [HelpRequest].[UserId] AS [UserId], 
-    [HelpRequest].[IsActive] AS [IsActive], 
-    [HelpRequest].[CreateDate] AS [CreateDate], 
-    [HelpRequest].[IsCheckByAdmin] AS [IsCheckByAdmin]
-    FROM [dbo].[HelpRequest] AS [HelpRequest]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="NewsTicker" EntityType="Self.NewsTicker" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [NewsTicker].[NewsTickerId] AS [NewsTickerId], 
-    [NewsTicker].[NewsTickerName] AS [NewsTickerName], 
-    [NewsTicker].[NewsTickerDescription] AS [NewsTickerDescription], 
-    [NewsTicker].[IsActive] AS [IsActive], 
-    [NewsTicker].[CreateDate] AS [CreateDate]
-    FROM [dbo].[NewsTicker] AS [NewsTicker]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Packages" EntityType="Self.Packages" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Packages].[PackageId] AS [PackageId], 
-    [Packages].[PackageName] AS [PackageName], 
-    [Packages].[PackagePercent] AS [PackagePercent], 
-    [Packages].[PackagePrice] AS [PackagePrice], 
-    [Packages].[PackageValidity] AS [PackageValidity], 
-    [Packages].[PackageMinWithdrawalAmount] AS [PackageMinWithdrawalAmount], 
-    [Packages].[PackageMaxWithdrawalAmount] AS [PackageMaxWithdrawalAmount], 
-    [Packages].[IsActive] AS [IsActive], 
-    [Packages].[CreateDate] AS [CreateDate], 
-    [Packages].[AddMemberLimit] AS [AddMemberLimit], 
-    [Packages].[MaximumMatchingBonusAmount] AS [MaximumMatchingBonusAmount]
-    FROM [dbo].[Packages] AS [Packages]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ReceiveAdminMessages" EntityType="Self.ReceiveAdminMessages" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ReceiveAdminMessages].[Id] AS [Id], 
-    [ReceiveAdminMessages].[Sender] AS [Sender], 
-    [ReceiveAdminMessages].[UserId] AS [UserId], 
-    [ReceiveAdminMessages].[SponserId] AS [SponserId], 
-    [ReceiveAdminMessages].[Sender_Name] AS [Sender_Name], 
-    [ReceiveAdminMessages].[Message] AS [Message], 
-    [ReceiveAdminMessages].[MessageImage] AS [MessageImage], 
-    [ReceiveAdminMessages].[IsRead] AS [IsRead], 
-    [ReceiveAdminMessages].[CreateDate] AS [CreateDate]
-    FROM [dbo].[ReceiveAdminMessages] AS [ReceiveAdminMessages]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ReceiveUserMessages" EntityType="Self.ReceiveUserMessages" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ReceiveUserMessages].[Id] AS [Id], 
-    [ReceiveUserMessages].[Sender] AS [Sender], 
-    [ReceiveUserMessages].[Sender_Name] AS [Sender_Name], 
-    [ReceiveUserMessages].[UserId] AS [UserId], 
-    [ReceiveUserMessages].[SponserId] AS [SponserId], 
-    [ReceiveUserMessages].[Message] AS [Message], 
-    [ReceiveUserMessages].[IsRead] AS [IsRead], 
-    [ReceiveUserMessages].[CreateDate] AS [CreateDate]
-    FROM [dbo].[ReceiveUserMessages] AS [ReceiveUserMessages]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Rewards" EntityType="Self.Rewards" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Rewards].[Id] AS [Id], 
-    [Rewards].[Designation] AS [Designation], 
-    [Rewards].[Leftlimit] AS [Leftlimit], 
-    [Rewards].[Rightlimit] AS [Rightlimit], 
-    [Rewards].[Rewardimage] AS [Rewardimage], 
-    [Rewards].[Isactive] AS [Isactive]
-    FROM [dbo].[Rewards] AS [Rewards]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="SentAdminMessages" EntityType="Self.SentAdminMessages" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [SentAdminMessages].[Id] AS [Id], 
-    [SentAdminMessages].[Sender] AS [Sender], 
-    [SentAdminMessages].[UserId] AS [UserId], 
-    [SentAdminMessages].[SponserId] AS [SponserId], 
-    [SentAdminMessages].[Sender_Name] AS [Sender_Name], 
-    [SentAdminMessages].[Message] AS [Message], 
-    [SentAdminMessages].[MessageImage] AS [MessageImage], 
-    [SentAdminMessages].[IsRead] AS [IsRead], 
-    [SentAdminMessages].[CreateDate] AS [CreateDate]
-    FROM [dbo].[SentAdminMessages] AS [SentAdminMessages]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="SentUserMessages" EntityType="Self.SentUserMessages" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [SentUserMessages].[Id] AS [Id], 
-    [SentUserMessages].[Sender] AS [Sender], 
-    [SentUserMessages].[Sender_Name] AS [Sender_Name], 
-    [SentUserMessages].[UserId] AS [UserId], 
-    [SentUserMessages].[SponserId] AS [SponserId], 
-    [SentUserMessages].[Message] AS [Message], 
-    [SentUserMessages].[IsRead] AS [IsRead], 
-    [SentUserMessages].[CreateDate] AS [CreateDate]
-    FROM [dbo].[SentUserMessages] AS [SentUserMessages]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="SignUpUsers" EntityType="Self.SignUpUsers" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [SignUpUsers].[SignUpId] AS [SignUpId], 
-    [SignUpUsers].[FirstName] AS [FirstName], 
-    [SignUpUsers].[LastName] AS [LastName], 
-    [SignUpUsers].[Email] AS [Email], 
-    [SignUpUsers].[DateOfBirth] AS [DateOfBirth], 
-    [SignUpUsers].[NICnumber] AS [NICnumber], 
-    [SignUpUsers].[Package] AS [Package], 
-    [SignUpUsers].[AmountRange] AS [AmountRange], 
-    [SignUpUsers].[PhoneNumber] AS [PhoneNumber], 
-    [SignUpUsers].[Message] AS [Message], 
-    [SignUpUsers].[CreateDate] AS [CreateDate]
-    FROM [dbo].[SignUpUsers] AS [SignUpUsers]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TableLevel" EntityType="Self.TableLevel" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TableLevel].[TableLevelId] AS [TableLevelId], 
-    [TableLevel].[TableLevelName] AS [TableLevelName], 
-    [TableLevel].[TableLevelLimit] AS [TableLevelLimit], 
-    [TableLevel].[TableLevelNum] AS [TableLevelNum]
-    FROM [dbo].[TableLevel] AS [TableLevel]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UserGenealogyTable" EntityType="Self.UserGenealogyTable" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserGenealogyTable].[GenealogyTableId] AS [GenealogyTableId], 
-    [UserGenealogyTable].[NoOfPerson] AS [NoOfPerson], 
-    [UserGenealogyTable].[CommissionDescription] AS [CommissionDescription], 
-    [UserGenealogyTable].[CommissionAmount] AS [CommissionAmount], 
-    [UserGenealogyTable].[UserPositionName] AS [UserPositionName], 
-    [UserGenealogyTable].[UserPositionLeft] AS [UserPositionLeft], 
-    [UserGenealogyTable].[UserPositionRight] AS [UserPositionRight], 
-    [UserGenealogyTable].[UserId] AS [UserId], 
-    [UserGenealogyTable].[UserName] AS [UserName], 
-    [UserGenealogyTable].[SponsorId] AS [SponsorId], 
-    [UserGenealogyTable].[SponsorName] AS [SponsorName], 
-    [UserGenealogyTable].[DownlineMemberId] AS [DownlineMemberId], 
-    [UserGenealogyTable].[DownlineMemberName] AS [DownlineMemberName], 
-    [UserGenealogyTable].[CreateDate] AS [CreateDate], 
-    [UserGenealogyTable].[TableLevel] AS [TableLevel], 
-    [UserGenealogyTable].[DirectCommision] AS [DirectCommision], 
-    [UserGenealogyTable].[MatchingCommision] AS [MatchingCommision]
-    FROM [dbo].[UserGenealogyTable] AS [UserGenealogyTable]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UserGenealogyTableLeft" EntityType="Self.UserGenealogyTableLeft" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserGenealogyTableLeft].[GenealogyTableLeftId] AS [GenealogyTableLeftId], 
-    [UserGenealogyTableLeft].[NoOfPerson] AS [NoOfPerson], 
-    [UserGenealogyTableLeft].[CommissionDescription] AS [CommissionDescription], 
-    [UserGenealogyTableLeft].[CommissionAmount] AS [CommissionAmount], 
-    [UserGenealogyTableLeft].[UserPositionName] AS [UserPositionName], 
-    [UserGenealogyTableLeft].[UserPositionLeft] AS [UserPositionLeft], 
-    [UserGenealogyTableLeft].[UserPositionRight] AS [UserPositionRight], 
-    [UserGenealogyTableLeft].[UserId] AS [UserId], 
-    [UserGenealogyTableLeft].[UserName] AS [UserName], 
-    [UserGenealogyTableLeft].[SponsorId] AS [SponsorId], 
-    [UserGenealogyTableLeft].[SponsorName] AS [SponsorName], 
-    [UserGenealogyTableLeft].[DownlineMemberId] AS [DownlineMemberId], 
-    [UserGenealogyTableLeft].[DownlineMemberName] AS [DownlineMemberName], 
-    [UserGenealogyTableLeft].[CreateDate] AS [CreateDate], 
-    [UserGenealogyTableLeft].[TableLevel] AS [TableLevel], 
-    [UserGenealogyTableLeft].[DirectCommision] AS [DirectCommision], 
-    [UserGenealogyTableLeft].[MatchingCommision] AS [MatchingCommision]
-    FROM [dbo].[UserGenealogyTableLeft] AS [UserGenealogyTableLeft]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UserGenealogyTableRight" EntityType="Self.UserGenealogyTableRight" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserGenealogyTableRight].[GenealogyTableRightId] AS [GenealogyTableRightId], 
-    [UserGenealogyTableRight].[NoOfPerson] AS [NoOfPerson], 
-    [UserGenealogyTableRight].[CommissionDescription] AS [CommissionDescription], 
-    [UserGenealogyTableRight].[CommissionAmount] AS [CommissionAmount], 
-    [UserGenealogyTableRight].[UserPositionName] AS [UserPositionName], 
-    [UserGenealogyTableRight].[UserPositionLeft] AS [UserPositionLeft], 
-    [UserGenealogyTableRight].[UserPositionRight] AS [UserPositionRight], 
-    [UserGenealogyTableRight].[UserId] AS [UserId], 
-    [UserGenealogyTableRight].[UserName] AS [UserName], 
-    [UserGenealogyTableRight].[SponsorId] AS [SponsorId], 
-    [UserGenealogyTableRight].[SponsorName] AS [SponsorName], 
-    [UserGenealogyTableRight].[DownlineMemberId] AS [DownlineMemberId], 
-    [UserGenealogyTableRight].[DownlineMemberName] AS [DownlineMemberName], 
-    [UserGenealogyTableRight].[CreateDate] AS [CreateDate], 
-    [UserGenealogyTableRight].[TableLevel] AS [TableLevel], 
-    [UserGenealogyTableRight].[DirectCommision] AS [DirectCommision], 
-    [UserGenealogyTableRight].[MatchingCommision] AS [MatchingCommision]
-    FROM [dbo].[UserGenealogyTableRight] AS [UserGenealogyTableRight]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UserLoginInfo" EntityType="Self.UserLoginInfo" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserLoginInfo].[UserId] AS [UserId], 
-    [UserLoginInfo].[UserName] AS [UserName], 
-    [UserLoginInfo].[Password] AS [Password], 
-    [UserLoginInfo].[LastLoginDate] AS [LastLoginDate], 
-    [UserLoginInfo].[LoginFailedCount] AS [LoginFailedCount], 
-    [UserLoginInfo].[LoginIPAddress] AS [LoginIPAddress], 
-    [UserLoginInfo].[CustomerTimeZone] AS [CustomerTimeZone], 
-    [UserLoginInfo].[LastAccessedDate] AS [LastAccessedDate], 
-    [UserLoginInfo].[AccountLocked] AS [AccountLocked]
-    FROM [dbo].[UserLoginInfo] AS [UserLoginInfo]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UserNotification" EntityType="Self.UserNotification" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserNotification].[NotificationId] AS [NotificationId], 
-    [UserNotification].[NotificationName] AS [NotificationName], 
-    [UserNotification].[NotificationDescription] AS [NotificationDescription], 
-    [UserNotification].[IsActive] AS [IsActive], 
-    [UserNotification].[UserId] AS [UserId], 
-    [UserNotification].[CreateDate] AS [CreateDate], 
-    [UserNotification].[IsSaveByUser] AS [IsSaveByUser]
-    FROM [dbo].[UserNotification] AS [UserNotification]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UserPackages" EntityType="Self.UserPackages" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserPackages].[UserPackageId] AS [UserPackageId], 
-    [UserPackages].[PackageName] AS [PackageName], 
-    [UserPackages].[PackagePercent] AS [PackagePercent], 
-    [UserPackages].[PackagePrice] AS [PackagePrice], 
-    [UserPackages].[PackageValidity] AS [PackageValidity], 
-    [UserPackages].[PackageMinWithdrawalAmount] AS [PackageMinWithdrawalAmount], 
-    [UserPackages].[PackageMaxWithdrawalAmount] AS [PackageMaxWithdrawalAmount], 
-    [UserPackages].[PackageId] AS [PackageId], 
-    [UserPackages].[UserId] AS [UserId], 
-    [UserPackages].[IsInCurrentUse] AS [IsInCurrentUse], 
-    [UserPackages].[PurchaseDate] AS [PurchaseDate], 
-    [UserPackages].[PackagePurchaseMethod] AS [PackagePurchaseMethod], 
-    [UserPackages].[BankSlipImage] AS [BankSlipImage], 
-    [UserPackages].[LastCommisionDate] AS [LastCommisionDate]
-    FROM [dbo].[UserPackages] AS [UserPackages]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UserPosition" EntityType="Self.UserPosition" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserPosition].[UserPositionId] AS [UserPositionId], 
-    [UserPosition].[UserPositionName] AS [UserPositionName]
-    FROM [dbo].[UserPosition] AS [UserPosition]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="UserTableLevel" EntityType="Self.UserTableLevel" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UserTableLevel].[UserTableLevelId] AS [UserTableLevelId], 
-    [UserTableLevel].[UserName] AS [UserName], 
-    [UserTableLevel].[TableLevel] AS [TableLevel], 
-    [UserTableLevel].[NoOfUsers] AS [NoOfUsers], 
-    [UserTableLevel].[LeftUsers] AS [LeftUsers], 
-    [UserTableLevel].[RightUsers] AS [RightUsers], 
-    [UserTableLevel].[TableLevelLimit] AS [TableLevelLimit], 
-    [UserTableLevel].[UserId] AS [UserId], 
-    [UserTableLevel].[TotalLeftUserAmount] AS [TotalLeftUserAmount], 
-    [UserTableLevel].[TotalRightUserAmount] AS [TotalRightUserAmount], 
-    [UserTableLevel].[TotalRemainingLeftUserAmount] AS [TotalRemainingLeftUserAmount], 
-    [UserTableLevel].[TotalRemainingRightUserAmount] AS [TotalRemainingRightUserAmount], 
-    [UserTableLevel].[LastModifiedDate] AS [LastModifiedDate]
-    FROM [dbo].[UserTableLevel] AS [UserTableLevel]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Packages" EntityType="Self.Packages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiveAdminMessages" EntityType="Self.ReceiveAdminMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiveUserMessages" EntityType="Self.ReceiveUserMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rewards" EntityType="Self.Rewards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SentAdminMessages" EntityType="Self.SentAdminMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SentUserMessages" EntityType="Self.SentUserMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SignUpUsers" EntityType="Self.SignUpUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableLevel" EntityType="Self.TableLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGenealogyTable" EntityType="Self.UserGenealogyTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGenealogyTableLeft" EntityType="Self.UserGenealogyTableLeft" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGenealogyTableRight" EntityType="Self.UserGenealogyTableRight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLoginInfo" EntityType="Self.UserLoginInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserNotification" EntityType="Self.UserNotification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPackages" EntityType="Self.UserPackages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPosition" EntityType="Self.UserPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRewards" EntityType="Self.UserRewards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTableLevel" EntityType="Self.UserTableLevel" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="sleepingtestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="AdvertisementId" />
+          </Key>
+          <Property Name="AdvertisementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdvertisementDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdvertisementImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BonusSetting">
+          <Key>
+            <PropertyRef Name="BonusSettingId" />
+          </Key>
+          <Property Name="BonusSettingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BonusSettingName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BonusSettingPercent" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TwoCharCountryCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ThreeCharCountryCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EWalletPayoutConfig">
+          <Key>
+            <PropertyRef Name="ConfigId" />
+          </Key>
+          <Property Name="ConfigId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimePeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MinimumPayout" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PayoutChargesPercent" Type="Int32" />
+        </EntityType>
+        <EntityType Name="EWalletTransaction">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AsscociatedMember" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="Credit" Type="Boolean" />
+          <Property Name="Debit" Type="Boolean" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="IsPackageBonus" Type="Boolean" />
+          <Property Name="PackageId" Type="Int32" />
+          <Property Name="IsMatchingBonus" Type="Boolean" />
+          <Property Name="IsParentBonus" Type="Boolean" />
+          <Property Name="IsWithdrawlRequestByUser" Type="Boolean" />
+          <Property Name="IsWithdrawlPaidByAdmin" Type="Boolean" />
+          <Property Name="AdminCredit" Type="Boolean" />
+          <Property Name="AdminDebit" Type="Boolean" />
+          <Property Name="AdminTransactionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EWalletWithdrawalFund">
+          <Key>
+            <PropertyRef Name="WithdrawalFundId" />
+          </Key>
+          <Property Name="WithdrawalFundId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WithdrawalFundMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AmountPayble" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="WithdrawalFundDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WithdrawalFundCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Country" Type="Int32" />
+          <Property Name="RequestedDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="PaidDate" Type="DateTime" Precision="3" />
+          <Property Name="RejectedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsPending" Type="Boolean" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="IsPaid" Type="Boolean" />
+          <Property Name="IsRejected" Type="Boolean" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HelpRequest">
+          <Key>
+            <PropertyRef Name="HelpRequestId" />
+          </Key>
+          <Property Name="HelpRequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HelpRequestName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HelpRequestDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HelpRequestImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="HelpRequestPriority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="IsCheckByAdmin" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="NewsTicker">
+          <Key>
+            <PropertyRef Name="NewsTickerId" />
+          </Key>
+          <Property Name="NewsTickerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsTickerName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NewsTickerDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="NewUserRegistration">
           <Key>
             <PropertyRef Name="UserId" />
@@ -808,119 +646,11 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="UserDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsWithdrawalOpen" Type="Boolean" />
         </EntityType>
-        <EntityType Name="Advertisement">
-          <Key>
-            <PropertyRef Name="AdvertisementId" />
-          </Key>
-          <Property Name="AdvertisementId" Type="Int32" Nullable="false" />
-          <Property Name="AdvertisementName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdvertisementDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AdvertisementImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="BonusSetting">
-          <Key>
-            <PropertyRef Name="BonusSettingId" />
-          </Key>
-          <Property Name="BonusSettingId" Type="Int32" Nullable="false" />
-          <Property Name="BonusSettingName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BonusSettingPercent" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Country">
-          <Key>
-            <PropertyRef Name="CountryID" />
-          </Key>
-          <Property Name="CountryID" Type="Int32" Nullable="false" />
-          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TwoCharCountryCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="ThreeCharCountryCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="EWalletPayoutConfig">
-          <Key>
-            <PropertyRef Name="ConfigId" />
-          </Key>
-          <Property Name="ConfigId" Type="Int32" Nullable="false" />
-          <Property Name="TimePeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MinimumPayout" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="PayoutChargesPercent" Type="Int32" />
-        </EntityType>
-        <EntityType Name="EWalletTransaction">
-          <Key>
-            <PropertyRef Name="TransactionId" />
-          </Key>
-          <Property Name="TransactionId" Type="Int32" Nullable="false" />
-          <Property Name="TransactionSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TransactionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AsscociatedMember" Type="Int32" />
-          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="TransactionDate" Type="DateTime" Precision="0" />
-          <Property Name="Credit" Type="Boolean" />
-          <Property Name="Debit" Type="Boolean" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="IsPackageBonus" Type="Boolean" />
-          <Property Name="PackageId" Type="Int32" />
-          <Property Name="IsMatchingBonus" Type="Boolean" />
-          <Property Name="IsParentBonus" Type="Boolean" />
-          <Property Name="IsWithdrawlRequestByUser" Type="Boolean" />
-          <Property Name="IsWithdrawlPaidByAdmin" Type="Boolean" />
-          <Property Name="AdminCredit" Type="Boolean" />
-          <Property Name="AdminDebit" Type="Boolean" />
-          <Property Name="AdminTransactionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="EWalletWithdrawalFund">
-          <Key>
-            <PropertyRef Name="WithdrawalFundId" />
-          </Key>
-          <Property Name="WithdrawalFundId" Type="Int32" Nullable="false" />
-          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WithdrawalFundMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AmountPayble" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="WithdrawalFundDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="WithdrawalFundCharge" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Country" Type="Int32" />
-          <Property Name="RequestedDate" Type="DateTime" Precision="0" />
-          <Property Name="ApprovedDate" Type="DateTime" Precision="0" />
-          <Property Name="PaidDate" Type="DateTime" Precision="0" />
-          <Property Name="RejectedDate" Type="DateTime" Precision="0" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="IsPending" Type="Boolean" />
-          <Property Name="IsApproved" Type="Boolean" />
-          <Property Name="IsPaid" Type="Boolean" />
-          <Property Name="IsRejected" Type="Boolean" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="HelpRequest">
-          <Key>
-            <PropertyRef Name="HelpRequestId" />
-          </Key>
-          <Property Name="HelpRequestId" Type="Int32" Nullable="false" />
-          <Property Name="HelpRequestName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HelpRequestDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="HelpRequestImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="HelpRequestPriority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
-          <Property Name="IsCheckByAdmin" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="NewsTicker">
-          <Key>
-            <PropertyRef Name="NewsTickerId" />
-          </Key>
-          <Property Name="NewsTickerId" Type="Int32" Nullable="false" />
-          <Property Name="NewsTickerName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="NewsTickerDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
-        </EntityType>
         <EntityType Name="Package">
           <Key>
             <PropertyRef Name="PackageId" />
           </Key>
-          <Property Name="PackageId" Type="Int32" Nullable="false" />
+          <Property Name="PackageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PackagePercent" Type="Int32" />
           <Property Name="PackagePrice" Type="Decimal" Precision="19" Scale="4" />
@@ -928,7 +658,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="PackageMinWithdrawalAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="PackageMaxWithdrawalAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="AddMemberLimit" Type="Int32" />
           <Property Name="MaximumMatchingBonusAmount" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
@@ -936,7 +666,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sender" Type="Int32" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="SponserId" Type="Int32" />
@@ -944,27 +674,29 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MessageImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="IsRead" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ReceiveUserMessage">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sender" Type="Int32" />
           <Property Name="Sender_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="SponserId" Type="Int32" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsRead" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Reward">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RewardName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Leftlimit" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Rightlimit" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Rewardimage" Type="Binary" MaxLength="Max" FixedLength="false" />
@@ -974,7 +706,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sender" Type="Int32" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="SponserId" Type="Int32" />
@@ -982,42 +714,42 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MessageImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="IsRead" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="SentUserMessage">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sender" Type="Int32" />
           <Property Name="Sender_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="SponserId" Type="Int32" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsRead" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="SignUpUser">
           <Key>
             <PropertyRef Name="SignUpId" />
           </Key>
-          <Property Name="SignUpId" Type="Int32" Nullable="false" />
+          <Property Name="SignUpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
           <Property Name="NICnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Package" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AmountRange" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="PhoneNumber" Type="Int32" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TableLevel">
           <Key>
             <PropertyRef Name="TableLevelId" />
           </Key>
-          <Property Name="TableLevelId" Type="Int32" Nullable="false" />
+          <Property Name="TableLevelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TableLevelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TableLevelLimit" Type="Int32" />
           <Property Name="TableLevelNum" Type="Int32" />
@@ -1026,7 +758,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Key>
             <PropertyRef Name="GenealogyTableId" />
           </Key>
-          <Property Name="GenealogyTableId" Type="Int32" Nullable="false" />
+          <Property Name="GenealogyTableId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NoOfPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CommissionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CommissionAmount" Type="Decimal" Precision="19" Scale="4" />
@@ -1039,7 +771,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="SponsorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DownlineMemberId" Type="Int32" />
           <Property Name="DownlineMemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="TableLevel" Type="Int32" />
           <Property Name="DirectCommision" Type="Boolean" />
           <Property Name="MatchingCommision" Type="Boolean" />
@@ -1048,7 +780,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Key>
             <PropertyRef Name="GenealogyTableLeftId" />
           </Key>
-          <Property Name="GenealogyTableLeftId" Type="Int32" Nullable="false" />
+          <Property Name="GenealogyTableLeftId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NoOfPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CommissionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CommissionAmount" Type="Decimal" Precision="19" Scale="4" />
@@ -1061,7 +793,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="SponsorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DownlineMemberId" Type="Int32" />
           <Property Name="DownlineMemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="TableLevel" Type="Int32" />
           <Property Name="DirectCommision" Type="Boolean" />
           <Property Name="MatchingCommision" Type="Boolean" />
@@ -1070,7 +802,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Key>
             <PropertyRef Name="GenealogyTableRightId" />
           </Key>
-          <Property Name="GenealogyTableRightId" Type="Int32" Nullable="false" />
+          <Property Name="GenealogyTableRightId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NoOfPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CommissionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CommissionAmount" Type="Decimal" Precision="19" Scale="4" />
@@ -1083,7 +815,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="SponsorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DownlineMemberId" Type="Int32" />
           <Property Name="DownlineMemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="TableLevel" Type="Int32" />
           <Property Name="DirectCommision" Type="Boolean" />
           <Property Name="MatchingCommision" Type="Boolean" />
@@ -1095,30 +827,30 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LastLoginDate" Type="DateTime" Precision="0" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
           <Property Name="LoginFailedCount" Type="Int32" />
           <Property Name="LoginIPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CustomerTimeZone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LastAccessedDate" Type="DateTime" Precision="0" />
+          <Property Name="LastAccessedDate" Type="DateTime" Precision="3" />
           <Property Name="AccountLocked" Type="Boolean" />
         </EntityType>
         <EntityType Name="UserNotification">
           <Key>
             <PropertyRef Name="NotificationId" />
           </Key>
-          <Property Name="NotificationId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NotificationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NotificationDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="UserId" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="IsSaveByUser" Type="Boolean" />
         </EntityType>
         <EntityType Name="UserPackage">
           <Key>
             <PropertyRef Name="UserPackageId" />
           </Key>
-          <Property Name="UserPackageId" Type="Int32" Nullable="false" />
+          <Property Name="UserPackageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PackagePercent" Type="Int32" />
           <Property Name="PackagePrice" Type="Decimal" Precision="19" Scale="4" />
@@ -1128,23 +860,41 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="PackageId" Type="Int32" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="IsInCurrentUse" Type="Boolean" />
-          <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
           <Property Name="PackagePurchaseMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BankSlipImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="LastCommisionDate" Type="DateTime" Precision="0" />
+          <Property Name="LastCommisionDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="UserPosition">
           <Key>
             <PropertyRef Name="UserPositionId" />
           </Key>
-          <Property Name="UserPositionId" Type="Int32" Nullable="false" />
+          <Property Name="UserPositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserPositionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserReward">
+          <Key>
+            <PropertyRef Name="UserRewardId" />
+          </Key>
+          <Property Name="UserRewardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserRewardName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserRewardDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLeftAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="UserRightAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="RewardId" Type="Int32" />
+          <Property Name="IsClaimByUser" Type="Boolean" />
+          <Property Name="IsRewardedByAdmin" Type="Boolean" />
+          <Property Name="ClaimDate" Type="DateTime" Precision="3" />
+          <Property Name="RewardedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="UserTableLevel">
           <Key>
             <PropertyRef Name="UserTableLevelId" />
           </Key>
-          <Property Name="UserTableLevelId" Type="Int32" Nullable="false" />
+          <Property Name="UserTableLevelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TableLevel" Type="Int32" />
           <Property Name="NoOfUsers" Type="Int32" />
@@ -1156,10 +906,9 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <Property Name="TotalRightUserAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TotalRemainingLeftUserAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TotalRemainingRightUserAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="SleepingtestEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="NewUserRegistrations" EntityType="Self.NewUserRegistration" />
           <EntitySet Name="Advertisements" EntityType="Self.Advertisement" />
           <EntitySet Name="BonusSettings" EntityType="Self.BonusSetting" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
@@ -1168,6 +917,7 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <EntitySet Name="EWalletWithdrawalFunds" EntityType="Self.EWalletWithdrawalFund" />
           <EntitySet Name="HelpRequests" EntityType="Self.HelpRequest" />
           <EntitySet Name="NewsTickers" EntityType="Self.NewsTicker" />
+          <EntitySet Name="NewUserRegistrations" EntityType="Self.NewUserRegistration" />
           <EntitySet Name="Packages" EntityType="Self.Package" />
           <EntitySet Name="ReceiveAdminMessages" EntityType="Self.ReceiveAdminMessage" />
           <EntitySet Name="ReceiveUserMessages" EntityType="Self.ReceiveUserMessage" />
@@ -1183,48 +933,178 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
           <EntitySet Name="UserNotifications" EntityType="Self.UserNotification" />
           <EntitySet Name="UserPackages" EntityType="Self.UserPackage" />
           <EntitySet Name="UserPositions" EntityType="Self.UserPosition" />
+          <EntitySet Name="UserRewards" EntityType="Self.UserReward" />
           <EntitySet Name="UserTableLevels" EntityType="Self.UserTableLevel" />
+          <FunctionImport Name="GetParentChildsLeftSP" ReturnType="Collection(sleepingtestModel.GetParentChildsLeftSP_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetParentChildsRightSP" ReturnType="Collection(sleepingtestModel.GetParentChildsRightSP_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetParentChildsSP" ReturnType="Collection(sleepingtestModel.GetParentChildsSP_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserLoginInfo">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserParentsSP" ReturnType="Collection(sleepingtestModel.GetUserParentsSP_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserTree">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserTreeLeft">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserTreeRight">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="insert_tree_node">
+            <Parameter Name="tree_name" Mode="In" Type="String" />
+            <Parameter Name="parent_ID" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="DownlineMemberId" Mode="In" Type="Int32" />
+            <Parameter Name="UserPosition" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="move_node_down">
+            <Parameter Name="tree_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="move_node_up">
+            <Parameter Name="tree_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="remove_node">
+            <Parameter Name="tree_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="view_human_tree" />
+          <FunctionImport Name="view_tree" />
         </EntityContainer>
+        <ComplexType Name="GetParentChildsLeftSP_Result">
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Country" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CNIC" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsThisFirstUser" Nullable="true" />
+          <Property Type="Int32" Name="SponsorId" Nullable="true" />
+          <Property Type="Int32" Name="DownlineMemberId" Nullable="true" />
+          <Property Type="Int32" Name="UpperId" Nullable="true" />
+          <Property Type="Decimal" Name="PaidAmount" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserCode" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsUserActive" Nullable="true" />
+          <Property Type="Boolean" Name="IsNewRequest" Nullable="true" />
+          <Property Type="String" Name="UserPosition" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsEmailConfirmed" Nullable="true" />
+          <Property Type="Int32" Name="UserPackage" Nullable="true" />
+          <Property Type="Binary" Name="DocumentImage" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="IsSleepingPartner" Nullable="true" />
+          <Property Type="Boolean" Name="IsSalesExecutive" Nullable="true" />
+          <Property Type="String" Name="UserDesignation" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsWithdrawalOpen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetParentChildsRightSP_Result">
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Country" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CNIC" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsThisFirstUser" Nullable="true" />
+          <Property Type="Int32" Name="SponsorId" Nullable="true" />
+          <Property Type="Int32" Name="DownlineMemberId" Nullable="true" />
+          <Property Type="Int32" Name="UpperId" Nullable="true" />
+          <Property Type="Decimal" Name="PaidAmount" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserCode" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsUserActive" Nullable="true" />
+          <Property Type="Boolean" Name="IsNewRequest" Nullable="true" />
+          <Property Type="String" Name="UserPosition" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsEmailConfirmed" Nullable="true" />
+          <Property Type="Int32" Name="UserPackage" Nullable="true" />
+          <Property Type="Binary" Name="DocumentImage" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="IsSleepingPartner" Nullable="true" />
+          <Property Type="Boolean" Name="IsSalesExecutive" Nullable="true" />
+          <Property Type="String" Name="UserDesignation" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsWithdrawalOpen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetParentChildsSP_Result">
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Country" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CNIC" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsThisFirstUser" Nullable="true" />
+          <Property Type="Int32" Name="SponsorId" Nullable="true" />
+          <Property Type="Int32" Name="DownlineMemberId" Nullable="true" />
+          <Property Type="Int32" Name="UpperId" Nullable="true" />
+          <Property Type="Decimal" Name="PaidAmount" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserCode" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsUserActive" Nullable="true" />
+          <Property Type="Boolean" Name="IsNewRequest" Nullable="true" />
+          <Property Type="String" Name="UserPosition" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsEmailConfirmed" Nullable="true" />
+          <Property Type="Int32" Name="UserPackage" Nullable="true" />
+          <Property Type="Binary" Name="DocumentImage" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="IsSleepingPartner" Nullable="true" />
+          <Property Type="Boolean" Name="IsSalesExecutive" Nullable="true" />
+          <Property Type="String" Name="UserDesignation" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsWithdrawalOpen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetUserParentsSP_Result">
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Country" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CNIC" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AccountNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsThisFirstUser" Nullable="true" />
+          <Property Type="Int32" Name="SponsorId" Nullable="true" />
+          <Property Type="Int32" Name="DownlineMemberId" Nullable="true" />
+          <Property Type="Int32" Name="UpperId" Nullable="true" />
+          <Property Type="Decimal" Name="PaidAmount" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserCode" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsUserActive" Nullable="true" />
+          <Property Type="Boolean" Name="IsNewRequest" Nullable="true" />
+          <Property Type="String" Name="UserPosition" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsEmailConfirmed" Nullable="true" />
+          <Property Type="Int32" Name="UserPackage" Nullable="true" />
+          <Property Type="Binary" Name="DocumentImage" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="IsSleepingPartner" Nullable="true" />
+          <Property Type="Boolean" Name="IsSalesExecutive" Nullable="true" />
+          <Property Type="String" Name="UserDesignation" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsWithdrawalOpen" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="sleepingtestModelStoreContainer" CdmEntityContainer="SleepingtestEntities">
-          <EntitySetMapping Name="NewUserRegistrations">
-            <EntityTypeMapping TypeName="sleepingtestModel.NewUserRegistration">
-              <MappingFragment StoreEntitySet="NewUserRegistration">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="BankName" ColumnName="BankName" />
-                <ScalarProperty Name="IsThisFirstUser" ColumnName="IsThisFirstUser" />
-                <ScalarProperty Name="SponsorId" ColumnName="SponsorId" />
-                <ScalarProperty Name="DownlineMemberId" ColumnName="DownlineMemberId" />
-                <ScalarProperty Name="UpperId" ColumnName="UpperId" />
-                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
-                <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
-                <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
-                <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
-                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
-                <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
-                <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
-                <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
-                <ScalarProperty Name="IsSalesExecutive" ColumnName="IsSalesExecutive" />
-                <ScalarProperty Name="UserDesignation" ColumnName="UserDesignation" />
-                <ScalarProperty Name="IsWithdrawalOpen" ColumnName="IsWithdrawalOpen" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Advertisements">
             <EntityTypeMapping TypeName="sleepingtestModel.Advertisement">
               <MappingFragment StoreEntitySet="Advertisement">
@@ -1341,6 +1221,40 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="NewUserRegistrations">
+            <EntityTypeMapping TypeName="sleepingtestModel.NewUserRegistration">
+              <MappingFragment StoreEntitySet="NewUserRegistration">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="IsThisFirstUser" ColumnName="IsThisFirstUser" />
+                <ScalarProperty Name="SponsorId" ColumnName="SponsorId" />
+                <ScalarProperty Name="DownlineMemberId" ColumnName="DownlineMemberId" />
+                <ScalarProperty Name="UpperId" ColumnName="UpperId" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
+                <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
+                <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
+                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
+                <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
+                <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
+                <ScalarProperty Name="IsSalesExecutive" ColumnName="IsSalesExecutive" />
+                <ScalarProperty Name="UserDesignation" ColumnName="UserDesignation" />
+                <ScalarProperty Name="IsWithdrawalOpen" ColumnName="IsWithdrawalOpen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Packages">
             <EntityTypeMapping TypeName="sleepingtestModel.Package">
               <MappingFragment StoreEntitySet="Packages">
@@ -1392,6 +1306,8 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
               <MappingFragment StoreEntitySet="Rewards">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="RewardName" ColumnName="RewardName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Leftlimit" ColumnName="Leftlimit" />
                 <ScalarProperty Name="Rightlimit" ColumnName="Rightlimit" />
                 <ScalarProperty Name="Rewardimage" ColumnName="Rewardimage" />
@@ -1580,6 +1496,25 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserRewards">
+            <EntityTypeMapping TypeName="sleepingtestModel.UserReward">
+              <MappingFragment StoreEntitySet="UserRewards">
+                <ScalarProperty Name="UserRewardId" ColumnName="UserRewardId" />
+                <ScalarProperty Name="UserRewardName" ColumnName="UserRewardName" />
+                <ScalarProperty Name="UserRewardDesignation" ColumnName="UserRewardDesignation" />
+                <ScalarProperty Name="UserLeftAmount" ColumnName="UserLeftAmount" />
+                <ScalarProperty Name="UserRightAmount" ColumnName="UserRightAmount" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="RewardId" ColumnName="RewardId" />
+                <ScalarProperty Name="IsClaimByUser" ColumnName="IsClaimByUser" />
+                <ScalarProperty Name="IsRewardedByAdmin" ColumnName="IsRewardedByAdmin" />
+                <ScalarProperty Name="ClaimDate" ColumnName="ClaimDate" />
+                <ScalarProperty Name="RewardedDate" ColumnName="RewardedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserTableLevels">
             <EntityTypeMapping TypeName="sleepingtestModel.UserTableLevel">
               <MappingFragment StoreEntitySet="UserTableLevel">
@@ -1599,6 +1534,152 @@ warning 6002: The table/view 'sleepingtest.dbo.UserTableLevel' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetParentChildsLeftSP" FunctionName="sleepingtestModel.Store.GetParentChildsLeftSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sleepingtestModel.GetParentChildsLeftSP_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="IsThisFirstUser" ColumnName="IsThisFirstUser" />
+                <ScalarProperty Name="SponsorId" ColumnName="SponsorId" />
+                <ScalarProperty Name="DownlineMemberId" ColumnName="DownlineMemberId" />
+                <ScalarProperty Name="UpperId" ColumnName="UpperId" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
+                <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
+                <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
+                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
+                <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
+                <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
+                <ScalarProperty Name="IsSalesExecutive" ColumnName="IsSalesExecutive" />
+                <ScalarProperty Name="UserDesignation" ColumnName="UserDesignation" />
+                <ScalarProperty Name="IsWithdrawalOpen" ColumnName="IsWithdrawalOpen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetParentChildsRightSP" FunctionName="sleepingtestModel.Store.GetParentChildsRightSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sleepingtestModel.GetParentChildsRightSP_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="IsThisFirstUser" ColumnName="IsThisFirstUser" />
+                <ScalarProperty Name="SponsorId" ColumnName="SponsorId" />
+                <ScalarProperty Name="DownlineMemberId" ColumnName="DownlineMemberId" />
+                <ScalarProperty Name="UpperId" ColumnName="UpperId" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
+                <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
+                <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
+                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
+                <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
+                <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
+                <ScalarProperty Name="IsSalesExecutive" ColumnName="IsSalesExecutive" />
+                <ScalarProperty Name="UserDesignation" ColumnName="UserDesignation" />
+                <ScalarProperty Name="IsWithdrawalOpen" ColumnName="IsWithdrawalOpen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetParentChildsSP" FunctionName="sleepingtestModel.Store.GetParentChildsSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sleepingtestModel.GetParentChildsSP_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="IsThisFirstUser" ColumnName="IsThisFirstUser" />
+                <ScalarProperty Name="SponsorId" ColumnName="SponsorId" />
+                <ScalarProperty Name="DownlineMemberId" ColumnName="DownlineMemberId" />
+                <ScalarProperty Name="UpperId" ColumnName="UpperId" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
+                <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
+                <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
+                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
+                <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
+                <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
+                <ScalarProperty Name="IsSalesExecutive" ColumnName="IsSalesExecutive" />
+                <ScalarProperty Name="UserDesignation" ColumnName="UserDesignation" />
+                <ScalarProperty Name="IsWithdrawalOpen" ColumnName="IsWithdrawalOpen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserLoginInfo" FunctionName="sleepingtestModel.Store.GetUserLoginInfo" />
+          <FunctionImportMapping FunctionImportName="GetUserParentsSP" FunctionName="sleepingtestModel.Store.GetUserParentsSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sleepingtestModel.GetUserParentsSP_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="IsThisFirstUser" ColumnName="IsThisFirstUser" />
+                <ScalarProperty Name="SponsorId" ColumnName="SponsorId" />
+                <ScalarProperty Name="DownlineMemberId" ColumnName="DownlineMemberId" />
+                <ScalarProperty Name="UpperId" ColumnName="UpperId" />
+                <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
+                <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
+                <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
+                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
+                <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
+                <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
+                <ScalarProperty Name="IsSalesExecutive" ColumnName="IsSalesExecutive" />
+                <ScalarProperty Name="UserDesignation" ColumnName="UserDesignation" />
+                <ScalarProperty Name="IsWithdrawalOpen" ColumnName="IsWithdrawalOpen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserTree" FunctionName="sleepingtestModel.Store.GetUserTree" />
+          <FunctionImportMapping FunctionImportName="GetUserTreeLeft" FunctionName="sleepingtestModel.Store.GetUserTreeLeft" />
+          <FunctionImportMapping FunctionImportName="GetUserTreeRight" FunctionName="sleepingtestModel.Store.GetUserTreeRight" />
+          <FunctionImportMapping FunctionImportName="insert_tree_node" FunctionName="sleepingtestModel.Store.insert_tree_node" />
+          <FunctionImportMapping FunctionImportName="move_node_down" FunctionName="sleepingtestModel.Store.move_node_down" />
+          <FunctionImportMapping FunctionImportName="move_node_up" FunctionName="sleepingtestModel.Store.move_node_up" />
+          <FunctionImportMapping FunctionImportName="remove_node" FunctionName="sleepingtestModel.Store.remove_node" />
+          <FunctionImportMapping FunctionImportName="view_human_tree" FunctionName="sleepingtestModel.Store.view_human_tree" />
+          <FunctionImportMapping FunctionImportName="view_tree" FunctionName="sleepingtestModel.Store.view_tree" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

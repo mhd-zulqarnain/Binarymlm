@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BinaryMLMSystem.Models.Rewards
+namespace ApiSleepingPatener.Models.Rewards
 {
     public class RewardsModel
     {

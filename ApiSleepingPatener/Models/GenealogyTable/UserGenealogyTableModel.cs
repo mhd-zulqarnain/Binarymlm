@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BinaryMLMSystem.Models.GenealogyTable
+namespace ApiSleepingPatener.Models.GenealogyTable
 {
     public class UserGenealogyTableModel
     {

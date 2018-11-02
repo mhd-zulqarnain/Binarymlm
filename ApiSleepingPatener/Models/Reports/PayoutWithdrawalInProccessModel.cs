@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BinaryMLMSystem.Models.Reports
+namespace ApiSleepingPatener.Models.Reports
 {
     public class PayoutWithdrawalInProccessModel
     {

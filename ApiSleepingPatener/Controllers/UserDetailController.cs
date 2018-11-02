@@ -10,7 +10,7 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 
-namespace ApiSleepingPatener.Controllers.Userdetails
+namespace ApiSleepingPatener.Controllers
 {
    
     public class UserDetailController : ApiController
@@ -24,10 +24,7 @@ namespace ApiSleepingPatener.Controllers.Userdetails
             {
                 using (SleepingtestEntities dce = new SleepingtestEntities())
                 {
-                    //var CGP = (from a in dce.EWalletWithdrawalFunds
-                    //           where a.IsPending.Value == true
-                    //           select a).ToList();
-                    //var query = CGP.Count();
+                   
                     NewUserRegistration v = dce.NewUserRegistrations.Where(a => a.Username == username).FirstOrDefault();
                   
                     return Ok(v);
@@ -43,7 +40,7 @@ namespace ApiSleepingPatener.Controllers.Userdetails
         [Route("updateuser")]
         public IHttpActionResult ProfileSetup(NewUserRegistration model)
         {
-            
+
             SleepingtestEntities dce = new SleepingtestEntities();
             //NewUserRegistration newuser = dce.NewUserRegistrations.Where(a => a.UserId.Equals(model.UserId)).FirstOrDefault();
             NewUserRegistration newuser = dce.NewUserRegistrations.SingleOrDefault(x => x.UserId == model.UserId);
@@ -121,14 +118,38 @@ namespace ApiSleepingPatener.Controllers.Userdetails
                     { return true; };
                     smtp.Send(mail);
 
-                return Ok(new { success = true, message = "email and password sent to user email account" });
+                return Ok(new { success = true, message = "Email and password sent to user email account" });
             }
                 else
                 {
-                return Ok(new { success = false, message = "user not found" });
+                return Ok(new { success = false, message = "Email not exists" });
             }
 
 
         }
+
+        
+        [HttpGet]
+        [Route("getcountries")]
+        public IHttpActionResult getCountries()
+        {
+            try
+            {
+                List<Country> List = new List<Country>();
+                using (SleepingtestEntities dce = new SleepingtestEntities())
+                {
+
+                    List = dce.Countries.ToList();
+
+                    return Ok(List);
+                }
+
+            }
+            catch (Exception e)
+            {
+                return Ok(e);
+            }
+        }
+
     }
 }

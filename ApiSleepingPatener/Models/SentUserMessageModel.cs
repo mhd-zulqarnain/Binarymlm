@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BinaryMLMSystem.Models
+namespace ApiSleepingPatener.Models
 {
     public class SentUserMessageModel
     {

@@ -16,6 +16,8 @@ namespace ApiSleepingPatener
     {
         public int Id { get; set; }
         public string Designation { get; set; }
+        public string RewardName { get; set; }
+        public string Description { get; set; }
         public Nullable<decimal> Leftlimit { get; set; }
         public Nullable<decimal> Rightlimit { get; set; }
         public byte[] Rewardimage { get; set; }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BinaryMLMSystem.Models.NewsTicker
+namespace ApiSleepingPatener.Models.NewsTicker
 {
     public class NewsTickerModel
     {

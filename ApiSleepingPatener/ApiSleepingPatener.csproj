@@ -208,7 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Advertisement.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -245,31 +245,45 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="BonusSetting.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Common\Enum.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\Network\MakeTableController.cs" />
     <Compile Include="Controllers\UserDetailController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Country.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EWalletPayoutConfig.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EWalletTransaction.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="EWalletWithdrawalFund.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetParentChildsLeftSP_Result.cs">
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetParentChildsRightSP_Result.cs">
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetParentChildsSP_Result.cs">
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetUserParentsSP_Result.cs">
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HelpRequest.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -291,6 +305,7 @@
     <Compile Include="Models\GenealogyTable\UserGenealogyTableModel.cs" />
     <Compile Include="Models\GenealogyTable\UserGenealogyTableRightModel.cs" />
     <Compile Include="Models\GeneralHelp\HelpRequestModel.cs" />
+    <Compile Include="Models\MakeTableData.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\NewsTicker\NewsTickerModel.cs" />
     <Compile Include="Models\NotificationExtensions.cs" />
@@ -308,78 +323,81 @@
     <Compile Include="Models\TableLevel\TableLevelModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="NewsTicker.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="NewUserRegistration.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Package.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\OAuthProvider.cs" />
     <Compile Include="ReceiveAdminMessage.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ReceiveUserMessage.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
-    </Compile>
-    <Compile Include="remotetest.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>remotetest.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="remotetest.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>remotetest.tt</DependentUpon>
-    </Compile>
-    <Compile Include="remotetest.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>remotetest.edmx</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Reward.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SentAdminMessage.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="SentUserMessage.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\UserService.cs" />
     <Compile Include="SignUpUser.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SleepingtestEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SleepingtestEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SleepingtestEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SleepingtestEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SleepingtestEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="TableLevel.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserGenealogyTable.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserGenealogyTableLeft.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserGenealogyTableRight.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserLoginInfo.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserNotification.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserPackage.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserPosition.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserReward.cs">
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserTableLevel.cs">
-      <DependentUpon>remotetest.tt</DependentUpon>
+      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -398,16 +416,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MLM.edmx</DependentUpon>
       <LastGenOutput>MLM.cs</LastGenOutput>
-    </Content>
-    <Content Include="remotetest.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>remotetest.edmx</DependentUpon>
-      <LastGenOutput>remotetest.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="remotetest.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>remotetest.edmx</DependentUpon>
-      <LastGenOutput>remotetest.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -438,13 +446,6 @@
     <None Include="Properties\PublishProfiles\redcodetechnologies.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\sleepingpartner - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\sleepingpartner - Web Deploy.pubxml" />
-    <EntityDeploy Include="remotetest.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>remotetest.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="remotetest.edmx.diagram">
-      <DependentUpon>remotetest.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -456,6 +457,16 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="SleepingtestEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SleepingtestEntities.edmx</DependentUpon>
+      <LastGenOutput>SleepingtestEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SleepingtestEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SleepingtestEntities.edmx</DependentUpon>
+      <LastGenOutput>SleepingtestEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -473,9 +484,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <EntityDeploy Include="SleepingtestEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SleepingtestEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="SleepingtestEntities.edmx.diagram">
+      <DependentUpon>SleepingtestEntities.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\NewFolder1\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
