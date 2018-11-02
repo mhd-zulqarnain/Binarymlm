@@ -9,8 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.redcodetechnologies.mlm.R
+import com.redcodetechnologies.mlm.models.NewUserRegistration
+import com.redcodetechnologies.mlm.utils.SharedPrefs
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
-import kotlinx.android.synthetic.main.report_dialog.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,8 +29,8 @@ class FirstFragment : Fragment() {
     var username : EditText? = null
     var address : EditText? = null
     var spinner_country : SearchableSpinner? = null
-
-
+    var pref:SharedPrefs ? = null
+    lateinit var obj :NewUserRegistration;
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_first, container, false)
@@ -39,17 +40,20 @@ class FirstFragment : Fragment() {
         username = view.findViewById(R.id.ed_username)
         address = view.findViewById(R.id.ed_address)
         spinner_country = view.findViewById(R.id.spinner_country)
+        pref = SharedPrefs.getInstance()
+
 
         initView()
         updateprofile!!.setOnClickListener{
 
             validiation()
         }
-
         return view
     }
 
     private fun initView() {
+        obj= pref!!.getUser(activity!!)
+
 
         var arrayAdapter  =ArrayAdapter.createFromResource(activity!!,R.array.country_arrays,R.layout.support_simple_spinner_dropdown_item)
         spinner_country!!.adapter = arrayAdapter
