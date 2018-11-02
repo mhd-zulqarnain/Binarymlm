@@ -45,7 +45,7 @@ class NetworkFragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_network, container, false)
         frgement_type = arguments?.getString("Fragment").toString();
         initView(view)
-
+        (activity as DrawerActivity).getSupportActionBar()?.setTitle(frgement_type)
         return view
 
     }
@@ -123,15 +123,6 @@ class NetworkFragment : Fragment() {
             fragment_title!!.text = "Refered Members List"
 
         }
-    }
-
-    override fun onAttach(activity: Activity?) {
-        super.onAttach(activity)
-        (activity as DrawerActivity).getSupportActionBar()?.setTitle(frgement_type)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -47,6 +47,7 @@ android:layout_margin="12dp"
         android:maxLines="1"
         android:singleLine="true"
         android:imeOptions="actionNext"
+
         />
 
 
