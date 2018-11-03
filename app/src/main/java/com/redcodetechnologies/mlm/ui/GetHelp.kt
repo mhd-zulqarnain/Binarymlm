@@ -1,9 +1,7 @@
 package com.redcodetechnologies.mlm.ui
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Html
@@ -13,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
-import com.redcodetechnologies.mlm.DrawerActivity
+import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 
 import com.redcodetechnologies.mlm.R
 import kotlinx.android.synthetic.main.fragment_get_help.*

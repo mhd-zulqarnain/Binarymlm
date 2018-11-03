@@ -39,7 +39,7 @@
             android:text="Bank Name" />
 
         <TextView
-            android:id="@+id/tv_account"
+            android:id="@+id/tv_sponser"
             style="@style/CustomHeaderBlacktextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

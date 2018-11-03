@@ -43,17 +43,17 @@
                         android:src="@drawable/left_arrow" />
 
                     <TextView
+                        style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        style="@style/CustomBlacktextStyle"
                         android:text="Left Amount Remaing" />
 
                     <TextView
                         android:id="@+id/tv_leftRemaingAmount"
+                        style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/CustomBlacktextStyle"
                         android:text="0 PKR"
                         android:textStyle="bold" />
 
@@ -84,19 +84,19 @@
                         android:src="@drawable/right_arrow" />
 
                     <TextView
+                        style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        style="@style/CustomBlacktextStyle"
                         android:text="Right Remaining Amount" />
 
                     <TextView
                         android:id="@+id/tv_rightRemaingAmount"
+                        style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6"
-                        style="@style/CustomBlacktextStyle"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -126,19 +126,19 @@
                         android:src="@drawable/multiple_users_silhouette" />
 
                     <TextView
+                        style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        style="@style/CustomBlacktextStyle"
                         android:text="Total Left Users" />
 
                     <TextView
                         android:id="@+id/tv_totalLeftUsers"
+                        style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6"
-                        style="@style/CustomBlacktextStyle"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -369,12 +369,12 @@
 
             <android.support.v7.widget.SearchView
                 android:id="@+id/search_view"
-                android:theme="@style/SeachViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:clickable="true"
                 android:background="@drawable/border_theme_red"
+                android:clickable="true"
+                android:theme="@style/SeachViewStyle"
                 app:defaultQueryHint="Search.." />
         </LinearLayout>
 
@@ -410,7 +410,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Name" />
+                        android:text="Userame" />
 
                     <TextView
                         style="@style/CustomHeaderBlacktextStyle"
@@ -434,7 +434,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:gravity="center"
-                        android:text="Account Number" />
+                        android:text="Sponser" />
 
                     <TextView
                         style="@style/CustomHeaderBlacktextStyle"
@@ -458,8 +458,8 @@
                 android:id="@+id/recylcer_down_member"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scrollbars="horizontal"
-                android:layout_weight="4" />
+                android:layout_weight="4"
+                android:scrollbars="horizontal" />
 
             <View
                 android:layout_width="wrap_content"
@@ -475,7 +475,6 @@
                 android:text="Total: 12312" />
 
         </LinearLayout>
-
 
 
     </LinearLayout>
