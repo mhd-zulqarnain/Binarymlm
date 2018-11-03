@@ -62,10 +62,7 @@ class SecondFragment : android.support.v4.app.Fragment() {
 
         ed_password!!.setOnTouchListener(object: View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                val DRAWABLE_LEFT = 0
-                val DRAWABLE_TOP = 1
                 val DRAWABLE_RIGHT = 2
-                val DRAWABLE_BOTTOM = 3
 
                 if (event!!.getAction() === MotionEvent.ACTION_UP)
                 {

@@ -240,13 +240,13 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <android.support.v7.widget.AppCompatSpinner
-                style="@style/Widget.AppCompat.Spinner.Underlined"
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:layout_gravity="right"
+                android:id="@+id/spinner_countr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:entries="@array/spinner_country"
-                android:theme="@style/CustomSpinner" />
+                />
 
             <Button
                 android:id="@+id/btn_add_image"
