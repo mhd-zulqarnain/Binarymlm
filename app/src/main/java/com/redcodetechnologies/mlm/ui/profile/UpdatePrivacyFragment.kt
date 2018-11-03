@@ -1,11 +1,15 @@
 package com.redcodetechnologies.mlm.ui.profile
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.app.Fragment
+import android.graphics.drawable.Drawable
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.text.Html
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -13,6 +17,7 @@ import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.NewUserRegistration
 import com.redcodetechnologies.mlm.utils.SharedPrefs
+import kotlinx.android.synthetic.*
 
 
 class SecondFragment : android.support.v4.app.Fragment() {
@@ -26,6 +31,7 @@ class SecondFragment : android.support.v4.app.Fragment() {
     lateinit var obj: NewUserRegistration;
     var password:String ?= null
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.second_fragment, container, false)
@@ -37,23 +43,35 @@ class SecondFragment : android.support.v4.app.Fragment() {
         accountnumber = view.findViewById(R.id.ed_accountnumber)
         updateprivacy = view.findViewById(R.id.btn_updateprivacy)
 
+        initView()
 
         updateprivacy!!.setOnClickListener(View.OnClickListener {
 
             validiation()
         })
 
+
+
+            //showChangePasswordDialog()
+
+
+
         return view
     }//oncreate()
 
-
-    fun validiation() {
+    fun initView() {
+        pref = SharedPrefs.getInstance()
         obj = pref!!.getUser(activity!!)
         ed_password!!.setText(obj.password.toString())
         phone!!.setText(obj.phone.toString())
         bankname!!.setText(obj.bankName.toString())
         accountnumber!!.setText(obj.accountNumber.toString())
         email!!.setText(obj.email.toString())
+    }
+
+
+    fun validiation() {
+
 
 
         if (ed_password!!.text.toString().trim(' ').length < 1) {

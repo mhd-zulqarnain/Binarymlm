@@ -70,6 +70,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         headerView.findViewById<TextView>(R.id.tv_email).setText(obj.email);
         if(obj.userDesignation!=null)
         headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
+        if(obj.userPackage!=null)
+            headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.userPackage.toString());
     }
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {

@@ -44,12 +44,20 @@
                 android:text="android.studio@android.com"
                 android:textSize="15sp" />
         <TextView
-                android:id="@+id/tv_designation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/oswald_regular"
-                android:text="SalesExcecutive"
-                android:textSize="15sp" />
+        android:id="@+id/tv_designation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/oswald_regular"
+        android:text="SalesExcecutive"
+        android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_package_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oswald_regular"
+            android:text="Package Type"
+            android:textSize="15sp" />
 
     </LinearLayout>
 

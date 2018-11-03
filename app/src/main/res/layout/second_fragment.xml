@@ -32,23 +32,27 @@ android:layout_margin="12dp"
         android:layout_marginTop="10dp"
         />
 
-    <EditText
-        android:id="@+id/ed_password"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:backgroundTint="#a0a1a1"
-        android:fontFamily="@font/ralewayregular"
-        android:hint="Enter Password"
-        android:inputType="textPassword"
-        android:textColor="#313131"
-        android:textColorHint="#565656"
-        android:textSize="17sp"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:imeOptions="actionNext"
+        <EditText
+            android:id="@+id/ed_password"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:backgroundTint="#a0a1a1"
+            android:fontFamily="@font/ralewayregular"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:textColor="#313131"
+            android:textColorHint="#565656"
+            android:textSize="17sp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:drawableRight="@drawable/icon_pencil"
+            />
 
-        />
+
+
+
 
 
 
