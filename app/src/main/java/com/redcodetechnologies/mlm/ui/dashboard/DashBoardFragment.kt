@@ -15,6 +15,8 @@ import android.widget.*
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.models.AddsModal
 import com.redcodetechnologies.mlm.ui.dashboard.adapter.AdvertismentAdapter
+import com.redcodetechnologies.mlm.utils.Apputils
+import dmax.dialog.SpotsDialog
 
 
 class DashBoardFragment : Fragment() {
@@ -24,16 +26,23 @@ class DashBoardFragment : Fragment() {
     var recycler_adds: RecyclerView? = null
     var list: ArrayList<AddsModal> = ArrayList()
     var adapter: AdvertismentAdapter? = null
-
+    var progressdialog: android.app.AlertDialog? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         tv = view.findViewById(R.id.dashboardbalance) as CardView;
+        progressdialog = SpotsDialog.Builder()
+                .setContext(activity!!)
+                .setMessage("Loading please wait!!")
+                .setTheme(R.style.CustomProgess)
+                .build()
 
         list.add(AddsModal("One Plus"))
         list.add(AddsModal("I phone"))
         list.add(AddsModal("Black berry"))
         list.add(AddsModal("Oppo"))
+
+
         recycler_adds = view.findViewById(R.id.recylcer_adds)
         val manager = GridLayoutManager(activity!!, 2)
         recycler_adds!!.layoutManager = manager
@@ -45,11 +54,23 @@ class DashBoardFragment : Fragment() {
                 showSendDialog(view)
 
             }
-
-
         }
 
         return view
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        getads()
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun getads() {
+        if(!Apputils.isNetworkAvailable(activity!!)){
+            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+        }
+
 
     }
 

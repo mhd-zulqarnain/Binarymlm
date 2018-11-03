@@ -20,6 +20,7 @@ import com.redcodetechnologies.mlm.models.Users
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
+import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import dmax.dialog.SpotsDialog
 import retrofit2.Call
@@ -88,20 +89,21 @@ class NetworkFragment : Fragment() {
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
         getviewData()
 
-        recylcer_down_member!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
-        adapter = DownMemberAdapter(activity!!, list) { obj ->
-            var intent = Intent(activity!!,MemberDetailActivity::class.java)
-            var json = Gson().toJson(list[obj])
-            intent.putExtra("object",json)
-            startActivity(intent)
-        }
-        recylcer_down_member!!.adapter = adapter
-        layout_add_left!!.setOnClickListener {
-            layout_add_right!!.setBackgroundResource(R.color.colorGray);
-            layout_add_left!!.setBackgroundResource(R.color.colorRed);
-            getAllDownlineMembersLeft()
+            recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
+            adapter = DownMemberAdapter(activity!!, list) { obj ->
+                var intent = Intent(activity!!, MemberDetailActivity::class.java)
+                var json = Gson().toJson(list[obj])
+                intent.putExtra("object", json)
+                startActivity(intent)
+            }
 
-        }
+        recylcer_down_member!!. adapter = adapter
+                layout_add_left!!.setOnClickListener {
+                    layout_add_right!!.setBackgroundResource(R.color.colorGray);
+                    layout_add_left!!.setBackgroundResource(R.color.colorRed);
+                    getAllDownlineMembersLeft()
+
+                }
         layout_add_right!!.setOnClickListener {
             layout_add_left!!.setBackgroundResource(R.color.colorGray);
             layout_add_right!!.setBackgroundResource(R.color.colorRed);

@@ -57,9 +57,9 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users> ,private va
             tv_paid = itemView.findViewById(R.id.tv_paid)
             tv_name!!.text = users.UserName
             tv_phone!!.text = users.Phone
-            tv_bank!!.text = users.BankName
+            tv_bank!!.text = users.BankName!!
             tv_sponser!!.text = users.SponsorName
-            tv_paid!!.text = users.PaidAmount
+            tv_paid!!.text = users.PaidAmount!!.split(".")[0]
         }
     }
 }
