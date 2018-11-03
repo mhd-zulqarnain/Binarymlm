@@ -89,21 +89,22 @@ class NetworkFragment : Fragment() {
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
         getviewData()
 
-            recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
-            adapter = DownMemberAdapter(activity!!, list) { obj ->
-                var intent = Intent(activity!!, MemberDetailActivity::class.java)
-                var json = Gson().toJson(list[obj])
-                intent.putExtra("object", json)
-                startActivity(intent)
-            }
+        recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
+        adapter = DownMemberAdapter(activity!!, list) { obj ->
+            var intent = Intent(activity!!, MemberDetailActivity::class.java)
+            var json = Gson().toJson(list[obj])
+            intent.putExtra("object", json)
+            startActivity(intent)
+        }
 
-        recylcer_down_member!!. adapter = adapter
-                layout_add_left!!.setOnClickListener {
-                    layout_add_right!!.setBackgroundResource(R.color.colorGray);
-                    layout_add_left!!.setBackgroundResource(R.color.colorRed);
-                    getAllDownlineMembersLeft()
+        recylcer_down_member!!.adapter = adapter
 
-                }
+        layout_add_left!!.setOnClickListener {
+            layout_add_right!!.setBackgroundResource(R.color.colorGray);
+            layout_add_left!!.setBackgroundResource(R.color.colorRed);
+            getAllDownlineMembersLeft()
+
+        }
         layout_add_right!!.setOnClickListener {
             layout_add_left!!.setBackgroundResource(R.color.colorGray);
             layout_add_right!!.setBackgroundResource(R.color.colorRed);
@@ -295,7 +296,6 @@ class NetworkFragment : Fragment() {
 
     //token expire
     fun tokenExpire() {
-        Apputils.showMsg(activity!!, "Please Login Again")
         prefs.clearToken(activity!!)
         prefs.clearUser(activity!!)
         startActivity(Intent(activity!!, SignInActivity::class.java))
