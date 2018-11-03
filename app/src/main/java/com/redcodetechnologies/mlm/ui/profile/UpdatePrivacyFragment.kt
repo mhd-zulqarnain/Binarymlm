@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.text.Html
+import android.text.method.Touch
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -59,9 +60,29 @@ class SecondFragment : android.support.v4.app.Fragment() {
             validiation()
         })
 
+        ed_password!!.setOnTouchListener(object: View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                val DRAWABLE_LEFT = 0
+                val DRAWABLE_TOP = 1
+                val DRAWABLE_RIGHT = 2
+                val DRAWABLE_BOTTOM = 3
+
+                if (event!!.getAction() === MotionEvent.ACTION_UP)
+                {
+                    if (event!!.getRawX() >= (ed_password!!.getRight() - ed_password!!.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))
+                    {
+                        showChangePasswordDialog()
+                        // your action here
+                        return true
+                    }
+                }
+                return false
+            }
+        })
 
 
-            //showChangePasswordDialog()
+
+
 
 
 
