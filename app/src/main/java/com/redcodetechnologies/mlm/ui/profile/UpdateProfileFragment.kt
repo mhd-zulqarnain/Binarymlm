@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.redcodetechnologies.mlm.R
+import com.redcodetechnologies.mlm.models.NewUserRegistration
+import com.redcodetechnologies.mlm.utils.SharedPrefs
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -25,9 +28,9 @@ class FirstFragment : Fragment() {
     var name : EditText? = null
     var username : EditText? = null
     var address : EditText? = null
-    var spinner_country : Spinner? = null
-
-
+    var spinner_country : SearchableSpinner? = null
+    var pref:SharedPrefs ? = null
+    lateinit var obj :NewUserRegistration;
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_first, container, false)
@@ -37,21 +40,41 @@ class FirstFragment : Fragment() {
         username = view.findViewById(R.id.ed_username)
         address = view.findViewById(R.id.ed_address)
         spinner_country = view.findViewById(R.id.spinner_country)
+        pref = SharedPrefs.getInstance()
+
 
         initView()
         updateprofile!!.setOnClickListener{
+
             validiation()
         }
-
         return view
     }
 
     private fun initView() {
+        obj= pref!!.getUser(activity!!)
+
+
         var arrayAdapter  =ArrayAdapter.createFromResource(activity!!,R.array.country_arrays,R.layout.support_simple_spinner_dropdown_item)
         spinner_country!!.adapter = arrayAdapter
+        spinner_country!!.setTitle("Select Country");
+        spinner_country!!.setPositiveButton("Close");
 
+        spinner_country!!.setSelection(166)
 
+            spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        Toast.makeText(activity!!, ""+(spinner_country!!.selectedItemPosition+1), Toast.LENGTH_SHORT).show()
+                }
+
+            }
     }
+
+
 
     fun validiation(){
 

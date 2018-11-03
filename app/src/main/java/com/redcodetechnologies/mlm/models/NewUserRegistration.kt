@@ -84,4 +84,5 @@ class NewUserRegistration {
     @Expose
     var userDesignation: Any? = null
 
+
 }

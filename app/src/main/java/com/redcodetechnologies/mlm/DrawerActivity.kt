@@ -70,6 +70,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         headerView.findViewById<TextView>(R.id.tv_email).setText(obj.email);
         if(obj.userDesignation!=null)
         headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
+        if(obj.userPackage!=null)
+            headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.userPackage.toString());
     }
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
@@ -157,7 +159,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     if (groupPosition == 1) {
                         var gt: NetworkFragment = NetworkFragment()
                         if (childPosition == 0) {
-
                         args.putString("Fragment", "MakeTable")
                         gt!!.arguments = args
                             supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()

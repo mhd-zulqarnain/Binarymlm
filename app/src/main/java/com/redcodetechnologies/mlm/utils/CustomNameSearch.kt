@@ -14,13 +14,10 @@ class CustomNameSearch(var filterList: ArrayList<Users>, var adapter: DownMember
             val filtered = ArrayList<Users>()
 
             for (i in 0 until filterList.size) {
-                //CHECK
-                if (filterList!!.get(i).name?.toUpperCase()!!.contains(constraint)) {
-                    //ADD PLAYER TO FILTERED PLAYERS
+                if (filterList!!.get(i).UserName?.toUpperCase()!!.contains(constraint)) {
                     filtered.add(filterList!!.get(i))
                 }
             }
-
             results.count = filtered.size
             results.values = filtered
         } else {
@@ -33,7 +30,7 @@ class CustomNameSearch(var filterList: ArrayList<Users>, var adapter: DownMember
 
     override fun publishResults(constraint: CharSequence, results: Filter.FilterResults) {
 
-        adapter!!.list = results.values as ArrayList<Users>
-        adapter!!.notifyDataSetChanged()
+        adapter.list = results.values as ArrayList<Users>
+        adapter.notifyDataSetChanged()
     }
 }
