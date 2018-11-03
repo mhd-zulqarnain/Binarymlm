@@ -107,6 +107,27 @@
 
 
         <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#4FAF4F"
+            android:text="Upload Document  "
+            android:fontFamily="@font/ralewaybold"
+            android:textColor="@color/colorWhite"
+            android:drawableRight="@drawable/upload_document"
+            android:layout_gravity="left"
+            android:layout_marginBottom="20dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/btn_upload_document"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            />
+
+
+
+
+        <Button
             android:id="@+id/btn_updateprofile"
             android:layout_width="wrap_content"
             android:layout_height="0dp"

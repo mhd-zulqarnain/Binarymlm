@@ -29,7 +29,7 @@
         android:layout_height="40dp"
         android:layout_margin="12dp"
         android:hint="Old pasword"
-        android:textColor="#FFF"
+        android:textColor="#000"
         android:textColorHint="#DDAAAAAA"
         android:inputType="textPassword"
         android:maxLines="1"
@@ -42,7 +42,7 @@
         android:layout_margin="12dp"
         android:hint="New password"
         android:inputType="textPassword"
-        android:textColor="#FFF"
+        android:textColor="#000"
         android:textColorHint="#DDAAAAAA"
         android:maxLines="1"
         android:singleLine="true"
@@ -55,7 +55,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginBottom="15dp"
         android:hint="Confirm password"
-        android:textColor="#FFF"
+        android:textColor="#000"
         android:textColorHint="#DDAAAAAA"
         android:inputType="textPassword"
         android:maxLines="1"
@@ -69,6 +69,7 @@
         android:text="Change Password"
         style="@style/CustomWhitetextStyle"
         android:padding="4dp"
+        android:fontFamily="@font/ralewaybold"
         />
 
     <LinearLayout

@@ -85,6 +85,15 @@ class SecondFragment : android.support.v4.app.Fragment() {
         bankname!!.setText(obj.bankName.toString())
         accountnumber!!.setText(obj.accountNumber.toString())
         email!!.setText(obj.email.toString())
+
+        ed_password!!.setText(obj.password)
+        phone!!.setText(obj.phone.toString())
+        email!!.setText(obj.email)
+        bankname!!.setText(obj.bankName.toString())
+        accountnumber!!.setText(obj.accountNumber.toString())
+
+
+
     }
 
 
