@@ -171,14 +171,16 @@ class SignInActivity : AppCompatActivity() {
                             else if (obj.isSalesExecutive == true)
                                 salesExecutiveActivity()
                             else {
+                                progressdialog!!.dismiss()
                                 var i: Intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
                                 startActivity(i)
                                 finish()
                             }
                         } else {
+                            progressdialog!!.dismiss()
                             print("error")
                         }
-                        progressdialog!!.dismiss()
+
                     }
                 })
     }
@@ -209,6 +211,7 @@ class SignInActivity : AppCompatActivity() {
     fun salesExecutiveActivity() {
         var i: Intent = Intent(this@SignInActivity, DrawerActivity::class.java)
         i.putExtra("Category", "Sales")
+        progressdialog!!.dismiss()
         startActivity(i)
         finish()
     }
@@ -216,6 +219,7 @@ class SignInActivity : AppCompatActivity() {
     fun sleepingPatnerActivity() {
         var i: Intent = Intent(this@SignInActivity, DrawerActivity::class.java)
         i.putExtra("Category", "Sleeping")
+        progressdialog!!.dismiss()
         startActivity(i)
         finish()
     }
