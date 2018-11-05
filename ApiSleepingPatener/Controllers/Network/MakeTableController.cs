@@ -47,33 +47,32 @@ namespace ApiSleepingPatener.Controllers
         public IHttpActionResult AllGetUserDownlineMembersLeft(int userId)
         {
             SleepingtestEntities db = new SleepingtestEntities();
-            
             IEnumerable<UserModel> usrmodel = new List<UserModel>();
 
-          
-            string UserTypeAdmin = Common.Enum.UserType.Admin.ToString();
-            string UserTypeUser = Common.Enum.UserType.User.ToString();
-
             List<GetParentChildsSP_Result> List = new List<GetParentChildsSP_Result>();
-            
-            
-                //List = db.NewUserRegistrations.Where(a => a.UserCode.Equals(UserTypeUser)
-                //    && a.DownlineMemberId.Equals(userId))
-                usrmodel = (from n in db.GetParentChildsLeftSP(userId)
-                            join c in db.NewUserRegistrations on n.SponsorId equals c.UserId
-                            select new UserModel
-                            {
-                                UserId = n.UserId.Value,
-                                UserName = n.Username,
-                                Country = n.Country,
-                                Phone = n.Phone,
-                                AccountNumber = n.AccountNumber,
-                                BankName = n.BankName,
-                                SponsorId = n.SponsorId,
-                                PaidAmount = n.PaidAmount.Value,
-                                SponsorName = c.Username
-                            }).ToList();
 
+
+            //List = db.NewUserRegistrations.Where(a => a.UserCode.Equals(UserTypeUser)
+            //    && a.DownlineMemberId.Equals(userId))
+            //List = db.NewUserRegistrations.Select(x => new UserModel
+
+            //List = db.GetParentChildsRightSP(userId)
+            //    .Select(x => new GetParentChildsSP_Result
+
+            usrmodel = (from n in db.GetParentChildsRightSP(userId)
+                        join c in db.NewUserRegistrations on n.SponsorId equals c.UserId
+                        select new UserModel
+                        {
+                            UserId = n.UserId.Value,
+                            UserName = n.Username,
+                            Country = n.Country,
+                            Phone = n.Phone,
+                            AccountNumber = n.AccountNumber,
+                            BankName = n.BankName,
+                            SponsorId = n.SponsorId,
+                            PaidAmount = n.PaidAmount.Value,
+                            SponsorName = c.Username
+                        }).ToList();
 
             return Ok(usrmodel);
 
@@ -85,34 +84,36 @@ namespace ApiSleepingPatener.Controllers
         public IHttpActionResult AllGetUserDownlineMembersRight(int userId)
         {
             SleepingtestEntities db = new SleepingtestEntities();
+
             IEnumerable<UserModel> usrmodel = new List<UserModel>();
 
-           List<GetParentChildsSP_Result> List = new List<GetParentChildsSP_Result>();
-            
-            
-                //List = db.NewUserRegistrations.Where(a => a.UserCode.Equals(UserTypeUser)
-                //    && a.DownlineMemberId.Equals(userId))
-                //List = db.NewUserRegistrations.Select(x => new UserModel
 
-                //List = db.GetParentChildsRightSP(userId)
-                //    .Select(x => new GetParentChildsSP_Result
+            string UserTypeAdmin = Common.Enum.UserType.Admin.ToString();
+            string UserTypeUser = Common.Enum.UserType.User.ToString();
 
-                usrmodel = (from n in db.GetParentChildsRightSP(userId)
-                            join c in db.NewUserRegistrations on n.SponsorId equals c.UserId
-                            select new UserModel
-                            {
-                                UserId = n.UserId.Value,
-                                UserName = n.Username,
-                                Country = n.Country,
-                                Phone = n.Phone,
-                                AccountNumber = n.AccountNumber,
-                                BankName = n.BankName,
-                                SponsorId = n.SponsorId,
-                                PaidAmount = n.PaidAmount.Value,
-                                SponsorName = c.Username
-                            }).ToList();
+            List<GetParentChildsSP_Result> List = new List<GetParentChildsSP_Result>();
+
+
+            //List = db.NewUserRegistrations.Where(a => a.UserCode.Equals(UserTypeUser)
+            //    && a.DownlineMemberId.Equals(userId))
+            usrmodel = (from n in db.GetParentChildsLeftSP(userId)
+                        join c in db.NewUserRegistrations on n.SponsorId equals c.UserId
+                        select new UserModel
+                        {
+                            UserId = n.UserId.Value,
+                            UserName = n.Username,
+                            Country = n.Country,
+                            Phone = n.Phone,
+                            AccountNumber = n.AccountNumber,
+                            BankName = n.BankName,
+                            SponsorId = n.SponsorId,
+                            PaidAmount = n.PaidAmount.Value,
+                            SponsorName = c.Username
+                        }).ToList();
+
 
             return Ok(usrmodel);
+
         }
 
         public decimal GetLeftRemaingAmount(int userId)
