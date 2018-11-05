@@ -11,9 +11,10 @@ using System.Web.Http;
 
 namespace ApiSleepingPatener.Controllers
 {
-    [Authorize]
+   
     public class AccountController : ApiController
     {
+        [Authorize]
         [HttpGet]
         [Route("api/account/getuser/{id}")]
         public IHttpActionResult GetUFirstUser(int id)
@@ -62,6 +63,16 @@ namespace ApiSleepingPatener.Controllers
             }
             
            
+        }
+
+        [HttpGet]
+        [Route("getAds")]
+        public IHttpActionResult ShowAdvertisementData()
+        {
+            SleepingtestEntities db = new SleepingtestEntities();
+            List<Advertisement> listadvertisement = db.Advertisements.Where(x => x.IsActive == true).ToList();
+            return Ok(listadvertisement);
+
         }
     }
 }
