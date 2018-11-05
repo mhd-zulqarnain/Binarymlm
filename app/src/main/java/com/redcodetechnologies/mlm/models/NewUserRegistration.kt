@@ -19,7 +19,7 @@ class NewUserRegistration {
     var password: String? = null
     @SerializedName("Country")
     @Expose
-    var country: Any? = null
+    var country: Int? = null
     @SerializedName("Address")
     @Expose
     var address: Any? = null

@@ -8,22 +8,30 @@ import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import com.redcodetechnologies.mlm.R
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.redcodetechnologies.mlm.utils.Apputils
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 import kotlinx.android.synthetic.main.activity_add_member.*
 import java.util.*
 
 class AddMemberActivity : AppCompatActivity() {
     val REQUSET_GALLERY_CODE: Int = 43
     var type: String = "right"
+    var spinner_country : SearchableSpinner? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_add_member)
         var toolbar : Toolbar = findViewById(R.id.toolbar_top)
+
+        spinner_country = findViewById(R.id.spinner_countr)
+
+initView()
 
         type = intent.getStringExtra("type")
         ed_name!!.addTextChangedListener(object : TextWatcher {
@@ -69,6 +77,28 @@ class AddMemberActivity : AppCompatActivity() {
             validation()
         }
     }
+
+     fun initView() {
+
+
+         var arrayAdapter = ArrayAdapter.createFromResource(this, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
+         spinner_country!!.adapter = arrayAdapter
+         spinner_country!!.setTitle("Select Country");
+         spinner_country!!.setPositiveButton("Close");
+
+         spinner_country!!.setSelection(166)
+
+         spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+             override fun onNothingSelected(parent: AdapterView<*>?) {
+
+             }
+
+             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+             }
+         }
+     }
+
 
     private fun validation() {
         if (ed_name!!.text.toString().trim() == "") {
