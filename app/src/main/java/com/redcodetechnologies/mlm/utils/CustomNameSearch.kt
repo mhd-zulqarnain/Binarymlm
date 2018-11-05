@@ -1,7 +1,7 @@
 package com.redcodetechnologies.mlm.utils
 
 import android.widget.Filter;
-import com.redcodetechnologies.mlm.adapter.DownMemberAdapter
+import com.redcodetechnologies.mlm.ui.network.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.models.Users
 
 

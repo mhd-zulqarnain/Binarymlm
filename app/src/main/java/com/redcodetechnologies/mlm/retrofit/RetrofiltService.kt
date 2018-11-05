@@ -33,6 +33,10 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getAllDownlineMembersLeft(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<Users>>
 
+    @GET("getAds")
+    @Headers("Content-Type:application/json")
+    fun getAdvertisment():  Call<ArrayList<Advertisement>>
+
 }
 
 //"irelease/{ord_id}/{utfee}/{utamount}/{uobitamount}/{uoamount}/{ut_id}"

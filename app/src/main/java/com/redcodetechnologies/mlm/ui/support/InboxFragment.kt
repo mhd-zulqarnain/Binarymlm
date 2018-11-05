@@ -11,9 +11,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.redcodetechnologies.mlm.DrawerActivity
+import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.adapter.InboxAdapter
+import com.redcodetechnologies.mlm.ui.support.adapter.InboxAdapter
 import com.redcodetechnologies.mlm.models.Inbox
 import java.util.*
 class InboxFragment : Fragment() {
@@ -43,10 +43,10 @@ class InboxFragment : Fragment() {
         var recyclerView = view!!.findViewById(R.id.unread_inbox_recycler) as RecyclerView
         recyclerView.layoutManager= LinearLayoutManager(activity!!,LinearLayout.VERTICAL,false) as RecyclerView.LayoutManager?
 
-        var report = InboxAdapter(activity!!,data){postion,type->
-            if(type=="reply") {
+        var report = InboxAdapter(activity!!, data) { postion, type ->
+            if (type == "reply") {
                 editmesseage(data[postion])
-            }else if(type=="view"){
+            } else if (type == "view") {
                 viewmesseage(data[postion])
             }
         }

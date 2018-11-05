@@ -8,6 +8,9 @@ class NewUserRegistration {
     @SerializedName("UserId")
     @Expose
     var userId: Int? = null
+    @SerializedName("Name")
+    @Expose
+    var name: String? = null
     @SerializedName("Username")
     @Expose
     var username: String? = null
@@ -16,7 +19,7 @@ class NewUserRegistration {
     var password: String? = null
     @SerializedName("Country")
     @Expose
-    var country: Any? = null
+    var country: Int? = null
     @SerializedName("Address")
     @Expose
     var address: Any? = null

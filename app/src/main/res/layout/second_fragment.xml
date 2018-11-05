@@ -48,6 +48,7 @@ android:layout_margin="12dp"
             android:singleLine="true"
             android:imeOptions="actionNext"
             android:drawableRight="@drawable/icon_pencil"
+            android:focusable="false"
             />
 
 
