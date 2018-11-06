@@ -119,13 +119,11 @@ class FirstFragment : Fragment() {
 
     private fun initView() {
         obj= pref!!.getUser(activity!!)
-
-
         var arrayAdapter  =ArrayAdapter.createFromResource(activity!!,R.array.country_arrays,R.layout.support_simple_spinner_dropdown_item)
+
         spinner_country!!.adapter = arrayAdapter
         spinner_country!!.setTitle("Select Country");
         spinner_country!!.setPositiveButton("Close");
-
         spinner_country!!.setSelection(166)
 
             spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{

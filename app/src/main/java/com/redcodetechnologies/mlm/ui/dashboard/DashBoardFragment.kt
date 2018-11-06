@@ -7,29 +7,50 @@ import android.view.View
 import android.view.ViewGroup
 import com.redcodetechnologies.mlm.R
 import android.app.Activity
+import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.widget.*
+import com.redcodetechnologies.mlm.models.Advertisement
+import com.redcodetechnologies.mlm.retrofit.ApiClint
+import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
+import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
-import com.redcodetechnologies.mlm.models.AddsModal
 import com.redcodetechnologies.mlm.ui.dashboard.adapter.AdvertismentAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.SharedPrefs
 import dmax.dialog.SpotsDialog
+import retrofit2.Call
+import retrofit2.Callback
+import io.reactivex.Observable;
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers;
 
 
 class DashBoardFragment : Fragment() {
     var frgement_type = "MyPackageCommisionList"
     var tv: CardView? = null
     var click: Boolean = true;
+    lateinit var prefs: SharedPrefs
+
     var recycler_adds: RecyclerView? = null
-    var list: ArrayList<AddsModal> = ArrayList()
+    var tv_show_ads: TextView? = null
+    var adsList: ArrayList<Advertisement> = ArrayList()
     var adapter: AdvertismentAdapter? = null
     var progressdialog: android.app.AlertDialog? = null
+     var adsdisposable: Disposable? = null
+    var progressBar: LinearLayout? = null
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        prefs = SharedPrefs.getInstance()!!
+
         tv = view.findViewById(R.id.dashboardbalance) as CardView;
         progressdialog = SpotsDialog.Builder()
                 .setContext(activity!!)
@@ -37,42 +58,25 @@ class DashBoardFragment : Fragment() {
                 .setTheme(R.style.CustomProgess)
                 .build()
 
-        list.add(AddsModal("One Plus"))
-        list.add(AddsModal("I phone"))
-        list.add(AddsModal("Black berry"))
-        list.add(AddsModal("Oppo"))
-
-
         recycler_adds = view.findViewById(R.id.recylcer_adds)
+        tv_show_ads = view.findViewById(R.id.tv_show_ads)
+        progressBar = view.findViewById(R.id.progressBar)
+
         val manager = GridLayoutManager(activity!!, 2)
         recycler_adds!!.layoutManager = manager
-        adapter = AdvertismentAdapter(activity!!, frgement_type, list)
-        recycler_adds!!.adapter = adapter
+        adapter = AdvertismentAdapter(activity!!, frgement_type, adsList)
 
+        recycler_adds!!.adapter = adapter
         tv!!.setOnClickListener {
             if (click) {
                 showSendDialog(view)
-
             }
         }
-
+        getads()
         return view
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        getads()
-
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    private fun getads() {
-        if(!Apputils.isNetworkAvailable(activity!!)){
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
-        }
-
-
-    }
 
     private fun showSendDialog(v1: View) {
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialogue_forget_password, null)
@@ -122,11 +126,56 @@ class DashBoardFragment : Fragment() {
 
     }
 
+    private fun getads() {
+
+          if (!Apputils.isNetworkAvailable(activity!!)) {
+           Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+       }
+
+        progressBar!!.visibility = View.VISIBLE
+        val adsObserver = getadvertismentObservable()
+        var adsObservable :Observable<ArrayList<Advertisement>>  = MyApiRxClint.getInstance()?.getService()?.getCoinData()!!
+         adsObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(adsObserver)
+    }
+
+       private fun getadvertismentObservable(): Observer<ArrayList<Advertisement>> {
+           return object : Observer<ArrayList<Advertisement>> {
+               override fun onComplete() {
+                   println("completed")
+                   progressBar!!.visibility = View.GONE
+
+               }
+               override fun onSubscribe(d: Disposable) {
+                   adsdisposable =d
+
+               }
+               override fun onError(e: Throwable) {
+                   progressBar!!.visibility = View.VISIBLE
+                   Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+
+               }
+   
+               override fun onNext(response: ArrayList<Advertisement>) {
+
+                   response?.forEach { ads ->
+                       adsList.add(ads)
+                   }
+                       adapter!!.notifyDataSetChanged()
+               }
+   
+           }
+       }
 
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Dashboard")
     }
 
+    override fun onDestroyView() {
+        adsdisposable?.dispose()
+        super.onDestroyView()
+    }
 
 }

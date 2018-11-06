@@ -50,6 +50,7 @@ class NetworkFragment : Fragment() {
     lateinit var prefs: SharedPrefs
     var id: Int? = null
     lateinit var token: String
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         prefs = SharedPrefs.getInstance()!!
@@ -92,7 +93,7 @@ class NetworkFragment : Fragment() {
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
         adapter = DownMemberAdapter(activity!!, list) { obj ->
             var intent = Intent(activity!!, MemberDetailActivity::class.java)
-            var json = Gson().toJson(list[obj])
+            var json = Gson().toJson(obj)
             intent.putExtra("object", json)
             startActivity(intent)
         }
@@ -186,7 +187,7 @@ class NetworkFragment : Fragment() {
                         var code: Int = response!!.code()
 
                         if (code == 401) {
-                            Apputils.showMsg(activity!!, "Please Login Agin")
+                            Apputils.showMsg(activity!!, "Token Expired")
                             tokenExpire();
 
                         }
@@ -240,7 +241,7 @@ class NetworkFragment : Fragment() {
                         var code: Int = response!!.code()
 
                         if (code == 401) {
-                            Apputils.showMsg(activity!!, "Please Login Agin")
+                            Apputils.showMsg(activity!!, "Token Expired")
                             tokenExpire();
                         }
                         if (code == 200) {
@@ -278,7 +279,7 @@ class NetworkFragment : Fragment() {
                         var code: Int = response!!.code()
 
                         if (code == 401) {
-                            Apputils.showMsg(activity!!, "Please Login Agin")
+                            Apputils.showMsg(activity!!, "Token Expired")
                             tokenExpire();
                         }
                         if (code == 200) {

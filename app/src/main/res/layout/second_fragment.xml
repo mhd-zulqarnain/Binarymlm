@@ -51,14 +51,6 @@ android:layout_margin="12dp"
             android:focusable="false"
             />
 
-
-
-
-
-
-
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -8,6 +8,7 @@
     >
 
     <TextView
+        android:id="@+id/tv_show_ads"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Advertisements"
@@ -30,4 +31,17 @@
             android:layout_weight="4" />
 
 
+    <LinearLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+        <ProgressBar
+            android:layout_width="50dp"
+            android:gravity="center"
+            android:layout_height="50dp"
+            />
+    </LinearLayout>
 </LinearLayout>

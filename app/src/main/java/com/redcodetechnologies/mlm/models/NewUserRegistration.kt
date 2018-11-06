@@ -87,5 +87,12 @@ class NewUserRegistration {
     @Expose
     var userDesignation: Any? = null
 
+    override fun toString(): String {
+        var username = ""
+        if (userDesignation != null) {
+            username = userDesignation.toString()!!
+        }
+        return username
+    }
 
 }
