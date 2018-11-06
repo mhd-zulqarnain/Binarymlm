@@ -1,6 +1,7 @@
 package com.redcodetechnologies.mlm.retrofit
 
 import com.redcodetechnologies.mlm.models.*
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.*
 import java.lang.reflect.Array
@@ -36,6 +37,10 @@ interface RetrofiltService {
     @GET("getAds")
     @Headers("Content-Type:application/json")
     fun getAdvertisment():  Call<ArrayList<Advertisement>>
+
+    @GET("getAds")
+    @Headers("Content-Type:application/json")
+    fun getCoinData(): Observable<ArrayList<Advertisement>>
 
 }
 

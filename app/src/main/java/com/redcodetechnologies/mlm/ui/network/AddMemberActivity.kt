@@ -8,30 +8,44 @@ import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.redcodetechnologies.mlm.R
+import com.redcodetechnologies.mlm.models.Users
+import com.redcodetechnologies.mlm.retrofit.ApiClint
+import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.SharedPrefs
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
+import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_add_member.*
+import retrofit2.Call
+import retrofit2.Callback
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AddMemberActivity : AppCompatActivity() {
     val REQUSET_GALLERY_CODE: Int = 43
-    var type: String = "right"
-    var spinner_country : SearchableSpinner? = null
+    var type: String ?=null
+    var spinner_country: SearchableSpinner? = null
+    var listdownliner:ArrayList<String> = ArrayList()
+    var c:ArrayList<String> = ArrayList()
+    lateinit var downlinerAdapter:ArrayAdapter<String>;
+    var id: Int? = null
+    lateinit var prefs: SharedPrefs
+    var progressdialog: android.app.AlertDialog? = null
+    lateinit var token: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_add_member)
-        var toolbar : Toolbar = findViewById(R.id.toolbar_top)
-
-        spinner_country = findViewById(R.id.spinner_countr)
-
-initView()
+        var toolbar: Toolbar = findViewById(R.id.toolbar_top)
+        spinner_country = findViewById(R.id.spinner_country)
+        initView()
 
         type = intent.getStringExtra("type")
         ed_name!!.addTextChangedListener(object : TextWatcher {
@@ -66,9 +80,12 @@ initView()
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 layout_package.visibility = View.GONE
             }
+
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
             }
         })
+
+
         btn_back.setOnClickListener {
             finish()
         }
@@ -78,27 +95,126 @@ initView()
         }
     }
 
-     fun initView() {
+    fun initView() {
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this@AddMemberActivity)
+                .setMessage("Loading please wait!!")
+                .setTheme(R.style.CustomProgess)
+                .build()
+
+        prefs = SharedPrefs.getInstance()!!
+        token = prefs.getToken(this@AddMemberActivity).accessToken!!
+        id = prefs.getUser(this@AddMemberActivity).userId!!
+
+        var arrayAdapter = ArrayAdapter.createFromResource(this, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
+        spinner_country!!.adapter = arrayAdapter
+        spinner_country!!.setTitle("Select Country");
+        spinner_country!!.setPositiveButton("Close");
+
+        spinner_country!!.setSelection(166)
+        spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+            }
+        }
+        downlinerAdapter  =ArrayAdapter(this@AddMemberActivity,R.layout.support_simple_spinner_dropdown_item,listdownliner)
+        spinner_downliner.adapter = downlinerAdapter;
+        getdownliner()
+
+        spinner_country!!.adapter = arrayAdapter
+        spinner_country!!.setTitle("Select Country");
+        spinner_country!!.setPositiveButton("Close");
+    }
+
+    private fun getdownliner() {
+
+        if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
+            Toast.makeText(this@AddMemberActivity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog!!.show();
+        listdownliner.clear()
+
+       if(type=="right") {
+           ApiClint.getInstance()?.getService()?.getAllDownlineMembersRight("bearer " + token!!, id!!)
+                   ?.enqueue(object : Callback<java.util.ArrayList<Users>> {
+                       override fun onFailure(call: Call<java.util.ArrayList<Users>>?, t: Throwable?) {
+                           println("error")
+                           progressdialog!!.hide();
+
+                       }
+
+                       override fun onResponse(call: Call<java.util.ArrayList<Users>>?, response: retrofit2.Response<java.util.ArrayList<Users>>?) {
+                           print("object success ")
+                           var code: Int = response!!.code()
+
+                           if (code == 401) {
+                               Apputils.showMsg(this@AddMemberActivity, "Token Expired")
+                               tokenExpire();
+                           }
+                           if (code == 200) {
+                               response?.body()?.forEach { user ->
+                                   listdownliner.add(user.UserName.toString())
+                               }
+                               downlinerAdapter!!.notifyDataSetChanged()
+                               if (response.body()!!.size == 0) {
+                                   listdownliner.add("No downliner found")
+
+                               }
+                           }
+
+                           progressdialog!!.hide();
 
 
-         var arrayAdapter = ArrayAdapter.createFromResource(this, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
-         spinner_country!!.adapter = arrayAdapter
-         spinner_country!!.setTitle("Select Country");
-         spinner_country!!.setPositiveButton("Close");
+                       }
+                   })
 
-         spinner_country!!.setSelection(166)
+       }else {
+           //getDownLineRight
 
-         spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-             override fun onNothingSelected(parent: AdapterView<*>?) {
+           ApiClint.getInstance()?.getService()?.getAllDownlineMembersLeft("bearer " + token!!, id!!)
+                   ?.enqueue(object : Callback<java.util.ArrayList<Users>> {
+                       override fun onFailure(call: Call<java.util.ArrayList<Users>>?, t: Throwable?) {
+                           println("error")
+                           progressdialog!!.hide();
 
-             }
+                       }
 
-             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                       override fun onResponse(call: Call<java.util.ArrayList<Users>>?, response: retrofit2.Response<java.util.ArrayList<Users>>?) {
+                           print("object success ")
+                           var code: Int = response!!.code()
 
-             }
-         }
-     }
+                           if (code == 401) {
+                               Apputils.showMsg(this@AddMemberActivity, "Token Expired")
+                               tokenExpire();
+                           }
+                           if (code == 200) {
+                               response?.body()?.forEach { user ->
+                                   listdownliner.add(user.UserName.toString())
+                               }
+                               downlinerAdapter!!.notifyDataSetChanged()
+                               if (response.body()!!.size == 0) {
+                                   listdownliner.add("No downliner found")
 
+                               }
+                           }
+
+                           progressdialog!!.hide();
+
+
+                       }
+                   })
+       }
+    }
+    fun tokenExpire() {
+        prefs.clearToken(this@AddMemberActivity)
+        prefs.clearUser(this@AddMemberActivity)
+        startActivity(Intent(this@AddMemberActivity, SignInActivity::class.java))
+        finish()
+    }
 
     private fun validation() {
         if (ed_name!!.text.toString().trim() == "") {
@@ -118,19 +234,6 @@ initView()
             ed_phone!!.requestFocus()
             return
         }
-
-        if (ed_address!!.text.toString().trim() == "") {
-            ed_address!!.error = Html.fromHtml("<font color='white'>This field could not be empty</font>")
-            ed_address!!.requestFocus()
-            return
-        }
-
-        if (ed_account!!.text.toString().trim() == "" || ed_account!!.text.toString().trim { it <= ' ' }.length < 18) {
-            ed_account!!.error = Html.fromHtml("<font color='white'>Invalid entry</font>")
-            ed_account!!.requestFocus()
-            return
-        }
-
         if (ed_bank_name!!.text.toString().trim() == "") {
             ed_bank_name!!.error = Html.fromHtml("<font color='white'>Please Enter bank name!</font>")
             ed_bank_name!!.requestFocus()
@@ -140,12 +243,6 @@ initView()
         if (ed_bank_name!!.text.toString().trim() == "") {
             ed_bank_name!!.error = Html.fromHtml("<font color='white'>Please Enter bank name!</font>")
             ed_bank_name!!.requestFocus()
-            return
-        }
-
-        if (ed_cnic!!.text.toString().trim() == "" || ed_cnic!!.text.toString().trim { it <= ' ' }.length < 12) {
-            ed_cnic!!.error = Html.fromHtml("<font color='white'>Invalid entry</font>")
-            ed_cnic!!.requestFocus()
             return
         }
     }
@@ -155,4 +252,6 @@ initView()
             println("data " + data.data)
         }
     }
+
+
 }

@@ -584,6 +584,7 @@
         </LinearLayout>
 
         <include
+
             android:id="@+id/ads_view"
             layout="@layout/layout_secondary"
             android:layout_width="match_parent"

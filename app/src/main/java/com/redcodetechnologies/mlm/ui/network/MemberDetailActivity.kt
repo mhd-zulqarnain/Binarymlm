@@ -1,6 +1,7 @@
 package com.redcodetechnologies.mlm.ui.network
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -8,6 +9,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.Gson
 import com.redcodetechnologies.mlm.R
@@ -33,6 +36,10 @@ class MemberDetailActivity : AppCompatActivity() {
     var progressdialog: android.app.AlertDialog? = null
     var userList: ArrayList<Users> = ArrayList()
     var adapter: DialogMemberAdapter? = null
+    var tv_no_data: TextView? = null
+    var progressBar: LinearLayout? = null
+    var layout_add_right: LinearLayout?=null
+    var layout_add_left: LinearLayout?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,9 +85,11 @@ class MemberDetailActivity : AppCompatActivity() {
         alertBox.setView(view)
         alertBox.setCancelable(true)
         val dialog = alertBox.create()
+        tv_no_data = view.findViewById(R.id.tv_no_data)
+        progressBar = view.findViewById(R.id.progressBar)
 
-        val layout_add_right: LinearLayout = view.findViewById(R.id.layout_add_right)
-        val layout_add_left: LinearLayout = view.findViewById(R.id.layout_add_left)
+         layout_add_right = view.findViewById(R.id.layout_add_right)
+         layout_add_left = view.findViewById(R.id.layout_add_left)
         val recylcer_dialog_member: RecyclerView = view.findViewById(R.id.recylcer_dialog_member)
 
         recylcer_dialog_member!!.layoutManager = LinearLayoutManagerWrapper(this, LinearLayout.VERTICAL, false)
@@ -88,14 +97,14 @@ class MemberDetailActivity : AppCompatActivity() {
         recylcer_dialog_member!!.adapter = adapter
 
         getAllDownlineMembersLeft()
-        layout_add_left.setOnClickListener {
-            layout_add_right.setBackgroundResource(R.color.colorGray);
-            layout_add_left.setBackgroundResource(R.color.colorRed);
+        layout_add_left!!.setOnClickListener {
+            layout_add_right!!.setBackgroundResource(R.color.colorGray);
+            layout_add_left!!.setBackgroundResource(R.color.colorRed);
             getAllDownlineMembersLeft()
         }
-        layout_add_right.setOnClickListener {
-            layout_add_left.setBackgroundResource(R.color.colorGray);
-            layout_add_right.setBackgroundResource(R.color.colorRed);
+        layout_add_right!!.setOnClickListener {
+            layout_add_left!!.setBackgroundResource(R.color.colorGray);
+            layout_add_right!!.setBackgroundResource(R.color.colorRed);
             getAllDownlineMembersRight()
         }
 
@@ -103,6 +112,18 @@ class MemberDetailActivity : AppCompatActivity() {
 
     }
 
+    fun showPrgressbar(){
+        layout_add_right!!.setClickable(false);
+        layout_add_left!!.setClickable(false);
+        progressBar!!.visibility= View.VISIBLE
+        tv_no_data!!.visibility= View.GONE
+    }
+    fun hideprogressbar(){
+        layout_add_right!!.setClickable(true);
+        layout_add_left!!.setClickable(true);
+        progressBar!!.visibility= View.GONE
+//        tv_no_data!!.visibility= View.VISIBLE
+    }
     //getDownLineRight
     fun getAllDownlineMembersRight() {
 
@@ -111,12 +132,13 @@ class MemberDetailActivity : AppCompatActivity() {
             return
         }
         userList.clear()
-        progressdialog!!.show()
+        showPrgressbar()
         ApiClint.getInstance()?.getService()?.getAllDownlineMembersRight("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.hide();
+                        //progressdialog!!.hide();
+                        hideprogressbar()
 
                     }
 
@@ -125,7 +147,7 @@ class MemberDetailActivity : AppCompatActivity() {
                         var code: Int = response!!.code()
 
                         if (code == 401) {
-                            Apputils.showMsg(this@MemberDetailActivity, "Please Login Agin")
+                            Apputils.showMsg(this@MemberDetailActivity, "Token Expired")
                             tokenExpire();
                         }
                         if (code == 200) {
@@ -133,8 +155,15 @@ class MemberDetailActivity : AppCompatActivity() {
                                 userList.add(user)
                             }
                             adapter!!.notifyDataSetChanged()
+                            if(response.body()!!.size==0){
+                                tv_no_data!!.visibility = View.VISIBLE
+                            }
+                            else
+                                tv_no_data!!.visibility = View.GONE
                         }
-                        progressdialog!!.hide();
+                        hideprogressbar()
+
+                        // progressdialog!!.hide();
 
 
                     }
@@ -149,12 +178,14 @@ class MemberDetailActivity : AppCompatActivity() {
             return
         }
         userList.clear()
-        progressdialog!!.show()
+        showPrgressbar()
+
         ApiClint.getInstance()?.getService()?.getAllDownlineMembersLeft("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.hide();
+                        hideprogressbar()
+
 
                     }
 
@@ -163,16 +194,22 @@ class MemberDetailActivity : AppCompatActivity() {
                         var code: Int = response!!.code()
 
                         if (code == 401) {
-                            Apputils.showMsg(this@MemberDetailActivity, "Please Login Agin")
+                            Apputils.showMsg(this@MemberDetailActivity, "Token Expired")
                             tokenExpire();
                         }
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 userList.add(user)
                             }
+                            if(response.body()!!.size==0){
+                                tv_no_data!!.visibility = View.VISIBLE
+                            }
+                            else
+                                tv_no_data!!.visibility = View.GONE
+
                             adapter!!.notifyDataSetChanged()
                         }
-                        progressdialog!!.hide();
+                        hideprogressbar()
 
 
                     }

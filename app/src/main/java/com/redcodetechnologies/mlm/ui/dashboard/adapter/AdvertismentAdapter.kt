@@ -7,10 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.AddsModal
+import com.redcodetechnologies.mlm.models.Advertisement
 import com.squareup.picasso.Picasso
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import android.util.Base64
+import java.io.ByteArrayInputStream
+import java.io.InputStream
 
-class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayList<AddsModal>) : RecyclerView.Adapter<AdvertismentAdapter.MyViewHolder>() {
+
+class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayList<Advertisement>) : RecyclerView.Adapter<AdvertismentAdapter.MyViewHolder>() {
 
     var typ=type
 
@@ -32,9 +38,16 @@ class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayLis
 
         var tv_first_image: ImageView? = null
 
-        fun bindView(addsmodal : AddsModal, typ :String) {
+        fun bindView(addsmodal : Advertisement, typ :String) {
             tv_first_image = itemView.findViewById(R.id.first_image)
-            Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(tv_first_image);
+            if(addsmodal.AdvertisementImage!=null){
+                //var stream :InputStream  =  ByteArrayInputStream(addsmodal.AdvertisementImage!!.getBytes(StandardCharsets.UTF_8))
+            //val image = BitmapFactory.decodeStream(addsmodal.AdvertisementImage)
+               var imageBytes = Base64.decode(addsmodal.AdvertisementImage!!, Base64.DEFAULT)
+                val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+                tv_first_image!!.setImageBitmap(decodedImage)
+            }
         }
     }
 }

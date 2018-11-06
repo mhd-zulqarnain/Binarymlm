@@ -12,7 +12,7 @@ import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Users
 import com.redcodetechnologies.mlm.utils.CustomNameSearch
 
-class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users> ,private val onClick:(Int)->Unit) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
+class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users> ,private val onClick:(Users)->Unit) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
     var customFilter: CustomNameSearch? = null
 
        override fun getFilter(): Filter{
@@ -37,7 +37,7 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users> ,private va
     override fun onBindViewHolder(holder: MyViewHolder, p1: Int) {
         holder.bindView(list[p1])
         holder.itemView.setOnClickListener {
-            onClick(p1)
+            onClick(list[p1])
         }
     }
 
