@@ -269,6 +269,10 @@ namespace ApiSleepingPatener.Controllers
             }
             
         }
+
+
+
+
         //public string GetAllCurrentRewardInfo(int userId)
         //{
         //    using (SleepingtestEntities dc = new SleepingtestEntities())
@@ -371,7 +375,7 @@ namespace ApiSleepingPatener.Controllers
         //        decimal MaxValueRight = Math.Max(RightLimitPV, TotalRightUserPV);
         //        decimal RemainingRightUserPV = MaxValueRight - TotalRightUserPV;
 
-        //          GetCalculateCurrentReward(userId);
+        //        GetCalculateCurrentReward(userId);
         //        //if (reward != null)
         //        //{
         //        //    //return reward.ToString();
@@ -386,7 +390,7 @@ namespace ApiSleepingPatener.Controllers
         //        //    //}, JsonRequestBehavior.AllowGet);
         //        //}
         //        //return RemainingLeftUserPV.ToString();
-        //        return RemainingRightUserPV.ToString();
+        //        return RemainingLeftUserPV.ToString() +""+ RemainingRightUserPV;
         //        //return (RemainingLeftUs);
         //    }
 

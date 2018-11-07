@@ -47,6 +47,7 @@ namespace ApiSleepingPatener.Controllers
         public IHttpActionResult AllGetUserDownlineMembersLeft(int userId)
         {
             SleepingtestEntities db = new SleepingtestEntities();
+            
             IEnumerable<UserModel> usrmodel = new List<UserModel>();
 
             List<GetParentChildsSP_Result> List = new List<GetParentChildsSP_Result>();
@@ -503,8 +504,233 @@ namespace ApiSleepingPatener.Controllers
 
         }
         
+        // public ActionResult AddNewMemeberLeft(UserModel model)
+        //{
+        //    var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
+        //    BinaryMLMTreeEntities dbTree = new BinaryMLMTreeEntities();
+        //    using (BinaryMLMSystemEntities dc = new BinaryMLMSystemEntities())
+        //    {
+        //        var usercheckEmail = dc.NewUserRegistrations.Where(a => a.Email.Equals(model.Email)).FirstOrDefault();
+        //        var usercheckPhone = dc.NewUserRegistrations.Where(a => a.Phone.Equals(model.Phone)).FirstOrDefault();
+        //        var usercheckAccountNumber = dc.NewUserRegistrations.Where(a => a.AccountNumber.Equals(model.AccountNumber)).FirstOrDefault();
+        //        if (usercheckEmail != null)
+        //        {
+        //            //ViewBag.MessageAddNewMemeberLeft = "User email already exist";
+        //            return Json(new { error = true, message = "User email already exist" }, JsonRequestBehavior.AllowGet);
+        //        }
+        //        else if (usercheckPhone != null)
+        //        {
+        //            //ViewBag.MessageAddNewMemeberLeft = "User phone number already exist";
+        //            return Json(new { error = true, message = "User phone number already exist" }, JsonRequestBehavior.AllowGet);
+        //        }
+        //        else if (usercheckAccountNumber != null)
+        //        {
+        //            //ViewBag.MessageAddNewMemeberLeft = "User Account Number already exist";
+        //            return Json(new { error = true, message = "User Account Number already exist" }, JsonRequestBehavior.AllowGet);
+        //        }
+        //        else
+        //        {
+        //            Package package = dc.Packages.Where(a => a.PackageId.Equals(model.UserPackage)).FirstOrDefault();
+        //            UserPackage userpackage = new UserPackage();
+        //            UserTableLevel userTableLevel = new UserTableLevel();
+        //            NewUserRegistration newuser = new NewUserRegistration();
+
+        //            newuser.Name = model.Name;
+        //            newuser.Username = model.UserName;
+        //            newuser.Password = model.Password;
+        //            newuser.Country = model.Country;
+        //            newuser.Address = model.Address;
+        //            newuser.Phone = model.Phone;
+        //            newuser.Email = model.Email;
+        //            newuser.AccountNumber = model.AccountNumber;
+        //            newuser.BankName = model.BankName;
+        //            newuser.CNIC = model.CNICNumber;
+        //            newuser.IsThisFirstUser = model.IsThisFirstUser;
+        //            if (model.DownlineMemberId == 0 || model.DownlineMemberId == null)
+        //            {
+        //                newuser.DownlineMemberId = userId;
+        //            }
+        //            else
+        //            {
+        //                newuser.DownlineMemberId = model.DownlineMemberId.Value;
+        //            }
+        //            newuser.UserPosition = Common.Enum.UserPosition.Left;
+        //            newuser.IsUserActive = false;
+        //            newuser.IsNewRequest = true;
+        //            newuser.SponsorId = userId;
+        //            newuser.UpperId = model.UpperId;
+        //            newuser.PaidAmount = package.PackagePrice;
+        //            newuser.CreateDate = DateTime.Now;
+        //            newuser.UserCode = BinaryMLMSystem.Common.Enum.UserType.User.ToString();
+        //            newuser.IsEmailConfirmed = false;
+        //            newuser.UserPackage = model.UserPackage;
+        //            //file = Request.Files["AddNewMemberLeftImageData"];
+        //            var fileImage = model.DocumentImage;
+        //            if (fileImage != null)
+        //            {
+        //                byte[] img = ConvertToBytes(fileImage);
+        //                newuser.DocumentImage = img;
+        //            }
+        //            dc.NewUserRegistrations.Add(newuser);
+        //            dc.SaveChanges();
+
+
+        //            userpackage.PackageId = package.PackageId;
+        //            userpackage.PackageName = package.PackageName;
+        //            userpackage.PackagePercent = package.PackagePercent;
+        //            userpackage.PackagePrice = package.PackagePrice;
+        //            userpackage.PackageValidity = package.PackageValidity;
+        //            userpackage.PackageMinWithdrawalAmount = package.PackageMinWithdrawalAmount;
+        //            userpackage.PackageMaxWithdrawalAmount = package.PackageMaxWithdrawalAmount;
+        //            userpackage.UserId = newuser.UserId;
+        //            userpackage.IsInCurrentUse = true;
+        //            userpackage.PurchaseDate = DateTime.Now;
+
+        //            dc.UserPackages.Add(userpackage);
+
+
+        //            userTableLevel.UserName = model.UserName;
+        //            userTableLevel.TableLevel = 1;
+        //            userTableLevel.NoOfUsers = 0;
+        //            userTableLevel.RightUsers = 0;
+        //            userTableLevel.LeftUsers = 0;
+        //            userTableLevel.TableLevelLimit = 2;
+        //            userTableLevel.UserId = newuser.UserId;
+        //            userTableLevel.LastModifiedDate = DateTime.Now;
+        //            dc.UserTableLevels.Add(userTableLevel);
+
+        //            dc.SaveChanges();
+
+        //            #region creating first user tree
+
+        //            TreeDataTbl userTree = dbTree.TreeDataTbls.Where(a => a.UserId.Value.Equals(newuser.DownlineMemberId)).FirstOrDefault();
+
+        //            if (userTree == null)
+        //            {
+        //                if (newuser.IsThisFirstUser == true)
+        //                {
+        //                    dbTree.insert_tree_node(newuser.Username, 0, newuser.UserId, newuser.DownlineMemberId, newuser.UserPosition);
+        //                }
+        //                else
+        //                {
+        //                    dbTree.insert_tree_node(newuser.Username, userTree.Tree_ID, newuser.UserId, newuser.DownlineMemberId, newuser.UserPosition);
+        //                }
+        //            }
 
 
 
+        //            #endregion
+
+        //            ModelState.Clear();
+        //            model = null;
+        //            ViewBag.MessageAddNewMemeberLeft = "Successfully Registration Done";
+        //        }
+
+        //    }
+        //    //this.AddNotification("Data has bees saved", NotificationType.SUCCESS);
+        //    //return RedirectToAction("UserDownlineMembers");
+        //    //return PartialView("_AddNewMemeberLeft", model);
+        //    return Json(new { success = true, message = "User has been saved" }, JsonRequestBehavior.AllowGet);
+        //    //return View("UserDownlineMembers");
+        //}
+
+        //dropdown foir left users 
+        [HttpGet]
+        [Route("DropDownLeft/{userId}")]
+        public IHttpActionResult GetUserForDownlineMemberByUserOnlyLeft(int userId)
+        {
+            //var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
+
+            SleepingtestEntities db = new SleepingtestEntities();
+
+            List<GetParentChildsLeftSP_Result> List = new List<GetParentChildsLeftSP_Result>();
+            List = db.GetParentChildsLeftSP(userId).ToList();
+
+            List<DropDownMembers> listDownlineMember = new List<DropDownMembers>();
+
+            UserGenealogyTableLeft leftUsers = new UserGenealogyTableLeft();
+
+            foreach (var item in List)
+            {
+                var userIdChild = Convert.ToInt32(item.UserId);
+                if (item.UserCode == Common.Enum.UserType.User)
+                {
+                    leftUsers = db.UserGenealogyTableLefts.Where(a => a.DownlineMemberId.Value.Equals(userIdChild)).FirstOrDefault();
+                    
+                    if (leftUsers == null)
+                    {
+                        listDownlineMember.Add(new DropDownMembers() { UserId = item.UserId.Value, Username = item.Username,UserPosition = null });
+                    }
+                }
+            }
+
+            return Ok(listDownlineMember);
+               // return Ok(listDownlineMember);
+          
+           // ViewBag.DownlineMemberList = listDownlineMember;
+        }
+        [HttpGet]
+        [Route("DropDownRight/{userId}")]
+        public IHttpActionResult GetUserForDownlineMemberByUserOnlyRight(int userId)
+        {
+
+            SleepingtestEntities db = new SleepingtestEntities();
+
+            List<GetParentChildsRightSP_Result> List = new List<GetParentChildsRightSP_Result>();
+            List = db.GetParentChildsRightSP(userId).ToList();
+
+            List<DropDownMembers> listDownlineMember = new List<DropDownMembers>();
+
+            UserGenealogyTableRight rightUsers = new UserGenealogyTableRight();
+
+            foreach (var item in List)
+            {
+                var userIdChild = Convert.ToInt32(item.UserId);
+                if (item.UserCode == Common.Enum.UserType.User)
+                {
+                    rightUsers = db.UserGenealogyTableRights.Where(a => a.DownlineMemberId.Value.Equals(userIdChild)).FirstOrDefault();
+                    if (rightUsers == null)
+                    {
+                        listDownlineMember.Add(new DropDownMembers() { UserId = item.UserId.Value, Username = item.Username, UserPosition = null });
+                    }
+                   
+                }
+            }
+            return Ok(listDownlineMember);
+        }
+        //[HttpGet]
+        //[Route("AllUserDownlineMembersLeft/{userId}")]
+        //public IHttpActionResult AllGetUserDownlineMembersLeft(int userId)
+        //{
+        //    SleepingtestEntities db = new SleepingtestEntities();
+        //    BinaryMLMTreeEntities dbTree = new BinaryMLMTreeEntities();
+        //    IEnumerable<UserModel> usrmodel = new List<UserModel>();
+        //    //var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
+        //    //string UserTypeAdmin = BinaryMLMSystem.Common.Enum.UserType.Admin.ToString();
+        //    //string UserTypeUser = BinaryMLMSystem.Common.Enum.UserType.User.ToString();
+
+        //    List<GetParentChildsSP_Result> List = new List<GetParentChildsSP_Result>();           
+        //    if (Session["LogedUserCode"].ToString() == BinaryMLMSystem.Common.Enum.UserType.User.ToString())
+        //    {
+        //        //List = db.NewUserRegistrations.Where(a => a.UserCode.Equals(UserTypeUser)
+        //        //    && a.DownlineMemberId.Equals(userId))
+        //        usrmodel = (from n in db.GetParentChildsLeftSP(userId)
+        //                    join c in db.NewUserRegistrations on n.SponsorId equals c.UserId
+        //                    select new UserModel
+        //                    {
+        //                        UserId = n.UserId.Value,
+        //                        UserName = n.Username,
+        //                        Country = n.Country,
+        //                        Phone = n.Phone,
+        //                        AccountNumber = n.AccountNumber,
+        //                        BankName = n.BankName,
+        //                        SponsorId = n.SponsorId,
+        //                        PaidAmount = n.PaidAmount.Value,
+        //                        SponsorName = c.Username
+        //                    }).ToList();
+
+        //    }
+        //    return Json(new { data = usrmodel }, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

@@ -298,6 +298,7 @@
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\Dashboarddetails.cs" />
     <Compile Include="Models\DownlineMemberModel.cs" />
+    <Compile Include="Models\DropDownMembers.cs" />
     <Compile Include="Models\EWallet\EWalletPayoutConfigModel.cs" />
     <Compile Include="Models\EWallet\EWalletTransactionModel.cs" />
     <Compile Include="Models\EWallet\EWalletWithdrawalFundModel.cs" />
