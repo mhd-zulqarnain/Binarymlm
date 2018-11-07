@@ -14,6 +14,7 @@ namespace ApiSleepingPatener.Controllers
    
     public class AccountController : ApiController
     {
+
         [Authorize]
         [HttpGet]
         [Route("api/account/getuser/{id}")]

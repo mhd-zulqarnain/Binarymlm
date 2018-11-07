@@ -65,7 +65,7 @@ namespace ApiSleepingPatener.Controllers
                         select new UserModel
                         {
                             UserId = n.UserId.Value,
-                            UserName = n.Username,
+                            Username = n.Username,
                             Country = n.Country,
                             Phone = n.Phone,
                             AccountNumber = n.AccountNumber,
@@ -102,7 +102,7 @@ namespace ApiSleepingPatener.Controllers
                         select new UserModel
                         {
                             UserId = n.UserId.Value,
-                            UserName = n.Username,
+                            Username = n.Username,
                             Country = n.Country,
                             Phone = n.Phone,
                             AccountNumber = n.AccountNumber,
@@ -536,7 +536,7 @@ namespace ApiSleepingPatener.Controllers
         //            NewUserRegistration newuser = new NewUserRegistration();
 
         //            newuser.Name = model.Name;
-        //            newuser.Username = model.UserName;
+        //            newuser.Username = model.Username;
         //            newuser.Password = model.Password;
         //            newuser.Country = model.Country;
         //            newuser.Address = model.Address;
@@ -589,7 +589,7 @@ namespace ApiSleepingPatener.Controllers
         //            dc.UserPackages.Add(userpackage);
 
 
-        //            userTableLevel.UserName = model.UserName;
+        //            userTableLevel.Username = model.Username;
         //            userTableLevel.TableLevel = 1;
         //            userTableLevel.NoOfUsers = 0;
         //            userTableLevel.RightUsers = 0;
@@ -706,7 +706,7 @@ namespace ApiSleepingPatener.Controllers
         public IHttpActionResult GetUserDownlineMembersLeft(int userId)
         {
             SleepingtestEntities db = new SleepingtestEntities();
-            TreeDataTbl dbTree = new TreeDataTbl();
+       //     TreeDataTbl dbTree = new TreeDataTbl();
             UserModel usrmodel = new UserModel();
             List<GetParentChildsLeftSP_Result> List = new List<GetParentChildsLeftSP_Result>();          
                 List = db.GetParentChildsLeftSP(userId).ToList();
