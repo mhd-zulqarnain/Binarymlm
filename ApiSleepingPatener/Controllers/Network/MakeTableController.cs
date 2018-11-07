@@ -635,8 +635,9 @@ namespace ApiSleepingPatener.Controllers
         //}
 
         //dropdown foir left users 
+        [Authorize]
         [HttpGet]
-        [Route("DropDownLeft/{userId}")]
+        [Route("dropdownleft/{userId}")]
         public IHttpActionResult GetUserForDownlineMemberByUserOnlyLeft(int userId)
         {
             //var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
@@ -669,8 +670,9 @@ namespace ApiSleepingPatener.Controllers
           
            // ViewBag.DownlineMemberList = listDownlineMember;
         }
+        [Authorize]
         [HttpGet]
-        [Route("DropDownRight/{userId}")]
+        [Route("dropdownright/{userId}")]
         public IHttpActionResult GetUserForDownlineMemberByUserOnlyRight(int userId)
         {
 
@@ -698,39 +700,110 @@ namespace ApiSleepingPatener.Controllers
             }
             return Ok(listDownlineMember);
         }
-        //[HttpGet]
-        //[Route("AllUserDownlineMembersLeft/{userId}")]
-        //public IHttpActionResult AllGetUserDownlineMembersLeft(int userId)
-        //{
-        //    SleepingtestEntities db = new SleepingtestEntities();
-        //    BinaryMLMTreeEntities dbTree = new BinaryMLMTreeEntities();
-        //    IEnumerable<UserModel> usrmodel = new List<UserModel>();
-        //    //var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
-        //    //string UserTypeAdmin = BinaryMLMSystem.Common.Enum.UserType.Admin.ToString();
-        //    //string UserTypeUser = BinaryMLMSystem.Common.Enum.UserType.User.ToString();
+        [Authorize]
+        [HttpGet]
+        [Route("maketablemembersleft/{userId}")]
+        public IHttpActionResult GetUserDownlineMembersLeft(int userId)
+        {
+            SleepingtestEntities db = new SleepingtestEntities();
+            TreeDataTbl dbTree = new TreeDataTbl();
+            UserModel usrmodel = new UserModel();
+            List<GetParentChildsLeftSP_Result> List = new List<GetParentChildsLeftSP_Result>();          
+                List = db.GetParentChildsLeftSP(userId).ToList();
 
-        //    List<GetParentChildsSP_Result> List = new List<GetParentChildsSP_Result>();           
-        //    if (Session["LogedUserCode"].ToString() == BinaryMLMSystem.Common.Enum.UserType.User.ToString())
-        //    {
-        //        //List = db.NewUserRegistrations.Where(a => a.UserCode.Equals(UserTypeUser)
-        //        //    && a.DownlineMemberId.Equals(userId))
-        //        usrmodel = (from n in db.GetParentChildsLeftSP(userId)
-        //                    join c in db.NewUserRegistrations on n.SponsorId equals c.UserId
-        //                    select new UserModel
-        //                    {
-        //                        UserId = n.UserId.Value,
-        //                        UserName = n.Username,
-        //                        Country = n.Country,
-        //                        Phone = n.Phone,
-        //                        AccountNumber = n.AccountNumber,
-        //                        BankName = n.BankName,
-        //                        SponsorId = n.SponsorId,
-        //                        PaidAmount = n.PaidAmount.Value,
-        //                        SponsorName = c.Username
-        //                    }).ToList();
+                List<NewUserRegistration> listDownlineMember = new List<NewUserRegistration>();
+                UserGenealogyTableLeft usersLeft = new UserGenealogyTableLeft();
 
-        //    }
-        //    return Json(new { data = usrmodel }, JsonRequestBehavior.AllowGet);
-        //}
+                foreach (var item in List)
+                {
+                    var userIdChild = Convert.ToInt32(item.UserId);
+                    if (item.UserCode == Common.Enum.UserType.User)
+                    {
+                        usersLeft = db.UserGenealogyTableLefts.Where(a => a.UserId.Value.Equals(userIdChild)
+                            && a.MatchingCommision.Value.Equals(false)).FirstOrDefault();
+                        if (usersLeft != null)
+                        {
+                            listDownlineMember.Add(new NewUserRegistration()
+                            {
+                                UserId = item.UserId.Value,
+                                Username = item.Username,
+                                Country = item.Country,
+                                Phone = item.Phone,
+                                AccountNumber = item.AccountNumber,
+                                BankName = item.BankName,
+                                SponsorId = item.SponsorId.Value,
+                                PaidAmount = item.PaidAmount.Value,
+                                UserCode = item.UserCode
+                            });
+                        }
+                    }
+                }
+            return Ok(listDownlineMember);
+                
+
+            }
+        [HttpGet]
+        [Route("maketablemembersright/{userId}")]
+        public IHttpActionResult GetUserDownlineMembersRight(int userId)
+        {
+            SleepingtestEntities db = new SleepingtestEntities();
+            UserModel usrmodel = new UserModel();
+
+            List<GetParentChildsRightSP_Result> List = new List<GetParentChildsRightSP_Result>();
+
+            List = db.GetParentChildsRightSP(userId)
+                .Select(x => new GetParentChildsRightSP_Result
+                    //List = db.NewUserRegistrations.Select(x => new UserModel
+                    {
+                    UserId = x.UserId.Value,
+                    Username = x.Username,
+                    Country = x.Country,
+                    Phone = x.Phone,
+                    AccountNumber = x.AccountNumber,
+                    BankName = x.BankName,
+                    SponsorId = x.SponsorId,
+                    PaidAmount = x.PaidAmount.Value,
+                    UserCode = x.UserCode
+                }).ToList();
+            //return Json(new { data = List }, JsonRequestBehavior.AllowGet);
+            return Ok(List);
+
+
+            List = db.GetParentChildsRightSP(userId).ToList();
+
+            List<NewUserRegistration> listDownlineMember = new List<NewUserRegistration>();
+            UserGenealogyTableRight usersRight = new UserGenealogyTableRight();
+
+            foreach (var item in List)
+            {
+                var userIdChild = Convert.ToInt32(item.UserId);
+                if (item.UserCode == Common.Enum.UserType.User)
+                {
+                    usersRight = db.UserGenealogyTableRights.Where(a => a.UserId.Value.Equals(userIdChild)
+                        && a.MatchingCommision.Value.Equals(false)).FirstOrDefault();
+                    if (usersRight != null) //both null
+                    {
+                        listDownlineMember.Add(new NewUserRegistration()
+                        {
+                            UserId = item.UserId.Value,
+                            Username = item.Username,
+                            Country = item.Country,
+                            Phone = item.Phone,
+                            AccountNumber = item.AccountNumber,
+                            BankName = item.BankName,
+                            SponsorId = item.SponsorId.Value,
+                            PaidAmount = item.PaidAmount.Value,
+                            UserCode = item.UserCode
+                        });
+                    }
+                }
+            }
+            return Ok(listDownlineMember);
+           // return Json(new { data = listDownlineMember }, JsonRequestBehavior.AllowGet);
+        }
+            
     }
+
 }
+
+

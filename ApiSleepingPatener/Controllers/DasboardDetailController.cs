@@ -15,7 +15,7 @@ namespace ApiSleepingPatener.Controllers
 {
     public class DasboardDetailController : ApiController
     {
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         [Route("dashboard/{userId}")]
         public IHttpActionResult DashBoard(int userId)
