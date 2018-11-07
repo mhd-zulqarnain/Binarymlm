@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.adapter.ViewPagerAdapter
+import com.redcodetechnologies.mlm.ui.profile.adapter.ViewPagerAdapter
 
 
 class ProfileFragment : Fragment() {

@@ -10,12 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.redcodetechnologies.mlm.DrawerActivity
+import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.adapter.NotificationAdapter
-import com.redcodetechnologies.mlm.adapter.WalletAdapter
+import com.redcodetechnologies.mlm.ui.support.adapter.NotificationAdapter
 import com.redcodetechnologies.mlm.models.NotificationModal
-import com.redcodetechnologies.mlm.models.WalletModal
 import java.util.ArrayList
 
 class NoficationListFragment : Fragment() {
@@ -52,7 +50,7 @@ class NoficationListFragment : Fragment() {
         tv_action = view!!.findViewById(R.id.tv_notofic_action)
 
         recylcer_notification!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
-        adapter = NotificationAdapter(activity!! ,frgement_type,  list)
+        adapter = NotificationAdapter(activity!!, frgement_type, list)
         recylcer_notification!!.adapter = adapter
 
 

@@ -2,7 +2,7 @@ package com.redcodetechnologies.mlm.utils
 
 
 import android.widget.Filter;
-import com.redcodetechnologies.mlm.adapter.InboxAdapter
+import com.redcodetechnologies.mlm.ui.support.adapter.InboxAdapter
 import com.redcodetechnologies.mlm.models.Inbox
 
 
