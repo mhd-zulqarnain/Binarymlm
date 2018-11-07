@@ -65,14 +65,6 @@ namespace ApiSleepingPatener.Controllers
            
         }
 
-        [HttpGet]
-        [Route("getAds")]
-        public IHttpActionResult ShowAdvertisementData()
-        {
-            SleepingtestEntities db = new SleepingtestEntities();
-            List<Advertisement> listadvertisement = db.Advertisements.Where(x => x.IsActive == true).ToList();
-            return Ok(listadvertisement);
-
-        }
+        
     }
 }

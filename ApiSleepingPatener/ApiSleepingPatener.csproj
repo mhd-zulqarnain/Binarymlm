@@ -250,6 +250,8 @@
     <Compile Include="Common\Enum.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\DasboardDetailController.cs" />
+    <Compile Include="Controllers\SettingController .cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\Network\MakeTableController.cs" />
     <Compile Include="Controllers\UserDetailController.cs" />
@@ -294,6 +296,7 @@
     <Compile Include="Models\Account\UserTableLevelModel.cs" />
     <Compile Include="Models\Advertisement\AdvertisementModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
+    <Compile Include="Models\Dashboarddetails.cs" />
     <Compile Include="Models\DownlineMemberModel.cs" />
     <Compile Include="Models\EWallet\EWalletPayoutConfigModel.cs" />
     <Compile Include="Models\EWallet\EWalletTransactionModel.cs" />
