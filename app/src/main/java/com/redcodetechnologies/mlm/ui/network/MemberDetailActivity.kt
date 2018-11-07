@@ -1,7 +1,6 @@
 package com.redcodetechnologies.mlm.ui.network
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -9,16 +8,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.Gson
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.Users
+import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.network.adapter.DialogMemberAdapter
-import com.redcodetechnologies.mlm.ui.network.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
 import com.redcodetechnologies.mlm.utils.SharedPrefs
@@ -70,7 +67,7 @@ class MemberDetailActivity : AppCompatActivity() {
         if (user != null) {
             id = user!!.UserId!!.toInt()
             token = prefs.getToken(this@MemberDetailActivity).accessToken!!
-            tv_username.text = user!!.UserName
+            tv_username.text = user!!.Username
             tv_phone.setText("Phone:" + user!!.Phone)
             tv_BankName.setText("Bank: " + user!!.BankName)
             tv_SponsorName.setText("Sponser: " + user!!.SponsorName)

@@ -13,9 +13,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.Users
+import com.redcodetechnologies.mlm.models.Packages
+import com.redcodetechnologies.mlm.models.users.DropDownMembers
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
+import com.redcodetechnologies.mlm.ui.network.adapter.DownlinerSpinnerAdapter
+import com.redcodetechnologies.mlm.ui.network.adapter.PackageSpinnerAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
@@ -28,11 +31,13 @@ import kotlin.collections.ArrayList
 
 class AddMemberActivity : AppCompatActivity() {
     val REQUSET_GALLERY_CODE: Int = 43
-    var type: String ?=null
+    lateinit var type: String;
     var spinner_country: SearchableSpinner? = null
-    var listdownliner:ArrayList<String> = ArrayList()
-    var c:ArrayList<String> = ArrayList()
-    lateinit var downlinerAdapter:ArrayAdapter<String>;
+    var listdownliner:ArrayList<DropDownMembers> = ArrayList()
+    var listPackages:ArrayList<Packages> = ArrayList()
+
+    lateinit var downlinerAdapter: DownlinerSpinnerAdapter;
+    lateinit var packageAdapter: PackageSpinnerAdapter;
     var id: Int? = null
     lateinit var prefs: SharedPrefs
     var progressdialog: android.app.AlertDialog? = null
@@ -45,9 +50,10 @@ class AddMemberActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_member)
         var toolbar: Toolbar = findViewById(R.id.toolbar_top)
         spinner_country = findViewById(R.id.spinner_country)
+        type = intent.getStringExtra("type")
+
         initView()
 
-        type = intent.getStringExtra("type")
         ed_name!!.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (!ed_name!!.text.toString().trim().isEmpty() && ed_name!!.text.toString().trim() != "") {
@@ -120,15 +126,54 @@ class AddMemberActivity : AppCompatActivity() {
 
             }
         }
-        downlinerAdapter  =ArrayAdapter(this@AddMemberActivity,R.layout.support_simple_spinner_dropdown_item,listdownliner)
+
+        downlinerAdapter  = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
         spinner_downliner.adapter = downlinerAdapter;
         getdownliner()
+
+        packageAdapter  = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
+        spinner_package.adapter = packageAdapter;
+        getPackages()
 
         spinner_country!!.adapter = arrayAdapter
         spinner_country!!.setTitle("Select Country");
         spinner_country!!.setPositiveButton("Close");
     }
 
+    private fun getPackages(){
+        listPackages.add(Packages("1","--select--"))
+        ApiClint.getInstance()?.getService()?.getpackages()
+                ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {
+                    override fun onFailure(call: Call<java.util.ArrayList<Packages>>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.hide();
+                    }
+
+                    override fun onResponse(call: Call<java.util.ArrayList<Packages>>?, response: retrofit2.Response<java.util.ArrayList<Packages>>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+
+                        if (code == 401) {
+                            Apputils.showMsg(this@AddMemberActivity, "Token Expired")
+                            tokenExpire();
+                        }
+                        if (code == 200) {
+                            response?.body()?.forEach { user ->
+                                listPackages.add(user)
+                            }
+                            downlinerAdapter.notifyDataSetChanged()
+                            if (response.body()!!.size == 0) {
+                                //nnnn   listdownliner.add(DropDownMembers(0,"None"))
+
+                            }
+                        }
+
+                        progressdialog!!.hide();
+
+
+                    }
+                })
+    }
     private fun getdownliner() {
 
         if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
@@ -137,17 +182,18 @@ class AddMemberActivity : AppCompatActivity() {
         }
         progressdialog!!.show();
         listdownliner.clear()
+        listdownliner.add(DropDownMembers(0,"--select--"))
 
        if(type=="right") {
-           ApiClint.getInstance()?.getService()?.getAllDownlineMembersRight("bearer " + token!!, id!!)
-                   ?.enqueue(object : Callback<java.util.ArrayList<Users>> {
-                       override fun onFailure(call: Call<java.util.ArrayList<Users>>?, t: Throwable?) {
+           ApiClint.getInstance()?.getService()?.getdropDownMembersRight("bearer " + token!!, id!!)
+                   ?.enqueue(object : Callback<java.util.ArrayList<DropDownMembers>> {
+                       override fun onFailure(call: Call<java.util.ArrayList<DropDownMembers>>?, t: Throwable?) {
                            println("error")
                            progressdialog!!.hide();
 
                        }
 
-                       override fun onResponse(call: Call<java.util.ArrayList<Users>>?, response: retrofit2.Response<java.util.ArrayList<Users>>?) {
+                       override fun onResponse(call: Call<java.util.ArrayList<DropDownMembers>>?, response: retrofit2.Response<java.util.ArrayList<DropDownMembers>>?) {
                            print("object success ")
                            var code: Int = response!!.code()
 
@@ -157,11 +203,11 @@ class AddMemberActivity : AppCompatActivity() {
                            }
                            if (code == 200) {
                                response?.body()?.forEach { user ->
-                                   listdownliner.add(user.UserName.toString())
+                                   listdownliner.add(user)
                                }
-                               downlinerAdapter!!.notifyDataSetChanged()
+                               downlinerAdapter.notifyDataSetChanged()
                                if (response.body()!!.size == 0) {
-                                   listdownliner.add("No downliner found")
+                                 //  listdownliner.add(DropDownMembers(0,"--select--"))
 
                                }
                            }
@@ -173,17 +219,15 @@ class AddMemberActivity : AppCompatActivity() {
                    })
 
        }else {
-           //getDownLineRight
-
-           ApiClint.getInstance()?.getService()?.getAllDownlineMembersLeft("bearer " + token!!, id!!)
-                   ?.enqueue(object : Callback<java.util.ArrayList<Users>> {
-                       override fun onFailure(call: Call<java.util.ArrayList<Users>>?, t: Throwable?) {
+           //getDownLineLeft
+           ApiClint.getInstance()?.getService()?.getdropDownMembersLeft("bearer " + token!!, id!!)
+                   ?.enqueue(object : Callback<java.util.ArrayList<DropDownMembers>> {
+                       override fun onFailure(call: Call<java.util.ArrayList<DropDownMembers>>?, t: Throwable?) {
                            println("error")
                            progressdialog!!.hide();
-
                        }
 
-                       override fun onResponse(call: Call<java.util.ArrayList<Users>>?, response: retrofit2.Response<java.util.ArrayList<Users>>?) {
+                       override fun onResponse(call: Call<java.util.ArrayList<DropDownMembers>>?, response: retrofit2.Response<java.util.ArrayList<DropDownMembers>>?) {
                            print("object success ")
                            var code: Int = response!!.code()
 
@@ -193,11 +237,11 @@ class AddMemberActivity : AppCompatActivity() {
                            }
                            if (code == 200) {
                                response?.body()?.forEach { user ->
-                                   listdownliner.add(user.UserName.toString())
+                                   listdownliner.add(user)
                                }
-                               downlinerAdapter!!.notifyDataSetChanged()
+                               downlinerAdapter.notifyDataSetChanged()
                                if (response.body()!!.size == 0) {
-                                   listdownliner.add("No downliner found")
+                                //nnnn   listdownliner.add(DropDownMembers(0,"None"))
 
                                }
                            }
@@ -215,7 +259,6 @@ class AddMemberActivity : AppCompatActivity() {
         startActivity(Intent(this@AddMemberActivity, SignInActivity::class.java))
         finish()
     }
-
     private fun validation() {
         if (ed_name!!.text.toString().trim() == "") {
             ed_name!!.error = Html.fromHtml("<font color='white'>Enter user name</font>")

@@ -3,12 +3,8 @@ package com.redcodetechnologies.mlm.ui.profile
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.app.Fragment
-import android.graphics.drawable.Drawable
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.text.Html
-import android.text.method.Touch
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -16,9 +12,8 @@ import android.view.ViewGroup
 import android.widget.*
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.NewUserRegistration
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.utils.SharedPrefs
-import kotlinx.android.synthetic.*
 
 
 class SecondFragment : android.support.v4.app.Fragment() {

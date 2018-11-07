@@ -2,7 +2,7 @@ package com.redcodetechnologies.mlm.utils
 
 import android.widget.Filter;
 import com.redcodetechnologies.mlm.ui.network.adapter.DownMemberAdapter
-import com.redcodetechnologies.mlm.models.Users
+import com.redcodetechnologies.mlm.models.users.Users
 
 
 class CustomNameSearch(var filterList: ArrayList<Users>, var adapter: DownMemberAdapter): Filter() {
@@ -14,7 +14,7 @@ class CustomNameSearch(var filterList: ArrayList<Users>, var adapter: DownMember
             val filtered = ArrayList<Users>()
 
             for (i in 0 until filterList.size) {
-                if (filterList!!.get(i).UserName?.toUpperCase()!!.contains(constraint)) {
+                if (filterList!!.get(i).Username?.toUpperCase()!!.contains(constraint)) {
                     filtered.add(filterList!!.get(i))
                 }
             }

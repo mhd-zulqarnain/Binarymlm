@@ -196,16 +196,16 @@
                         android:id="@+id/spinner_package"
                         style="@style/Widget.AppCompat.Spinner.Underlined"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:entries="@array/spinner_package"
+                        android:entries="@array/spinner_downliner"
                         android:theme="@style/CustomSpinner" />
 
                     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spinner_country"
                         android:layout_width="0dp"
                         style="@style/Widget.AppCompat.Spinner.Underlined"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                         android:layout_gravity="right"
                         android:layout_weight="1" />
 

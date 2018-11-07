@@ -7,8 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
@@ -18,14 +16,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.NewUserRegistration
-import com.redcodetechnologies.mlm.models.Response
-import com.redcodetechnologies.mlm.utils.Apputils
-import com.redcodetechnologies.mlm.utils.ServiceError
-import com.redcodetechnologies.mlm.utils.ServiceListener
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
-import kotlinx.android.synthetic.main.fragment_first.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -48,7 +41,7 @@ class FirstFragment : Fragment() {
     var address : EditText? = null
     var spinner_country : SearchableSpinner? = null
     var pref:SharedPrefs ? = null
-    lateinit var obj :NewUserRegistration;
+    lateinit var obj : NewUserRegistration;
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_first, container, false)

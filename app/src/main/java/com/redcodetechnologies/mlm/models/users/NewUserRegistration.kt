@@ -1,4 +1,4 @@
-package com.redcodetechnologies.mlm.models
+package com.redcodetechnologies.mlm.models.users
 
 
 import com.google.gson.annotations.Expose

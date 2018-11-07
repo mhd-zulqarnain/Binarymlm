@@ -16,7 +16,7 @@ import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.utils.Apputils
 
 import com.redcodetechnologies.mlm.models.ApiToken
-import com.redcodetechnologies.mlm.models.NewUserRegistration
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.models.Response
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.utils.ServiceError

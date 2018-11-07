@@ -9,10 +9,10 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.Users
+import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.utils.CustomNameSearch
 
-class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users> ,private val onClick:(Users)->Unit) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
+class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgement_type:String, private val onClick:(Users)->Unit) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
     var customFilter: CustomNameSearch? = null
 
        override fun getFilter(): Filter{
@@ -39,6 +39,8 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users> ,private va
         holder.itemView.setOnClickListener {
             onClick(list[p1])
         }
+        if(frgement_type!="MakeTable")
+            holder.tv_sponser!!.visibility=View.GONE
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -55,7 +57,8 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users> ,private va
             tv_bank = itemView.findViewById(R.id.tv_bank)
             tv_sponser = itemView.findViewById(R.id.tv_sponser)
             tv_paid = itemView.findViewById(R.id.tv_paid)
-            tv_name!!.text = users.UserName
+
+            tv_name!!.text = users.Username
             tv_phone!!.text = users.Phone
             tv_bank!!.text = users.BankName!!
             tv_sponser!!.text = users.SponsorName

@@ -69,7 +69,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         makeView()
 
     }
-
     fun makeView(){
 
         var obj = mPref!!.getUser(this@DrawerActivity);
@@ -115,6 +114,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return true
     }
+
     private fun enableExpandableList() {
         listDataHeader = ArrayList()
         listDataChild = HashMap()
