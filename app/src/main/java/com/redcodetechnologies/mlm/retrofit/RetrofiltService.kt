@@ -30,10 +30,6 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getAllDownlineMembersRight(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<Users>>
 
-    @GET("getAllDownlineMembersLeft/{userid}")
-    @Headers("Content-Type:application/json")
-    fun getAllDownlineMembersLeft(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<Users>>
-
     @GET("getAds")
     @Headers("Content-Type:application/json")
     fun getAdvertisment():  Call<ArrayList<Advertisement>>
@@ -41,6 +37,10 @@ interface RetrofiltService {
     @GET("getAds")
     @Headers("Content-Type:application/json")
     fun getCoinData(): Observable<ArrayList<Advertisement>>
+
+    @GET ("gwallet/overalllist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getAllDownlineMembersLeft(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<WalletModal>>
 
 }
 

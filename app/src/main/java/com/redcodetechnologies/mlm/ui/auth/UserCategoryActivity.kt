@@ -52,5 +52,9 @@ class UserCategoryActivity : AppCompatActivity() {
         }
         super.onStart()
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
+        fragment!!.onActivityResult(requestCode, resultCode, data)
+    }
 
 }

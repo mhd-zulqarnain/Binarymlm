@@ -37,4 +37,5 @@ class ViewPagerAdapter internal constructor(fm: FragmentManager) : FragmentState
 
     }
 
+
 }
