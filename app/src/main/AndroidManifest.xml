@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -32,14 +31,14 @@
         <activity
             android:name=".ui.drawer.DrawerActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ui.network.AddMemberActivity" />
         <activity
             android:name=".ui.auth.UserCategoryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_user_category"
-            android:theme="@style/FullscreenTheme"></activity>
-        <activity android:name=".ui.network.MemberDetailActivity"></activity>
+            android:theme="@style/FullscreenTheme"/>
+        <activity android:name=".ui.network.MemberDetailActivity"/>
     </application>
 
 </manifest>

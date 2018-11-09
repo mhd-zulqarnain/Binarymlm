@@ -51,8 +51,11 @@ class AddMemberActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_member)
         var toolbar: Toolbar = findViewById(R.id.toolbar_top)
         spinner_country = findViewById(R.id.spinner_country)
-        type = intent.getStringExtra("type")
 
+        if(intent.getStringExtra("type")==null){
+            type = "right"
+        }else
+            type = intent.getStringExtra("type")
         initView()
 
         ed_name!!.addTextChangedListener(object : TextWatcher {

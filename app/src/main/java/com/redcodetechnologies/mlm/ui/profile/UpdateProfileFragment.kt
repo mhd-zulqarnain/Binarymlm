@@ -2,9 +2,13 @@ package com.redcodetechnologies.mlm.ui.profile
 
 
 import android.Manifest
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.app.Fragment
@@ -19,6 +23,14 @@ import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
+import kotlinx.android.synthetic.main.fragment_first.*
+import java.io.FileNotFoundException
+import java.io.InputStream
+import android.graphics.Bitmap
+import android.net.Uri
+import android.util.Log
+import java.io.ByteArrayOutputStream
+import java.util.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,9 +45,9 @@ private const val ARG_PARAM2 = "param2"
 class FirstFragment : Fragment() {
     private val CAMERA_INTENT = 555
     private val REQUSET_GALLERY_CODE: Int = 44
-    private val MY_PERMISSIONS_REQUEST_CAMERA = 999
+    private val SELECT_PHOTO = 999
     var updateprofile : Button? = null
-    var uploadimage : Button?  = null
+    var uploadimage : EditText?  = null
     var name : EditText? = null
     var username : EditText? = null
     var address : EditText? = null
@@ -62,11 +74,72 @@ class FirstFragment : Fragment() {
         }
 
         uploadimage!!.setOnClickListener{
-            supportImageDialoge()
+//            supportImageDialoge()
+            pickAImage(it)
+
         }
 
         return view
     } //onCreate().
+
+    fun pickAImage(view:View) {
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.setType("image/*")
+        startActivityForResult(photoPickerIntent, SELECT_PHOTO)
+    }
+
+
+
+     override fun onActivityResult(requestCode: Int, resultCode: Int, imageReturnedIntent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent)
+         when (requestCode) {
+             SELECT_PHOTO -> if (resultCode == RESULT_OK)
+             {
+                 try
+                 {
+                     val selectedImage = imageReturnedIntent!!.getData()
+                     val imageStream = getRealPathFromURI(activity!!, selectedImage)
+                     val bitmap = BitmapFactory.decodeFile(imageStream)
+                     val byteArrayOutputStream = ByteArrayOutputStream()
+                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+                     val byteArray = byteArrayOutputStream.toByteArray()
+
+////                     fun encoder(filePath: String): String{
+//                     val bytes = File(filePath).readBytes()
+//   api level 26                  val base64 = Base64.getEncoder().encodeToString(bytes)
+//                     return base64
+//                 }
+
+                     var encodedString : String? =  android.util.Base64.encodeToString(byteArray , 1)
+                    // var encodedString : String? = Base64.encodeToString(byteArray, Base64.DEFAULT)
+                     Log.wtf("Base64 = ", encodedString)
+                     Toast.makeText(activity!!, encodedString, Toast.LENGTH_SHORT).show()
+                 }
+                 catch (e:Exception) {
+                     e.printStackTrace()
+                 }
+             }
+         }
+
+    }
+    fun getRealPathFromURI(context:Context, contentUri:Uri):String {
+        var cursor : Cursor? = null
+        try
+        {
+            val proj = arrayOf<String>(MediaStore.Images.Media.DATA)
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null)
+            val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(column_index)
+        }
+        finally
+        {
+            if (cursor != null)
+            {
+                cursor.close()
+            }
+        }
+    }
 
 
 
