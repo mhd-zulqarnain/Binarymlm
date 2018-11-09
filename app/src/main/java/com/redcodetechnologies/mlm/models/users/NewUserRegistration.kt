@@ -68,9 +68,11 @@ class NewUserRegistration {
     @SerializedName("UserPosition")
     @Expose
     var userPosition: Any? = null
+
     @SerializedName("IsEmailConfirmed")
     @Expose
     var isEmailConfirmed: Any? = null
+
     @SerializedName("UserPackage")
     @Expose
     var userPackage: Any? = null
@@ -83,9 +85,14 @@ class NewUserRegistration {
     @SerializedName("IsSalesExecutive")
     @Expose
     var isSalesExecutive: Any? = null
+
     @SerializedName("UserDesignation")
     @Expose
     var userDesignation: Any? = null
+
+    @SerializedName("IsWithdrawalOpen ")
+    @Expose
+    var isWithdrawalOpen : Boolean? = null
 
     override fun toString(): String {
         var username = ""
@@ -96,3 +103,5 @@ class NewUserRegistration {
     }
 
 }
+
+

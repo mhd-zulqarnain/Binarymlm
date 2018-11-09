@@ -2,8 +2,10 @@ package com.redcodetechnologies.mlm.ui.network
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.Html
@@ -33,8 +35,8 @@ class AddMemberActivity : AppCompatActivity() {
     val REQUSET_GALLERY_CODE: Int = 43
     lateinit var type: String;
     var spinner_country: SearchableSpinner? = null
-    var listdownliner:ArrayList<DropDownMembers> = ArrayList()
-    var listPackages:ArrayList<Packages> = ArrayList()
+    var listdownliner: ArrayList<DropDownMembers> = ArrayList()
+    var listPackages: ArrayList<Packages> = ArrayList()
 
     lateinit var downlinerAdapter: DownlinerSpinnerAdapter;
     lateinit var packageAdapter: PackageSpinnerAdapter;
@@ -43,10 +45,9 @@ class AddMemberActivity : AppCompatActivity() {
     var progressdialog: android.app.AlertDialog? = null
     lateinit var token: String
 
-
+    var userdocumentImage: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_add_member)
         var toolbar: Toolbar = findViewById(R.id.toolbar_top)
         spinner_country = findViewById(R.id.spinner_country)
@@ -81,7 +82,6 @@ class AddMemberActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent, REQUSET_GALLERY_CODE)
         }
-
         spinner_package.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 layout_package.visibility = View.GONE
@@ -90,8 +90,6 @@ class AddMemberActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
             }
         })
-
-
         btn_back.setOnClickListener {
             finish()
         }
@@ -122,16 +120,17 @@ class AddMemberActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
+
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
             }
         }
 
-        downlinerAdapter  = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
+        downlinerAdapter = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
         spinner_downliner.adapter = downlinerAdapter;
         getdownliner()
 
-        packageAdapter  = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
+        packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
         spinner_package.adapter = packageAdapter;
         getPackages()
 
@@ -140,8 +139,8 @@ class AddMemberActivity : AppCompatActivity() {
         spinner_country!!.setPositiveButton("Close");
     }
 
-    private fun getPackages(){
-        listPackages.add(Packages("1","--select--"))
+    private fun getPackages() {
+        listPackages.add(Packages("1", "--select--"))
         ApiClint.getInstance()?.getService()?.getpackages()
                 ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {
                     override fun onFailure(call: Call<java.util.ArrayList<Packages>>?, t: Throwable?) {
@@ -174,6 +173,7 @@ class AddMemberActivity : AppCompatActivity() {
                     }
                 })
     }
+
     private fun getdownliner() {
 
         if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
@@ -182,83 +182,85 @@ class AddMemberActivity : AppCompatActivity() {
         }
         progressdialog!!.show();
         listdownliner.clear()
-        listdownliner.add(DropDownMembers(0,"--select--"))
+        listdownliner.add(DropDownMembers(0, "--select--"))
 
-       if(type=="right") {
-           ApiClint.getInstance()?.getService()?.getdropDownMembersRight("bearer " + token!!, id!!)
-                   ?.enqueue(object : Callback<java.util.ArrayList<DropDownMembers>> {
-                       override fun onFailure(call: Call<java.util.ArrayList<DropDownMembers>>?, t: Throwable?) {
-                           println("error")
-                           progressdialog!!.hide();
+        if (type == "right") {
+            ApiClint.getInstance()?.getService()?.getdropDownMembersRight("bearer " + token!!, id!!)
+                    ?.enqueue(object : Callback<java.util.ArrayList<DropDownMembers>> {
+                        override fun onFailure(call: Call<java.util.ArrayList<DropDownMembers>>?, t: Throwable?) {
+                            println("error")
+                            progressdialog!!.hide();
 
-                       }
+                        }
 
-                       override fun onResponse(call: Call<java.util.ArrayList<DropDownMembers>>?, response: retrofit2.Response<java.util.ArrayList<DropDownMembers>>?) {
-                           print("object success ")
-                           var code: Int = response!!.code()
+                        override fun onResponse(call: Call<java.util.ArrayList<DropDownMembers>>?, response: retrofit2.Response<java.util.ArrayList<DropDownMembers>>?) {
+                            print("object success ")
+                            var code: Int = response!!.code()
 
-                           if (code == 401) {
-                               Apputils.showMsg(this@AddMemberActivity, "Token Expired")
-                               tokenExpire();
-                           }
-                           if (code == 200) {
-                               response?.body()?.forEach { user ->
-                                   listdownliner.add(user)
-                               }
-                               downlinerAdapter.notifyDataSetChanged()
-                               if (response.body()!!.size == 0) {
-                                 //  listdownliner.add(DropDownMembers(0,"--select--"))
+                            if (code == 401) {
+                                Apputils.showMsg(this@AddMemberActivity, "Token Expired")
+                                tokenExpire();
+                            }
+                            if (code == 200) {
+                                response?.body()?.forEach { user ->
+                                    listdownliner.add(user)
+                                }
+                                downlinerAdapter.notifyDataSetChanged()
+                                if (response.body()!!.size == 0) {
+                                    //  listdownliner.add(DropDownMembers(0,"--select--"))
 
-                               }
-                           }
+                                }
+                            }
 
-                           progressdialog!!.hide();
-
-
-                       }
-                   })
-
-       }else {
-           //getDownLineLeft
-           ApiClint.getInstance()?.getService()?.getdropDownMembersLeft("bearer " + token!!, id!!)
-                   ?.enqueue(object : Callback<java.util.ArrayList<DropDownMembers>> {
-                       override fun onFailure(call: Call<java.util.ArrayList<DropDownMembers>>?, t: Throwable?) {
-                           println("error")
-                           progressdialog!!.hide();
-                       }
-
-                       override fun onResponse(call: Call<java.util.ArrayList<DropDownMembers>>?, response: retrofit2.Response<java.util.ArrayList<DropDownMembers>>?) {
-                           print("object success ")
-                           var code: Int = response!!.code()
-
-                           if (code == 401) {
-                               Apputils.showMsg(this@AddMemberActivity, "Token Expired")
-                               tokenExpire();
-                           }
-                           if (code == 200) {
-                               response?.body()?.forEach { user ->
-                                   listdownliner.add(user)
-                               }
-                               downlinerAdapter.notifyDataSetChanged()
-                               if (response.body()!!.size == 0) {
-                                //nnnn   listdownliner.add(DropDownMembers(0,"None"))
-
-                               }
-                           }
-
-                           progressdialog!!.hide();
+                            progressdialog!!.hide();
 
 
-                       }
-                   })
-       }
+                        }
+                    })
+
+        } else {
+            //getDownLineLeft
+            ApiClint.getInstance()?.getService()?.getdropDownMembersLeft("bearer " + token!!, id!!)
+                    ?.enqueue(object : Callback<java.util.ArrayList<DropDownMembers>> {
+                        override fun onFailure(call: Call<java.util.ArrayList<DropDownMembers>>?, t: Throwable?) {
+                            println("error")
+                            progressdialog!!.hide();
+                        }
+
+                        override fun onResponse(call: Call<java.util.ArrayList<DropDownMembers>>?, response: retrofit2.Response<java.util.ArrayList<DropDownMembers>>?) {
+                            print("object success ")
+                            var code: Int = response!!.code()
+
+                            if (code == 401) {
+                                Apputils.showMsg(this@AddMemberActivity, "Token Expired")
+                                tokenExpire();
+                            }
+                            if (code == 200) {
+                                response?.body()?.forEach { user ->
+                                    listdownliner.add(user)
+                                }
+                                downlinerAdapter.notifyDataSetChanged()
+                                if (response.body()!!.size == 0) {
+                                    //nnnn   listdownliner.add(DropDownMembers(0,"None"))
+
+                                }
+                            }
+
+                            progressdialog!!.hide();
+
+
+                        }
+                    })
+        }
     }
+
     fun tokenExpire() {
         prefs.clearToken(this@AddMemberActivity)
         prefs.clearUser(this@AddMemberActivity)
         startActivity(Intent(this@AddMemberActivity, SignInActivity::class.java))
         finish()
     }
+
     private fun validation() {
         if (ed_name!!.text.toString().trim() == "") {
             ed_name!!.error = Html.fromHtml("<font color='white'>Enter user name</font>")
@@ -288,11 +290,21 @@ class AddMemberActivity : AppCompatActivity() {
             ed_bank_name!!.requestFocus()
             return
         }
+        if (btn_add_image!!.text.toString().trim() == "") {
+            btn_add_image!!.error = Html.fromHtml("<font color='white'>Please Upload document image!</font>")
+            btn_add_image!!.requestFocus()
+            return
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
             println("data " + data.data)
+            val imageUri = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(this@AddMemberActivity.getContentResolver(), imageUri)
+            userdocumentImage= Apputils.encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG,100)
+
         }
     }
 
