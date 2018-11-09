@@ -28,8 +28,8 @@ namespace ApiSleepingPatener.Controllers
             try
             {
                 // var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
-                  SleepingTestTreeEntities1  dbTree = new SleepingTestTreeEntities1();
-                using (SleepingtestEntities dc = new SleepingtestEntities())
+                  SleepingTestTreeEntities  dbTree = new SleepingTestTreeEntities();
+                using (sleepingtestEntities dc = new sleepingtestEntities())
                 {
                     var usercheckEmail = dc.NewUserRegistrations.Where(a => a.Email.Equals(model.Email)).FirstOrDefault();
                     var usercheckPhone = dc.NewUserRegistrations.Where(a => a.Phone.Equals(model.Phone)).FirstOrDefault();
@@ -92,7 +92,7 @@ namespace ApiSleepingPatener.Controllers
                         if (fileImage != null)
                         {
                             //byte[] img = ConvertToBytes(fileImage;
-                            //newuser.DocumentImage = Convert.ToByte(fileImage);
+                            newuser.DocumentImage = fileImage;
                         }
                         newuser.IsSleepingPartner = false;
                         newuser.IsSalesExecutive = false;
@@ -129,19 +129,19 @@ namespace ApiSleepingPatener.Controllers
 
                         #region creating first user tree
 
-                        TreeDataTbl userTree = dbTree.TreeDataTbls.Where(a => a.UserId.Value.Equals(newuser.DownlineMemberId)).FirstOrDefault();
+                      //  TreeDataTbl userTree = dbTree.TreeDataTbls.Where(a => a.UserId.Value.Equals(newuser.DownlineMemberId)).FirstOrDefault();
 
-                        if (userTree == null)
-                        {
-                            if (newuser.IsThisFirstUser == true)
-                            {
-                                //dbTree.insert_tree_node(newuser.Username, 0, newuser.UserId, newuser.DownlineMemberId, newuser.UserPosition);
-                            }
-                            else
-                            {
-                                //dbTree.insert_tree_node(newuser.Username, userTree.Tree_ID, newuser.UserId, newuser.DownlineMemberId, newuser.UserPosition);
-                            }
-                        }
+                        //if (userTree == null)
+                        //{
+                        //    if (newuser.IsThisFirstUser == true)
+                        //    {
+                        //        //dbTree.insert_tree_node(newuser.Username, 0, newuser.UserId, newuser.DownlineMemberId, newuser.UserPosition);
+                        //    }
+                        //    else
+                        //    {
+                        //        //dbTree.insert_tree_node(newuser.Username, userTree.Tree_ID, newuser.UserId, newuser.DownlineMemberId, newuser.UserPosition);
+                        //    }
+                        //}
 
 
 
@@ -206,6 +206,21 @@ namespace ApiSleepingPatener.Controllers
             }
 
         }
+        //[HttpGet]
+        //public IHttpActionResult getuserimage(int userId)
+        //{
+        //    sleepingtestEntities dc = new sleepingtestEntities();
+        //    var usercheckPhone = dc.NewUserRegistrations.Where(a => a.Phone.Equals(model.Phone)).FirstOrDefault();
+        //    //var userimage = dc.
+        //    if (usercheckPhone == null)
+        //    {
+        //        return Ok(new { error = true, message = "" });
+        //    }
+        //    else
+        //    {
+        //        return Ok(new { success = true, message = usercheckPhone });
+        //    }
+        //}
 
     }
 

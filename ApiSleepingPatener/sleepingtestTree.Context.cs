@@ -13,10 +13,10 @@ namespace ApiSleepingPatener
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SleepingTestTreeEntities1 : DbContext
+    public partial class SleepingTestTreeEntities : DbContext
     {
-        public SleepingTestTreeEntities1()
-            : base("name=SleepingTestTreeEntities1")
+        public SleepingTestTreeEntities()
+            : base("name=SleepingTestTreeEntities")
         {
         }
     

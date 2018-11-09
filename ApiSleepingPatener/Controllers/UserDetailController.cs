@@ -22,7 +22,7 @@ namespace ApiSleepingPatener.Controllers
         {
             try
             {
-                using (SleepingtestEntities dce = new SleepingtestEntities())
+                using (sleepingtestEntities dce = new sleepingtestEntities())
                 {
                    
                     NewUserRegistration v = dce.NewUserRegistrations.Where(a => a.Username == username).FirstOrDefault();
@@ -41,7 +41,7 @@ namespace ApiSleepingPatener.Controllers
         public IHttpActionResult ProfileSetup(NewUserRegistration model)
         {
 
-            SleepingtestEntities dce = new SleepingtestEntities();
+            sleepingtestEntities dce = new sleepingtestEntities();
             //NewUserRegistration newuser = dce.NewUserRegistrations.Where(a => a.UserId.Equals(model.UserId)).FirstOrDefault();
             NewUserRegistration newuser = dce.NewUserRegistrations.SingleOrDefault(x => x.UserId == model.UserId);
             if (newuser != null)
@@ -73,7 +73,7 @@ namespace ApiSleepingPatener.Controllers
         public IHttpActionResult addUserSetup(NewUserRegistration model)
         {
 
-            SleepingtestEntities dce = new SleepingtestEntities();
+            sleepingtestEntities dce = new sleepingtestEntities();
             NewUserRegistration newuser = dce.NewUserRegistrations.Where(a => a.Username.Equals(model.Username)).FirstOrDefault();
             //NewUserRegistration newuser = dce.NewUserRegistrations.SingleOrDefault(x => x.Username == model.UserId);
             if (newuser == null)
@@ -93,7 +93,7 @@ namespace ApiSleepingPatener.Controllers
         [Route("forgetpassword/{email}")]
         public IHttpActionResult fortgetPassword(string email)
         {
-            SleepingtestEntities dc = new SleepingtestEntities();
+            sleepingtestEntities dc = new sleepingtestEntities();
            
                 var v = dc.NewUserRegistrations.Where(a => a.Email.Equals(email)).FirstOrDefault();
                 if (v != null)
@@ -136,7 +136,7 @@ namespace ApiSleepingPatener.Controllers
             try
             {
                 List<Country> List = new List<Country>();
-                using (SleepingtestEntities dce = new SleepingtestEntities())
+                using (sleepingtestEntities dce = new sleepingtestEntities())
                 {
 
                     List = dce.Countries.ToList();

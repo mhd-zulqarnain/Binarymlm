@@ -41,5 +41,10 @@ namespace ApiSleepingPatener
         public Nullable<bool> IsSalesExecutive { get; set; }
         public string UserDesignation { get; set; }
         public Nullable<bool> IsWithdrawalOpen { get; set; }
+        public byte[] NICImage { get; set; }
+        public byte[] ProfileImage { get; set; }
+        public string AccountTitle { get; set; }
+        public Nullable<bool> IsVerify { get; set; }
+        public Nullable<bool> IsBlock { get; set; }
     }
 }

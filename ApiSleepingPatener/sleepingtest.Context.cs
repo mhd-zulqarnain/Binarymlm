@@ -15,10 +15,10 @@ namespace ApiSleepingPatener
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SleepingtestEntities : DbContext
+    public partial class sleepingtestEntities : DbContext
     {
-        public SleepingtestEntities()
-            : base("name=SleepingtestEntities")
+        public sleepingtestEntities()
+            : base("name=sleepingtestEntities")
         {
         }
     
@@ -44,6 +44,7 @@ namespace ApiSleepingPatener
         public virtual DbSet<SentUserMessage> SentUserMessages { get; set; }
         public virtual DbSet<SignUpUser> SignUpUsers { get; set; }
         public virtual DbSet<TableLevel> TableLevels { get; set; }
+        public virtual DbSet<TrainingVideo> TrainingVideos { get; set; }
         public virtual DbSet<UserGenealogyTable> UserGenealogyTables { get; set; }
         public virtual DbSet<UserGenealogyTableLeft> UserGenealogyTableLefts { get; set; }
         public virtual DbSet<UserGenealogyTableRight> UserGenealogyTableRights { get; set; }

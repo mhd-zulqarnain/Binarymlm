@@ -107,6 +107,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
@@ -226,7 +227,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Advertisement.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -263,7 +264,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="BonusSetting.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="Common\Enum.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -278,34 +279,34 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Country.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="EWalletPayoutConfig.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="EWalletTransaction.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="EWalletWithdrawalFund.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="GetParentChildsLeftSP_Result.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="GetParentChildsRightSP_Result.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="GetParentChildsSP_Result.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="GetUserParentsSP_Result.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HelpRequest.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -348,99 +349,102 @@
     <Compile Include="Models\TableLevel\TableLevelModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="NewsTicker.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="NewUserRegistration.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="Package.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\OAuthProvider.cs" />
     <Compile Include="ReceiveAdminMessage.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="ReceiveUserMessage.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Reward.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="SentAdminMessage.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="SentUserMessage.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="Service\UserService.cs" />
     <Compile Include="SignUpUser.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
-    <Compile Include="SleepingtestEntities.Context.cs">
+    <Compile Include="sleepingtest.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SleepingtestEntities.Context.tt</DependentUpon>
+      <DependentUpon>sleepingtest.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SleepingtestEntities.cs">
+    <Compile Include="sleepingtest.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
-    <Compile Include="SleepingtestEntities.Designer.cs">
+    <Compile Include="sleepingtest.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SleepingtestEntities.edmx</DependentUpon>
+      <DependentUpon>sleepingtest.edmx</DependentUpon>
     </Compile>
-    <Compile Include="SleepingTestTreeEntities.Context.cs">
+    <Compile Include="sleepingtestTree.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SleepingTestTreeEntities.Context.tt</DependentUpon>
+      <DependentUpon>sleepingtestTree.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SleepingTestTreeEntities.cs">
+    <Compile Include="sleepingtestTree.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SleepingTestTreeEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtestTree.tt</DependentUpon>
     </Compile>
-    <Compile Include="SleepingTestTreeEntities.Designer.cs">
+    <Compile Include="sleepingtestTree.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SleepingTestTreeEntities.edmx</DependentUpon>
+      <DependentUpon>sleepingtestTree.edmx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="TableLevel.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrainingVideo.cs">
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="TreeDataTbl.cs">
-      <DependentUpon>SleepingTestTreeEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtestTree.tt</DependentUpon>
     </Compile>
     <Compile Include="UserGenealogyTable.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="UserGenealogyTableLeft.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="UserGenealogyTableRight.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="UserLoginInfo.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="UserNotification.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="UserPackage.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="UserPosition.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="UserReward.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
     <Compile Include="UserTableLevel.cs">
-      <DependentUpon>SleepingtestEntities.tt</DependentUpon>
+      <DependentUpon>sleepingtest.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -450,16 +454,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="MLM.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MLM.edmx</DependentUpon>
-      <LastGenOutput>MLM.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="MLM.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MLM.edmx</DependentUpon>
-      <LastGenOutput>MLM.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -500,25 +494,25 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="SleepingtestEntities.Context.tt">
+    <Content Include="sleepingtest.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SleepingtestEntities.edmx</DependentUpon>
-      <LastGenOutput>SleepingtestEntities.Context.cs</LastGenOutput>
+      <DependentUpon>sleepingtest.edmx</DependentUpon>
+      <LastGenOutput>sleepingtest.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="SleepingtestEntities.tt">
+    <Content Include="sleepingtest.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SleepingtestEntities.edmx</DependentUpon>
-      <LastGenOutput>SleepingtestEntities.cs</LastGenOutput>
+      <DependentUpon>sleepingtest.edmx</DependentUpon>
+      <LastGenOutput>sleepingtest.cs</LastGenOutput>
     </Content>
-    <Content Include="SleepingTestTreeEntities.Context.tt">
+    <Content Include="sleepingtestTree.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SleepingTestTreeEntities.edmx</DependentUpon>
-      <LastGenOutput>SleepingTestTreeEntities.Context.cs</LastGenOutput>
+      <DependentUpon>sleepingtestTree.edmx</DependentUpon>
+      <LastGenOutput>sleepingtestTree.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="SleepingTestTreeEntities.tt">
+    <Content Include="sleepingtestTree.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SleepingTestTreeEntities.edmx</DependentUpon>
-      <LastGenOutput>SleepingTestTreeEntities.cs</LastGenOutput>
+      <DependentUpon>sleepingtestTree.edmx</DependentUpon>
+      <LastGenOutput>sleepingtestTree.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -537,19 +531,19 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <EntityDeploy Include="SleepingtestEntities.edmx">
+    <EntityDeploy Include="sleepingtest.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SleepingtestEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>sleepingtest.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="SleepingtestEntities.edmx.diagram">
-      <DependentUpon>SleepingtestEntities.edmx</DependentUpon>
+    <Content Include="sleepingtest.edmx.diagram">
+      <DependentUpon>sleepingtest.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="SleepingTestTreeEntities.edmx">
+    <EntityDeploy Include="sleepingtestTree.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SleepingTestTreeEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>sleepingtestTree.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="SleepingTestTreeEntities.edmx.diagram">
-      <DependentUpon>SleepingTestTreeEntities.edmx</DependentUpon>
+    <Content Include="sleepingtestTree.edmx.diagram">
+      <DependentUpon>sleepingtestTree.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

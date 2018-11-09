@@ -77,7 +77,7 @@ namespace ApiSleepingPatener.Models.Account
 
         //public byte[] DocumentImage { get; set; }
 
-        public string DocumentImage { get; set; }
+        public byte[] DocumentImage { get; set; }
 
         public bool IsSleepingPartner { get; set; }
 

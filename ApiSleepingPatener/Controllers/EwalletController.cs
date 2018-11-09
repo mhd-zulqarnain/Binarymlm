@@ -15,7 +15,7 @@ namespace ApiSleepingPatener.Controllers
         [Route("wallet/overalllist/{userId}")] 
         public IHttpActionResult GetEWalletTransactionsOverAllList(int userId)
         {
-            SleepingtestEntities db = new SleepingtestEntities();
+            sleepingtestEntities db = new sleepingtestEntities();
             List<EWalletTransactionModel> List = new List<EWalletTransactionModel>();           
                 List = db.EWalletTransactions.Where(a => a.UserId.Value.Equals(userId))
                     .Select(x => new EWalletTransactionModel
@@ -39,7 +39,7 @@ namespace ApiSleepingPatener.Controllers
         [Route("wallet/thismonth/{userId}")]
         public IHttpActionResult GetEWalletTransactionsThisMonthList(int userId)
         {            
-            SleepingtestEntities db = new SleepingtestEntities();
+            sleepingtestEntities db = new sleepingtestEntities();
             List<EWalletTransactionModel> List = new List<EWalletTransactionModel>();          
 
                 List = db.EWalletTransactions.Where(a => a.UserId.Value.Equals(userId)

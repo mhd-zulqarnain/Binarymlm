@@ -60,7 +60,7 @@ warning 6002: The table/view 'SleepingTestTree.dbo.TreeDataTbl' does not have a 
           <Property Name="Full_index" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="SleepingTestTreeEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SleepingTestTreeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TreeDataTbls" EntityType="Self.TreeDataTbl" />
         </EntityContainer>
       </Schema>
@@ -68,7 +68,7 @@ warning 6002: The table/view 'SleepingTestTree.dbo.TreeDataTbl' does not have a 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SleepingTestTreeModelStoreContainer" CdmEntityContainer="SleepingTestTreeEntities1">
+        <EntityContainerMapping StorageEntityContainer="SleepingTestTreeModelStoreContainer" CdmEntityContainer="SleepingTestTreeEntities">
           <EntitySetMapping Name="TreeDataTbls">
             <EntityTypeMapping TypeName="SleepingTestTreeModel.TreeDataTbl">
               <MappingFragment StoreEntitySet="TreeDataTbl">

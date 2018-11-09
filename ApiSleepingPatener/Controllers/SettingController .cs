@@ -23,7 +23,7 @@ namespace ApiSleepingPatener.Controllers
             try
             {
                 List<Package> List = new List<Package>();
-                using (SleepingtestEntities dce = new SleepingtestEntities())
+                using (sleepingtestEntities dce = new sleepingtestEntities())
                 {
 
                     List = dce.Packages.ToList();
@@ -43,7 +43,7 @@ namespace ApiSleepingPatener.Controllers
         [Route("getAds")]
         public IHttpActionResult ShowAdvertisementData()
         {
-            SleepingtestEntities db = new SleepingtestEntities();
+            sleepingtestEntities db = new sleepingtestEntities();
             List<Advertisement> listadvertisement = db.Advertisements.Where(x => x.IsActive == true).ToList();
             return Ok(listadvertisement);
 
@@ -55,7 +55,7 @@ namespace ApiSleepingPatener.Controllers
         //    //var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
         //    string UserTypeUser = Common.Enum.UserType.User.ToString();
 
-        //    SleepingtestEntities db = new SleepingtestEntities();
+        //    sleepingtestEntities db = new sleepingtestEntities();
 
         //    List<GetParentChildsLeftSP_Result> List = new List<GetParentChildsLeftSP_Result>();
         //    List = db.GetParentChildsLeftSP(userId).ToList();
