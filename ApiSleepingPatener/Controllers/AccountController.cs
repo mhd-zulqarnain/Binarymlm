@@ -1,4 +1,5 @@
 ﻿using ApiSleepingPatener.Models;
+using ApiSleepingPatener.Models.Account;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -65,7 +66,38 @@ namespace ApiSleepingPatener.Controllers
             
            
         }
+        //[HttpPost]
+        //public IHttpActionResult ProfileSetup(ProfileSetting model, HttpPostedFileBase file,int userId)
+        //{
+        //    //var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
+        //    sleepingtestEntities dc = new sleepingtestEntities();
+        //    SleepingTestTreeEntities dbTree = new SleepingTestTreeEntities();
+        //    NewUserRegistration newuser = dc.NewUserRegistrations.Where(a => a.UserId.Equals(userId)).FirstOrDefault();
 
-        
+        //    if (newuser != null)
+        //    {
+        //        newuser.Name = model.Name;
+        //        newuser.Username = model.Username;            
+        //        newuser.Country = model.CountryName;
+        //        newuser.Address = model.Address;
+        //        var fileImage = model.DocumentImage;
+        //        if (fileImage != null)
+        //        {
+        //            byte[] img = ConvertToBytes(fileImage);
+        //            newuser.DocumentImage = img;
+        //        }
+        //        dc.SaveChanges();
+
+        //        //dbTree.update_tree_name(userId, model.UserName);
+        //        ModelState.Clear();
+        //        return Json(new { success = true, message = "Update Successfully" }, JsonRequestBehavior.AllowGet);
+
+        //    }
+
+        //    this.AddNotification("Your profile has bees saved", NotificationType.SUCCESS);
+        //    return RedirectToAction("ProfileSetup");
+        //}
+
+
     }
 }

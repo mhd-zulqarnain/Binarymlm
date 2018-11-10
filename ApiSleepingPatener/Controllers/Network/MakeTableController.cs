@@ -134,7 +134,7 @@ namespace ApiSleepingPatener.Controllers
                 List<NewUserRegistration> newUsersLeft = new List<NewUserRegistration>();
                 List<UserGenealogyTableRight> usersRight = new List<UserGenealogyTableRight>();
                 List<NewUserRegistration> newUsersRight = new List<NewUserRegistration>();
-
+                
                 List<NewUserRegistration> listDownlineMemberLeft = new List<NewUserRegistration>();
                 List<NewUserRegistration> listDownlineMemberRight = new List<NewUserRegistration>();
 
