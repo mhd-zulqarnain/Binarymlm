@@ -10,7 +10,7 @@ namespace ApiSleepingPatener.Controllers
     {
         public string Index(string id,string query)
         {
-            string value = "id="+id +" query="+Request.QueryString["query"];
+            string value = "Server is up and running";
             return value;
         }
 
