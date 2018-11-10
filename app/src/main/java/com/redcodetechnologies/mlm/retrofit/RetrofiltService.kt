@@ -29,6 +29,10 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getMaketableData(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<MakeTableData>
 
+  @GET("dashboardData/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getdashboardData(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<DasboardData>
+
     //<editor-fold desc="Make table api">
     @GET("getAllDownlineMembersRight/{userid}")
     @Headers("Content-Type:application/json")

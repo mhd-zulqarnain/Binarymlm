@@ -35,7 +35,7 @@ class Apputils {
             return netInfo != null && netInfo.isConnectedOrConnecting
         }
 
-        fun encodeToBase64(image: Bitmap, compressFormat: Bitmap.CompressFormat, quality: Int): String {
+        fun encodeToBase64(image: Bitmap): String {
             val byteArrayOS = ByteArrayOutputStream()
             image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOS)
             return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT)
@@ -46,6 +46,8 @@ class Apputils {
             return decodedImage
         }
     }
+
+
 
 
 }

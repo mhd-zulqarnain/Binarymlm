@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:orientation="vertical"
     >
 
     <android.support.v7.widget.Toolbar
@@ -30,24 +30,13 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_top"
-        android:fillViewport="true"
-        android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_margin="15dp"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:orientation="vertical">
 
 
                 <TextView
@@ -181,8 +170,9 @@
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="1"
-                        android:theme="@style/CustomSpinner"
+                        android:entries="@array/spinner_downliner"
                         />
+
 
                     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                         android:id="@+id/spinner_country"
@@ -202,7 +192,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:entries="@array/spinner_downliner"
-                    android:theme="@style/CustomSpinner"
                      />
 
 
@@ -325,7 +314,5 @@
                 </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
-    </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>

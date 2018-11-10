@@ -58,6 +58,7 @@
                             android:text="Cash withdraw" />
 
                         <TextView
+                            android:id="@+id/GetPayoutHistorySum"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -99,6 +100,7 @@
                             android:text="DownLine Members" />
 
                         <TextView
+                            android:id="@+id/GetUserDownlineMembers"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -140,6 +142,7 @@
                             android:text="Total Direct Commision" />
 
                         <TextView
+                            android:id="@+id/totaldirectcommission"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -188,6 +191,7 @@
                             android:text="E wallet Debit" />
 
                         <TextView
+                            android:id="@+id/GetEWalletDebitSum"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
 
@@ -230,6 +234,7 @@
                             android:text="Total Table commision" />
 
                         <TextView
+                            android:id="@+id/GetUserTotalMatchingCommission"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -270,6 +275,7 @@
                             android:text="Total Package Comission" />
 
                         <TextView
+                            android:id="@+id/GetUserTotalPackageCommission"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -323,9 +329,9 @@
                                 android:text="Payments In Process" />
 
                             <TextView
+                                android:id="@+id/GetPaymentsInProcessSum"
                                 style="@style/CustomBlacktextStyle"
                                 android:layout_width="wrap_content"
-
                                 android:layout_height="wrap_content"
                                 android:text="0 PKR"
                                 android:textStyle="bold" />
@@ -365,7 +371,8 @@
                             android:text="Show E-Wallet Balance" />
 
                         <TextView
-                            android:id="@+id/tv_wallet_balance"
+
+                            android:id="@+id/GetEWalletSummarySponsorBonus"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -406,6 +413,7 @@
                             android:text="E-Wallet Credits" />
 
                         <TextView
+                            android:id="@+id/GetEwalletCredit"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -478,6 +486,7 @@
 
 
                         <TextView
+                            android:id="@+id/GetTotalleftamount"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -516,6 +525,7 @@
                             android:text="Total Right Amount " />
 
                         <TextView
+                            android:id="@+id/GetTotalrightamount"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -558,6 +568,7 @@
                             android:text="Remaining Left Amount " />
 
                         <TextView
+                            android:id="@+id/GetTotalremainingleftamount"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -600,6 +611,7 @@
                             android:text="Remaining Right Amount " />
 
                         <TextView
+                            android:id="@+id/GetTotalremainingrightamount"
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

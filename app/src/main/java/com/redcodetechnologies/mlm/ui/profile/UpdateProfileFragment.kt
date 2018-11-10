@@ -46,14 +46,14 @@ class FirstFragment : Fragment() {
     private val CAMERA_INTENT = 555
     private val REQUSET_GALLERY_CODE: Int = 44
     private val SELECT_PHOTO = 999
-    var updateprofile : Button? = null
-    var uploadimage : EditText?  = null
-    var name : EditText? = null
-    var username : EditText? = null
-    var address : EditText? = null
-    var spinner_country : SearchableSpinner? = null
-    var pref:SharedPrefs ? = null
-    lateinit var obj : NewUserRegistration;
+    var updateprofile: Button? = null
+    var uploadimage: EditText? = null
+    var name: EditText? = null
+    var username: EditText? = null
+    var address: EditText? = null
+    var spinner_country: SearchableSpinner? = null
+    var pref: SharedPrefs? = null
+    lateinit var obj: NewUserRegistration;
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_first, container, false)
@@ -68,13 +68,13 @@ class FirstFragment : Fragment() {
 
 
         initView()
-        updateprofile!!.setOnClickListener{
+        updateprofile!!.setOnClickListener {
 
             validiation()
         }
 
-        uploadimage!!.setOnClickListener{
-//            supportImageDialoge()
+        uploadimage!!.setOnClickListener {
+            //            supportImageDialoge()
             pickAImage(it)
 
         }
@@ -82,27 +82,24 @@ class FirstFragment : Fragment() {
         return view
     } //onCreate().
 
-    fun pickAImage(view:View) {
+    fun pickAImage(view: View) {
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.setType("image/*")
         startActivityForResult(photoPickerIntent, SELECT_PHOTO)
     }
 
 
-
-     override fun onActivityResult(requestCode: Int, resultCode: Int, imageReturnedIntent: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, imageReturnedIntent: Intent?) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent)
-         when (requestCode) {
-             SELECT_PHOTO -> if (resultCode == RESULT_OK)
-             {
-                 try
-                 {
-                     val selectedImage = imageReturnedIntent!!.getData()
-                     val imageStream = getRealPathFromURI(activity!!, selectedImage)
-                     val bitmap = BitmapFactory.decodeFile(imageStream)
-                     val byteArrayOutputStream = ByteArrayOutputStream()
-                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-                     val byteArray = byteArrayOutputStream.toByteArray()
+        when (requestCode) {
+            SELECT_PHOTO -> if (resultCode == RESULT_OK) {
+                try {
+                    val selectedImage = imageReturnedIntent!!.getData()
+                    val imageStream = getRealPathFromURI(activity!!, selectedImage)
+                    val bitmap = BitmapFactory.decodeFile(imageStream)
+                    val byteArrayOutputStream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+                    val byteArray = byteArrayOutputStream.toByteArray()
 
 ////                     fun encoder(filePath: String): String{
 //                     val bytes = File(filePath).readBytes()
@@ -110,40 +107,34 @@ class FirstFragment : Fragment() {
 //                     return base64
 //                 }
 
-                     var encodedString : String? =  android.util.Base64.encodeToString(byteArray , 1)
+                    var encodedString: String? = android.util.Base64.encodeToString(byteArray, 1)
                     // var encodedString : String? = Base64.encodeToString(byteArray, Base64.DEFAULT)
-                     Log.wtf("Base64 = ", encodedString)
-                     Toast.makeText(activity!!, encodedString, Toast.LENGTH_SHORT).show()
-                 }
-                 catch (e:Exception) {
-                     e.printStackTrace()
-                 }
-             }
-         }
+                    Log.wtf("Base64 = ", encodedString)
+                    Toast.makeText(activity!!, encodedString, Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
 
     }
-    fun getRealPathFromURI(context:Context, contentUri:Uri):String {
-        var cursor : Cursor? = null
-        try
-        {
+
+    fun getRealPathFromURI(context: Context, contentUri: Uri): String {
+        var cursor: Cursor? = null
+        try {
             val proj = arrayOf<String>(MediaStore.Images.Media.DATA)
             cursor = context.getContentResolver().query(contentUri, proj, null, null, null)
             val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
             cursor.moveToFirst()
             return cursor.getString(column_index)
-        }
-        finally
-        {
-            if (cursor != null)
-            {
+        } finally {
+            if (cursor != null) {
                 cursor.close()
             }
         }
     }
 
-
-
-     private fun supportImageDialoge() {
+    private fun supportImageDialoge() {
         val view: View = LayoutInflater.from(activity!! as Context).inflate(R.layout.select_image_dialog, null)
         val alertBox = AlertDialog.Builder(activity!! as Context)
         alertBox.setView(view)
@@ -163,7 +154,7 @@ class FirstFragment : Fragment() {
         camera_dialog.setOnClickListener {
 
 
-            if (ContextCompat.checkSelfPermission(activity!! ,
+            if (ContextCompat.checkSelfPermission(activity!!,
                             Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
 
                 var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -181,57 +172,48 @@ class FirstFragment : Fragment() {
         dialog.show()
     }
 
-
-
     private fun initView() {
-        obj= pref!!.getUser(activity!!)
-        var arrayAdapter  =ArrayAdapter.createFromResource(activity!!,R.array.country_arrays,R.layout.support_simple_spinner_dropdown_item)
+        obj = pref!!.getUser(activity!!)
+        var arrayAdapter = ArrayAdapter.createFromResource(activity!!, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
 
         spinner_country!!.adapter = arrayAdapter
         spinner_country!!.setTitle("Select Country");
         spinner_country!!.setPositiveButton("Close");
         spinner_country!!.setSelection(166)
 
-            spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                }
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                        Toast.makeText(activity!!, ""+(spinner_country!!.selectedItemPosition+1), Toast.LENGTH_SHORT).show()
-                }
+        spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Toast.makeText(activity!!, "" + (spinner_country!!.selectedItemPosition + 1), Toast.LENGTH_SHORT).show()
+            }
+
+        }
 
         name!!.setText(obj.name)
         username!!.setText(obj.username)
         address!!.setText(obj.address.toString())
-        spinner_country!!.setSelection(obj.country!!-1)
-
-
+        spinner_country!!.setSelection(obj.country!! - 1)
 
 
     }
 
 
+    fun validiation() {
 
-    fun validiation(){
-
-        if(name!!.text.toString().trim(' ').length < 1) {
+        if (name!!.text.toString().trim(' ').length < 1) {
             name!!.error = Html.fromHtml("<font color='#E0796C'>Name could not be empty</font>")
             name!!.requestFocus()
-        }
-        else if(username!!.text.toString().trim(' ').length < 1){
+        } else if (username!!.text.toString().trim(' ').length < 1) {
             username!!.error = Html.fromHtml("<font color='#E0796C'>User name could not be empty</font>")
             username!!.requestFocus()
-        }
-        else if(address!!.text.toString().trim(' ').length < 1){
+        } else if (address!!.text.toString().trim(' ').length < 1) {
             address!!.error = Html.fromHtml("<font color='#E0796C'>Address could not be empty</font>")
             address!!.requestFocus()
-        }
-
-        else{
-            Toast.makeText(activity!!, "Profile has been Updated!" , Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(activity!!, "Profile has been Updated!", Toast.LENGTH_LONG).show()
         }
 
     }

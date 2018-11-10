@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 class UserTree (
         var UserId: String? = null,
         var Name: String? = null,
-        var UserName: String? = null,
+        var Username: String? = null,
         var Password: String? = null,
         var Country: Int? = null,
         var CountryName: String? = null,

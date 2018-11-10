@@ -3,7 +3,6 @@ package com.redcodetechnologies.mlm.ui.network
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,9 +10,11 @@ import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
+import android.util.Base64
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Packages
@@ -31,6 +32,8 @@ import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_add_member.*
 import retrofit2.Call
 import retrofit2.Callback
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.io.InputStream
 import java.util.*
 import kotlin.collections.ArrayList
@@ -39,11 +42,14 @@ class AddMemberActivity : AppCompatActivity() {
     val REQUSET_GALLERY_CODE: Int = 43
     lateinit var type: String;
     var spinner_country: SearchableSpinner? = null
+    var spinner_package: Spinner? = null
+    var spinner_downliner: Spinner? = null
     var listdownliner: ArrayList<DropDownMembers> = ArrayList()
     var listPackages: ArrayList<Packages> = ArrayList()
     var userModel: UserTree = UserTree()
-    lateinit var downlinerAdapter: DownlinerSpinnerAdapter;
-    lateinit var packageAdapter: PackageSpinnerAdapter;
+    var downlinerAdapter: DownlinerSpinnerAdapter?=null;
+    var packageAdapter: PackageSpinnerAdapter?=null;
+
     var id: Int? = null
     lateinit var prefs: SharedPrefs
     var progressdialog: android.app.AlertDialog? = null
@@ -60,6 +66,8 @@ class AddMemberActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_member)
         var toolbar: Toolbar = findViewById(R.id.toolbar_top)
         spinner_country = findViewById(R.id.spinner_country)
+        spinner_downliner = findViewById(R.id.spinner_downliner)
+        spinner_package = findViewById(R.id.spinner_package)
 
         if (intent.getStringExtra("type") == null) {
             type = "right"
@@ -94,7 +102,7 @@ class AddMemberActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent, REQUSET_GALLERY_CODE)
         }
-        spinner_package.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+        spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 layout_package.visibility = View.GONE
             }
@@ -117,57 +125,23 @@ class AddMemberActivity : AppCompatActivity() {
                 .setMessage("Loading please wait!!")
                 .setTheme(R.style.CustomProgess)
                 .build()
-
         prefs = SharedPrefs.getInstance()!!
         token = prefs.getToken(this@AddMemberActivity).accessToken!!
         id = prefs.getUser(this@AddMemberActivity).userId!!
-
         var arrayAdapter = ArrayAdapter.createFromResource(this, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
         spinner_country!!.adapter = arrayAdapter
         spinner_country!!.setTitle("Select Country");
         spinner_country!!.setPositiveButton("Close");
         spinner_country!!.setSelection(166)
 
-
-
-        downlinerAdapter = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
-        spinner_downliner.adapter = downlinerAdapter;
         getdownliner()
-
-
-        spinner_downliner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                if (pos != 0) {
-                    var obj: DropDownMembers = spinner_downliner.getSelectedItem() as DropDownMembers
-                    downlineMemberId = obj.UserId
-                }
-            }
-        })
-
-        packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
-        spinner_package.adapter = packageAdapter;
         getPackages()
-
-        spinner_package.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                if (pos != 0) {
-                    var obj: Packages = spinner_downliner.getSelectedItem() as Packages
-                    package_price = obj.PackagePrice
-                    userPackage = obj.PackageId
-                }
-            }
-        })
-
-
-        spinner_country!!.adapter = arrayAdapter
-        spinner_country!!.setTitle("Select Country");
-        spinner_country!!.setPositiveButton("Close");
     }
 
+    //<editor-fold desc="Spinner package and downliner">
     private fun getPackages() {
         listPackages.add(Packages("1", "--select--"))
+
         ApiClint.getInstance()?.getService()?.getpackages()
                 ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {
                     override fun onFailure(call: Call<java.util.ArrayList<Packages>>?, t: Throwable?) {
@@ -187,20 +161,18 @@ class AddMemberActivity : AppCompatActivity() {
                             response?.body()?.forEach { user ->
                                 listPackages.add(user)
                             }
-                            downlinerAdapter.notifyDataSetChanged()
                             if (response.body()!!.size == 0) {
                                 //nnnn   listdownliner.add(DropDownMembers(0,"None"))
 
                             }
                         }
-
+                        setpackagepinner()
                         progressdialog!!.dismiss();
 
 
                     }
                 })
     }
-
     private fun getdownliner() {
 
         if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
@@ -232,14 +204,14 @@ class AddMemberActivity : AppCompatActivity() {
                                 response?.body()?.forEach { user ->
                                     listdownliner.add(user)
                                 }
-                                downlinerAdapter.notifyDataSetChanged()
+
                                 if (response.body()!!.size == 0) {
                                     //  listdownliner.add(DropDownMembers(0,"--select--"))
 
                                 }
                             }
-
                             progressdialog!!.dismiss();
+                            setdownlinerspinner()
 
 
                         }
@@ -266,7 +238,6 @@ class AddMemberActivity : AppCompatActivity() {
                                 response?.body()?.forEach { user ->
                                     listdownliner.add(user)
                                 }
-                                downlinerAdapter.notifyDataSetChanged()
                                 if (response.body()!!.size == 0) {
                                     //nnnn   listdownliner.add(DropDownMembers(0,"None"))
 
@@ -275,11 +246,49 @@ class AddMemberActivity : AppCompatActivity() {
 
                             progressdialog!!.dismiss();
 
-
+                            setdownlinerspinner()
                         }
                     })
         }
     }
+    fun setdownlinerspinner() {
+
+        spinner_downliner!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                if (pos != 0) {
+                    var obj: DropDownMembers = spinner_downliner!!.getSelectedItem() as DropDownMembers
+                    downlineMemberId = obj.UserId
+                }else{
+                    downlineMemberId=null
+                }
+            }
+        })
+        downlinerAdapter = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
+        spinner_downliner!!.adapter = downlinerAdapter;
+    }
+    fun setpackagepinner() {
+
+        packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
+        spinner_package!!.adapter = packageAdapter;
+
+        spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                if (pos != 0) {
+                    var obj: Packages = spinner_package!!.getSelectedItem() as Packages
+                    package_price = obj.PackagePrice
+                    userPackage = obj.PackageId
+                }else{
+                    package_price = null
+                    userPackage = null
+                }
+            }
+        })
+
+    }
+    //</editor-fold>
+
 
     fun tokenExpire() {
         prefs.clearToken(this@AddMemberActivity)
@@ -307,28 +316,27 @@ class AddMemberActivity : AppCompatActivity() {
             return
         }
 
-        /*if (btn_add_image.text.toString().trim() == "") {
+        if (userdocumentImage==null) {
             btn_add_image.error = Html.fromHtml("<font color='white'>Please Upload document image!</font>")
             btn_add_image.requestFocus()
             return
-        }*/
+        }
 
-        if (package_price==null|| userPackage ==null) {
+        if (package_price == null || userPackage == null) {
             Apputils.showMsg(this@AddMemberActivity, "Please select package")
             return
         }
 
         if (downlineMemberId == null) {
             if (listdownliner.size != 1) {
-                Apputils.showMsg(this@AddMemberActivity, "Please downliner")
+                Apputils.showMsg(this@AddMemberActivity, "Please select downliner")
                 return
-            }
-            else
+            } else
                 downlineMemberId = 1////memeber id spinner
 
         }
         userModel.Name = ed_name.text.toString()
-        userModel.UserName = ed_uname.text.toString()
+        userModel.Username = ed_uname.text.toString()
         userModel.Password = ed_pass.text.toString()
         userModel.Country = spinner_country!!.getSelectedItemPosition() - 1
         userModel.Address = ""
@@ -336,9 +344,10 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.Email = ed_email.text.toString()
         userModel.AccountNumber = ""
         userModel.Phone = ed_phone.text.toString()
-        userModel.DownlineMemberId =downlineMemberId
+        userModel.DownlineMemberId = downlineMemberId
         userModel.PaidAmount = package_price///package price
-        userModel.UserPackage =userPackage //from spinner
+        userModel.UserPackage = userPackage //from spinner
+        userModel.DocumentImage = userdocumentImage //from spinner
 
 
         if (type == "right") {
@@ -413,11 +422,25 @@ class AddMemberActivity : AppCompatActivity() {
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
             println("data " + data.data)
             val imageUri = data.data
-              var imageStream: InputStream = getContentResolver().openInputStream(imageUri);
-            val bitmap = BitmapFactory.decodeStream(imageStream)
-            userdocumentImage= Apputils.encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG,100)
-              println(userdocumentImage)
+            if (data.data != null) {
+                val f = File(imageUri.getPath())
+                val imageName = f.getPath().split(":")[1]
+                btn_add_image.setText(imageName)
+                val bitmap = MediaStore.Images.Media.getBitmap(baseContext.getContentResolver(), data.data)
+                userdocumentImage = imageTostring(MediaStore.Images.Media.getBitmap(baseContext.getContentResolver(), data.data))
+//                println(userdocumentImage)
+            }
+            /*   var imageStream: InputStream = getContentResolver().openInputStream(imageUri);
+             val bitmap = BitmapFactory.decodeStream(imageStream)*/
+
         }
+    }
+
+    private fun imageTostring(bitmap: Bitmap): String {
+        val outStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outStream)
+        val imageBytes = outStream.toByteArray()
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
 
 }
