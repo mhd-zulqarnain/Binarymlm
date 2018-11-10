@@ -37,7 +37,7 @@ class Apputils {
 
         fun encodeToBase64(image: Bitmap, compressFormat: Bitmap.CompressFormat, quality: Int): String {
             val byteArrayOS = ByteArrayOutputStream()
-            image.compress(compressFormat, quality, byteArrayOS)
+            image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOS)
             return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT)
         }
         fun decodeFromBase64( img:String ): Bitmap {

@@ -159,8 +159,7 @@ class MemberDetailActivity : AppCompatActivity() {
                                 tv_no_data!!.visibility = View.GONE
                         }
                         hideprogressbar()
-
-                        // progressdialog!!.hide();
+                        //progressdialog!!.dismiss();
 
 
                     }

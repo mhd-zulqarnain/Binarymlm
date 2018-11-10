@@ -3,6 +3,7 @@ package com.redcodetechnologies.mlm.retrofit
 import com.redcodetechnologies.mlm.models.*
 import com.redcodetechnologies.mlm.models.users.DropDownMembers
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
+import com.redcodetechnologies.mlm.models.users.UserTree
 import com.redcodetechnologies.mlm.models.users.Users
 import io.reactivex.Observable
 import retrofit2.Call
@@ -63,14 +64,22 @@ interface RetrofiltService {
 
     //</editor-fold>
 
+    //<editor-fold desc="Adding memeber in tree">
+    @POST("maketabledetails/{userid}")
+    @Headers("Content-Type:application/json")
+    fun addLeftMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body obj: UserTree):  Call<Response>
+    @POST("maketabledetails/{userid}")
+    @Headers("Content-Type:application/json")
+    fun addRightMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body  obj: UserTree):  Call<Response>
+    //</editor-fold>
+
+
     @GET("getAds")
     @Headers("Content-Type:application/json")
     fun getCoinData(): Observable<ArrayList<Advertisement>>
-/*
 
     @GET ("gwallet/overalllist/{userId}")
     @Headers("Content-Type:application/json")
-    fun getAllDownlineMembersLeft(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<WalletModal>>
-*/
+    fun getwalletData(): Observable<ArrayList<WalletModal>>
 
 }

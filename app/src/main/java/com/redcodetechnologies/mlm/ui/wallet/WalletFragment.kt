@@ -37,8 +37,8 @@ class WalletFragment : Fragment(){
     var tv_amount: TextView? = null
     var tv_date: TextView? = null
     var progressBar: LinearLayout? = null
-    var adsdisposable: Disposable? = null
-    var adsList: ArrayList<WalletModal> = ArrayList()
+    var walletdisposable: Disposable? = null
+    var walletList: ArrayList<WalletModal> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,6 +47,7 @@ class WalletFragment : Fragment(){
         initView(view)
         return view
     }
+
     private fun initView(view: View?) {
         list.add(WalletModal("Yaseen00423", "Debit", "1000", "25-10-2018"))
         list.add(WalletModal("Ismail", "Debit", "3000", "27-10-2018"))
@@ -66,20 +67,19 @@ class WalletFragment : Fragment(){
 
         showViews()
     }
-/*
-    private fun getads() {
+    private fun getwalletData() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
         }
 
         progressBar!!.visibility = View.VISIBLE
-        val adsObserver = getwalletObservable()
-        var adsObservable : Observable<ArrayList<WalletModal>> = MyApiRxClint.getInstance()?.getService()?.getCoinData()!!
-        adsObservable.subscribeOn(Schedulers.io())
+        val walletObserver = getwalletObservable()
+        var walletObservable : Observable<ArrayList<WalletModal>> = MyApiRxClint.getInstance()?.getService()?.getwalletData()!!
+        walletObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(adsObserver)
-    }*/
+                .subscribe(walletObserver)
+    }
 
     private fun getwalletObservable(): Observer<ArrayList<WalletModal>> {
         return object : Observer<ArrayList<WalletModal>> {
@@ -89,7 +89,7 @@ class WalletFragment : Fragment(){
 
             }
             override fun onSubscribe(d: Disposable) {
-                adsdisposable =d
+                walletdisposable =d
 
             }
             override fun onError(e: Throwable) {
@@ -100,8 +100,8 @@ class WalletFragment : Fragment(){
 
             override fun onNext(response: ArrayList<WalletModal>) {
 
-                response?.forEach { ads ->
-                    adsList.add(ads)
+                response?.forEach { wallet ->
+                    walletList.add(wallet)
                 }
                 adapter!!.notifyDataSetChanged()
             }
@@ -128,7 +128,7 @@ class WalletFragment : Fragment(){
 
 
     override fun onDestroyView() {
-        adsdisposable?.dispose()
+        walletdisposable?.dispose()
         super.onDestroyView()
     }
 

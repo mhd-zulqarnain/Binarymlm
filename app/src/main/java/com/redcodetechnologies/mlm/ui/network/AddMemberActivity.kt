@@ -3,6 +3,7 @@ package com.redcodetechnologies.mlm.ui.network
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -16,7 +17,9 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Packages
+import com.redcodetechnologies.mlm.models.Response
 import com.redcodetechnologies.mlm.models.users.DropDownMembers
+import com.redcodetechnologies.mlm.models.users.UserTree
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.network.adapter.DownlinerSpinnerAdapter
@@ -28,6 +31,7 @@ import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_add_member.*
 import retrofit2.Call
 import retrofit2.Callback
+import java.io.InputStream
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -37,24 +41,29 @@ class AddMemberActivity : AppCompatActivity() {
     var spinner_country: SearchableSpinner? = null
     var listdownliner: ArrayList<DropDownMembers> = ArrayList()
     var listPackages: ArrayList<Packages> = ArrayList()
-
+    var userModel: UserTree = UserTree()
     lateinit var downlinerAdapter: DownlinerSpinnerAdapter;
     lateinit var packageAdapter: PackageSpinnerAdapter;
     var id: Int? = null
     lateinit var prefs: SharedPrefs
     var progressdialog: android.app.AlertDialog? = null
+
     lateinit var token: String
 
     var userdocumentImage: String? = null
+    var package_price: String? = null
+    var userPackage: String? = null
+    var downlineMemberId: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_member)
         var toolbar: Toolbar = findViewById(R.id.toolbar_top)
         spinner_country = findViewById(R.id.spinner_country)
 
-        if(intent.getStringExtra("type")==null){
+        if (intent.getStringExtra("type") == null) {
             type = "right"
-        }else
+        } else
             type = intent.getStringExtra("type")
         initView()
 
@@ -117,25 +126,40 @@ class AddMemberActivity : AppCompatActivity() {
         spinner_country!!.adapter = arrayAdapter
         spinner_country!!.setTitle("Select Country");
         spinner_country!!.setPositiveButton("Close");
-
         spinner_country!!.setSelection(166)
-        spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-            }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-            }
-        }
 
         downlinerAdapter = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
         spinner_downliner.adapter = downlinerAdapter;
         getdownliner()
 
+
+        spinner_downliner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                if (pos != 0) {
+                    var obj: DropDownMembers = spinner_downliner.getSelectedItem() as DropDownMembers
+                    downlineMemberId = obj.UserId
+                }
+            }
+        })
+
         packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
         spinner_package.adapter = packageAdapter;
         getPackages()
+
+        spinner_package.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                if (pos != 0) {
+                    var obj: Packages = spinner_downliner.getSelectedItem() as Packages
+                    package_price = obj.PackagePrice
+                    userPackage = obj.PackageId
+                }
+            }
+        })
+
 
         spinner_country!!.adapter = arrayAdapter
         spinner_country!!.setTitle("Select Country");
@@ -148,7 +172,7 @@ class AddMemberActivity : AppCompatActivity() {
                 ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {
                     override fun onFailure(call: Call<java.util.ArrayList<Packages>>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
                     }
 
                     override fun onResponse(call: Call<java.util.ArrayList<Packages>>?, response: retrofit2.Response<java.util.ArrayList<Packages>>?) {
@@ -170,7 +194,7 @@ class AddMemberActivity : AppCompatActivity() {
                             }
                         }
 
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
 
 
                     }
@@ -192,7 +216,7 @@ class AddMemberActivity : AppCompatActivity() {
                     ?.enqueue(object : Callback<java.util.ArrayList<DropDownMembers>> {
                         override fun onFailure(call: Call<java.util.ArrayList<DropDownMembers>>?, t: Throwable?) {
                             println("error")
-                            progressdialog!!.hide();
+                            progressdialog!!.dismiss();
 
                         }
 
@@ -215,7 +239,7 @@ class AddMemberActivity : AppCompatActivity() {
                                 }
                             }
 
-                            progressdialog!!.hide();
+                            progressdialog!!.dismiss();
 
 
                         }
@@ -227,7 +251,7 @@ class AddMemberActivity : AppCompatActivity() {
                     ?.enqueue(object : Callback<java.util.ArrayList<DropDownMembers>> {
                         override fun onFailure(call: Call<java.util.ArrayList<DropDownMembers>>?, t: Throwable?) {
                             println("error")
-                            progressdialog!!.hide();
+                            progressdialog!!.dismiss();
                         }
 
                         override fun onResponse(call: Call<java.util.ArrayList<DropDownMembers>>?, response: retrofit2.Response<java.util.ArrayList<DropDownMembers>>?) {
@@ -249,7 +273,7 @@ class AddMemberActivity : AppCompatActivity() {
                                 }
                             }
 
-                            progressdialog!!.hide();
+                            progressdialog!!.dismiss();
 
 
                         }
@@ -265,51 +289,135 @@ class AddMemberActivity : AppCompatActivity() {
     }
 
     private fun validation() {
-        if (ed_name!!.text.toString().trim() == "") {
-            ed_name!!.error = Html.fromHtml("<font color='white'>Enter user name</font>")
-            ed_name!!.requestFocus()
+        if (ed_name.text.toString().trim() == "") {
+            ed_name.error = Html.fromHtml("<font color='white'>Enter user name</font>")
+            ed_name.requestFocus()
             return
         }
 
         if (!Apputils.isValidEmail(ed_email!!.text.toString())) {
-            ed_email!!.error = Html.fromHtml("<font color='#E0796C'>Please enter correct Email Address</font>")
-            ed_email!!.requestFocus()
+            ed_email.error = Html.fromHtml("<font color='#E0796C'>Please enter correct Email Address</font>")
+            ed_email.requestFocus()
             return
         }
 
-        if (ed_phone!!.text.toString().trim() == "" || ed_phone!!.text.toString().trim { it <= ' ' }.length < 11) {
-            ed_phone!!.error = Html.fromHtml("<font color='white'>Invalid entry</font>")
-            ed_phone!!.requestFocus()
-            return
-        }
-        if (ed_bank_name!!.text.toString().trim() == "") {
-            ed_bank_name!!.error = Html.fromHtml("<font color='white'>Please Enter bank name!</font>")
-            ed_bank_name!!.requestFocus()
+        if (ed_phone.text.toString().trim() == "" || ed_phone!!.text.toString().trim { it <= ' ' }.length < 11) {
+            ed_phone.error = Html.fromHtml("<font color='white'>Invalid entry</font>")
+            ed_phone.requestFocus()
             return
         }
 
-        if (ed_bank_name!!.text.toString().trim() == "") {
-            ed_bank_name!!.error = Html.fromHtml("<font color='white'>Please Enter bank name!</font>")
-            ed_bank_name!!.requestFocus()
+        /*if (btn_add_image.text.toString().trim() == "") {
+            btn_add_image.error = Html.fromHtml("<font color='white'>Please Upload document image!</font>")
+            btn_add_image.requestFocus()
             return
-        }
-        if (btn_add_image!!.text.toString().trim() == "") {
-            btn_add_image!!.error = Html.fromHtml("<font color='white'>Please Upload document image!</font>")
-            btn_add_image!!.requestFocus()
+        }*/
+
+        if (package_price==null|| userPackage ==null) {
+            Apputils.showMsg(this@AddMemberActivity, "Please select package")
             return
         }
 
+        if (downlineMemberId == null) {
+            if (listdownliner.size != 1) {
+                Apputils.showMsg(this@AddMemberActivity, "Please downliner")
+                return
+            }
+            else
+                downlineMemberId = 1////memeber id spinner
+
+        }
+        userModel.Name = ed_name.text.toString()
+        userModel.UserName = ed_uname.text.toString()
+        userModel.Password = ed_pass.text.toString()
+        userModel.Country = spinner_country!!.getSelectedItemPosition() - 1
+        userModel.Address = ""
+        userModel.Phone = ed_phone.text.toString()
+        userModel.Email = ed_email.text.toString()
+        userModel.AccountNumber = ""
+        userModel.Phone = ed_phone.text.toString()
+        userModel.DownlineMemberId =downlineMemberId
+        userModel.PaidAmount = package_price///package price
+        userModel.UserPackage =userPackage //from spinner
+
+
+        if (type == "right") {
+            addRightMember()
+        } else {
+            addLeftMember()
+        }
+
+    }
+
+    private fun addLeftMember() {
+        var token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
+        if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog!!.show()
+        progressdialog!!.setCancelable(false)
+
+        ApiClint.getInstance()?.getService()?.addLeftMember("bearer " + token!!, id!!, userModel)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                        } else {
+                            progressdialog!!.dismiss()
+                            print("error")
+                        }
+
+                    }
+                })
+    }
+
+    private fun addRightMember() {
+        var token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
+        if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog!!.show()
+        progressdialog!!.setCancelable(false)
+
+        ApiClint.getInstance()?.getService()?.addRightMember("bearer " + token!!, id!!, userModel)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                        } else {
+                            progressdialog!!.dismiss()
+                            print("error")
+                        }
+
+                    }
+                })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
             println("data " + data.data)
             val imageUri = data.data
-            val bitmap = MediaStore.Images.Media.getBitmap(this@AddMemberActivity.getContentResolver(), imageUri)
+              var imageStream: InputStream = getContentResolver().openInputStream(imageUri);
+            val bitmap = BitmapFactory.decodeStream(imageStream)
             userdocumentImage= Apputils.encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG,100)
-
+              println(userdocumentImage)
         }
     }
-
 
 }

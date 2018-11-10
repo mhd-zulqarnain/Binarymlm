@@ -22,77 +22,88 @@ class NewUserRegistration {
     var country: Int? = null
     @SerializedName("Address")
     @Expose
-    var address: Any? = null
+    var address: String? = null
     @SerializedName("Phone")
     @Expose
-    var phone: Any? = null
+    var phone: String? = null
     @SerializedName("Email")
     @Expose
     var email: String? = null
     @SerializedName("CNIC")
     @Expose
-    var cnic: Any? = null
+    var cnic: String? = null
     @SerializedName("AccountNumber")
     @Expose
-    var accountNumber: Any? = null
+    var accountNumber: String? = null
     @SerializedName("BankName")
     @Expose
-    var bankName: Any? = null
+    var bankName: String? = null
     @SerializedName("IsThisFirstUser")
     @Expose
-    var isThisFirstUser: Any? = null
+    var isThisFirstUser: Boolean? = null
     @SerializedName("SponsorId")
     @Expose
-    var sponsorId: Any? = null
+    var sponsorId: Int? = null
     @SerializedName("DownlineMemberId")
     @Expose
-    var downlineMemberId: Any? = null
+    var downlineMemberId: Int? = null
     @SerializedName("UpperId")
     @Expose
-    var upperId: Any? = null
+    var upperId: Int? = null
     @SerializedName("PaidAmount")
     @Expose
-    var paidAmount: Any? = null
+    var paidAmount: Int? = null
     @SerializedName("CreateDate")
     @Expose
-    var createDate: Any? = null
+    var createDate: String? = null
     @SerializedName("UserCode")
     @Expose
-    var userCode: Any? = null
+    var userCode: String? = null
     @SerializedName("IsUserActive")
     @Expose
-    var isUserActive: Any? = null
+    var isUserActive: Boolean? = null
     @SerializedName("IsNewRequest")
     @Expose
-    var isNewRequest: Any? = null
+    var isNewRequest: Boolean? = null
     @SerializedName("UserPosition")
     @Expose
-    var userPosition: Any? = null
-
+    var userPosition: String? = null
     @SerializedName("IsEmailConfirmed")
     @Expose
-    var isEmailConfirmed: Any? = null
-
+    var isEmailConfirmed: Boolean? = null
     @SerializedName("UserPackage")
     @Expose
-    var userPackage: Any? = null
+    var userPackage: Int? = null
     @SerializedName("DocumentImage")
     @Expose
     var documentImage: Any? = null
     @SerializedName("IsSleepingPartner")
     @Expose
-    var isSleepingPartner: Any? = null
+    var isSleepingPartner: Boolean? = null
     @SerializedName("IsSalesExecutive")
     @Expose
-    var isSalesExecutive: Any? = null
-
+    var isSalesExecutive: Boolean? = null
     @SerializedName("UserDesignation")
     @Expose
-    var userDesignation: Any? = null
-
-    @SerializedName("IsWithdrawalOpen ")
+    var userDesignation: String? = null
+    @SerializedName("IsWithdrawalOpen")
     @Expose
-    var isWithdrawalOpen : Boolean? = null
+    var isWithdrawalOpen: Boolean? = null
+    @SerializedName("NICImage")
+    @Expose
+    var nicImage: Any? = null
+    @SerializedName("ProfileImage")
+    @Expose
+    var profileImage: Any? = null
+    @SerializedName("AccountTitle")
+    @Expose
+    var accountTitle: Any? = null
+    @SerializedName("IsVerify")
+    @Expose
+    var isVerify: Boolean? = null
+    @SerializedName("IsBlock")
+    @Expose
+    var isBlock: Boolean? = null
 
     override fun toString(): String {
         var username = ""

@@ -195,7 +195,7 @@ class NetworkFragment : Fragment() {
                 ?.enqueue(object : Callback<MakeTableData> {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
 
                     }
 
@@ -249,7 +249,7 @@ class NetworkFragment : Fragment() {
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
 
                     }
 
@@ -267,7 +267,7 @@ class NetworkFragment : Fragment() {
                             }
                             adapter!!.notifyDataSetChanged()
                         }
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
 
 
                     }
@@ -286,7 +286,7 @@ class NetworkFragment : Fragment() {
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
 
                     }
 
@@ -304,7 +304,7 @@ class NetworkFragment : Fragment() {
                             }
                             adapter!!.notifyDataSetChanged()
                         }
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
 
 
                     }
@@ -325,7 +325,7 @@ class NetworkFragment : Fragment() {
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
 
                     }
 

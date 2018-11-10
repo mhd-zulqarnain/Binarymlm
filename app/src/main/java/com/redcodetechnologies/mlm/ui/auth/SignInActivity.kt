@@ -130,13 +130,11 @@ class SignInActivity : AppCompatActivity() {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
-        progressdialog!!.show()
         ApiClint.getInstance()?.getService()?.verifyEmail("password", ed_username.text.toString(), ed_password.text.toString())
                 ?.enqueue(object : Callback<ApiToken> {
                     override fun onFailure(call: Call<ApiToken>?, t: Throwable?) {
 
                         println("error")
-                        progressdialog!!.dismiss()
 
                     }
 
@@ -150,7 +148,6 @@ class SignInActivity : AppCompatActivity() {
                             serviceListener.fail(ServiceError())
 
                         }
-                        progressdialog!!.dismiss()
                     }
                 })
     }
