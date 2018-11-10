@@ -46,7 +46,7 @@ namespace ApiSleepingPatener.Controllers
         [Route("getAllDownlineMembersLeft/{userId}")]
         public IHttpActionResult AllGetUserDownlineMembersLeft(int userId)
         {
-            SleepingtestEntities db = new SleepingtestEntities();
+            sleepingtestEntities db = new sleepingtestEntities();
             
             IEnumerable<UserModel> usrmodel = new List<UserModel>();
 
@@ -65,7 +65,7 @@ namespace ApiSleepingPatener.Controllers
                         select new UserModel
                         {
                             UserId = n.UserId.Value,
-                            UserName = n.Username,
+                            Username = n.Username,
                             Country = n.Country,
                             Phone = n.Phone,
                             AccountNumber = n.AccountNumber,
@@ -84,7 +84,7 @@ namespace ApiSleepingPatener.Controllers
         [Route("getAllDownlineMembersRight/{userId}")]
         public IHttpActionResult AllGetUserDownlineMembersRight(int userId)
         {
-            SleepingtestEntities db = new SleepingtestEntities();
+            sleepingtestEntities db = new sleepingtestEntities();
 
             IEnumerable<UserModel> usrmodel = new List<UserModel>();
 
@@ -102,7 +102,7 @@ namespace ApiSleepingPatener.Controllers
                         select new UserModel
                         {
                             UserId = n.UserId.Value,
-                            UserName = n.Username,
+                            Username = n.Username,
                             Country = n.Country,
                             Phone = n.Phone,
                             AccountNumber = n.AccountNumber,
@@ -126,7 +126,7 @@ namespace ApiSleepingPatener.Controllers
             string UserTypeUser = ApiSleepingPatener.Common.Enum.UserType.User.ToString();
             List<GetParentChildsLeftSP_Result> ListLeft = new List<GetParentChildsLeftSP_Result>();
             List<GetParentChildsRightSP_Result> ListRight = new List<GetParentChildsRightSP_Result>();
-            using (SleepingtestEntities dc = new SleepingtestEntities())
+            using (sleepingtestEntities dc = new sleepingtestEntities())
             {
                 ListLeft = dc.GetParentChildsLeftSP(userId).ToList();
                 ListRight = dc.GetParentChildsRightSP(userId).ToList();
@@ -134,7 +134,7 @@ namespace ApiSleepingPatener.Controllers
                 List<NewUserRegistration> newUsersLeft = new List<NewUserRegistration>();
                 List<UserGenealogyTableRight> usersRight = new List<UserGenealogyTableRight>();
                 List<NewUserRegistration> newUsersRight = new List<NewUserRegistration>();
-
+                
                 List<NewUserRegistration> listDownlineMemberLeft = new List<NewUserRegistration>();
                 List<NewUserRegistration> listDownlineMemberRight = new List<NewUserRegistration>();
 
@@ -218,7 +218,7 @@ namespace ApiSleepingPatener.Controllers
             int TotalLeftUsersShow = 0;
             decimal TotalLeftUsers = 0;
             List<GetParentChildsLeftSP_Result> List = new List<GetParentChildsLeftSP_Result>();
-            using (SleepingtestEntities dc = new SleepingtestEntities())
+            using (sleepingtestEntities dc = new sleepingtestEntities())
             {
                 List = dc.GetParentChildsLeftSP(userId).ToList();
                 List<NewUserRegistration> listDownlineMember = new List<NewUserRegistration>();
@@ -264,7 +264,7 @@ namespace ApiSleepingPatener.Controllers
             decimal TotalAmountLeftUsersShow = 0;
            
             List<GetParentChildsLeftSP_Result> List = new List<GetParentChildsLeftSP_Result>();
-            using (SleepingtestEntities dc = new SleepingtestEntities())
+            using (sleepingtestEntities dc = new sleepingtestEntities())
             {
                 List = dc.GetParentChildsLeftSP(userId).ToList();
                 List<UserGenealogyTableLeft> usersLeft = new List<UserGenealogyTableLeft>();
@@ -319,7 +319,7 @@ namespace ApiSleepingPatener.Controllers
             string UserTypeUser = Common.Enum.UserType.User.ToString();
             List<GetParentChildsLeftSP_Result> ListLeft = new List<GetParentChildsLeftSP_Result>();
             List<GetParentChildsRightSP_Result> ListRight = new List<GetParentChildsRightSP_Result>();
-            using (SleepingtestEntities dc = new SleepingtestEntities())
+            using (sleepingtestEntities dc = new sleepingtestEntities())
             {
                 ListLeft = dc.GetParentChildsLeftSP(userId).ToList();
                 ListRight = dc.GetParentChildsRightSP(userId).ToList();
@@ -412,7 +412,7 @@ namespace ApiSleepingPatener.Controllers
             decimal TotalRightUsers = 0;
 
             List<GetParentChildsRightSP_Result> List = new List<GetParentChildsRightSP_Result>();
-            using (SleepingtestEntities dc = new SleepingtestEntities())
+            using (sleepingtestEntities dc = new sleepingtestEntities())
             {
                 List = dc.GetParentChildsRightSP(userId).ToList();
                 List<NewUserRegistration> listDownlineMember = new List<NewUserRegistration>();
@@ -457,7 +457,7 @@ namespace ApiSleepingPatener.Controllers
             decimal TotalAmountRightUsersShow = 0;
             decimal TotalAmountRightUsers = 0;
             List<GetParentChildsRightSP_Result> List = new List<GetParentChildsRightSP_Result>();
-            using (SleepingtestEntities dc = new SleepingtestEntities())
+            using (sleepingtestEntities dc = new sleepingtestEntities())
             {
                 List = dc.GetParentChildsRightSP(userId).ToList();
                 List<UserGenealogyTableRight> usersRight = new List<UserGenealogyTableRight>();
@@ -536,7 +536,7 @@ namespace ApiSleepingPatener.Controllers
         //            NewUserRegistration newuser = new NewUserRegistration();
 
         //            newuser.Name = model.Name;
-        //            newuser.Username = model.UserName;
+        //            newuser.Username = model.Username;
         //            newuser.Password = model.Password;
         //            newuser.Country = model.Country;
         //            newuser.Address = model.Address;
@@ -589,7 +589,7 @@ namespace ApiSleepingPatener.Controllers
         //            dc.UserPackages.Add(userpackage);
 
 
-        //            userTableLevel.UserName = model.UserName;
+        //            userTableLevel.Username = model.Username;
         //            userTableLevel.TableLevel = 1;
         //            userTableLevel.NoOfUsers = 0;
         //            userTableLevel.RightUsers = 0;
@@ -642,7 +642,7 @@ namespace ApiSleepingPatener.Controllers
         {
             //var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
 
-            SleepingtestEntities db = new SleepingtestEntities();
+            sleepingtestEntities db = new sleepingtestEntities();
 
             List<GetParentChildsLeftSP_Result> List = new List<GetParentChildsLeftSP_Result>();
             List = db.GetParentChildsLeftSP(userId).ToList();
@@ -676,7 +676,7 @@ namespace ApiSleepingPatener.Controllers
         public IHttpActionResult GetUserForDownlineMemberByUserOnlyRight(int userId)
         {
 
-            SleepingtestEntities db = new SleepingtestEntities();
+            sleepingtestEntities db = new sleepingtestEntities();
 
             List<GetParentChildsRightSP_Result> List = new List<GetParentChildsRightSP_Result>();
             List = db.GetParentChildsRightSP(userId).ToList();
@@ -705,8 +705,8 @@ namespace ApiSleepingPatener.Controllers
         [Route("maketablemembersleft/{userId}")]
         public IHttpActionResult GetUserDownlineMembersLeft(int userId)
         {
-            SleepingtestEntities db = new SleepingtestEntities();
-            TreeDataTbl dbTree = new TreeDataTbl();
+            sleepingtestEntities db = new sleepingtestEntities();
+       //     TreeDataTbl dbTree = new TreeDataTbl();
             UserModel usrmodel = new UserModel();
             List<GetParentChildsLeftSP_Result> List = new List<GetParentChildsLeftSP_Result>();          
                 List = db.GetParentChildsLeftSP(userId).ToList();
@@ -746,7 +746,7 @@ namespace ApiSleepingPatener.Controllers
         [Route("maketablemembersright/{userId}")]
         public IHttpActionResult GetUserDownlineMembersRight(int userId)
         {
-            SleepingtestEntities db = new SleepingtestEntities();
+            sleepingtestEntities db = new sleepingtestEntities();
             UserModel usrmodel = new UserModel();
 
             List<GetParentChildsRightSP_Result> List = new List<GetParentChildsRightSP_Result>();
