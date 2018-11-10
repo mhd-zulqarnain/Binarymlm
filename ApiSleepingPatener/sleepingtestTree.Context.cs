@@ -12,6 +12,8 @@ namespace ApiSleepingPatener
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SleepingTestTreeEntities : DbContext
     {
@@ -26,5 +28,132 @@ namespace ApiSleepingPatener
         }
     
         public virtual DbSet<TreeDataTbl> TreeDataTbls { get; set; }
+    
+        public virtual ObjectResult<GetUserTree_Result> GetUserTree(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserTree_Result>("GetUserTree", userIdParameter);
+        }
+    
+        public virtual ObjectResult<GetUserTreeLeft_Result> GetUserTreeLeft(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserTreeLeft_Result>("GetUserTreeLeft", userIdParameter);
+        }
+    
+        public virtual ObjectResult<GetUserTreeRight_Result> GetUserTreeRight(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserTreeRight_Result>("GetUserTreeRight", userIdParameter);
+        }
+    
+        public virtual int insert_tree_node(string tree_name, Nullable<int> parent_ID, Nullable<int> userId, Nullable<int> downlineMemberId, string userPosition)
+        {
+            var tree_nameParameter = tree_name != null ?
+                new ObjectParameter("tree_name", tree_name) :
+                new ObjectParameter("tree_name", typeof(string));
+    
+            var parent_IDParameter = parent_ID.HasValue ?
+                new ObjectParameter("parent_ID", parent_ID) :
+                new ObjectParameter("parent_ID", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var downlineMemberIdParameter = downlineMemberId.HasValue ?
+                new ObjectParameter("DownlineMemberId", downlineMemberId) :
+                new ObjectParameter("DownlineMemberId", typeof(int));
+    
+            var userPositionParameter = userPosition != null ?
+                new ObjectParameter("UserPosition", userPosition) :
+                new ObjectParameter("UserPosition", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_tree_node", tree_nameParameter, parent_IDParameter, userIdParameter, downlineMemberIdParameter, userPositionParameter);
+        }
+    
+        public virtual int move_node_down(Nullable<int> tree_id)
+        {
+            var tree_idParameter = tree_id.HasValue ?
+                new ObjectParameter("tree_id", tree_id) :
+                new ObjectParameter("tree_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("move_node_down", tree_idParameter);
+        }
+    
+        public virtual int move_node_up(Nullable<int> tree_id)
+        {
+            var tree_idParameter = tree_id.HasValue ?
+                new ObjectParameter("tree_id", tree_id) :
+                new ObjectParameter("tree_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("move_node_up", tree_idParameter);
+        }
+    
+        public virtual int remove_node(Nullable<int> tree_id)
+        {
+            var tree_idParameter = tree_id.HasValue ?
+                new ObjectParameter("tree_id", tree_id) :
+                new ObjectParameter("tree_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("remove_node", tree_idParameter);
+        }
+    
+        public virtual int update_tree_name(Nullable<int> userId, string userName)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_tree_name", userIdParameter, userNameParameter);
+        }
+    
+        public virtual int view_human_tree()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("view_human_tree");
+        }
+    
+        public virtual ObjectResult<view_tree_Result> view_tree()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_tree_Result>("view_tree");
+        }
+    
+        public virtual int insert_tree_node1(string tree_name, Nullable<int> parent_ID, Nullable<int> userId, Nullable<int> downlineMemberId, string userPosition)
+        {
+            var tree_nameParameter = tree_name != null ?
+                new ObjectParameter("tree_name", tree_name) :
+                new ObjectParameter("tree_name", typeof(string));
+    
+            var parent_IDParameter = parent_ID.HasValue ?
+                new ObjectParameter("parent_ID", parent_ID) :
+                new ObjectParameter("parent_ID", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var downlineMemberIdParameter = downlineMemberId.HasValue ?
+                new ObjectParameter("DownlineMemberId", downlineMemberId) :
+                new ObjectParameter("DownlineMemberId", typeof(int));
+    
+            var userPositionParameter = userPosition != null ?
+                new ObjectParameter("UserPosition", userPosition) :
+                new ObjectParameter("UserPosition", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_tree_node1", tree_nameParameter, parent_IDParameter, userIdParameter, downlineMemberIdParameter, userPositionParameter);
+        }
     }
 }
