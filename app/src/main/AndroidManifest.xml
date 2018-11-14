@@ -19,11 +19,7 @@
         <activity
             android:name=".ui.auth.SignInActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.auth.SplashActivity"
@@ -31,7 +27,12 @@
         <activity
             android:name=".ui.drawer.DrawerActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.network.AddMemberActivity" />
         <activity
             android:name=".ui.auth.UserCategoryActivity"
@@ -39,6 +40,7 @@
             android:label="@string/title_activity_user_category"
             android:theme="@style/FullscreenTheme"/>
         <activity android:name=".ui.network.MemberDetailActivity"/>
+        <activity android:name=".ui.profile.ProfileActivity"/>
     </application>
 
 </manifest>

@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.WalletModal
+import com.redcodetechnologies.mlm.models.wallet.TransactionModal
 
-class WalletAdapter(var ctx: Context, var type: String, var list: ArrayList<WalletModal>) : RecyclerView.Adapter<WalletAdapter.MyViewHolder>() {
+class WalletAdapter(var ctx: Context, var type: String, var list: ArrayList<TransactionModal>) : RecyclerView.Adapter<WalletAdapter.MyViewHolder>() {
 
     var typ=type
 
@@ -33,7 +33,7 @@ class WalletAdapter(var ctx: Context, var type: String, var list: ArrayList<Wall
         var tv_name: TextView? = null
         var tv_amount: TextView? = null
         var tv_date: TextView? = null
-        fun bindView(walletmodal : WalletModal, typ :String) {
+        fun bindView(walletmodal : TransactionModal, typ :String) {
 
             tv_source = itemView.findViewById(R.id.tv_walt_source)
             tv_name = itemView.findViewById(R.id.tv_walt_name)
@@ -41,10 +41,10 @@ class WalletAdapter(var ctx: Context, var type: String, var list: ArrayList<Wall
             tv_date = itemView.findViewById(R.id.tv_walt_date)
 
 
-            tv_source!!.text = walletmodal.walt_source
-            tv_name!!.text = walletmodal.walt_name
-            tv_amount!!.text = walletmodal.walt_amount
-            tv_date!!.text = walletmodal.walt_date
+            tv_source!!.text = "test source"
+            tv_name!!.text ="test name"
+            tv_amount!!.text ="1000"
+            tv_date!!.text = "10-3-2123"
 
 
             //  tv_price!!.text = order.BitPrice

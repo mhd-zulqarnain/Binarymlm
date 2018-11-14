@@ -1,4 +1,4 @@
-package com.redcodetechnologies.mlm.models
+package com.redcodetechnologies.mlm.models.wallet
 
 data class WithdrawalRequestModal (var wd_username: String? = null,
                                    var wd_paymen_method: String? = null,

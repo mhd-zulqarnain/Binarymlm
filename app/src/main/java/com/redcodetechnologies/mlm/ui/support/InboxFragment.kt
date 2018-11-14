@@ -73,7 +73,7 @@ class InboxFragment : Fragment() {
         val alertBox = android.support.v7.app.AlertDialog.Builder((activity as Context?)!!)
         alertBox.setView(v)
         var dialog = alertBox.create()
-        dialog!!.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         dialog!!.setCancelable(false);
         var message : EditText = v.findViewById(R.id.ed_message)

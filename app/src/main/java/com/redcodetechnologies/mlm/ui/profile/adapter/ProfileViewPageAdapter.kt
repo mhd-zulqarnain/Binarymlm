@@ -4,8 +4,8 @@ package com.redcodetechnologies.mlm.ui.profile.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.redcodetechnologies.mlm.ui.profile.FirstFragment
-import com.redcodetechnologies.mlm.ui.profile.SecondFragment
+import com.redcodetechnologies.mlm.ui.profile.UpdatePrivacyFragment
+import com.redcodetechnologies.mlm.ui.profile.UpdateProfileFragment
 
 class ViewPagerAdapter internal constructor(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
@@ -15,8 +15,8 @@ class ViewPagerAdapter internal constructor(fm: FragmentManager) : FragmentState
         var fragment: Fragment? = null
 
         when (position) {
-            0 -> fragment = FirstFragment()
-            1 -> fragment = SecondFragment()
+            0 -> fragment = UpdateProfileFragment()
+            1 -> fragment = UpdatePrivacyFragment()
         }
 
         return fragment

@@ -289,7 +289,6 @@ class AddMemberActivity : AppCompatActivity() {
     }
     //</editor-fold>
 
-
     fun tokenExpire() {
         prefs.clearToken(this@AddMemberActivity)
         prefs.clearUser(this@AddMemberActivity)
@@ -335,10 +334,15 @@ class AddMemberActivity : AppCompatActivity() {
                 downlineMemberId = 1////memeber id spinner
 
         }
+
+        var countryIndex = 0;
+        if(spinner_country!!.getSelectedItemPosition()!=0){
+            countryIndex =spinner_country!!.getSelectedItemPosition() - 1
+        }
         userModel.Name = ed_name.text.toString()
         userModel.Username = ed_uname.text.toString()
         userModel.Password = ed_pass.text.toString()
-        userModel.Country = spinner_country!!.getSelectedItemPosition() - 1
+        userModel.Country = countryIndex
         userModel.Address = ""
         userModel.Phone = ed_phone.text.toString()
         userModel.Email = ed_email.text.toString()
@@ -426,12 +430,9 @@ class AddMemberActivity : AppCompatActivity() {
                 val f = File(imageUri.getPath())
                 val imageName = f.getPath().split(":")[1]
                 btn_add_image.setText(imageName)
-                val bitmap = MediaStore.Images.Media.getBitmap(baseContext.getContentResolver(), data.data)
                 userdocumentImage = imageTostring(MediaStore.Images.Media.getBitmap(baseContext.getContentResolver(), data.data))
-//                println(userdocumentImage)
             }
-            /*   var imageStream: InputStream = getContentResolver().openInputStream(imageUri);
-             val bitmap = BitmapFactory.decodeStream(imageStream)*/
+
 
         }
     }

@@ -7,8 +7,6 @@
     android:layout_margin="12dp"
     >
 
-
-
     <View
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
@@ -24,12 +22,11 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".8"
+            android:layout_weight="0.8"
             android:gravity="center"
             android:text="User Name"
-            android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
-            android:textSize="12sp"
+            style="@style/CustomBlacktextStyle"
+            android:textSize="10sp"
             />
 
         <TextView
@@ -38,9 +35,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Payment Method"
-            android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
-            android:textSize="12sp"
+            style="@style/CustomBlacktextStyle"
+            android:textSize="10sp"
             />
 
         <TextView
@@ -49,10 +45,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Amount Payable"
-            android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
-            android:textSize="12sp"
-            android:layout_gravity="center_vertical"
+            style="@style/CustomBlacktextStyle"
+            android:textSize="10sp"
             />
 
         <TextView
@@ -61,19 +55,17 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Withdrawal Charges"
-            android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
-            android:textSize="12sp"
+            style="@style/CustomBlacktextStyle"
+            android:textSize="10sp"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Rejected Date"
-            android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
-            android:textSize="12sp"
+            android:text="Requested Date"
+            style="@style/CustomBlacktextStyle"
+            android:textSize="10sp"
             />
 
 
@@ -84,15 +76,35 @@
         android:layout_height="1dp"
         android:background="#494A4B" />
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recylcer_rejected_request"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scrollbars="horizontal"
-        android:layout_weight="4" />
+        android:orientation="vertical"
+        android:layout_weight="6">
+        <LinearLayout
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+            <ProgressBar
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#494A4B" />
 
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recylcer_wd_request"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="horizontal"
+            android:layout_weight="4" />
+    </LinearLayout>
 
 </LinearLayout>
 

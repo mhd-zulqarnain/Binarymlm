@@ -1,4 +1,4 @@
-package com.redcodetechnologies.mlm.ui
+package com.redcodetechnologies.mlm.ui.wallet
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.WalletSummery
+import com.redcodetechnologies.mlm.models.wallet.WalletSummery
 
 class EWalletSummaryFragment() : Fragment() {
 
@@ -24,8 +24,8 @@ class EWalletSummaryFragment() : Fragment() {
         wData.add(WalletSummery("WithDrawl", "20PKR"))
         var tv_bonus: TextView? = null
         var tv_debit: TextView? = null
-        tv_bonus = view!!.findViewById(R.id.wallet_Bcurrency)
-        tv_debit = view!!.findViewById(R.id.wallet_Dcurrency)
+        /*tv_bonus = view!!.findViewById(R.id.wallet_Bcurrency)
+        tv_debit = view!!.findViewById(R.id.wallet_Dcurrency)*/
 
         tv_bonus!!.setText(wData.get(1).Balance.toString())
     }

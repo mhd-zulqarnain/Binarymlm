@@ -134,7 +134,7 @@ android:orientation="vertical"
                         android:hint="Phone"
                         android:imeOptions="actionNext"
                         android:inputType="number"
-                        android:maxLength="11"
+                        android:maxLength="12"
                         android:maxLines="1"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>

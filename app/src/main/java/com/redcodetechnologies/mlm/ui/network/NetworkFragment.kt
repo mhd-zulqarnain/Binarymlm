@@ -28,6 +28,7 @@ import java.util.*
 
 
 class NetworkFragment : Fragment() {
+
     var recylcer_down_member: RecyclerView? = null
     var adapter: DownMemberAdapter? = null
     var layout_add_right: LinearLayout? = null
@@ -56,11 +57,12 @@ class NetworkFragment : Fragment() {
         prefs = SharedPrefs.getInstance()!!
         var view = inflater.inflate(R.layout.fragment_network, container, false)
         frgement_type = arguments?.getString("Fragment").toString();
-        id = prefs.getUser(activity!!).userId
-        token = prefs.getToken(activity!!).accessToken!!
 
+        if (prefs.getUser(activity!!).userId != null) {
+            id = prefs.getUser(activity!!).userId
+            token = prefs.getToken(activity!!).accessToken!!
+        }
         initView(view)
-
         (activity as DrawerActivity).getSupportActionBar()?.setTitle(frgement_type)
         return view
 
@@ -89,10 +91,11 @@ class NetworkFragment : Fragment() {
         tv_totalAmountRightUsers = view.findViewById(R.id.tv_totalAmountRightUsers)
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
         tv_sponser = view.findViewById(R.id.tv_sponser)
-        getviewData()
+
+        //getviewData()
 
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
-        adapter = DownMemberAdapter(activity!!, list,frgement_type) { obj ->
+        adapter = DownMemberAdapter(activity!!, list, frgement_type) { obj ->
             if (frgement_type != "MakeTable") {
                 var intent = Intent(activity!!, MemberDetailActivity::class.java)
                 var json = Gson().toJson(obj)
@@ -107,9 +110,10 @@ class NetworkFragment : Fragment() {
             layout_add_right!!.setBackgroundResource(R.color.colorGray);
             layout_add_left!!.setBackgroundResource(R.color.colorRed);
             if (frgement_type == "MakeTable")
-                getMakeTableLeft()
-            else
-                getAllDownlineMembersLeft()
+               // getMakeTableLeft()
+            else{
+               // getAllDownlineMembersLeft()
+                 }
 
         }
         layout_add_right!!.setOnClickListener {
@@ -150,9 +154,9 @@ class NetworkFragment : Fragment() {
         })
 
         if (frgement_type == "MakeTable")
-            getMakeTableLeft()
+            //getMakeTableLeft()
         else
-            getAllDownlineMembersLeft()
+            //getAllDownlineMembersLeft()
         showViews()
     }
 
@@ -160,7 +164,6 @@ class NetworkFragment : Fragment() {
         if (frgement_type == "MakeTable") {
             add_left!!.visibility = View.VISIBLE
             add_right!!.visibility = View.VISIBLE
-
             fragment_title!!.text = "Down-line Members List"
 
         } else if (frgement_type == "DownlineMembers") {
@@ -191,6 +194,7 @@ class NetworkFragment : Fragment() {
             return
         }
         progressdialog!!.show()
+
         ApiClint.getInstance()?.getService()?.getMaketableData("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<MakeTableData> {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {

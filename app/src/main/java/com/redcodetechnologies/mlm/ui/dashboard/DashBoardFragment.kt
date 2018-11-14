@@ -35,7 +35,7 @@ import io.reactivex.schedulers.Schedulers;
 
 class DashBoardFragment : Fragment() {
     var frgement_type = "MyPackageCommisionList"
-    var tv: CardView? = null
+    var balance_card: CardView? = null
     var click: Boolean = true;
     lateinit var prefs: SharedPrefs
 
@@ -51,19 +51,19 @@ class DashBoardFragment : Fragment() {
     lateinit var token: String
 
     //view
-    var totaldirectcommission: TextView? = null//total direct comission
+    var totaldirectcommission: TextView? = null
     var GetEwalletCredit: TextView? = null
-    var GetEWalletDebitSum: TextView? = null //debit
+    var GetEWalletDebitSum: TextView? = null
     var GetPaymentsInProcessSum: TextView? = null
-    var GetUserTotalPackageCommission: TextView? = null//
-    var GetUserDownlineMembers: TextView? = null//downlinmer
-    var GetPayoutHistorySum: TextView? = null //withdraw
-    var GetUserTotalMatchingCommission: TextView? = null//table coable
-    var GetEWalletSummarySponsorBonus: TextView? = null//balance
-    var GetTotalleftamount: TextView? = null//balance
-    var GetTotalrightamount: TextView? = null//balance
-    var GetTotalremainingleftamount: TextView? = null//balance
-    var GetTotalremainingrightamount: TextView? = null//balance
+    var GetUserTotalPackageCommission: TextView? = null
+    var GetUserDownlineMembers: TextView? = null
+    var GetPayoutHistorySum: TextView? = null
+    var GetUserTotalMatchingCommission: TextView? = null
+    var GetEWalletSummarySponsorBonus: TextView? = null
+    var GetTotalleftamount: TextView? = null
+    var GetTotalrightamount: TextView? = null
+    var GetTotalremainingleftamount: TextView? = null
+    var GetTotalremainingrightamount: TextView? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -73,14 +73,14 @@ class DashBoardFragment : Fragment() {
 
 
         initView(view)
-        getviewData()
+        //getviewData()
         return view
 
     }
 
     private fun initView(view: View) {
 
-        tv = view.findViewById(R.id.dashboardbalance) as CardView;
+        balance_card = view.findViewById(R.id.dashboardbalance) as CardView;
         progressdialog = SpotsDialog.Builder()
                 .setContext(activity!!)
                 .setMessage("Loading please wait!!")
@@ -107,29 +107,26 @@ class DashBoardFragment : Fragment() {
         val manager = GridLayoutManager(activity!!, 2)
         recycler_adds!!.layoutManager = manager
         adapter = AdvertismentAdapter(activity!!, frgement_type, adsList)
-
-        id = prefs.getUser(activity!!).userId
-        token = prefs.getToken(activity!!).accessToken!!
-
+        if (prefs.getUser(activity!!).userId != null) {
+            id = prefs.getUser(activity!!).userId
+            token = prefs.getToken(activity!!).accessToken!!
+        }
         recycler_adds!!.adapter = adapter
-        tv!!.setOnClickListener {
+        balance_card!!.setOnClickListener {
             if (click) {
-                showSendDialog(view)
+                showBalanaceDialog(view)
             }
         }
-        getads()
+      //  getads()
     }
 
-
-    private fun showSendDialog(view: View) {
+    private fun showBalanaceDialog(view: View) {
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialogue_forget_password, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
         alertBox.setView(view)
-        alertBox.setCancelable(false)
+        alertBox.setCancelable(true)
         val dialog = alertBox.create()
-
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
         var tvtitle: TextView = view.findViewById(R.id.tvtitle)
         var tvdescription: TextView = view.findViewById(R.id.tvdescription)
         tvtitle.text = "Enter Password"
@@ -149,16 +146,16 @@ class DashBoardFragment : Fragment() {
             } else {
                 Toast.makeText(activity!!, "Under Process", Toast.LENGTH_SHORT).show()
 
-                var sucess: Boolean = false;
+                //  var sucess: Boolean = false;
 
-                sucess = true;
-                if (sucess) {
+                //sucess = true;
+                val password = prefs.getUser(activity!!).password
+                if (pass.text.toString() == password) {
                     var GetEWalletSummarySponsorBonus: TextView = view.findViewById(R.id.GetEWalletSummarySponsorBonus)
                     GetEWalletSummarySponsorBonus.visibility = View.VISIBLE
-                    click = false
+                    dialog.dismiss()
                 } else {
                     Toast.makeText(activity!!, "Wrong-Password", Toast.LENGTH_SHORT).show()
-
                 }
                 dialog.dismiss()
 
@@ -169,21 +166,23 @@ class DashBoardFragment : Fragment() {
 
     }
 
+    //<editor-fold desc="Advertisment control">
     private fun getads() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            return
         }
 
         progressBar!!.visibility = View.VISIBLE
-        val adsObserver = getadvertismentObservable()
+        val adsObserver = getadvertismentObserver()
         var adsObservable: Observable<ArrayList<Advertisement>> = MyApiRxClint.getInstance()?.getService()?.getCoinData()!!
         adsObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(adsObserver)
     }
 
-    private fun getadvertismentObservable(): Observer<ArrayList<Advertisement>> {
+    private fun getadvertismentObserver(): Observer<ArrayList<Advertisement>> {
         return object : Observer<ArrayList<Advertisement>> {
             override fun onComplete() {
                 println("completed")
@@ -212,6 +211,7 @@ class DashBoardFragment : Fragment() {
 
         }
     }
+    //</editor-fold>
 
     fun getviewData() {
 
@@ -240,24 +240,24 @@ class DashBoardFragment : Fragment() {
                         }
                         if (code == 200) {
                             print("success")
-                             var obj: DasboardData = response.body()!!
+                            var obj: DasboardData = response.body()!!
 
-                             if (obj.totaldirectcommission != null)
-                                 totaldirectcommission!!.text = obj.totaldirectcommission!!.split(".")[0];
+                            if (obj.totaldirectcommission != null)
+                                totaldirectcommission!!.text = obj.totaldirectcommission!!.split(".")[0];
 
-                             if (obj.GetEwalletCredit != null)
-                                 GetEwalletCredit!!.text = obj.GetEwalletCredit!!.split(".")[0]
+                            if (obj.GetEwalletCredit != null)
+                                GetEwalletCredit!!.text = obj.GetEwalletCredit!!.split(".")[0]
 
-                             if (obj.GetEWalletDebitSum != null)
-                                 GetEWalletDebitSum!!.text = obj.GetEWalletDebitSum!!.split(".")[0]
+                            if (obj.GetEWalletDebitSum != null)
+                                GetEWalletDebitSum!!.text = obj.GetEWalletDebitSum!!.split(".")[0]
 
-                             if (obj.GetPaymentsInProcessSum != null)
-                                 GetPaymentsInProcessSum!!.text = obj.GetPaymentsInProcessSum!!.split(".")[0]
-                             if (obj.GetUserTotalPackageCommission != null)
-                                 GetUserTotalPackageCommission!!.text = obj.GetUserTotalPackageCommission!!.split(".")[0]
+                            if (obj.GetPaymentsInProcessSum != null)
+                                GetPaymentsInProcessSum!!.text = obj.GetPaymentsInProcessSum!!.split(".")[0]
+                            if (obj.GetUserTotalPackageCommission != null)
+                                GetUserTotalPackageCommission!!.text = obj.GetUserTotalPackageCommission!!.split(".")[0]
 
-                             if (obj.GetUserDownlineMembers != null)
-                                 GetUserDownlineMembers!!.text = obj.GetUserDownlineMembers!!.split(".")[0]
+                            if (obj.GetUserDownlineMembers != null)
+                                GetUserDownlineMembers!!.text = obj.GetUserDownlineMembers!!.split(".")[0]
 
                             if (obj.GetPayoutHistorySum != null)
                                 GetPayoutHistorySum!!.text = obj.GetPayoutHistorySum!!.split(".")[0]

@@ -89,9 +89,9 @@ class MemberDetailActivity : AppCompatActivity() {
          layout_add_left = view.findViewById(R.id.layout_add_left)
         val recylcer_dialog_member: RecyclerView = view.findViewById(R.id.recylcer_dialog_member)
 
-        recylcer_dialog_member!!.layoutManager = LinearLayoutManagerWrapper(this, LinearLayout.VERTICAL, false)
+        recylcer_dialog_member.layoutManager = LinearLayoutManagerWrapper(this, LinearLayout.VERTICAL, false)
         adapter = DialogMemberAdapter(this@MemberDetailActivity, userList)
-        recylcer_dialog_member!!.adapter = adapter
+        recylcer_dialog_member.adapter = adapter
 
         getAllDownlineMembersLeft()
         layout_add_left!!.setOnClickListener {
@@ -130,7 +130,7 @@ class MemberDetailActivity : AppCompatActivity() {
         }
         userList.clear()
         showPrgressbar()
-        ApiClint.getInstance()?.getService()?.getAllDownlineMembersRight("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.getAllDownlineMembersRight("bearer " + token, id!!)
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
@@ -176,7 +176,7 @@ class MemberDetailActivity : AppCompatActivity() {
         userList.clear()
         showPrgressbar()
 
-        ApiClint.getInstance()?.getService()?.getAllDownlineMembersLeft("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.getAllDownlineMembersLeft("bearer " + token, id!!)
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
