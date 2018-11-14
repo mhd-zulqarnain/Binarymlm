@@ -94,16 +94,6 @@ class UpdateProfileFragment : Fragment() {
         spinner_country!!.setTitle("Select Country");
         spinner_country!!.setPositiveButton("Close");
         spinner_country!!.setSelection(166)
-
-        spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            }
-
-        }
-
         name!!.setText(obj.name)
         username!!.setText(obj.username)
         address!!.setText(obj.address.toString())
