@@ -66,38 +66,59 @@ namespace ApiSleepingPatener.Controllers
             
            
         }
-        //[HttpPost]
-        //public IHttpActionResult ProfileSetup(ProfileSetting model, HttpPostedFileBase file,int userId)
-        //{
-        //    //var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
-        //    sleepingtestEntities dc = new sleepingtestEntities();
-        //    SleepingTestTreeEntities dbTree = new SleepingTestTreeEntities();
-        //    NewUserRegistration newuser = dc.NewUserRegistrations.Where(a => a.UserId.Equals(userId)).FirstOrDefault();
 
-        //    if (newuser != null)
-        //    {
-        //        newuser.Name = model.Name;
-        //        newuser.Username = model.Username;            
-        //        newuser.Country = model.CountryName;
-        //        newuser.Address = model.Address;
-        //        var fileImage = model.DocumentImage;
-        //        if (fileImage != null)
-        //        {
-        //            byte[] img = ConvertToBytes(fileImage);
-        //            newuser.DocumentImage = img;
-        //        }
-        //        dc.SaveChanges();
+        //Profile Update 
+        [HttpPost]
+        [Route("profileupdate/{userId}")]
+        public IHttpActionResult ProfileSetup(UserModel model,int userId)
+        {
+            //var userId = Convert.ToInt32(Session["LogedUserID"].ToString());
+            sleepingtestEntities dc = new sleepingtestEntities();
+            SleepingTestTreeEntities dbTree = new SleepingTestTreeEntities();
+            NewUserRegistration newuser = dc.NewUserRegistrations.Where(a => a.UserId.Equals(userId)).FirstOrDefault();
+            if (newuser != null)
+            {
+                newuser.Name = model.Name;
+                //newuser.Username = model.UserName;
+                newuser.Password = model.Password;
+                newuser.Country = model.Country;
+                newuser.Address = model.Address;
+                newuser.Phone = model.Phone;
+                newuser.Email = model.Email;
+                newuser.AccountTitle = model.AccountTitle;
+                newuser.AccountNumber = model.AccountNumber;
+                newuser.BankName = model.BankName;
+              //  newuser.CNIC = model.CNIC;
+                //if (Session["LogedUserCode"].ToString() == BinaryMLMSystem.Common.Enum.UserType.User.ToString())
+                //{
+                //    newuser.IsBlock = model.IsBlock = true;
+                //}
+                //else
+                //{
+                //    newuser.IsBlock = model.IsBlock = false;
+                ////}
+                //var fileImage1 = model.NICImage;
+                //var fileImage2 = model.ProfileImage;
+                //var fileImage3 = model.DocumentImage;
+                //if (fileImage1 != null && fileImage2 != null && fileImage3 != null)
+                //{
+                //    byte[] img1 = fileImage1;
+                //    byte[] img2 = fileImage2;
+                //    byte[] img3 = fileImage1;
+                //    newuser.NICImage = img1;
+                //    newuser.ProfileImage = img2;
+                //    newuser.DocumentImage = img3;
+                //}
+                dc.SaveChanges();
+                //dbTree.update_tree_name(userId, model.UserName);
+              //  ModelState.Clear();
+              
 
-        //        //dbTree.update_tree_name(userId, model.UserName);
-        //        ModelState.Clear();
-        //        return Json(new { success = true, message = "Update Successfully" }, JsonRequestBehavior.AllowGet);
+            }
 
-        //    }
-
-        //    this.AddNotification("Your profile has bees saved", NotificationType.SUCCESS);
-        //    return RedirectToAction("ProfileSetup");
-        //}
-
+            //this.AddNotification("Your profile has bees saved", NotificationType.SUCCESS);
+            return Ok(new { success = true, message = "Update Successfully" });
+        }
 
     }
 }

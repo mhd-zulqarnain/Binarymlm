@@ -4,18 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SleepingTestTreeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SleepingTestTree.dbo.TreeDataTbl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+      <Schema Namespace="SleepingTestTreeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TreeDataTbl">
           <Key>
             <PropertyRef Name="Tree_ID" />
-            <PropertyRef Name="Tree_Name" />
-            <PropertyRef Name="Parent_ID" />
-            <PropertyRef Name="Seq_index" />
-            <PropertyRef Name="Full_index" />
           </Key>
-          <Property Name="Tree_ID" Type="int" Nullable="false" />
+          <Property Name="Tree_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Tree_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="UserId" Type="int" />
           <Property Name="DownlineMemberId" Type="int" />
@@ -24,6 +18,27 @@ warning 6002: The table/view 'SleepingTestTree.dbo.TreeDataTbl' does not have a 
           <Property Name="Full_index" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserPosition" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Function Name="check_parent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="node_id" Type="int" Mode="In" />
+          <Parameter Name="parent_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="convert_integer_to_roma" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="i" Type="int" Mode="In" />
+        </Function>
+        <Function Name="count_tree_full_index" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="tree_node_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="count_tree_level" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="tree_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="get_reverse_ascii" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="Ascii_pattern" Type="nvarchar" Mode="In" />
+          <Parameter Name="seq_to_convert" Type="int" Mode="In" />
+        </Function>
+        <Function Name="get_seq_by_level" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="treelevel" Type="int" Mode="In" />
+          <Parameter Name="seq_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetUserTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
@@ -63,32 +78,18 @@ warning 6002: The table/view 'SleepingTestTree.dbo.TreeDataTbl' does not have a 
           <Parameter Name="UserPosition" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="SleepingTestTreeModelStoreContainer">
-          <EntitySet Name="TreeDataTbl" EntityType="Self.TreeDataTbl" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TreeDataTbl].[Tree_ID] AS [Tree_ID], 
-    [TreeDataTbl].[Tree_Name] AS [Tree_Name], 
-    [TreeDataTbl].[UserId] AS [UserId], 
-    [TreeDataTbl].[DownlineMemberId] AS [DownlineMemberId], 
-    [TreeDataTbl].[Parent_ID] AS [Parent_ID], 
-    [TreeDataTbl].[Seq_index] AS [Seq_index], 
-    [TreeDataTbl].[Full_index] AS [Full_index], 
-    [TreeDataTbl].[UserPosition] AS [UserPosition]
-    FROM [dbo].[TreeDataTbl] AS [TreeDataTbl]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="TreeDataTbl" EntityType="Self.TreeDataTbl" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SleepingTestTreeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="TreeDataTbl">
           <Key>
             <PropertyRef Name="Tree_ID" />
-            <PropertyRef Name="Tree_Name" />
-            <PropertyRef Name="Parent_ID" />
-            <PropertyRef Name="Seq_index" />
-            <PropertyRef Name="Full_index" />
           </Key>
-          <Property Name="Tree_ID" Type="Int32" Nullable="false" />
+          <Property Name="Tree_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Tree_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="DownlineMemberId" Type="Int32" />
@@ -128,7 +129,7 @@ warning 6002: The table/view 'SleepingTestTree.dbo.TreeDataTbl' does not have a 
             <Parameter Name="UserId" Mode="In" Type="Int32" />
             <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="view_human_tree" />
+          <FunctionImport Name="view_human_tree" ReturnType="Collection(SleepingTestTreeModel.view_human_tree_Result)" />
           <FunctionImport Name="view_tree" ReturnType="Collection(SleepingTestTreeModel.view_tree_Result)" />
           <FunctionImport Name="insert_tree_node1">
             <Parameter Name="tree_name" Mode="In" Type="String" />
@@ -170,6 +171,10 @@ warning 6002: The table/view 'SleepingTestTree.dbo.TreeDataTbl' does not have a 
           <Property Type="String" Name="Full_index" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="UserPosition" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Tree_level" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="view_human_tree_Result">
+          <Property Type="String" Name="Full_index" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TreeDes" Nullable="true" MaxLength="4000" />
         </ComplexType>
         <ComplexType Name="view_tree_Result">
           <Property Type="String" Name="Full_index" Nullable="false" MaxLength="50" />
@@ -245,7 +250,14 @@ warning 6002: The table/view 'SleepingTestTree.dbo.TreeDataTbl' does not have a 
           <FunctionImportMapping FunctionImportName="move_node_up" FunctionName="SleepingTestTreeModel.Store.move_node_up" />
           <FunctionImportMapping FunctionImportName="remove_node" FunctionName="SleepingTestTreeModel.Store.remove_node" />
           <FunctionImportMapping FunctionImportName="update_tree_name" FunctionName="SleepingTestTreeModel.Store.update_tree_name" />
-          <FunctionImportMapping FunctionImportName="view_human_tree" FunctionName="SleepingTestTreeModel.Store.view_human_tree" />
+          <FunctionImportMapping FunctionImportName="view_human_tree" FunctionName="SleepingTestTreeModel.Store.view_human_tree">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SleepingTestTreeModel.view_human_tree_Result">
+                <ScalarProperty Name="Full_index" ColumnName="Full_index" />
+                <ScalarProperty Name="TreeDes" ColumnName="TreeDes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="view_tree" FunctionName="SleepingTestTreeModel.Store.view_tree">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SleepingTestTreeModel.view_tree_Result">

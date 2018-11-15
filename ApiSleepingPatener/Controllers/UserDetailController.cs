@@ -15,7 +15,7 @@ namespace ApiSleepingPatener.Controllers
    
     public class UserDetailController : ApiController
     {
-        [Authorize]
+      //  [Authorize]
         [HttpGet]
         [Route("getuser/{username}")]
         public IHttpActionResult getNewRegistration(string username)

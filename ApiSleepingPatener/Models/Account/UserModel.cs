@@ -8,39 +8,17 @@ namespace ApiSleepingPatener.Models.Account
 {
     public class UserModel
     {
-        public int UserId { get; set; }
-
-        [Required(ErrorMessage = "enter name", AllowEmptyStrings = false)]
-        [RegularExpression(@"^[a-zA-Z0-9\s]+$", ErrorMessage = "Special character should not be entered")]
+        public int UserId { get; set; }        
         public string Name { get; set; }
-
-        [Required(ErrorMessage = "enter UserName", AllowEmptyStrings = false)]
-        public string Username { get; set; }
-
-        [Required(ErrorMessage = "enter Password", AllowEmptyStrings = false)]
+        public string UserName { get; set; }
         public string Password { get; set; }
-
-        [Required(ErrorMessage = "enter Country", AllowEmptyStrings = false)]
         public int? Country { get; set; }
-
         public string CountryName { get; set; }
-
-        [Required(ErrorMessage = "enter Address", AllowEmptyStrings = false)]
         public string Address { get; set; }
-
-        [Required(ErrorMessage = "enter Phone", AllowEmptyStrings = false)]
         public string Phone { get; set; }
-
-        [Required(ErrorMessage = "enter Email", AllowEmptyStrings = false)]
         public string Email { get; set; }
-
-        [Required(ErrorMessage = "enter AccountNumber", AllowEmptyStrings = false)]
         public string AccountNumber { get; set; }
-
-        [Required(ErrorMessage = "enter BankName", AllowEmptyStrings = false)]
         public string BankName { get; set; }
-
-        [Required(ErrorMessage = "enter CNICNumber", AllowEmptyStrings = false)]
         public string CNICNumber { get; set; }
 
         public bool IsThisFirstUser { get; set; }
@@ -77,7 +55,7 @@ namespace ApiSleepingPatener.Models.Account
 
         //public byte[] DocumentImage { get; set; }
 
-        public byte[] DocumentImage { get; set; }
+        public HttpPostedFileWrapper DocumentImage { get; set; }
 
         public bool IsSleepingPartner { get; set; }
 
@@ -85,7 +63,22 @@ namespace ApiSleepingPatener.Models.Account
 
         public string UserDesignation { get; set; }
 
-        public bool IsWithdrawalOpen { get; set; }
-      
+        public bool? IsWithdrawalOpen { get; set; }
+
+        public decimal EWalletBalance { get; set; }
+
+        public HttpPostedFileWrapper NICImage { get; set; }
+
+        public HttpPostedFileWrapper ProfileImage { get; set; }
+
+        [Required(ErrorMessage = "enter title", AllowEmptyStrings = false)]
+        public string AccountTitle { get; set; }
+
+        public bool IsVerify { get; set; }
+
+        public bool IsBlock { get; set; }
+
+        public bool? IsPaidMember { get; set; }
+
     }
 }

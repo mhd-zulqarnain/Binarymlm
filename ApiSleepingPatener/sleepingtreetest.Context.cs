@@ -121,9 +121,9 @@ namespace ApiSleepingPatener
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_tree_name", userIdParameter, userNameParameter);
         }
     
-        public virtual int view_human_tree()
+        public virtual ObjectResult<view_human_tree_Result> view_human_tree()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("view_human_tree");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_human_tree_Result>("view_human_tree");
         }
     
         public virtual ObjectResult<view_tree_Result> view_tree()

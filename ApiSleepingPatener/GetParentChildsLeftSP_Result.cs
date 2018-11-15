@@ -34,7 +34,7 @@ namespace ApiSleepingPatener
         public Nullable<bool> IsUserActive { get; set; }
         public Nullable<bool> IsNewRequest { get; set; }
         public string UserPosition { get; set; }
-        public Nullable<bool> IsEmailConfirmed { get; set; }
+        public Nullable<bool> IsPaidMember { get; set; }
         public Nullable<int> UserPackage { get; set; }
         public byte[] DocumentImage { get; set; }
         public Nullable<bool> IsSleepingPartner { get; set; }

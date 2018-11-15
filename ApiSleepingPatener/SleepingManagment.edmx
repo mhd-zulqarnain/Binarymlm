@@ -47,7 +47,7 @@
             <PropertyRef Name="TransactionId" />
           </Key>
           <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TransactionSource" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionSource" Type="nvarchar(max)" />
           <Property Name="TransactionName" Type="nvarchar" MaxLength="50" />
           <Property Name="AsscociatedMember" Type="int" />
           <Property Name="Amount" Type="money" />
@@ -138,7 +138,7 @@
           <Property Name="IsUserActive" Type="bit" />
           <Property Name="IsNewRequest" Type="bit" />
           <Property Name="UserPosition" Type="nvarchar" MaxLength="50" />
-          <Property Name="IsEmailConfirmed" Type="bit" />
+          <Property Name="IsPaidMember" Type="bit" />
           <Property Name="UserPackage" Type="int" />
           <Property Name="DocumentImage" Type="image" />
           <Property Name="IsSleepingPartner" Type="bit" />
@@ -264,8 +264,8 @@
             <PropertyRef Name="TrainingVideoId" />
           </Key>
           <Property Name="TrainingVideoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TrainingVideoName" Type="nvarchar" MaxLength="50" />
-          <Property Name="TrainingVideoURL" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrainingVideoName" Type="nvarchar(max)" />
+          <Property Name="TrainingVideoURL" Type="nvarchar(max)" />
           <Property Name="TrainingVideoDescription" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="UserGenealogyTable">
@@ -562,7 +562,7 @@
             <PropertyRef Name="TransactionId" />
           </Key>
           <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TransactionSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionSource" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TransactionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AsscociatedMember" Type="Int32" />
           <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
@@ -653,7 +653,7 @@
           <Property Name="IsUserActive" Type="Boolean" />
           <Property Name="IsNewRequest" Type="Boolean" />
           <Property Name="UserPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsEmailConfirmed" Type="Boolean" />
+          <Property Name="IsPaidMember" Type="Boolean" />
           <Property Name="UserPackage" Type="Int32" />
           <Property Name="DocumentImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="IsSleepingPartner" Type="Boolean" />
@@ -779,8 +779,8 @@
             <PropertyRef Name="TrainingVideoId" />
           </Key>
           <Property Name="TrainingVideoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TrainingVideoName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TrainingVideoURL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrainingVideoName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrainingVideoURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TrainingVideoDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserGenealogyTable">
@@ -1031,7 +1031,7 @@
           <Property Type="Boolean" Name="IsUserActive" Nullable="true" />
           <Property Type="Boolean" Name="IsNewRequest" Nullable="true" />
           <Property Type="String" Name="UserPosition" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="IsEmailConfirmed" Nullable="true" />
+          <Property Type="Boolean" Name="IsPaidMember" Nullable="true" />
           <Property Type="Int32" Name="UserPackage" Nullable="true" />
           <Property Type="Binary" Name="DocumentImage" Nullable="true" MaxLength="Max" />
           <Property Type="Boolean" Name="IsSleepingPartner" Nullable="true" />
@@ -1066,7 +1066,7 @@
           <Property Type="Boolean" Name="IsUserActive" Nullable="true" />
           <Property Type="Boolean" Name="IsNewRequest" Nullable="true" />
           <Property Type="String" Name="UserPosition" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="IsEmailConfirmed" Nullable="true" />
+          <Property Type="Boolean" Name="IsPaidMember" Nullable="true" />
           <Property Type="Int32" Name="UserPackage" Nullable="true" />
           <Property Type="Binary" Name="DocumentImage" Nullable="true" MaxLength="Max" />
           <Property Type="Boolean" Name="IsSleepingPartner" Nullable="true" />
@@ -1101,7 +1101,7 @@
           <Property Type="Boolean" Name="IsUserActive" Nullable="true" />
           <Property Type="Boolean" Name="IsNewRequest" Nullable="true" />
           <Property Type="String" Name="UserPosition" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="IsEmailConfirmed" Nullable="true" />
+          <Property Type="Boolean" Name="IsPaidMember" Nullable="true" />
           <Property Type="Int32" Name="UserPackage" Nullable="true" />
           <Property Type="Binary" Name="DocumentImage" Nullable="true" MaxLength="Max" />
           <Property Type="Boolean" Name="IsSleepingPartner" Nullable="true" />
@@ -1136,7 +1136,7 @@
           <Property Type="Boolean" Name="IsUserActive" Nullable="true" />
           <Property Type="Boolean" Name="IsNewRequest" Nullable="true" />
           <Property Type="String" Name="UserPosition" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="IsEmailConfirmed" Nullable="true" />
+          <Property Type="Boolean" Name="IsPaidMember" Nullable="true" />
           <Property Type="Int32" Name="UserPackage" Nullable="true" />
           <Property Type="Binary" Name="DocumentImage" Nullable="true" MaxLength="Max" />
           <Property Type="Boolean" Name="IsSleepingPartner" Nullable="true" />
@@ -1295,7 +1295,7 @@
                 <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
                 <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
                 <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
-                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="IsPaidMember" ColumnName="IsPaidMember" />
                 <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
                 <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
                 <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
@@ -1623,7 +1623,7 @@
                 <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
                 <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
                 <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
-                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="IsPaidMember" ColumnName="IsPaidMember" />
                 <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
                 <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
                 <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
@@ -1662,7 +1662,7 @@
                 <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
                 <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
                 <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
-                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="IsPaidMember" ColumnName="IsPaidMember" />
                 <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
                 <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
                 <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
@@ -1701,7 +1701,7 @@
                 <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
                 <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
                 <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
-                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="IsPaidMember" ColumnName="IsPaidMember" />
                 <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
                 <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
                 <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
@@ -1741,7 +1741,7 @@
                 <ScalarProperty Name="IsUserActive" ColumnName="IsUserActive" />
                 <ScalarProperty Name="IsNewRequest" ColumnName="IsNewRequest" />
                 <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
-                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="IsPaidMember" ColumnName="IsPaidMember" />
                 <ScalarProperty Name="UserPackage" ColumnName="UserPackage" />
                 <ScalarProperty Name="DocumentImage" ColumnName="DocumentImage" />
                 <ScalarProperty Name="IsSleepingPartner" ColumnName="IsSleepingPartner" />
