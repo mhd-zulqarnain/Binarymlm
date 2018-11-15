@@ -114,6 +114,7 @@ interface RetrofiltService {
     fun getMonthlyEWalletDebit(): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
+    //<editor-fold desc="Geneology">
     @GET ("gwallet/overalllist/{userId}")
     @Headers("Content-Type:application/json")
     fun getMyPackageComission(): Observable<ArrayList<TransactionModal>>
@@ -125,5 +126,6 @@ interface RetrofiltService {
     @GET ("gwallet/overalllist/{userId}")
     @Headers("Content-Type:application/json")
     fun getMyTableCommsionList(): Observable<ArrayList<TransactionModal>>
+    //</editor-fold>
 
 }
