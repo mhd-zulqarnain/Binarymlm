@@ -39,8 +39,6 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgemen
         holder.itemView.setOnClickListener {
             onClick(list[p1])
         }
-        if(frgement_type!="MakeTable")
-            holder.tv_sponser!!.visibility=View.GONE
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -58,10 +56,15 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgemen
             tv_sponser = itemView.findViewById(R.id.tv_sponser)
             tv_paid = itemView.findViewById(R.id.tv_paid)
 
+            if(users.Username!=null)
             tv_name!!.text = users.Username
+            if(users.Phone!=null)
             tv_phone!!.text = users.Phone
+            if(users.BankName!=null)
             tv_bank!!.text = users.BankName!!
+            if(users.SponsorName!=null)
             tv_sponser!!.text = users.SponsorName
+            if(users.PaidAmount!=null)
             tv_paid!!.text = users.PaidAmount!!.split(".")[0]
         }
     }

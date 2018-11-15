@@ -15,8 +15,7 @@ class MyWithdrawalRequestFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_mywithdrawalrequest, container, false)
-
+        val view = inflater.inflate(R.layout.fragment_mywithdrawalrequest, container, false)
         val viewPager = view.findViewById<ViewPager>(R.id.viewPagerwd)
         val strip = view.findViewById<PagerTabStrip>(R.id.pager_headerwd)
         strip.setPadding(-200,0,0,0)

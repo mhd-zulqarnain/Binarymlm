@@ -110,9 +110,9 @@ class NetworkFragment : Fragment() {
             layout_add_right!!.setBackgroundResource(R.color.colorGray);
             layout_add_left!!.setBackgroundResource(R.color.colorRed);
             if (frgement_type == "MakeTable")
-               // getMakeTableLeft()
+                getMakeTableLeft()
             else{
-               // getAllDownlineMembersLeft()
+                getAllDownlineMembersLeft()
                  }
 
         }
@@ -152,29 +152,34 @@ class NetworkFragment : Fragment() {
                 return false
             }
         })
-
+        showViews()
         if (frgement_type == "MakeTable")
             //getMakeTableLeft()
-        else
+        else{
             //getAllDownlineMembersLeft()
-        showViews()
+
+        }
+
     }
 
     fun showViews() {
         if (frgement_type == "MakeTable") {
             add_left!!.visibility = View.VISIBLE
             add_right!!.visibility = View.VISIBLE
+            tv_sponser!!.setTextColor(getResources().getColor(R.color.colorWhite));
             fragment_title!!.text = "Down-line Members List"
 
         } else if (frgement_type == "DownlineMembers") {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
-            tv_sponser!!.visibility = View.GONE
+
+            tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
             fragment_title!!.text = "Down-line Members List"
         } else {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
-            tv_sponser!!.visibility = View.GONE
+            tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             fragment_title!!.text = "Refered Members List"
 
         }
@@ -186,7 +191,7 @@ class NetworkFragment : Fragment() {
         }
     }
 
-    /*get the data for cardviews*/
+
     fun getviewData() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {

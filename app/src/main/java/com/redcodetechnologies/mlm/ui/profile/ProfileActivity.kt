@@ -1,4 +1,5 @@
 package com.redcodetechnologies.mlm.ui.profile
+
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -9,7 +10,9 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
 import android.text.Html
+import android.text.TextWatcher
 import android.util.Base64
 
 import android.view.LayoutInflater
@@ -67,12 +70,7 @@ class ProfileActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
-
-
         initView()
-
-
-
     }
 
     fun initView() {
@@ -100,7 +98,17 @@ class ProfileActivity : AppCompatActivity() {
             validiation()
         }
 
+        phone!!.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s.toString().length == 1 && s.toString().startsWith("0")) {
+                    s!!.clear();
+                }
+            }
 
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
         ed_password!!.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 val DRAWABLE_RIGHT = 2
@@ -114,10 +122,8 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
 
-
         ed_upload_document!!.setOnClickListener {
             pickImage(SELECT_DOCUMENT_PHOTO)
-
         }
         ed_upload_nic!!.setOnClickListener {
             pickImage(SELECT_NIC_PHOTO)
@@ -135,7 +141,6 @@ class ProfileActivity : AppCompatActivity() {
 
         if (obj.upperId != null) {
             ed_password!!.setText(obj.password.toString())
-            phone!!.setText(obj.phone.toString())
             bankname!!.setText(obj.bankName.toString())
             accountnumber!!.setText(obj.accountNumber.toString())
             email!!.setText(obj.email.toString())
@@ -143,8 +148,9 @@ class ProfileActivity : AppCompatActivity() {
             name!!.setText(obj.name)
             username!!.setText(obj.username)
             address!!.setText(obj.address.toString())
+            cleanMobileNumeber(obj.phone.toString())
 
-        }else{
+        } else {
             ed_password!!.setText("12345678")
         }
 
@@ -152,6 +158,19 @@ class ProfileActivity : AppCompatActivity() {
             userdocumentImage = obj.documentImage.toString()
 
     }
+
+    private fun cleanMobileNumeber(number: String) {
+        var temp = number;
+        if (number == "+92") {
+            temp = ""
+        } else {
+            if (number != "") {
+                temp = number.substring(3)
+            }
+        }
+        phone!!.setText(temp)
+    }
+
     fun validiation() {
 
         if (ed_password!!.text.toString().trim(' ').length < 1) {
@@ -163,7 +182,7 @@ class ProfileActivity : AppCompatActivity() {
         } else if (phone!!.text.toString().trim(' ').length < 1) {
             phone!!.error = Html.fromHtml("<font color='#E0796C'>Phone number could not be empty</font>")
             phone!!.requestFocus()
-        } else if (phone!!.text.toString().trim(' ').length < 11) {
+        } else if (phone!!.text.toString().trim(' ').length < 10) {
             phone!!.error = Html.fromHtml("<font color='#E0796C'>Phone number must contain 11 characters</font>")
             phone!!.requestFocus()
         } else if (email!!.text.toString().trim(' ').length < 1) {
@@ -233,11 +252,13 @@ class ProfileActivity : AppCompatActivity() {
         }
 
     }
+
     fun pickImage(code: Int) {
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.setType("image/*")
         startActivityForResult(photoPickerIntent, code)
     }
+
     private fun showChangePasswordDialog() {
         val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dilalog_new_pass, null)
         val alertBox = AlertDialog.Builder(this@ProfileActivity)
@@ -277,13 +298,13 @@ class ProfileActivity : AppCompatActivity() {
         }
         dialog.show()
     }
+
     private fun profileImageDialoge() {
         val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.select_image_dialog, null)
         val alertBox = AlertDialog.Builder(this@ProfileActivity)
         alertBox.setView(view)
         alertBox.setCancelable(true)
         val dialog = alertBox.create()
-
         val gallery_dialog: ImageView = view.findViewById(R.id.gallery_dialog)
         val camera_dialog: ImageView = view.findViewById(R.id.camera_dialog)
 
@@ -298,15 +319,16 @@ class ProfileActivity : AppCompatActivity() {
             startActivityForResult(intent, SELECT_CAMERA_IMAGE)
             dialog.dismiss()
         }
-
         dialog.show()
     }
+
     private fun imageTostring(bitmap: Bitmap): String {
         val outStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outStream)
         val imageBytes = outStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
+
     fun getRealPathFromURI(context: Context, contentUri: Uri): String {
         var cursor: Cursor? = null
         try {
@@ -321,12 +343,10 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && data != null) {
-
-
-
 
             when (requestCode) {
                 SELECT_DOCUMENT_PHOTO ->
@@ -381,6 +401,5 @@ class ProfileActivity : AppCompatActivity() {
         }
 
     }
-
 
 }

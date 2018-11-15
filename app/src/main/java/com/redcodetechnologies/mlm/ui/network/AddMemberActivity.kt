@@ -42,7 +42,6 @@ class AddMemberActivity : AppCompatActivity() {
     val REQUSET_GALLERY_CODE: Int = 43
     lateinit var type: String;
     var spinner_country: SearchableSpinner? = null
-    var spinner_package: Spinner? = null
     var spinner_downliner: Spinner? = null
     var listdownliner: ArrayList<DropDownMembers> = ArrayList()
     var listPackages: ArrayList<Packages> = ArrayList()
@@ -67,7 +66,6 @@ class AddMemberActivity : AppCompatActivity() {
         var toolbar: Toolbar = findViewById(R.id.toolbar_top)
         spinner_country = findViewById(R.id.spinner_country)
         spinner_downliner = findViewById(R.id.spinner_downliner)
-        spinner_package = findViewById(R.id.spinner_package)
 
         if (intent.getStringExtra("type") == null) {
             type = "right"
@@ -102,14 +100,14 @@ class AddMemberActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent, REQUSET_GALLERY_CODE)
         }
-        spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+      /*  spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 layout_package.visibility = View.GONE
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
             }
-        })
+        })*/
         btn_back.setOnClickListener {
             finish()
         }
@@ -134,12 +132,22 @@ class AddMemberActivity : AppCompatActivity() {
         spinner_country!!.setPositiveButton("Close");
         spinner_country!!.setSelection(166)
 
+        ed_phone.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                if (s.toString().length == 1 && s.toString().startsWith("0")) {
+                    s!!.clear();
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
         getdownliner()
-        getPackages()
+//        getPackages()
     }
 
     //<editor-fold desc="Spinner package and downliner">
-    private fun getPackages() {
+  /*  private fun getPackages() {
         listPackages.add(Packages("1", "--select--"))
 
         ApiClint.getInstance()?.getService()?.getpackages()
@@ -166,13 +174,13 @@ class AddMemberActivity : AppCompatActivity() {
 
                             }
                         }
-                        setpackagepinner()
+//                        setpackagepinner()
                         progressdialog!!.dismiss();
 
 
                     }
                 })
-    }
+    }*/
     private fun getdownliner() {
 
         if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
@@ -181,7 +189,7 @@ class AddMemberActivity : AppCompatActivity() {
         }
         progressdialog!!.show();
         listdownliner.clear()
-        listdownliner.add(DropDownMembers(0, "--select--"))
+        listdownliner.add(DropDownMembers(0, "--select Downliner--"))
 
         if (type == "right") {
             ApiClint.getInstance()?.getService()?.getdropDownMembersRight("bearer " + token!!, id!!)
@@ -267,7 +275,7 @@ class AddMemberActivity : AppCompatActivity() {
         downlinerAdapter = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
         spinner_downliner!!.adapter = downlinerAdapter;
     }
-    fun setpackagepinner() {
+   /* fun setpackagepinner() {
 
         packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
         spinner_package!!.adapter = packageAdapter;
@@ -286,7 +294,7 @@ class AddMemberActivity : AppCompatActivity() {
             }
         })
 
-    }
+    }*/
     //</editor-fold>
 
     fun tokenExpire() {
@@ -309,8 +317,8 @@ class AddMemberActivity : AppCompatActivity() {
             return
         }
 
-        if (ed_phone.text.toString().trim() == "" || ed_phone!!.text.toString().trim { it <= ' ' }.length < 11) {
-            ed_phone.error = Html.fromHtml("<font color='white'>Invalid entry</font>")
+        if (ed_phone.text.toString().trim() == "" || ed_phone!!.text.toString().trim { it <= ' ' }.length < 10) {
+            ed_phone.error = Html.fromHtml("<font color='white'>Invalid mobile number</font>")
             ed_phone.requestFocus()
             return
         }
@@ -321,10 +329,10 @@ class AddMemberActivity : AppCompatActivity() {
             return
         }
 
-        if (package_price == null || userPackage == null) {
+        /*if (package_price == null || userPackage == null) {
             Apputils.showMsg(this@AddMemberActivity, "Please select package")
             return
-        }
+        }*/
 
         if (downlineMemberId == null) {
             if (listdownliner.size != 1) {
@@ -344,13 +352,11 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.Password = ed_pass.text.toString()
         userModel.Country = countryIndex
         userModel.Address = ""
-        userModel.Phone = ed_phone.text.toString()
+        userModel.Phone = "+92"+ed_phone.text.toString()
         userModel.Email = ed_email.text.toString()
         userModel.AccountNumber = ""
         userModel.Phone = ed_phone.text.toString()
         userModel.DownlineMemberId = downlineMemberId
-        userModel.PaidAmount = package_price///package price
-        userModel.UserPackage = userPackage //from spinner
         userModel.DocumentImage = userdocumentImage //from spinner
 
 

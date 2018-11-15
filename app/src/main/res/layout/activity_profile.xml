@@ -9,8 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:weightSum="14">
 
@@ -41,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1.5"
+            android:layout_gravity="center"
             android:src="@drawable/executive" />
 
         <android.support.design.widget.TextInputLayout
@@ -137,7 +137,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/ralewayregular"
                 android:hint="Enter Bank name"
-                android:imeOptions="actionNext"
+                android:imeOptions="actionDone"
 
                 />
 
@@ -192,9 +192,9 @@
                 android:backgroundTint="#a0a1a1"
                 android:fontFamily="@font/ralewayregular"
                 android:hint="Enter Account Number"
-                android:imeOptions="actionDone"
-                android:inputType="number"
-                android:maxLength="16" />
+                android:imeOptions="actionNext"
+                android:digits="0123456789-"
+                android:maxLength="17" />
         </android.support.design.widget.TextInputLayout>
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
