@@ -6,6 +6,7 @@ import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.models.users.UserTree
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.models.wallet.TransactionModal
+import com.redcodetechnologies.mlm.models.wallet.WithdrawalRequestModal
 import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.*
@@ -127,5 +128,23 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getMyTableCommsionList(): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
+
+    @GET ("gpenwdreq/overalllist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getPendingWdRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+
+    @GET ("gapppenwdreq/overalllist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getApprovedPendingWdRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+
+    @GET ("getapppaid/overalllist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getApprovedPaid(): Observable<ArrayList<WithdrawalRequestModal>>
+
+    @GET ("rejreq/overalllist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getRejectedRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+
+
 
 }

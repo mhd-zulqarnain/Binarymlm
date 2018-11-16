@@ -107,10 +107,13 @@ class TransactionFragment : Fragment() {
     fun showViews() {
         if (frgement_type == "wallet_credits") {
             tv_header!!.text = " E-wallet Credits"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Credits")
         } else if (frgement_type == "wallet_transactions") {
             tv_header!!.text = " E-wallet Transactions"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Transactions")
         } else if (frgement_type == "wallet_debits") {
             tv_header!!.text = " E-wallet Debits"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Debits")
         }
 
     }

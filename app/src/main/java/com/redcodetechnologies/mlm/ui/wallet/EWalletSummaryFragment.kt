@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.wallet.WalletSummery
+import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 
 class EWalletSummaryFragment() : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_ewalletsummary, container, false)
+        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Summary")
         // initView(view)
         return view
     }
