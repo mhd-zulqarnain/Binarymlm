@@ -45,12 +45,16 @@ class UserCategoryActivity : AppCompatActivity() {
     override fun onStart() {
         prefs = SharedPrefs.getInstance()
         var obj = prefs!!.getUser(this@UserCategoryActivity);
-        if(obj.isSleepingPartner==1 ){
+        if(obj.isSleepingPartner == true ){
             SleepingPatnerActivity()
-        }else if(obj.isSalesExecutive== 1){
+        }else if(obj.isSalesExecutive == true){
             salesExecutiveActivity()
         }
         super.onStart()
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
+        fragment!!.onActivityResult(requestCode, resultCode, data)
     }
 
 }

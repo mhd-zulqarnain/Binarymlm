@@ -12,21 +12,31 @@
         android:layout_margin="20dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:weightSum="11">
+        android:weightSum="22">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="3"
+            android:src="@drawable/executive"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_weight="1"
             android:fontFamily="@font/ralewaybold"
             android:text="Full Name"
             android:textColor="#313131"
-            android:textSize="17sp" />
+          android:textSize="12sp" />
+
         <EditText
             android:id="@+id/ed_name"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="2"
             android:backgroundTint="#a0a1a1"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:fontFamily="@font/ralewayregular"
@@ -36,16 +46,16 @@
             android:singleLine="true"
             android:textColor="#313131"
             android:textColorHint="#565656"
-            android:textSize="17sp" />
+          android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_weight="1"
             android:fontFamily="@font/ralewaybold"
             android:text="User Name"
             android:textColor="#313131"
-            android:textSize="17sp"
+          android:textSize="12sp"
 
             />
 
@@ -53,7 +63,7 @@
             android:id="@+id/ed_username"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="2"
             android:backgroundTint="#a0a1a1"
             android:fontFamily="@font/ralewayregular"
             android:hint="Enter  User name"
@@ -62,22 +72,22 @@
             android:singleLine="true"
             android:textColor="#313131"
             android:textColorHint="#565656"
-            android:textSize="17sp" />
+          android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_weight="1"
             android:fontFamily="@font/ralewaybold"
             android:text="Address"
             android:textColor="#313131"
-            android:textSize="17sp" />
+          android:textSize="12sp" />
 
         <EditText
             android:id="@+id/ed_address"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="2"
             android:backgroundTint="#a0a1a1"
             android:fontFamily="@font/ralewayregular"
             android:hint="Enter Address"
@@ -86,7 +96,7 @@
             android:singleLine="true"
             android:textColor="#313131"
             android:textColorHint="#565656"
-            android:textSize="17sp" />
+          android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -95,50 +105,79 @@
             android:fontFamily="@font/ralewaybold"
             android:text="Country"
             android:textColor="#313131"
-            android:textSize="17sp" />
+          android:textSize="12sp" />
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
             android:id="@+id/spinner_country"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_weight="2"
+            android:layout_gravity="right" />
 
-
-
-        <Button
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="#4FAF4F"
-            android:text="Upload Document  "
             android:fontFamily="@font/ralewaybold"
-            android:textColor="@color/colorWhite"
-            android:drawableRight="@drawable/upload_document"
-            android:layout_gravity="left"
-            android:layout_marginBottom="20dp"
-            android:paddingRight="5dp"
-            android:paddingLeft="5dp"
-            android:id="@+id/btn_upload_document"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            />
+            android:text="Document"
+            android:textColor="#313131"
+          android:textSize="12sp" />
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
 
+            <EditText
+                android:id="@+id/ed_upload_document"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@drawable/ic_add_document"
+                android:focusable="false"
+                android:hint="Add Document"
+                android:backgroundTint="#a0a1a1"
+                android:fontFamily="@font/ralewayregular"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="12sp"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <EditText
+                android:id="@+id/ed_upload_nic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@drawable/ic_add_document"
+                android:focusable="false"
+                android:hint="Upload your Nic"
+                android:backgroundTint="#a0a1a1"
+                android:fontFamily="@font/ralewayregular"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="12sp"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/btn_updateprofile"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:layout_weight=".8"
+            android:layout_weight="2"
             android:background="@color/colorRed"
             android:fontFamily="@font/ralewaybold"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Update Profile"
             android:textColor="@color/colorWhite" />
+
     </LinearLayout>
 </LinearLayout>

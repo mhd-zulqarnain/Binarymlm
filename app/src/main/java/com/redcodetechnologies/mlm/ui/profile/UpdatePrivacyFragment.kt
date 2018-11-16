@@ -3,12 +3,8 @@ package com.redcodetechnologies.mlm.ui.profile
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.app.Fragment
-import android.graphics.drawable.Drawable
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.text.Html
-import android.text.method.Touch
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -16,12 +12,12 @@ import android.view.ViewGroup
 import android.widget.*
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.NewUserRegistration
+import com.redcodetechnologies.mlm.models.profile.PrivacySetting
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.utils.SharedPrefs
-import kotlinx.android.synthetic.*
 
 
-class SecondFragment : android.support.v4.app.Fragment() {
+class UpdatePrivacyFragment : android.support.v4.app.Fragment() {
     var ed_password: EditText? = null
     var phone: EditText? = null
     var email: EditText? = null
@@ -30,8 +26,8 @@ class SecondFragment : android.support.v4.app.Fragment() {
     var updateprivacy: Button? = null
     var pref: SharedPrefs? = null
     lateinit var obj: NewUserRegistration;
-    var password:String ?= null
-
+    var privacySetting: PrivacySetting = PrivacySetting()
+    var mPassword: String = ""
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -51,16 +47,12 @@ class SecondFragment : android.support.v4.app.Fragment() {
             validiation()
         })
 
-        ed_password!!.setOnTouchListener(object: View.OnTouchListener {
+        ed_password!!.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 val DRAWABLE_RIGHT = 2
-
-                if (event!!.getAction() === MotionEvent.ACTION_UP)
-                {
-                    if (event!!.getRawX() >= (ed_password!!.getRight() - ed_password!!.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()))
-                    {
+                if (event!!.getAction() === MotionEvent.ACTION_UP) {
+                    if (event!!.getRawX() >= (ed_password!!.getRight() - ed_password!!.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         showChangePasswordDialog()
-                        // your action here
                         return true
                     }
                 }
@@ -68,38 +60,26 @@ class SecondFragment : android.support.v4.app.Fragment() {
             }
         })
 
-
-
-
-
-
-
         return view
-    }//oncreate()
+    }
 
     fun initView() {
         pref = SharedPrefs.getInstance()
         obj = pref!!.getUser(activity!!)
-        ed_password!!.setText(obj.password.toString())
-        phone!!.setText(obj.phone.toString())
-        bankname!!.setText(obj.bankName.toString())
-        accountnumber!!.setText(obj.accountNumber.toString())
-        email!!.setText(obj.email.toString())
-
-        ed_password!!.setText(obj.password)
-        phone!!.setText(obj.phone.toString())
-        email!!.setText(obj.email)
-        bankname!!.setText(obj.bankName.toString())
-        accountnumber!!.setText(obj.accountNumber.toString())
-
-
+        if (obj.upperId != null) {
+            ed_password!!.setText(obj.password.toString())
+            phone!!.setText(obj.phone.toString())
+            bankname!!.setText(obj.bankName.toString())
+            accountnumber!!.setText(obj.accountNumber.toString())
+            email!!.setText(obj.email.toString())
+            mPassword = pref!!.getUser(activity!!).password!!
+        }else{
+            ed_password!!.setText("12345678")
+        }
 
     }
 
-
     fun validiation() {
-
-
 
         if (ed_password!!.text.toString().trim(' ').length < 1) {
             ed_password!!.error = Html.fromHtml("<font color='#E0796C'>Password could not be empty</font>")
@@ -130,6 +110,13 @@ class SecondFragment : android.support.v4.app.Fragment() {
             accountnumber!!.error = Html.fromHtml("<font color='#E0796C'>Account number must contain 16 characters</font>")
             accountnumber!!.requestFocus()
         } else {
+
+            privacySetting.Password = mPassword;
+            privacySetting.Phone = phone!!.text.toString();
+            privacySetting.Email = email!!.text.toString();
+            privacySetting.BankName = bankname!!.text.toString();
+            privacySetting.AccountNumber = accountnumber!!.text.toString();
+
             Toast.makeText(activity!!, "Privacy has been Updated!", Toast.LENGTH_LONG).show()
         }
 
@@ -143,22 +130,19 @@ class SecondFragment : android.support.v4.app.Fragment() {
         alertBox.setCancelable(true)
         val dialog = alertBox.create()
 
-        //-------------------------------------------------------------------------
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
         val ed_old_pass: EditText = view.findViewById(R.id.ed_old_pass)
         val ed_new_pass: EditText = view.findViewById(R.id.ed_new_pass)
         val ed_confirm_pass: EditText = view.findViewById(R.id.ed_confirm_pass)
         val btn_verify: Button = view.findViewById(R.id.btn_verify)
-         password = pref!!.getUser(activity!!).password
         btn_verify.setOnClickListener {
-            if (ed_old_pass.text.toString() == password && ed_old_pass.text.toString().trim() != "") {
+            if (ed_old_pass.text.toString() == mPassword && ed_old_pass.text.toString().trim() != "") {
                 if (ed_new_pass.text.toString().trim() != "" && ed_confirm_pass.text.toString().trim() != "") {
                     if (ed_new_pass.text.toString().trim() == ed_confirm_pass.text.toString().trim()) {
-                        if (ed_new_pass!!.text.toString().trim { it <= ' ' }.length < 8) {
+                        if (ed_new_pass.text.toString().trim { it <= ' ' }.length < 8) {
                             Apputils.showMsg(activity!!, "Password should be greater than 8")
                         } else {
-                            password = ed_confirm_pass.text.toString()
+                            mPassword = ed_confirm_pass.text.toString()
                             Apputils.showMsg(activity!!, "New password added please update")
                             dialog.dismiss()
 

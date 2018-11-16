@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.WalletSummery
+import com.redcodetechnologies.mlm.models.wallet.WalletSummery
 import kotlin.collections.ArrayList
 
 class WalletSummeryAdapter (var ctx: Context,var wlist: ArrayList<WalletSummery>):

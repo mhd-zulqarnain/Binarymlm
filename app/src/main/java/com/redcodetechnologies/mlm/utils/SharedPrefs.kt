@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.redcodetechnologies.mlm.models.ApiToken
-import com.redcodetechnologies.mlm.models.NewUserRegistration
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 
 private const val USER_TOKEN = "usertoken"
 private const val USER_REGISTRATION = "newUserRegistration"
@@ -50,12 +50,12 @@ class SharedPrefs private constructor(){
         editor.putString(USER_REGISTRATION,obj)
         editor.apply()
     }
-    fun getUser(context: Context):NewUserRegistration{
+    fun getUser(context: Context): NewUserRegistration {
         mPrefs = context.getSharedPreferences(USER_REGISTRATION,Context.MODE_PRIVATE)
         val str= mPrefs!!.getString(USER_REGISTRATION,null)
         if(str==null)
             return NewUserRegistration()
-        var obj = Gson().fromJson<NewUserRegistration>(str,NewUserRegistration::class.java)
+        var obj = Gson().fromJson<NewUserRegistration>(str, NewUserRegistration::class.java)
         return  obj
     }
 

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="12dp"
+    android:weightSum="10"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorRed"
+        android:text="E-Wallet Credits"
+        android:id="@+id/tv_walt_header"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:fontFamily="@font/ralewayregular"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+        android:text="Sort Details By:"
+        android:layout_margin="3dp"
+        style="@style/CustomBlacktextStyle"
+        android:textSize="15sp" />
+    <RadioGroup
+        android:id="@+id/transaction_filter_group"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".8"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RadioButton
+            android:id="@+id/month_limit_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="THIS MONTH" />
+
+        <RadioButton
+            android:id="@+id/overall_price_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="OVER ALL" />
+
+    </RadioGroup>
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#50000000" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".8"
+        android:orientation="horizontal"
+        android:weightSum="5.5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="Transaction Source"
+            style="@style/CustomBlacktextStyle"
+            android:textSize="12sp"
+            android:id="@+id/tv_walt_source"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="Transaction Name"
+            style="@style/CustomBlacktextStyle"
+            android:textSize="12sp"
+            android:id="@+id/tv_walt_name"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Amount"
+            style="@style/CustomBlacktextStyle"
+            android:textSize="12sp"
+            android:id="@+id/tv_walt_amount"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="Transaction Date"
+            style="@style/CustomBlacktextStyle"
+            android:textSize="12sp"
+            android:id="@+id/tv_walt_date"
+            />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="6">
+        <LinearLayout
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+           >
+            <ProgressBar
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#494A4B" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recylcer_walt_down"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="horizontal"
+            android:layout_weight="4" />
+    </LinearLayout>
+
+</LinearLayout>
+

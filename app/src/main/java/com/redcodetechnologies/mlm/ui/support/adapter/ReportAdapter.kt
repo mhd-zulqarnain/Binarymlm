@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Report
@@ -16,14 +17,10 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
         p0.bindView(datalist[p1])
         p0.btn_rd_view!!.setOnClickListener{
         onItemClick(p1)
-
         }
-
-
     }
 
     var customFilter: CustomNameSearch? = null
-
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {
         var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_row_report, parent, false))
@@ -35,44 +32,27 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
     }
 
 
-
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-
-        var et_rd_uname: TextView? = null
-        var et_rd_pm: TextView? = null
-        var et_rd_an: TextView? = null
-        var et_rd_bn: TextView? = null
-
-        var btn_rd_view: Button? = null
-
+        var tv_uname: TextView? = null
+        var tv_payment_method: TextView? = null
+        var tv_price: TextView? = null
+        var tv_status: TextView? = null
+        var btn_rd_view: LinearLayout? = null
         fun bindView(users: Report) {
 
-
-
-            et_rd_uname = itemView.findViewById(R.id.et_rd_uname)
-            et_rd_pm = itemView.findViewById(R.id.et_rd_pm)
-            et_rd_an = itemView.findViewById(R.id.et_rd_an)
-            et_rd_bn = itemView.findViewById(R.id.et_rd_bn)
-       //     et_rd_bn!!.layoutParams = LinearLayout.LayoutParams(30, 30, 0f)
+            tv_uname = itemView.findViewById(R.id.tv_uname)
+            tv_payment_method = itemView.findViewById(R.id.tv_payment_method)
+            tv_price = itemView.findViewById(R.id.tv_price)
+            tv_status = itemView.findViewById(R.id.tv_status)
             btn_rd_view = itemView.findViewById(R.id.btn_rd_view)
 
-
-
-
-
-            et_rd_uname!!.text = users.UserName
-            et_rd_pm!!.text = users.PaymentMethod
+            tv_uname!!.text = users.UserName
+            tv_payment_method!!.text = users.PaymentMethod
             var an :String = users.AccountNumber!!.substring(0,7) +".."
-            et_rd_an!!.text = an
-            et_rd_bn!!.text = users.BankName
-
-
-
-
-            //  tv_price!!.text = order.BitPrice
-
-        }
+            tv_payment_method!!.text = an
+            tv_status!!.text = users.BankName
+   }
     }
 
     fun filterList(filteredList: ArrayList<Report>) {

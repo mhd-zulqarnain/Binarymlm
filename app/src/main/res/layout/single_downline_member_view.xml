@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="Account Number" />
+            android:text="" />
 
         <TextView
             android:id="@+id/tv_paid"
