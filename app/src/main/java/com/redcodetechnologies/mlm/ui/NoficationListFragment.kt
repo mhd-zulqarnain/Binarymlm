@@ -17,6 +17,7 @@ import com.redcodetechnologies.mlm.models.NotificationModal
 import java.util.ArrayList
 
 class NoficationListFragment : Fragment() {
+
     var frgement_type = "wallet_credits"
     var recylcer_notification: RecyclerView? = null
     var adapter: NotificationAdapter? = null
@@ -26,33 +27,30 @@ class NoficationListFragment : Fragment() {
     var tv_desc: TextView? = null
     var tv_action: TextView? = null
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_notification_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_notification_list, container, false)
 
         frgement_type = arguments?.getString("Fragment").toString();
-
-
         initView(view)
         return view
 
     }
     private fun initView(view: View?) {
+
         list.add(NotificationModal("Account open", "done", "1000"))
         list.add(NotificationModal("Acount Close", "Pending", "3000"))
         list.add(NotificationModal("Account open", "done", "1000"))
 
         recylcer_notification = view!!.findViewById(R.id.recylcer_notification)
-        tv_header = view!!.findViewById(R.id.tv_notific_header)
-        tv_name = view!!.findViewById(R.id.tv_notific_name)
-        tv_desc = view!!.findViewById(R.id.tv_notific_desc)
-        tv_action = view!!.findViewById(R.id.tv_notofic_action)
+        tv_header = view.findViewById(R.id.tv_notific_header)
+        tv_name = view.findViewById(R.id.tv_notific_name)
+        tv_desc = view.findViewById(R.id.tv_notific_desc)
+        tv_action = view.findViewById(R.id.tv_notofic_action)
 
         recylcer_notification!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = NotificationAdapter(activity!!, frgement_type, list)
         recylcer_notification!!.adapter = adapter
-
 
     }
 
@@ -60,7 +58,5 @@ class NoficationListFragment : Fragment() {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()?.setTitle("Notifications")
     }
-
-
 
 }

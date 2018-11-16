@@ -100,14 +100,7 @@ class AddMemberActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent, REQUSET_GALLERY_CODE)
         }
-      /*  spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                layout_package.visibility = View.GONE
-            }
 
-            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-            }
-        })*/
         btn_back.setOnClickListener {
             finish()
         }

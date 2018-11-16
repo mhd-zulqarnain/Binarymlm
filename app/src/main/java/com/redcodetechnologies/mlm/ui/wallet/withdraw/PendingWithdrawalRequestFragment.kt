@@ -27,8 +27,10 @@ class PendingWDRequestFragment : Fragment() {
         frgement_type = arguments?.getString("Fragment").toString();
         initView(view)
         return view
+
     }
     private fun initView(view: View?) {
+
         list.add(EWalletWithdrawalFundModel("Ali", "ATM",
                 "1200", "120", "15/12/2018"))
         list.add(EWalletWithdrawalFundModel("Shakoor", "Cheque",
@@ -37,6 +39,7 @@ class PendingWDRequestFragment : Fragment() {
                 "1400", "140", "12/12/2018"))
 
         recylcer_wd = view!!.findViewById(R.id.recylcer_wd_request)
+
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = WithdrawAdapter(activity!!, frgement_type, list)
         recylcer_wd!!.adapter = adapter
