@@ -41,10 +41,10 @@ class InboxAdapter (var ctx: Context, var datalist: ArrayList<Inbox>, private va
         val inbox : Inbox = datalist[position]
         holder?.Sender?.text= inbox.Sender_Name
         holder?.Date?.text= inbox.Date
-        holder?.Status?.text= inbox.Status
-        holder?.btn_view.setOnClickListener(){
-            onItemClick(position,"view")
-        }
+//        holder?.Status?.text= inbox.Status
+//        holder?.btn_view.setOnClickListener(){
+//            onItemClick(position,"view")
+//        }
         holder?.btn_reply.setOnClickListener(){
            onItemClick(position,"reply")
         }
@@ -57,7 +57,6 @@ class InboxAdapter (var ctx: Context, var datalist: ArrayList<Inbox>, private va
             var Sender = itemView.findViewById(R.id.tv_User) as TextView
             var Date= itemView.findViewById(R.id.tv_date) as TextView
             var Status =itemView.findViewById(R.id.tv_status)as TextView
-            var btn_view= itemView.findViewById(R.id.btn_view) as Button
             var btn_reply= itemView.findViewById(R.id.btn_reply) as Button
             var btn_dlt= itemView.findViewById(R.id.btn_dlt) as Button
         }

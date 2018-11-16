@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="3">
 
         <TextView
             android:id="@+id/tv_User"
@@ -19,17 +19,19 @@
             android:gravity="center"
             android:text="Sender"
             android:textColor="#000"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="Status"
             android:textColor="#000"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:visibility="gone"
+            />
 
 
         <TextView
@@ -40,17 +42,9 @@
             android:text="Date"
             android:textColor="#000"
             android:gravity="center"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/btn_view"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.5"
-            android:text="View"
-            android:textColor="#fff"
-            android:background="#26ca6b"
-            android:textSize="8sp" />
+
         <Button
             android:id="@+id/btn_reply"
             android:layout_width="0dp"
@@ -59,7 +53,7 @@
             android:text="Reply"
             android:textColor="#fff"
             android:background="#2494bc"
-            android:textSize="8sp" />
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btn_dlt"
@@ -69,7 +63,7 @@
             android:text="Delete"
             android:textColor="#fff"
             android:background="#ec1a1a"
-            android:textSize="8sp" />
+            android:textSize="10sp" />
     </LinearLayout>
 
 </LinearLayout>
