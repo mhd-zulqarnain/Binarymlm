@@ -49,16 +49,19 @@ class ProfileActivity : AppCompatActivity() {
     private val REQUSET_GALLERY_CODE: Int = 44
     private val SELECT_DOCUMENT_PHOTO = 999
     private val SELECT_NIC_PHOTO = 39
+    private val SELECT_NIC_BACKSIDE_PHOTO = 40
     var updateprofile: Button? = null
     var name: EditText? = null
     var username: EditText? = null
     var address: EditText? = null
     var ed_upload_document: EditText? = null
     var ed_upload_nic: EditText? = null
+    var ed_upload_nic_backside: EditText? = null
     var profile_image: CircleImageView? = null
     var spinner_country: SearchableSpinner? = null
     var userdocumentImage: String? = null
     var userNicImage: String? = null
+    var userNicImageBackside: String? = null
     var profileSetting: ProfileSetting = ProfileSetting()
     var privacySetting: PrivacySetting = PrivacySetting()
     var mPassword: String = ""
@@ -86,6 +89,7 @@ class ProfileActivity : AppCompatActivity() {
         address = findViewById(R.id.ed_address)
         ed_upload_document = findViewById(R.id.ed_upload_document)
         ed_upload_nic = findViewById(R.id.ed_upload_nic)
+        ed_upload_nic_backside = findViewById(R.id.ed_upload_nic_backside)
         spinner_country = findViewById(R.id.spinner_country)
         profile_image = findViewById(R.id.profile_image)
         pref = SharedPrefs.getInstance()
@@ -128,6 +132,10 @@ class ProfileActivity : AppCompatActivity() {
         ed_upload_nic!!.setOnClickListener {
             pickImage(SELECT_NIC_PHOTO)
         }
+        ed_upload_nic_backside!!.setOnClickListener {
+            pickImage(SELECT_NIC_BACKSIDE_PHOTO)
+        }
+
         profile_image!!.setOnClickListener {
             profileImageDialoge()
         }
@@ -397,9 +405,28 @@ class ProfileActivity : AppCompatActivity() {
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
+                SELECT_NIC_BACKSIDE_PHOTO ->
+                    try {
+                        val imageUri = data.data
+                        var filename = "No Image found"
+                        val bitmap = MediaStore.Images.Media.getBitmap(this@ProfileActivity.getContentResolver(), imageUri);
+                        try {
+                            val arr = getRealPathFromURI(this@ProfileActivity, imageUri).split("/")
+                            filename = arr[arr.size - 1]
+                        } catch (e: Exception) {
+                        }
+                        ed_upload_nic_backside!!.setText(filename)
+                        userNicImageBackside = imageTostring(bitmap)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
             }
+
+
+        }
         }
 
     }
 
-}
+
