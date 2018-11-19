@@ -6,16 +6,15 @@ import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
 import android.util.Base64
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Packages
 import com.redcodetechnologies.mlm.models.Response
@@ -46,8 +45,8 @@ class AddMemberActivity : AppCompatActivity() {
     var listdownliner: ArrayList<DropDownMembers> = ArrayList()
     var listPackages: ArrayList<Packages> = ArrayList()
     var userModel: UserTree = UserTree()
-    var downlinerAdapter: DownlinerSpinnerAdapter?=null;
-    var packageAdapter: PackageSpinnerAdapter?=null;
+    var downlinerAdapter: DownlinerSpinnerAdapter? = null;
+    var packageAdapter: PackageSpinnerAdapter? = null;
 
     var id: Int? = null
     lateinit var prefs: SharedPrefs
@@ -100,14 +99,14 @@ class AddMemberActivity : AppCompatActivity() {
             intent.type = "image/*"
             startActivityForResult(intent, REQUSET_GALLERY_CODE)
         }
-      /*  spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                layout_package.visibility = View.GONE
-            }
+        /*  spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+              override fun onNothingSelected(p0: AdapterView<*>?) {
+                  layout_package.visibility = View.GONE
+              }
 
-            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-            }
-        })*/
+              override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+              }
+          })*/
         btn_back.setOnClickListener {
             finish()
         }
@@ -124,63 +123,66 @@ class AddMemberActivity : AppCompatActivity() {
                 .setTheme(R.style.CustomProgess)
                 .build()
         prefs = SharedPrefs.getInstance()!!
-        token = prefs.getToken(this@AddMemberActivity).accessToken!!
-        id = prefs.getUser(this@AddMemberActivity).userId!!
+        if (prefs.getUser(this@AddMemberActivity).userId != null) {
+            token = prefs.getToken(this@AddMemberActivity).accessToken!!
+            id = prefs.getUser(this@AddMemberActivity).userId!!
+        }
         var arrayAdapter = ArrayAdapter.createFromResource(this, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
         spinner_country!!.adapter = arrayAdapter
         spinner_country!!.setTitle("Select Country");
         spinner_country!!.setPositiveButton("Close");
         spinner_country!!.setSelection(166)
 
-        ed_phone.addTextChangedListener(object :TextWatcher{
+        ed_phone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s.toString().length == 1 && s.toString().startsWith("0")) {
                     s!!.clear();
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
-        getdownliner()
-//        getPackages()
+        //  getdownliner()
+// getPackages()
     }
 
     //<editor-fold desc="Spinner package and downliner">
-  /*  private fun getPackages() {
-        listPackages.add(Packages("1", "--select--"))
+    /*  private fun getPackages() {
+          listPackages.add(Packages("1", "--select--"))
 
-        ApiClint.getInstance()?.getService()?.getpackages()
-                ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {
-                    override fun onFailure(call: Call<java.util.ArrayList<Packages>>?, t: Throwable?) {
-                        println("error")
-                        progressdialog!!.dismiss();
-                    }
+          ApiClint.getInstance()?.getService()?.getpackages()
+                  ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {
+                      override fun onFailure(call: Call<java.util.ArrayList<Packages>>?, t: Throwable?) {
+                          println("error")
+                          progressdialog!!.dismiss();
+                      }
 
-                    override fun onResponse(call: Call<java.util.ArrayList<Packages>>?, response: retrofit2.Response<java.util.ArrayList<Packages>>?) {
-                        print("object success ")
-                        var code: Int = response!!.code()
+                      override fun onResponse(call: Call<java.util.ArrayList<Packages>>?, response: retrofit2.Response<java.util.ArrayList<Packages>>?) {
+                          print("object success ")
+                          var code: Int = response!!.code()
 
-                        if (code == 401) {
-                            Apputils.showMsg(this@AddMemberActivity, "Token Expired")
-                            tokenExpire();
-                        }
-                        if (code == 200) {
-                            response?.body()?.forEach { user ->
-                                listPackages.add(user)
-                            }
-                            if (response.body()!!.size == 0) {
-                                //nnnn   listdownliner.add(DropDownMembers(0,"None"))
+                          if (code == 401) {
+                              Apputils.showMsg(this@AddMemberActivity, "Token Expired")
+                              tokenExpire();
+                          }
+                          if (code == 200) {
+                              response?.body()?.forEach { user ->
+                                  listPackages.add(user)
+                              }
+                              if (response.body()!!.size == 0) {
+                                  //nnnn   listdownliner.add(DropDownMembers(0,"None"))
 
-                            }
-                        }
-//                        setpackagepinner()
-                        progressdialog!!.dismiss();
+                              }
+                          }
+  //                        setpackagepinner()
+                          progressdialog!!.dismiss();
 
 
-                    }
-                })
-    }*/
+                      }
+                  })
+      }*/
     private fun getdownliner() {
 
         if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
@@ -259,6 +261,7 @@ class AddMemberActivity : AppCompatActivity() {
                     })
         }
     }
+
     fun setdownlinerspinner() {
 
         spinner_downliner!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
@@ -267,34 +270,34 @@ class AddMemberActivity : AppCompatActivity() {
                 if (pos != 0) {
                     var obj: DropDownMembers = spinner_downliner!!.getSelectedItem() as DropDownMembers
                     downlineMemberId = obj.UserId
-                }else{
-                    downlineMemberId=null
+                } else {
+                    downlineMemberId = null
                 }
             }
         })
         downlinerAdapter = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
         spinner_downliner!!.adapter = downlinerAdapter;
     }
-   /* fun setpackagepinner() {
+    /* fun setpackagepinner() {
 
-        packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
-        spinner_package!!.adapter = packageAdapter;
+         packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
+         spinner_package!!.adapter = packageAdapter;
 
-        spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                if (pos != 0) {
-                    var obj: Packages = spinner_package!!.getSelectedItem() as Packages
-                    package_price = obj.PackagePrice
-                    userPackage = obj.PackageId
-                }else{
-                    package_price = null
-                    userPackage = null
-                }
-            }
-        })
+         spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+             override fun onNothingSelected(p0: AdapterView<*>?) {}
+             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                 if (pos != 0) {
+                     var obj: Packages = spinner_package!!.getSelectedItem() as Packages
+                     package_price = obj.PackagePrice
+                     userPackage = obj.PackageId
+                 }else{
+                     package_price = null
+                     userPackage = null
+                 }
+             }
+         })
 
-    }*/
+     }*/
     //</editor-fold>
 
     fun tokenExpire() {
@@ -323,7 +326,7 @@ class AddMemberActivity : AppCompatActivity() {
             return
         }
 
-        if (userdocumentImage==null) {
+        if (userdocumentImage == null) {
             btn_add_image.error = Html.fromHtml("<font color='white'>Please Upload document image!</font>")
             btn_add_image.requestFocus()
             return
@@ -335,7 +338,7 @@ class AddMemberActivity : AppCompatActivity() {
         }*/
 
         if (downlineMemberId == null) {
-            if (listdownliner.size != 1) {
+            if (listdownliner.size > 2) {
                 Apputils.showMsg(this@AddMemberActivity, "Please select downliner")
                 return
             } else
@@ -344,15 +347,15 @@ class AddMemberActivity : AppCompatActivity() {
         }
 
         var countryIndex = 0;
-        if(spinner_country!!.getSelectedItemPosition()!=0){
-            countryIndex =spinner_country!!.getSelectedItemPosition() - 1
+        if (spinner_country!!.getSelectedItemPosition() != 0) {
+            countryIndex = spinner_country!!.getSelectedItemPosition() - 1
         }
         userModel.Name = ed_name.text.toString()
         userModel.Username = ed_uname.text.toString()
         userModel.Password = ed_pass.text.toString()
         userModel.Country = countryIndex
         userModel.Address = ""
-        userModel.Phone = "+92"+ed_phone.text.toString()
+        userModel.Phone = "+92" + ed_phone.text.toString()
         userModel.Email = ed_email.text.toString()
         userModel.AccountNumber = ""
         userModel.Phone = ed_phone.text.toString()
@@ -360,6 +363,7 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.DocumentImage = userdocumentImage //from spinner
 
 
+        confirmationDialog()
         if (type == "right") {
             addRightMember()
         } else {
@@ -426,6 +430,29 @@ class AddMemberActivity : AppCompatActivity() {
 
                     }
                 })
+    }
+
+    private fun confirmationDialog() {
+        val view: View = LayoutInflater.from(this@AddMemberActivity).inflate(R.layout.add_member_confirmation_dialog, null)
+        val alertBox = AlertDialog.Builder(this@AddMemberActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(true)
+        val dialog = alertBox.create()
+        val gallery_dialog: ImageView = view.findViewById(R.id.gallery_dialog)
+        val camera_dialog: ImageView = view.findViewById(R.id.camera_dialog)
+
+        gallery_dialog.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(intent, REQUSET_GALLERY_CODE)
+            dialog.dismiss()
+        }
+        camera_dialog.setOnClickListener {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//            startActivityForResult(intent, SELECT_CAMERA_IMAGE)
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
