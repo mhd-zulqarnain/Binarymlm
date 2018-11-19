@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.wallet.TransactionModal
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
+import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.utils.Apputils
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -76,12 +77,15 @@ class GeneologyTableFragment : Fragment() {
             tv_date.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
             tv_action.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
             tv_header.text = " My Package Commision List"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Package Commision List")
         } else if (frgement_type == "MyDirectCommisionList") {
             tv_action.visibility = View.VISIBLE
             tv_header.text = " My Direct Commision List"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Direct Commision List")
         } else {
             tv_action.visibility = View.VISIBLE
             tv_header.text = " My Table Commision List"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Table Commision List")
 
         }
     }
