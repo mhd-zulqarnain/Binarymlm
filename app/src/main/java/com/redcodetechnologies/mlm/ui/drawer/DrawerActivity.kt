@@ -1,8 +1,12 @@
 package com.redcodetechnologies.mlm.ui.drawer
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -22,11 +26,12 @@ import com.redcodetechnologies.mlm.ui.geologytable.GeneologyTableFragment
 import com.redcodetechnologies.mlm.ui.network.NetworkFragment
 import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
-import com.redcodetechnologies.mlm.ui.profile.ProfileFragment
+import com.redcodetechnologies.mlm.ui.profile.ProfileActivity
 import com.redcodetechnologies.mlm.ui.support.ReportFragment
-import com.redcodetechnologies.mlm.ui.wallet.WalletFragment
+import com.redcodetechnologies.mlm.ui.wallet.EWalletSummaryFragment
+import com.redcodetechnologies.mlm.ui.wallet.TransactionFragment
 import com.redcodetechnologies.mlm.ui.wallet.WithdrawalFundFragment
-import com.redcodetechnologies.mlm.ui.withdraw.MyWithdrawalRequestFragment
+import com.redcodetechnologies.mlm.ui.wallet.withdraw.MyWithdrawalRequestFragment
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -38,8 +43,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     var expListViewright: ExpandableListView? = null
     var nav_view: NavigationView? = null
     var lastExpandedPosition = -1
-    var category:String?=null
-    var mPref:SharedPrefs?= null
+    //    var category:String?=null
+    var category: String = "Sales"
+    var mPref: SharedPrefs? = null
     lateinit var headerView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,34 +60,35 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp)
         nav_view = findViewById(R.id.nav_view) as NavigationView
         nav_view!!.setNavigationItemSelectedListener(this)
-        category = intent.getStringExtra("Category");
-        headerView  =  nav_view!!.getHeaderView(0)
-        if(category == "Sales"){
-         enableExpandableList()
+        if (intent.getStringExtra("Category") != null)
+            category = intent.getStringExtra("Category");
+        headerView = nav_view!!.getHeaderView(0)
+        if (category == "Sales") {
+            enableExpandableList()
             supportFragmentManager.beginTransaction().add(R.id.main_layout, DashBoardFragment()).commit()
-        }
-        else if(category == "Sleeping"){
+        } else if (category == "Sleeping") {
             enableExpandableListSleeping()
             supportFragmentManager.beginTransaction().add(R.id.main_layout, SleepingDashboardFragment()).commit()
         }
         getSupportActionBar()!!.setTitle("Dashboard")
 
         makeView()
-
+        askPermission(Manifest.permission.CAMERA, 1)
     }
 
-    fun makeView(){
+    fun makeView() {
 
-        var obj = mPref!!.getUser(this@DrawerActivity);
-        if(obj.username!=null)
-        headerView.findViewById<TextView>(R.id.tv_username).setText(obj.username);
-        if(obj.email!=null)
-        headerView.findViewById<TextView>(R.id.tv_email).setText(obj.email);
-        if(obj.userDesignation!=null)
-        headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
-        if(obj.userPackage!=null)
+        val obj = mPref!!.getUser(this@DrawerActivity);
+        if (obj.username != null)
+            headerView.findViewById<TextView>(R.id.tv_username).setText(obj.username);
+        if (obj.email != null)
+            headerView.findViewById<TextView>(R.id.tv_email).setText(obj.email);
+        if (obj.userDesignation != null)
+            headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
+        if (obj.userPackage != null)
             headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.userPackage.toString());
     }
+
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -89,14 +96,16 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             super.onBackPressed()
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> return true
-            R.id.action_logout ->{
+            R.id.action_logout -> {
 
                 mPref!!.clearToken(this@DrawerActivity)
                 mPref!!.clearUser(this@DrawerActivity)
@@ -104,17 +113,20 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 finish()
                 return true
             }
-            R.id.action_myprofile ->{
-                supportFragmentManager.beginTransaction().replace(R.id.main_layout, ProfileFragment()).commit()
+            R.id.action_myprofile -> {
+                startActivity(Intent(this@DrawerActivity, ProfileActivity::class.java))
+
                 return true
             }
 
             else -> return super.onOptionsItemSelected(item)
         }
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return true
     }
+
     private fun enableExpandableList() {
         listDataHeader = ArrayList()
         listDataChild = HashMap()
@@ -157,116 +169,114 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         })
 
         // Listview on child click listener
-                expListView!!.setOnChildClickListener(object : ExpandableListView.OnChildClickListener {
+        expListView!!.setOnChildClickListener(object : ExpandableListView.OnChildClickListener {
 
-                override fun onChildClick(parent: ExpandableListView, v: View,
-                          groupPosition: Int, childPosition: Int, id: Long): Boolean {
-                        drawer_layout.closeDrawer(GravityCompat.START)
+            override fun onChildClick(parent: ExpandableListView, v: View,
+                                      groupPosition: Int, childPosition: Int, id: Long): Boolean {
+                drawer_layout.closeDrawer(GravityCompat.START)
 
-                    var args: Bundle = Bundle();
+                var args: Bundle = Bundle();
 
-                    if (groupPosition == 1) {
-                        var gt: NetworkFragment = NetworkFragment()
-                        if (childPosition == 0) {
+                if (groupPosition == 1) {
+                    val gt: NetworkFragment = NetworkFragment()
+                    if (childPosition == 0) {
                         args.putString("Fragment", "MakeTable")
-                        gt!!.arguments = args
-                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                        } else if (childPosition == 1) {
-                            args.putString("Fragment", "DownlineMembers")
-                        gt!!.arguments = args
-                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                        } else if (childPosition == 2) {
-                            args.putString("Fragment", "ReferredMembers")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                         }
-                         }
-                    else if (groupPosition == 2) {
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                    } else if (childPosition == 1) {
+                        args.putString("Fragment", "DownlineMembers")
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                    } else if (childPosition == 2) {
+                        args.putString("Fragment", "ReferredMembers")
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                    }
+                } else if (groupPosition == 2) {
 
-                    var gt: GeneologyTableFragment = GeneologyTableFragment()
-                        if (childPosition == 0) {
+                    val gt: GeneologyTableFragment = GeneologyTableFragment()
+                    if (childPosition == 0) {
                         args.putString("Fragment", "MyPackageCommisionList")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 1) {
                         args.putString("Fragment", "MyDirectCommisionList")
-                        gt!!.arguments = args
+                        gt.arguments = args
 
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                     } else if (childPosition == 2) {
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                    } else if (childPosition == 2) {
                         args.putString("Fragment", "MyTableCommisionList")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     }
-                     }
-                    else if (groupPosition == 3) {
-                        var gt: WalletFragment = WalletFragment()
-                        if (childPosition == 0) {
+                } else if (groupPosition == 3) {
+                    val gt: TransactionFragment = TransactionFragment()
+                    when (childPosition) {
+                        0 -> {
                             args.putString("Fragment", "E-Wallet Summary")
-                            gt!!.arguments = args
+                            gt.arguments = args
                             supportFragmentManager.beginTransaction().replace(R.id.main_layout, EWalletSummaryFragment()).commit()
                         }
-                        else if (childPosition == 1) {
+                        1 -> {
                             args.putString("Fragment", "wallet_transactions")
-                            gt!!.arguments = args
-                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                            gt.arguments = args
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                         }
-                        else if (childPosition == 2) {
-                              args.putString("Fragment", "wallet_credits")
-                              gt!!.arguments = args
-                              supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                          }
-                          else if (childPosition == 3) {
-                              args.putString("Fragment", "wallet_debits")
-                              gt!!.arguments = args
-                              supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                          }
-                          else if (childPosition == 4) {
+                        2 -> {
+                            args.putString("Fragment", "wallet_credits")
+                            gt.arguments = args
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                        }
+                        3 -> {
+                            args.putString("Fragment", "wallet_debits")
+                            gt.arguments = args
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                        }
+                        4 -> {
                             supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
                         }
-                          else if (childPosition == 5) {
+                        5 -> {
                             supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
                         }
                     }
-                 else if (groupPosition == 5) {
-                        var gt: ReportFragment = ReportFragment()
+                } else if (groupPosition == 5) {
+                    val gt: ReportFragment = ReportFragment()
                     if (childPosition == 0) {
                         args.putString("Fragment", "ActivePayout")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 1) {
                         args.putString("Fragment", "PayoutHistory")
-                        gt!!.arguments = args
+                        gt.arguments = args
 
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 2) {
                         args.putString("Fragment", "PayoutWithdrawalinProcess")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     }
-                     } else if (groupPosition == 6  || groupPosition== 7) {
-                        var gt: InboxFragment = InboxFragment()
-                    var gta: SentFragment = SentFragment()
+                } else if (groupPosition == 6 || groupPosition == 7) {
+                    val gt: InboxFragment = InboxFragment()
+                    val gta: SentFragment = SentFragment()
 
                     if (childPosition == 0 && groupPosition == 6) {
                         args.putString("Inbox", "Sponser")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 0 && groupPosition == 7) {
                         args.putString("Inbox", "IT")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 1 && groupPosition == 6) {
                         args.putString("Sent", "Sponser")
-                        gta!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta!!).commit()
+                        gta.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta).commit()
                     } else if (childPosition == 1 && groupPosition == 7) {
                         args.putString("Sent", "IT")
-                        gta!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta!!).commit()
+                        gta.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta).commit()
                     }
-                    }
-
+                }
                 return true
             }
         })
@@ -285,9 +295,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataHeader.add("Sponsor Support")
         listDataHeader.add("IT Support")
 
-
         // Adding child data
-
 
         val network = ArrayList<String>()
         network.add("Make Table")
@@ -315,7 +323,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         val support = ArrayList<String>()
         support.add("Inbox")
         support.add("Sent")
-
 
 
         //   listDataChild[listDataHeader[0]] = null
@@ -381,75 +388,67 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 var args: Bundle = Bundle();
 
                 if (groupPosition == 1) {
-                    var gt: GeneologyTableFragment = GeneologyTableFragment()
+                    val gt: GeneologyTableFragment = GeneologyTableFragment()
                     if (childPosition == 0) {
                         args.putString("Fragment", "MyPackageCommisionList")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     }
-                }
-                else if (groupPosition == 2) {
-                    var gt: WalletFragment = WalletFragment()
+                } else if (groupPosition == 2) {
+                    val gt = TransactionFragment()
                     if (childPosition == 0) {
                         args.putString("Fragment", "E-Wallet Summary")
-                        gt!!.arguments = args
+                        gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, EWalletSummaryFragment()).commit()
-                    }
-                    else if (childPosition == 1) {
+                    } else if (childPosition == 1) {
                         args.putString("Fragment", "wallet_transactions")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                    }
-                    else if (childPosition == 2) {
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                    } else if (childPosition == 2) {
                         args.putString("Fragment", "wallet_credits")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                    }
-                    else if (childPosition == 3) {
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                    } else if (childPosition == 3) {
                         args.putString("Fragment", "wallet_debits")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                    }
-                    else if (childPosition == 4){
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                    } else if (childPosition == 4) {
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
-                    }
-
-                    else if (childPosition == 5){
+                    } else if (childPosition == 5) {
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
                     }
-                }
-                else if (groupPosition == 4) {
+                } else if (groupPosition == 4) {
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
-                    var gt: ReportFragment = ReportFragment()
+                    val gt: ReportFragment = ReportFragment()
                     if (childPosition == 0) {
                         args.putString("Fragment", "ActivePayout")
-                        gt!!.arguments = args
+                        gt.arguments = args
 
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 1) {
                         args.putString("Fragment", "PayoutHistory")
-                        gt!!.arguments = args
+                        gt.arguments = args
 
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 2) {
                         args.putString("Fragment", "PayoutWithdrawalinProcess")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     }
                 } else if (groupPosition == 5) {
 
-                    var gt: InboxFragment = InboxFragment()
-                    var gta: SentFragment = SentFragment()
+                    val gt = InboxFragment()
+                    val gta = SentFragment()
 
                     if (childPosition == 0) {
                         args.putString("Inbox", "IT")
-                        gt!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt!!).commit()
-                    }  else if (childPosition == 1 ) {
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                    } else if (childPosition == 1) {
                         args.putString("Sent", "IT")
-                        gta!!.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta!!).commit()
+                        gta.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta).commit()
                     }
                 }
 
@@ -497,8 +496,15 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     }
 
+    fun askPermission(permission: String, requestcode: Int) {
+        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(permission), requestcode)
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
         fragment!!.onActivityResult(requestCode, resultCode, data)
     }
+
 }

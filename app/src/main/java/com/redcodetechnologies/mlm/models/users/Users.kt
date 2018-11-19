@@ -1,7 +1,7 @@
-package com.redcodetechnologies.mlm.models
+package com.redcodetechnologies.mlm.models.users
 
 data class Users(var UserId: String? = null,
-                 var UserName: String? = null,
+                 var Username: String? = null,
                  var Country: String? = null,
                  var Phone: String? = null,
                  var AccountNumber: String? = null,
@@ -10,12 +10,4 @@ data class Users(var UserId: String? = null,
                  var PaidAmount: String? = null,
                  var SponsorName: String? = null
 
-) {
-    override fun toString(): String {
-        var username = ""
-        if (UserName != null) {
-            username = UserName!!
-        }
-        return username
-    }
-}
+)

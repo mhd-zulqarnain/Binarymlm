@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import com.redcodetechnologies.mlm.*
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.ui.network.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.models.MakeTableData
-import com.redcodetechnologies.mlm.models.Users
+import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
@@ -29,6 +28,7 @@ import java.util.*
 
 
 class NetworkFragment : Fragment() {
+
     var recylcer_down_member: RecyclerView? = null
     var adapter: DownMemberAdapter? = null
     var layout_add_right: LinearLayout? = null
@@ -47,6 +47,7 @@ class NetworkFragment : Fragment() {
     var tv_totalRightUsers: TextView? = null;
     var tv_totalAmountRightUsers: TextView? = null;
     var tv_totalAmountLeftUsers: TextView? = null;
+    var tv_sponser: TextView? = null;
     lateinit var prefs: SharedPrefs
     var id: Int? = null
     lateinit var token: String
@@ -56,11 +57,12 @@ class NetworkFragment : Fragment() {
         prefs = SharedPrefs.getInstance()!!
         var view = inflater.inflate(R.layout.fragment_network, container, false)
         frgement_type = arguments?.getString("Fragment").toString();
-        id = prefs.getUser(activity!!).userId
-        token = prefs.getToken(activity!!).accessToken!!
 
+        if (prefs.getUser(activity!!).userId != null) {
+            id = prefs.getUser(activity!!).userId
+            token = prefs.getToken(activity!!).accessToken!!
+        }
         initView(view)
-
         (activity as DrawerActivity).getSupportActionBar()?.setTitle(frgement_type)
         return view
 
@@ -88,14 +90,18 @@ class NetworkFragment : Fragment() {
         tv_totalRightUsers = view.findViewById(R.id.tv_totalRightUsers)
         tv_totalAmountRightUsers = view.findViewById(R.id.tv_totalAmountRightUsers)
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
-        getviewData()
+        tv_sponser = view.findViewById(R.id.tv_sponser)
+
+        //getviewData()
 
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
-        adapter = DownMemberAdapter(activity!!, list) { obj ->
-            var intent = Intent(activity!!, MemberDetailActivity::class.java)
-            var json = Gson().toJson(obj)
-            intent.putExtra("object", json)
-            startActivity(intent)
+        adapter = DownMemberAdapter(activity!!, list, frgement_type) { obj ->
+            if (frgement_type != "MakeTable") {
+                var intent = Intent(activity!!, MemberDetailActivity::class.java)
+                var json = Gson().toJson(obj)
+                intent.putExtra("object", json)
+                startActivity(intent)
+            }
         }
 
         recylcer_down_member!!.adapter = adapter
@@ -103,13 +109,20 @@ class NetworkFragment : Fragment() {
         layout_add_left!!.setOnClickListener {
             layout_add_right!!.setBackgroundResource(R.color.colorGray);
             layout_add_left!!.setBackgroundResource(R.color.colorRed);
-            getAllDownlineMembersLeft()
+            if (frgement_type == "MakeTable")
+                getMakeTableLeft()
+            else{
+                getAllDownlineMembersLeft()
+                 }
 
         }
         layout_add_right!!.setOnClickListener {
             layout_add_left!!.setBackgroundResource(R.color.colorGray);
             layout_add_right!!.setBackgroundResource(R.color.colorRed);
-            getAllDownlineMembersRight()
+            if (frgement_type == "MakeTable")
+                getMakeTableRight()
+            else
+                getAllDownlineMembersRight()
         }
 
         add_left!!.setOnClickListener {
@@ -139,22 +152,34 @@ class NetworkFragment : Fragment() {
                 return false
             }
         })
-        getAllDownlineMembersRight()
         showViews()
+        if (frgement_type == "MakeTable")
+            //getMakeTableLeft()
+        else{
+            //getAllDownlineMembersLeft()
+
+        }
+
     }
 
     fun showViews() {
         if (frgement_type == "MakeTable") {
             add_left!!.visibility = View.VISIBLE
             add_right!!.visibility = View.VISIBLE
+            tv_sponser!!.setTextColor(getResources().getColor(R.color.colorWhite));
             fragment_title!!.text = "Down-line Members List"
+
         } else if (frgement_type == "DownlineMembers") {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
+
+            tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
             fragment_title!!.text = "Down-line Members List"
         } else {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
+            tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             fragment_title!!.text = "Refered Members List"
 
         }
@@ -166,7 +191,7 @@ class NetworkFragment : Fragment() {
         }
     }
 
-    /*get the data for cardviews*/
+
     fun getviewData() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
@@ -174,11 +199,12 @@ class NetworkFragment : Fragment() {
             return
         }
         progressdialog!!.show()
+
         ApiClint.getInstance()?.getService()?.getMaketableData("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<MakeTableData> {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
 
                     }
 
@@ -219,7 +245,7 @@ class NetworkFragment : Fragment() {
                 })
     }
 
-    //getDownLineRight
+    //<editor-fold desc="Downline member">
     fun getAllDownlineMembersRight() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
@@ -232,7 +258,83 @@ class NetworkFragment : Fragment() {
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.hide();
+                        progressdialog!!.dismiss();
+
+                    }
+
+                    override fun onResponse(call: Call<ArrayList<Users>>?, response: retrofit2.Response<ArrayList<Users>>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+
+                        if (code == 401) {
+                            Apputils.showMsg(activity!!, "Token Expired")
+                            tokenExpire();
+                        }
+                        if (code == 200) {
+                            response?.body()?.forEach { user ->
+                                list.add(user)
+                            }
+                            adapter!!.notifyDataSetChanged()
+                        }
+                        progressdialog!!.dismiss();
+
+
+                    }
+                })
+    }
+
+    fun getAllDownlineMembersLeft() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        list.clear()
+        progressdialog!!.show()
+        ApiClint.getInstance()?.getService()?.getAllDownlineMembersLeft("bearer " + token!!, id!!)
+                ?.enqueue(object : Callback<ArrayList<Users>> {
+                    override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss();
+
+                    }
+
+                    override fun onResponse(call: Call<ArrayList<Users>>?, response: retrofit2.Response<ArrayList<Users>>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+
+                        if (code == 401) {
+                            Apputils.showMsg(activity!!, "Token Expired")
+                            tokenExpire();
+                        }
+                        if (code == 200) {
+                            response?.body()?.forEach { user ->
+                                list.add(user)
+                            }
+                            adapter!!.notifyDataSetChanged()
+                        }
+                        progressdialog!!.dismiss();
+
+
+                    }
+                })
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Make Table">
+    fun getMakeTableRight() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        list.clear()
+        progressdialog!!.show()
+        ApiClint.getInstance()?.getService()?.getMakeTableRight("bearer " + token!!, id!!)
+                ?.enqueue(object : Callback<ArrayList<Users>> {
+                    override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss();
 
                     }
 
@@ -257,8 +359,7 @@ class NetworkFragment : Fragment() {
                 })
     }
 
-    //getDownLineRight
-    fun getAllDownlineMembersLeft() {
+    fun getMakeTableLeft() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
@@ -266,7 +367,7 @@ class NetworkFragment : Fragment() {
         }
         list.clear()
         progressdialog!!.show()
-        ApiClint.getInstance()?.getService()?.getAllDownlineMembersLeft("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.getMakeTableLeft("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
@@ -294,6 +395,7 @@ class NetworkFragment : Fragment() {
                     }
                 })
     }
+    //</editor-fold>
 
     //token expire
     fun tokenExpire() {

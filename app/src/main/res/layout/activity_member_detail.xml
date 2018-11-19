@@ -48,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mr Khan"
+
             android:textSize="20sp" />
 
         <TextView
@@ -108,7 +109,7 @@
                     android:layout_height="wrap_content"
                     style="@style/CustomBlacktextStyle"
                     android:layout_gravity="center"
-                    android:text="View Member"
+                    android:text="Preview"
                     />
                 <TextView
                     android:layout_width="wrap_content"

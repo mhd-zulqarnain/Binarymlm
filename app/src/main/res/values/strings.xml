@@ -10,7 +10,10 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="down_line_text"><u>Down-line Members List</u></string>
+    <string name="down_line_text">Down-line Members List</string>
+    <string name="wallet_summery_yearly">This Year</string>
+    <string name="wallet_summery_monthly">This Month</string>
+    <string name="wallet_summery_summery">Summery</string>
 
     <string-array name="spinner_country">
         <item>Select Country</item>

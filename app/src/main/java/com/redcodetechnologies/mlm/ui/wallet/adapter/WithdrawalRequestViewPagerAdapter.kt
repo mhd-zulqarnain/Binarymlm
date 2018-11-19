@@ -1,8 +1,12 @@
-package com.redcodetechnologies.mlm.ui.withdraw
+package com.redcodetechnologies.mlm.ui.wallet.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import com.redcodetechnologies.mlm.ui.wallet.withdraw.ApprovedPaidFragment
+import com.redcodetechnologies.mlm.ui.wallet.withdraw.ApprovedPendingPaymentFragment
+import com.redcodetechnologies.mlm.ui.wallet.withdraw.PendingWDRequestFragment
+import com.redcodetechnologies.mlm.ui.wallet.withdraw.RejectedRequestFragement
 
 class ViewPagerAdapterWD internal constructor(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
@@ -13,9 +17,9 @@ class ViewPagerAdapterWD internal constructor(fm: FragmentManager) : FragmentSta
 
         when (position) {
             0 -> fragment = PendingWDRequestFragment()
-            1 -> fragment = ApprovedPendingPayment()
-            2 -> fragment = ApprovedPaid()
-            3 -> fragment = RejectedRequests()
+            1 -> fragment = ApprovedPendingPaymentFragment()
+            2 -> fragment = ApprovedPaidFragment()
+            3 -> fragment = RejectedRequestFragement()
         }
 
         return fragment

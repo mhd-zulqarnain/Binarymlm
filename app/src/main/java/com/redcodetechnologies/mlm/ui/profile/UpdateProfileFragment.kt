@@ -1,16 +1,13 @@
 package com.redcodetechnologies.mlm.ui.profile
 
 
-import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.database.Cursor
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.text.Html
 import android.view.LayoutInflater
@@ -18,66 +15,97 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.NewUserRegistration
-import com.redcodetechnologies.mlm.models.Response
-import com.redcodetechnologies.mlm.utils.Apputils
-import com.redcodetechnologies.mlm.utils.ServiceError
-import com.redcodetechnologies.mlm.utils.ServiceListener
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
-import kotlinx.android.synthetic.main.fragment_first.*
+import android.graphics.Bitmap
+import android.net.Uri
+import android.util.Base64
+import com.redcodetechnologies.mlm.models.profile.ProfileSetting
+import de.hdodenhof.circleimageview.CircleImageView
+import java.io.ByteArrayOutputStream
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
-class FirstFragment : Fragment() {
-    private val CAMERA_INTENT = 555
+class UpdateProfileFragment : Fragment() {
+    private val SELECT_CAMERA_IMAGE = 555
     private val REQUSET_GALLERY_CODE: Int = 44
-    private val MY_PERMISSIONS_REQUEST_CAMERA = 999
-    var updateprofile : Button? = null
-    var uploadimage : Button?  = null
-    var name : EditText? = null
-    var username : EditText? = null
-    var address : EditText? = null
-    var spinner_country : SearchableSpinner? = null
-    var pref:SharedPrefs ? = null
-    lateinit var obj :NewUserRegistration;
+    private val SELECT_DOCUMENT_PHOTO = 999
+    private val SELECT_NIC_PHOTO = 39
+    var updateprofile: Button? = null
+    var name: EditText? = null
+    var username: EditText? = null
+    var address: EditText? = null
+    var ed_upload_document: EditText? = null
+    var ed_upload_nic: EditText? = null
+    var profile_image: CircleImageView? = null
+    var spinner_country: SearchableSpinner? = null
+    var pref: SharedPrefs? = null
+    lateinit var obj: NewUserRegistration;
+    var userdocumentImage: String? = null
+    var userNicImage: String? = null
+    var profileSetting: ProfileSetting = ProfileSetting()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_first, container, false)
 
         updateprofile = view.findViewById(R.id.btn_updateprofile)
-        uploadimage = view.findViewById(R.id.btn_upload_document)
         name = view.findViewById(R.id.ed_name)
         username = view.findViewById(R.id.ed_username)
         address = view.findViewById(R.id.ed_address)
+        ed_upload_document = view.findViewById(R.id.ed_upload_document)
+        ed_upload_nic = view.findViewById(R.id.ed_upload_nic)
         spinner_country = view.findViewById(R.id.spinner_country)
+        profile_image = view.findViewById(R.id.profile_image)
         pref = SharedPrefs.getInstance()
 
 
         initView()
-        updateprofile!!.setOnClickListener{
+        updateprofile!!.setOnClickListener {
 
             validiation()
         }
 
-        uploadimage!!.setOnClickListener{
-            supportImageDialoge()
+        ed_upload_document!!.setOnClickListener {
+            pickImage(SELECT_DOCUMENT_PHOTO)
+
+        }
+        ed_upload_nic!!.setOnClickListener {
+            pickImage(SELECT_NIC_PHOTO)
+        }
+        profile_image!!.setOnClickListener {
+            profileImageDialoge()
         }
 
+
         return view
-    } //onCreate().
+    }
 
+    fun pickImage(code: Int) {
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.setType("image/*")
+        startActivityForResult(photoPickerIntent, code)
+    }
 
+    private fun initView() {
+        obj = pref!!.getUser(activity!!)
+        var arrayAdapter = ArrayAdapter.createFromResource(activity!!, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
 
-     private fun supportImageDialoge() {
+        spinner_country!!.adapter = arrayAdapter
+        spinner_country!!.setTitle("Select Country");
+        spinner_country!!.setPositiveButton("Close");
+        spinner_country!!.setSelection(166)
+        name!!.setText(obj.name)
+        username!!.setText(obj.username)
+        address!!.setText(obj.address.toString())
+        if (obj.documentImage != null)
+            userdocumentImage = obj.documentImage.toString()
+
+//        if (obj.documentImage != null)
+//            userNicImage = obj.documentImage.toString()
+
+    }
+
+    private fun profileImageDialoge() {
         val view: View = LayoutInflater.from(activity!! as Context).inflate(R.layout.select_image_dialog, null)
         val alertBox = AlertDialog.Builder(activity!! as Context)
         alertBox.setView(view)
@@ -90,82 +118,122 @@ class FirstFragment : Fragment() {
         gallery_dialog.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
-            // intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            activity!!.startActivityForResult(intent, REQUSET_GALLERY_CODE)
+            startActivityForResult(intent, REQUSET_GALLERY_CODE)
             dialog.dismiss()
-        }
-        camera_dialog.setOnClickListener {
-
-
-            if (ContextCompat.checkSelfPermission(activity!! ,
-                            Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-
-                var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                activity!!.startActivityForResult(intent, CAMERA_INTENT)
-
-            } else {
-
-                Toast.makeText(activity!!, "Please Allow app to Use Camera of your Device", Toast.LENGTH_SHORT).show()
-            }
-            dialog.dismiss()
-
-
         }
 
         dialog.show()
     }
 
+    fun validiation() {
 
-
-    private fun initView() {
-        obj= pref!!.getUser(activity!!)
-        var arrayAdapter  =ArrayAdapter.createFromResource(activity!!,R.array.country_arrays,R.layout.support_simple_spinner_dropdown_item)
-
-        spinner_country!!.adapter = arrayAdapter
-        spinner_country!!.setTitle("Select Country");
-        spinner_country!!.setPositiveButton("Close");
-        spinner_country!!.setSelection(166)
-
-            spinner_country!!?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                }
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                        Toast.makeText(activity!!, ""+(spinner_country!!.selectedItemPosition+1), Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
-        name!!.setText(obj.name)
-        username!!.setText(obj.username)
-        address!!.setText(obj.address.toString())
-        spinner_country!!.setSelection(obj.country!!-1)
-
-
-
-
-    }
-
-
-
-    fun validiation(){
-
-        if(name!!.text.toString().trim(' ').length < 1) {
+        if (name!!.text.toString().trim(' ').length < 1) {
             name!!.error = Html.fromHtml("<font color='#E0796C'>Name could not be empty</font>")
             name!!.requestFocus()
+            return
+
         }
-        else if(username!!.text.toString().trim(' ').length < 1){
+        if (username!!.text.toString().trim(' ').length < 1) {
             username!!.error = Html.fromHtml("<font color='#E0796C'>User name could not be empty</font>")
             username!!.requestFocus()
+            return
+
         }
-        else if(address!!.text.toString().trim(' ').length < 1){
+        if (address!!.text.toString().trim(' ').length < 1) {
             address!!.error = Html.fromHtml("<font color='#E0796C'>Address could not be empty</font>")
             address!!.requestFocus()
+            return
+        }
+        if (userdocumentImage == null) {
+            ed_upload_document!!.error = Html.fromHtml("<font color='#E0796C'>Please upload document</font>")
+            ed_upload_document!!.requestFocus()
+            return
         }
 
-        else{
-            Toast.makeText(activity!!, "Profile has been Updated!" , Toast.LENGTH_LONG).show()
+        if (userNicImage == null) {
+            ed_upload_nic!!.error = Html.fromHtml("<font color='#E0796C'>Please upload Nic</font>")
+            ed_upload_nic!!.requestFocus()
+            return
+        }
+
+
+        var countryIndex = 0;
+        if (spinner_country!!.getSelectedItemPosition() != 0) {
+            countryIndex = spinner_country!!.getSelectedItemPosition() - 1
+        }
+
+        profileSetting.Name = name!!.text.toString()
+        profileSetting.Username = username!!.text.toString()
+        profileSetting.Address = address!!.text.toString()
+        profileSetting.Country = countryIndex
+        profileSetting.DocumentImage = userdocumentImage
+    }
+
+    private fun imageTostring(bitmap: Bitmap): String {
+        val outStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outStream)
+        val imageBytes = outStream.toByteArray()
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
+    }
+
+    fun getRealPathFromURI(context: Context, contentUri: Uri): String {
+        var cursor: Cursor? = null
+        try {
+            val proj = arrayOf<String>(MediaStore.Images.Media.DATA)
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null)
+            val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(column_index)
+        } finally {
+            if (cursor != null) {
+                cursor.close()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && data != null) {
+            val imageUri = data.data
+            var filename = "No Image found"
+
+            val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imageUri);
+            try {
+                val arr = getRealPathFromURI(activity!!, imageUri).split("/")
+                filename = arr[arr.size - 1]
+            } catch (e: Exception) {
+            }
+
+            when (requestCode) {
+                SELECT_DOCUMENT_PHOTO ->
+                    try {
+                        ed_upload_document!!.setText(filename)
+                        userdocumentImage = imageTostring(bitmap)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                SELECT_CAMERA_IMAGE ->
+                    try {
+                        userdocumentImage = imageTostring(bitmap)
+                        profile_image!!.setImageBitmap(bitmap)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                REQUSET_GALLERY_CODE ->
+                    try {
+                        userdocumentImage = imageTostring(bitmap)
+                        profile_image!!.setImageBitmap(bitmap)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                SELECT_NIC_PHOTO ->
+                    try {
+                        ed_upload_nic!!.setText(filename)
+                        userNicImage = imageTostring(bitmap)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+            }
         }
 
     }

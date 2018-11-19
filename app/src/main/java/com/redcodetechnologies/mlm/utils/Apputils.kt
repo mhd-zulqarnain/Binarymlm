@@ -6,6 +6,11 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.text.TextUtils
 import android.widget.Toast
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
+import java.io.ByteArrayOutputStream
+
 
 class Apputils {
     companion object {
@@ -29,7 +34,20 @@ class Apputils {
             }
             return netInfo != null && netInfo.isConnectedOrConnecting
         }
+
+        fun encodeToBase64(image: Bitmap): String {
+            val byteArrayOS = ByteArrayOutputStream()
+            image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOS)
+            return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT)
+        }
+        fun decodeFromBase64( img:String ): Bitmap {
+            var imageBytes = Base64.decode(img, Base64.DEFAULT)
+            val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+            return decodedImage
+        }
     }
+
+
 
 
 }
