@@ -24,6 +24,7 @@ import com.redcodetechnologies.mlm.ui.dashboard.DashBoardFragment
 import com.redcodetechnologies.mlm.ui.dashboard.SleepingDashboardFragment
 import com.redcodetechnologies.mlm.ui.geologytable.GeneologyTableFragment
 import com.redcodetechnologies.mlm.ui.network.NetworkFragment
+import com.redcodetechnologies.mlm.ui.network.downliners.DownlinerStatusFragment
 import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
 import com.redcodetechnologies.mlm.ui.profile.ProfileActivity
@@ -180,17 +181,22 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 if (groupPosition == 1) {
                     val gt: NetworkFragment = NetworkFragment()
                     if (childPosition == 0) {
-                        args.putString("Fragment", "MakeTable")
+                        args.putString("Fragment", "Add New Member")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 1) {
-                        args.putString("Fragment", "DownlineMembers")
+                        args.putString("Fragment", "Downline Members")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 2) {
-                        args.putString("Fragment", "ReferredMembers")
+                        args.putString("Fragment", "Direct Members")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                    }
+                    else if (childPosition == 3) {
+                        args.putString("Fragment", "Paid-unPaid Downliners")
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, DownlinerStatusFragment()).commit()
                     }
                 } else if (groupPosition == 2) {
 
@@ -298,9 +304,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Adding child data
 
         val network = ArrayList<String>()
-        network.add("Make Table")
+        network.add("Add new Member")
         network.add("Down-line Members")
-        network.add("Referred Members")
+        network.add("Direct Members")
+        network.add("Paid-unPaid Downliners")
 
         val gtable = ArrayList<String>()
         gtable.add("My Package Commision List")
