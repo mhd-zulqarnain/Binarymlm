@@ -62,8 +62,8 @@
             android:layout_height="30dp"
             android:layout_weight="0.5"
             android:text="Reply"
-            android:textColor="#058C09"
-            android:background="@drawable/buttons_border_circle"
+            android:textColor="#fff"
+            android:background="@drawable/button_circle_blue"
             android:textSize="12sp"
             android:layout_marginRight="10dp"
             />
@@ -74,8 +74,8 @@
             android:layout_height="30dp"
             android:layout_weight="0.5"
             android:text="Delete"
-            android:textColor="#ec1a1a"
-            android:background="@drawable/buttons_border_circle"
+            android:textColor="#fff"
+            android:background="@drawable/button_circle_red"
             android:textSize="12sp"
             />
     </LinearLayout>

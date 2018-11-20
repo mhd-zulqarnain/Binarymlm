@@ -240,18 +240,34 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/ed_upload_nic"
+            style="@style/ProfileEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/ic_add_document"
+            android:focusable="false"
+            android:hint="Upload Front Side of NIC"
+            android:imeOptions="actionNext" />
+    </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/ed_upload_nic"
+                android:id="@+id/ed_upload_nic_backside"
                 style="@style/ProfileEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableRight="@drawable/ic_add_document"
                 android:focusable="false"
-                android:hint="Upload your Nic"
+                android:hint="Upload Back Side of NIC"
                 android:imeOptions="actionNext" />
         </android.support.design.widget.TextInputLayout>
 

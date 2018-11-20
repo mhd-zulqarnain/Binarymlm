@@ -76,7 +76,7 @@
             android:id="@+id/btn_ok"
             android:clickable="true"
             android:textColor="#058C09"
-            android:background="@drawable/buttons_border_circle"
+            android:background="@drawable/button_circle_blue"
             android:textSize="13sp"
             android:text="Done"
             />
