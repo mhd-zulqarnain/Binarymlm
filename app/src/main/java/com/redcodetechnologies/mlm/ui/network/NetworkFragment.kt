@@ -92,7 +92,7 @@ class NetworkFragment : Fragment() {
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
         tv_sponser = view.findViewById(R.id.tv_sponser)
 
-        //getviewData()
+        getviewData()
 
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
         adapter = DownMemberAdapter(activity!!, list, frgement_type) { obj ->
@@ -154,9 +154,9 @@ class NetworkFragment : Fragment() {
         })
         showViews()
         if (frgement_type == "MakeTable")
-            //getMakeTableLeft()
+            getMakeTableLeft()
         else{
-            //getAllDownlineMembersLeft()
+            getAllDownlineMembersLeft()
 
         }
 
