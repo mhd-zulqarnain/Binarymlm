@@ -144,45 +144,46 @@ class AddMemberActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
-        //  getdownliner()
-// getPackages()
+        getdownliner()
+        getPackages()
     }
 
     //<editor-fold desc="Spinner package and downliner">
-    /*  private fun getPackages() {
-          listPackages.add(Packages("1", "--select--"))
+    private fun getPackages() {
+        listPackages.add(Packages("1", "--select--"))
 
-          ApiClint.getInstance()?.getService()?.getpackages()
-                  ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {
-                      override fun onFailure(call: Call<java.util.ArrayList<Packages>>?, t: Throwable?) {
-                          println("error")
-                          progressdialog!!.dismiss();
-                      }
+        ApiClint.getInstance()?.getService()?.getpackages()
+                ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {
+                    override fun onFailure(call: Call<java.util.ArrayList<Packages>>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss();
+                    }
 
-                      override fun onResponse(call: Call<java.util.ArrayList<Packages>>?, response: retrofit2.Response<java.util.ArrayList<Packages>>?) {
-                          print("object success ")
-                          var code: Int = response!!.code()
+                    override fun onResponse(call: Call<java.util.ArrayList<Packages>>?, response: retrofit2.Response<java.util.ArrayList<Packages>>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
 
-                          if (code == 401) {
-                              Apputils.showMsg(this@AddMemberActivity, "Token Expired")
-                              tokenExpire();
-                          }
-                          if (code == 200) {
-                              response?.body()?.forEach { user ->
-                                  listPackages.add(user)
-                              }
-                              if (response.body()!!.size == 0) {
-                                  //nnnn   listdownliner.add(DropDownMembers(0,"None"))
+                        if (code == 401) {
+                            Apputils.showMsg(this@AddMemberActivity, "Token Expired")
+                            tokenExpire();
+                        }
+                        if (code == 200) {
+                            response?.body()?.forEach { user ->
+                                listPackages.add(user)
+                            }
+                            if (response.body()!!.size == 0) {
+                                //nnnn   listdownliner.add(DropDownMembers(0,"None"))
 
-                              }
-                          }
-  //                        setpackagepinner()
-                          progressdialog!!.dismiss();
+                            }
+                        }
+                        //                        setpackagepinner()
+                        progressdialog!!.dismiss();
 
 
-                      }
-                  })
-      }*/
+                    }
+                })
+    }
+
     private fun getdownliner() {
 
         if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
@@ -350,20 +351,20 @@ class AddMemberActivity : AppCompatActivity() {
         if (spinner_country!!.getSelectedItemPosition() != 0) {
             countryIndex = spinner_country!!.getSelectedItemPosition() - 1
         }
-        userModel.Name = ed_name.text.toString()
-        userModel.Username = ed_uname.text.toString()
-        userModel.Password = ed_pass.text.toString()
-        userModel.Country = countryIndex
-        userModel.Address = ""
-        userModel.Phone = "+92" + ed_phone.text.toString()
-        userModel.Email = ed_email.text.toString()
-        userModel.AccountNumber = ""
-        userModel.Phone = ed_phone.text.toString()
-        userModel.DownlineMemberId = downlineMemberId
-        userModel.DocumentImage = userdocumentImage //from spinner
+        var mobile ="+92" + ed_phone.text.toString()
+        userModel.name = ed_name.text.toString()
+        userModel.username = ed_uname.text.toString()
+        userModel.password = ed_pass.text.toString()
+        userModel.country = countryIndex
+        userModel.address = ""
+        userModel.phone = mobile
+        userModel.email = ed_email.text.toString()
+        userModel.accountNumber = ""
+        userModel.downlineMemberId = downlineMemberId.toString()!!
+        userModel.documentImage = userdocumentImage!! //from spinner
 
 
-        confirmationDialog()
+       // confirmationDialog()
         if (type == "right") {
             addRightMember()
         } else {
@@ -397,7 +398,8 @@ class AddMemberActivity : AppCompatActivity() {
                             progressdialog!!.dismiss()
                             print("error")
                         }
-
+                        progressdialog!!.dismiss()
+                       // finish()
                     }
                 })
     }
@@ -438,20 +440,8 @@ class AddMemberActivity : AppCompatActivity() {
         alertBox.setView(view)
         alertBox.setCancelable(true)
         val dialog = alertBox.create()
-        val gallery_dialog: ImageView = view.findViewById(R.id.gallery_dialog)
-        val camera_dialog: ImageView = view.findViewById(R.id.camera_dialog)
 
-        gallery_dialog.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            startActivityForResult(intent, REQUSET_GALLERY_CODE)
-            dialog.dismiss()
-        }
-        camera_dialog.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//            startActivityForResult(intent, SELECT_CAMERA_IMAGE)
-            dialog.dismiss()
-        }
+
         dialog.show()
     }
 
