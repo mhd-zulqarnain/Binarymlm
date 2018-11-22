@@ -31,12 +31,14 @@ class UpdateProfileFragment : Fragment() {
     private val REQUSET_GALLERY_CODE: Int = 44
     private val SELECT_DOCUMENT_PHOTO = 999
     private val SELECT_NIC_PHOTO = 39
+    private val SELECT_NIC_BACKSIDE_PHOTO = 40
     var updateprofile: Button? = null
     var name: EditText? = null
     var username: EditText? = null
     var address: EditText? = null
     var ed_upload_document: EditText? = null
     var ed_upload_nic: EditText? = null
+    var ed_upload_nic_back : EditText? = null
     var profile_image: CircleImageView? = null
     var spinner_country: SearchableSpinner? = null
     var pref: SharedPrefs? = null
@@ -54,6 +56,7 @@ class UpdateProfileFragment : Fragment() {
         address = view.findViewById(R.id.ed_address)
         ed_upload_document = view.findViewById(R.id.ed_upload_document)
         ed_upload_nic = view.findViewById(R.id.ed_upload_nic)
+        ed_upload_nic_back = view.findViewById(R.id.ed_upload_nic_backside)
         spinner_country = view.findViewById(R.id.spinner_country)
         profile_image = view.findViewById(R.id.profile_image)
         pref = SharedPrefs.getInstance()
@@ -71,6 +74,9 @@ class UpdateProfileFragment : Fragment() {
         }
         ed_upload_nic!!.setOnClickListener {
             pickImage(SELECT_NIC_PHOTO)
+        }
+        ed_upload_nic_back!!.setOnClickListener {
+            pickImage(SELECT_NIC_BACKSIDE_PHOTO)
         }
         profile_image!!.setOnClickListener {
             profileImageDialoge()

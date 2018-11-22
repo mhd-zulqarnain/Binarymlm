@@ -63,7 +63,7 @@ class NetworkFragment : Fragment() {
             token = prefs.getToken(activity!!).accessToken!!
         }
         initView(view)
-        (activity as DrawerActivity).getSupportActionBar()?.setTitle(frgement_type)
+
         return view
 
     }
@@ -92,7 +92,7 @@ class NetworkFragment : Fragment() {
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
         tv_sponser = view.findViewById(R.id.tv_sponser)
 
-        //getviewData()
+        getviewData()
 
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
         adapter = DownMemberAdapter(activity!!, list, frgement_type) { obj ->
@@ -154,9 +154,9 @@ class NetworkFragment : Fragment() {
         })
         showViews()
         if (frgement_type == "MakeTable")
-            //getMakeTableLeft()
+            getMakeTableLeft()
         else{
-            //getAllDownlineMembersLeft()
+            getAllDownlineMembersLeft()
 
         }
 
@@ -167,20 +167,23 @@ class NetworkFragment : Fragment() {
             add_left!!.visibility = View.VISIBLE
             add_right!!.visibility = View.VISIBLE
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorWhite));
-            fragment_title!!.text = "Down-line Members List"
+            fragment_title!!.text = "Add new Member"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle( "Add new Member")
 
         } else if (frgement_type == "DownlineMembers") {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
 
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            fragment_title!!.text = "Down-line Members "
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle( "Down-line Members")
 
-            fragment_title!!.text = "Down-line Members List"
         } else {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            fragment_title!!.text = "Refered Members List"
+            fragment_title!!.text = "Direct Members"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle( "Direct Members")
 
         }
     }
@@ -190,7 +193,6 @@ class NetworkFragment : Fragment() {
             println("data " + data.data)
         }
     }
-
 
     fun getviewData() {
 

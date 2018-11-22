@@ -181,15 +181,15 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 if (groupPosition == 1) {
                     val gt: NetworkFragment = NetworkFragment()
                     if (childPosition == 0) {
-                        args.putString("Fragment", "Add New Member")
+                        args.putString("Fragment", "MakeTable")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 1) {
-                        args.putString("Fragment", "Downline Members")
+                        args.putString("Fragment", "DownlineMembers")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 2) {
-                        args.putString("Fragment", "Direct Members")
+                        args.putString("Fragment", "ReferredMembers") //Direct Members
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     }

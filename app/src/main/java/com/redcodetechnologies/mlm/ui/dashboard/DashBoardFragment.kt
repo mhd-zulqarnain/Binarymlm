@@ -73,7 +73,7 @@ class DashBoardFragment : Fragment() {
 
 
         initView(view)
-        //getviewData()
+        getviewData()
         return view
 
     }
@@ -117,7 +117,7 @@ class DashBoardFragment : Fragment() {
                 showBalanaceDialog(view)
             }
         }
-      //  getads()
+       getads()
     }
 
     private fun showBalanaceDialog(view: View) {
@@ -144,15 +144,9 @@ class DashBoardFragment : Fragment() {
                 pass.error = Html.fromHtml("<font color='#E0796C'>Password cant be null</font>")
                 pass.requestFocus()
             } else {
-                Toast.makeText(activity!!, "Under Process", Toast.LENGTH_SHORT).show()
-
-                //  var sucess: Boolean = false;
-
-                //sucess = true;
                 val password = prefs.getUser(activity!!).password
                 if (pass.text.toString() == password) {
-                    var GetEWalletSummarySponsorBonus: TextView = view.findViewById(R.id.GetEWalletSummarySponsorBonus)
-                    GetEWalletSummarySponsorBonus.visibility = View.VISIBLE
+                    GetEWalletSummarySponsorBonus!!.visibility = View.VISIBLE
                     dialog.dismiss()
                 } else {
                     Toast.makeText(activity!!, "Wrong-Password", Toast.LENGTH_SHORT).show()

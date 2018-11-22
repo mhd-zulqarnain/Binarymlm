@@ -77,10 +77,10 @@ interface RetrofiltService {
     //</editor-fold>
 
     //<editor-fold desc="Adding memeber in tree">
-    @POST("maketabledetails/{userid}")
+    @POST("addleftmembers/{userid}")
     @Headers("Content-Type:application/json")
     fun addLeftMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body obj: UserTree):  Call<Response>
-    @POST("maketabledetails/{userid}")
+    @POST("addrightmembers/{userid}")
     @Headers("Content-Type:application/json")
     fun addRightMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body  obj: UserTree):  Call<Response>
     //</editor-fold>

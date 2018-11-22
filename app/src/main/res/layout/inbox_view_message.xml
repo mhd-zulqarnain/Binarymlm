@@ -5,111 +5,119 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#00000000"
     android:orientation="vertical"
-
     >
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:weightSum="10"
-        android:orientation="vertical"
         android:background="@drawable/dialog_background"
+        android:orientation="vertical"
+        android:layout_margin="6dp"
         >
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/usser_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:weightSum="9"
-            android:layout_weight="10"
-            android:orientation="vertical"
-            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Sender Name"
+            android:textColor="#101010"
+            android:fontFamily="@font/ralewayregular"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1.9"
-                android:fontFamily="@font/ralewayregular"
-                android:text="Message"
-                android:textSize="25sp"
-                android:layout_gravity="center"
-                android:textColor="#313131"
-                />
-
-
-
-
-            <TextView
-                android:id="@+id/usser_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1.2"
-                android:text="Username "
-                android:textColor="#8D9EA7"
-                android:fontFamily="@font/ralewayregular"
-                android:textSize="15sp"
-                android:layout_marginBottom="10dp"
-                />
 
             <TextView
                 android:id="@+id/message"
                 android:layout_width="match_parent"
-                android:inputType="textEmailAddress"
-                android:layout_height="0dp"
-                android:layout_weight="4"
+                android:layout_height="wrap_content"
                 android:hint="Message Body"
-                android:maxLines="4"
-                android:singleLine="true"
                 android:textColor="#000"
                 android:textColorHint="#8A8A8A"
                 android:textSize="18sp"
                 android:imeOptions="actionDone"
                 android:background="@drawable/edittext_style1"
-                android:paddingLeft="20dp"
                 android:fontFamily="@font/ralewayregular"
-                android:paddingTop="3dp"
-                android:paddingBottom="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingBottom="20dp"
+                android:paddingLeft="5dp"
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1.8"
-                android:weightSum="2"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
-
-                <Button
-                    android:id="@+id/btn_submit"
-                    android:layout_width="0dp"
-                    android:layout_weight="1.2"
-                    android:gravity="center"
-                    android:layout_height="match_parent"
-                    android:background="#C42D2D"
-                    android:fontFamily="@font/ralewayregular"
-                    android:onClick="signIn"
-                    android:text="OK!"
-                    android:textColor="#FFFBFB"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+        </ScrollView>
 
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:layout_weight="0.8"
-                android:paddingBottom="20dp"
-                ></LinearLayout>
 
-        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="You"
+            android:textColor="#101010"
+            android:fontFamily="@font/ralewayregular"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            >
+
+
+        <EditText
+            android:id="@+id/rep_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Message Body"
+            android:textColor="#000"
+            android:textColorHint="#8A8A8A"
+            android:textSize="18sp"
+            android:background="@drawable/edittext_style1"
+            android:fontFamily="@font/ralewayregular"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="20dp"
+            android:paddingLeft="5dp"
+            />
+
+        </ScrollView>
+
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:background="#C42D2D"
+            android:fontFamily="@font/ralewayregular"
+            android:onClick="signIn"
+            android:text="Send"
+            android:textColor="#FFFBFB"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            />
+
+
+
+
     </LinearLayout>
+
+
+
+
+
+
+
 
 </LinearLayout>
