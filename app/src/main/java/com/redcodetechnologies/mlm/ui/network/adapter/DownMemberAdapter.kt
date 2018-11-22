@@ -1,6 +1,9 @@
 package com.redcodetechnologies.mlm.ui.network.adapter
 
 import android.content.Context
+import android.os.Build
+import android.support.annotation.RequiresApi
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +14,7 @@ import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.utils.CustomNameSearch
+
 
 class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgement_type:String, private val onClick:(Users)->Unit) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
     var customFilter: CustomNameSearch? = null
@@ -34,6 +38,7 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgemen
         return list.size
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: MyViewHolder, p1: Int) {
         holder.bindView(list[p1])
         holder.itemView.setOnClickListener {
@@ -48,10 +53,16 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgemen
         var tv_bank: TextView? = null
         var tv_sponser: TextView? = null
         var tv_paid: TextView? = null
+        var card_members: CardView? = null
 
         fun bindView(users: Users) {
+
+
+//            itemView.setClickable(true);
+
             tv_name = itemView.findViewById(R.id.tv_name)
             tv_phone = itemView.findViewById(R.id.tv_phone)
+            card_members = itemView.findViewById(R.id.card_members)
             tv_bank = itemView.findViewById(R.id.tv_bank)
             tv_sponser = itemView.findViewById(R.id.tv_sponser)
             tv_paid = itemView.findViewById(R.id.tv_paid)

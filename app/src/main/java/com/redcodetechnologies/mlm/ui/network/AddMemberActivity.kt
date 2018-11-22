@@ -282,6 +282,7 @@ class AddMemberActivity : AppCompatActivity() {
         downlinerAdapter = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
         spinner_downliner!!.adapter = downlinerAdapter;
     }
+
     /* fun setpackagepinner() {
 
          packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)

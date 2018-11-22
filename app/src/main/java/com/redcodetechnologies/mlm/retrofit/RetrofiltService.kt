@@ -1,6 +1,7 @@
 package com.redcodetechnologies.mlm.retrofit
 
 import com.redcodetechnologies.mlm.models.*
+import com.redcodetechnologies.mlm.models.profile.ProfileSetup
 import com.redcodetechnologies.mlm.models.users.DropDownMembers
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.models.users.UserTree
@@ -80,6 +81,7 @@ interface RetrofiltService {
     @POST("addleftmembers/{userid}")
     @Headers("Content-Type:application/json")
     fun addLeftMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body obj: UserTree):  Call<Response>
+
     @POST("addrightmembers/{userid}")
     @Headers("Content-Type:application/json")
     fun addRightMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body  obj: UserTree):  Call<Response>
@@ -128,6 +130,13 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getMyTableCommsionList(): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
+
+
+
+    @POST ("addprofilesetup/{userId}")
+    @Headers("Content-Type:application/json")
+    fun updateProfile(@Header("Authorization")auth:String,@Path("userId") userId: Int,@Body obj: ProfileSetup):  Call<Response>
+
 
     @GET ("gpenwdreq/overalllist/{userId}")
     @Headers("Content-Type:application/json")

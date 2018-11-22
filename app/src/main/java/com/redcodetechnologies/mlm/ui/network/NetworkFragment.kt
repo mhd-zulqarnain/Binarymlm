@@ -48,6 +48,8 @@ class NetworkFragment : Fragment() {
     var tv_totalAmountRightUsers: TextView? = null;
     var tv_totalAmountLeftUsers: TextView? = null;
     var tv_sponser: TextView? = null;
+    var tv_no_data: TextView? = null;
+
     lateinit var prefs: SharedPrefs
     var id: Int? = null
     lateinit var token: String
@@ -83,6 +85,7 @@ class NetworkFragment : Fragment() {
         recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
         search_view = view.findViewById(R.id.search_view)
         fragment_title = view.findViewById(R.id.fragment_title)
+        tv_no_data = view.findViewById(R.id.tv_no_data)
 
         tv_leftRemaingAmount = view.findViewById(R.id.tv_leftRemaingAmount)
         tv_rightRemaingAmount = view.findViewById(R.id.tv_rightRemaingAmount)
@@ -277,6 +280,15 @@ class NetworkFragment : Fragment() {
                                 list.add(user)
                             }
                             adapter!!.notifyDataSetChanged()
+
+                            if(list.size==0){
+                                recylcer_down_member!!.visibility= View.GONE
+                                tv_no_data!!.visibility=View.VISIBLE
+                            }else{
+                                tv_no_data!!.visibility=View.GONE
+                                recylcer_down_member!!.visibility= View.VISIBLE
+
+                            }
                         }
                         progressdialog!!.dismiss();
 
@@ -313,7 +325,17 @@ class NetworkFragment : Fragment() {
                             response?.body()?.forEach { user ->
                                 list.add(user)
                             }
+
                             adapter!!.notifyDataSetChanged()
+                            if(list.size==0){
+                                recylcer_down_member!!.visibility= View.GONE
+                                tv_no_data!!.visibility=View.VISIBLE
+                            }else{
+                                tv_no_data!!.visibility=View.GONE
+                                recylcer_down_member!!.visibility= View.VISIBLE
+
+                            }
+
                         }
                         progressdialog!!.dismiss();
 
@@ -353,6 +375,14 @@ class NetworkFragment : Fragment() {
                                 list.add(user)
                             }
                             adapter!!.notifyDataSetChanged()
+                            if(list.size==0){
+                                recylcer_down_member!!.visibility= View.GONE
+                                tv_no_data!!.visibility=View.VISIBLE
+                            }else{
+                                tv_no_data!!.visibility=View.GONE
+                                recylcer_down_member!!.visibility= View.VISIBLE
+
+                            }
                         }
                         progressdialog!!.hide();
 
@@ -390,6 +420,15 @@ class NetworkFragment : Fragment() {
                                 list.add(user)
                             }
                             adapter!!.notifyDataSetChanged()
+
+                            if(list.size==0){
+                                recylcer_down_member!!.visibility= View.GONE
+                                tv_no_data!!.visibility=View.VISIBLE
+                            }else{
+                                tv_no_data!!.visibility=View.GONE
+                                recylcer_down_member!!.visibility= View.VISIBLE
+
+                            }
                         }
                         progressdialog!!.hide();
 

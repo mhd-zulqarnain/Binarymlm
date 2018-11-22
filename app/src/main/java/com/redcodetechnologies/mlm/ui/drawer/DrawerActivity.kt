@@ -3,6 +3,8 @@ package com.redcodetechnologies.mlm.ui.drawer
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
@@ -10,6 +12,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Base64
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -34,8 +37,10 @@ import com.redcodetechnologies.mlm.ui.wallet.TransactionFragment
 import com.redcodetechnologies.mlm.ui.wallet.WithdrawalFundFragment
 import com.redcodetechnologies.mlm.ui.wallet.withdraw.MyWithdrawalRequestFragment
 import com.redcodetechnologies.mlm.utils.SharedPrefs
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var listDataHeader: ArrayList<String>? = null
@@ -79,6 +84,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     fun makeView() {
 
+
         val obj = mPref!!.getUser(this@DrawerActivity);
         if (obj.username != null)
             headerView.findViewById<TextView>(R.id.tv_username).setText(obj.username);
@@ -88,6 +94,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
         if (obj.userPackage != null)
             headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.userPackage.toString());
+        if (obj.profileImage != null){
+            var img = obj.profileImage
+            if (img!="")
+                headerView.findViewById<CircleImageView>(R.id.profile_image_citizen).setImageBitmap(stringtoImage(img.toString()))
+        }
     }
 
     override fun onBackPressed() {
@@ -514,4 +525,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         fragment!!.onActivityResult(requestCode, resultCode, data)
     }
 
+    fun stringtoImage(encodedString: String): Bitmap? {
+        try {
+            var encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            var bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
+            return bitmap;
+
+        } catch (e: Exception) {
+            return null
+        }
+    }
 }
