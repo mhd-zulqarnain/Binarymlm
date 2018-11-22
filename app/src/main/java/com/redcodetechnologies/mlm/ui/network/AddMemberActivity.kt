@@ -58,6 +58,7 @@ class AddMemberActivity : AppCompatActivity() {
     var package_price: String? = null
     var userPackage: String? = null
     var downlineMemberId: Int? = null
+    var downlineMemberName = "none"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -271,8 +272,10 @@ class AddMemberActivity : AppCompatActivity() {
                 if (pos != 0) {
                     var obj: DropDownMembers = spinner_downliner!!.getSelectedItem() as DropDownMembers
                     downlineMemberId = obj.UserId
+                    downlineMemberName = obj.Username!!
                 } else {
                     downlineMemberId = null
+                    downlineMemberName="none"
                 }
             }
         })
@@ -363,13 +366,7 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.downlineMemberId = downlineMemberId.toString()!!
         userModel.documentImage = userdocumentImage!! //from spinner
 
-
-       // confirmationDialog()
-        if (type == "right") {
-            addRightMember()
-        } else {
-            addLeftMember()
-        }
+        confirmationDialog()
 
     }
 
@@ -393,13 +390,20 @@ class AddMemberActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
                         var code: Int = response!!.code()
+                        var status=response.body()!!.success
+                        var msg=response.body()!!.message
                         if (code == 200) {
                         } else {
                             progressdialog!!.dismiss()
                             print("error")
                         }
+
                         progressdialog!!.dismiss()
-                       // finish()
+                        if(status!!){
+                             finish()
+                        }
+
+                        Apputils.showMsg(this@AddMemberActivity,msg!!)
                     }
                 })
     }
@@ -424,11 +428,20 @@ class AddMemberActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
                         var code: Int = response!!.code()
+                        var status=response.body()!!.success
+                        var msg=response.body()!!.message
                         if (code == 200) {
                         } else {
                             progressdialog!!.dismiss()
                             print("error")
                         }
+
+                        progressdialog!!.dismiss()
+                        if(status!!){
+                            finish()
+                        }
+
+                        Apputils.showMsg(this@AddMemberActivity,msg!!)
 
                     }
                 })
@@ -441,7 +454,32 @@ class AddMemberActivity : AppCompatActivity() {
         alertBox.setCancelable(true)
         val dialog = alertBox.create()
 
+        val btn_confirm= view.findViewById<Button>(R.id.btn_confirm)
+        val btn_cancel= view.findViewById<Button>(R.id.btn_cancel)
+        val tv_name= view.findViewById<TextView>(R.id.tv_name)
+        val tv_uname= view.findViewById<TextView>(R.id.tv_uname)
+        val tv_email= view.findViewById<TextView>(R.id.tv_email)
+        val tv_mbl= view.findViewById<TextView>(R.id.tv_mbl)
+        val tv_downliner= view.findViewById<TextView>(R.id.tv_downliner)
 
+        tv_name.setText(userModel.name.toString())
+        tv_uname.setText(userModel.username.toString())
+        tv_email.setText(userModel.email.toString())
+        tv_mbl.setText(userModel.phone.toString())
+        tv_downliner.setText(downlineMemberName)
+
+        btn_confirm.setOnClickListener{
+            if (type == "right") {
+                addRightMember()
+            } else {
+                addLeftMember()
+            }
+            dialog.dismiss()
+
+        }
+        btn_cancel.setOnClickListener{
+            dialog.dismiss()
+        }
         dialog.show()
     }
 
