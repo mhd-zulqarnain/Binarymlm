@@ -33,10 +33,15 @@ interface RetrofiltService {
     @GET("dashboard/{userid}")
     @Headers("Content-Type:application/json")
     fun getdashboardData(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<DasboardData>
+
     @GET("getAds")
     @Headers("Content-Type:application/json")
     fun getCoinData(): Observable<ArrayList<Advertisement>>
     //</editor-fold>
+
+    @GET("getuserunpaidmembersleftlist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getUserUnpaidMembersLeft(@Path("userId")  userid: Int): Observable<ArrayList<UserTree>>
 
     //<editor-fold desc="Make table ">
     @GET("getAllDownlineMembersRight/{userid}")
@@ -70,8 +75,6 @@ interface RetrofiltService {
     @GET("maketabledetails/{userid}")
     @Headers("Content-Type:application/json")
     fun getMaketableData(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<MakeTableData>
-
-
 
 
     //</editor-fold>
@@ -144,6 +147,7 @@ interface RetrofiltService {
     @GET ("rejreq/overalllist/{userId}")
     @Headers("Content-Type:application/json")
     fun getRejectedRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+
 
 
 
