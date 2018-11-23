@@ -137,18 +137,6 @@
             android:layout_height="1dp"
             android:background="#494A4B" />
 
-        <TextView
-            android:id="@+id/tv_no_data"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:fontFamily="@font/oswald_regular"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:text="No data found"
-            android:textColor="#cac4c4"
-            />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recylcer_down"

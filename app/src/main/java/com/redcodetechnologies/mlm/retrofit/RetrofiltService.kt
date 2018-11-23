@@ -89,33 +89,33 @@ interface RetrofiltService {
     //</editor-fold>
 
     //<editor-fold desc="Transaction">
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("wallet/overalllist/{userId}")
     @Headers("Content-Type:application/json")
-    fun getOverAllTransation(): Observable<ArrayList<TransactionModal>>
+    fun getOverAllTransation(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("wallet/thismonth/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMonthlyTransation(): Observable<ArrayList<TransactionModal>>
+    fun getMonthlyTransation(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
     // <editor-fold desc="E wallet Credit">
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("gwallet/overall/{userId}")
     @Headers("Content-Type:application/json")
-    fun getOverAllEWalletCredit(): Observable<ArrayList<TransactionModal>>
+    fun getOverAllEWalletCredit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("gwallet/thismonth/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMonthlyEWalletCredit(): Observable<ArrayList<TransactionModal>>
+    fun getMonthlyEWalletCredit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
     // <editor-fold desc="E wallet Debit">
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("ewalletdebit/overall/{userId}")
     @Headers("Content-Type:application/json")
-    fun getOverAllEWalletDebit(): Observable<ArrayList<TransactionModal>>
+    fun getOverAllEWalletDebit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("ewalletdebit/thismonth/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMonthlyEWalletDebit(): Observable<ArrayList<TransactionModal>>
+    fun getMonthlyEWalletDebit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
     //<editor-fold desc="Geneology">
@@ -135,15 +135,15 @@ interface RetrofiltService {
     //<editor-fold desc="summery wallet">
     @GET("ewalletsummary/summary/{userId}/")
     @Headers("Content-Type:application/json")
-    fun getSummery(@Path("email") email: String): Call<WalletSummery>
+    fun getSummery(@Path("userId") userId: String): Call<WalletSummery>
 
     @GET("ewalletsummary/summarymonthly/{userId}/")
     @Headers("Content-Type:application/json")
-    fun getSummerythisYear(@Path("email") email: String): Call<WalletSummery>
+    fun getSummerythisYear(@Path("userId") userId: String): Call<WalletSummery>
 
     @GET("ewalletsummary/summaryyearly/{userId}/")
     @Headers("Content-Type:application/json")
-    fun getSummerythismonth(@Path("email") email: String): Call<WalletSummery>
+    fun getSummerythismonth(@Path("userId") userId: String): Call<WalletSummery>
     //</editor-fold>
 
 

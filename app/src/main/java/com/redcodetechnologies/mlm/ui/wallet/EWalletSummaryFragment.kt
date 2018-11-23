@@ -14,11 +14,13 @@ import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.SharedPrefs
+import dmax.dialog.SpotsDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class EWalletSummaryFragment() : Fragment() {
+    var progressdialog: android.app.AlertDialog? = null
 
     lateinit var tv_bonus_summery_balance: TextView
     lateinit var tv_bonus_summery_bonus: TextView
@@ -49,6 +51,11 @@ class EWalletSummaryFragment() : Fragment() {
     }
 
     private fun initView(view: View) {
+        progressdialog = SpotsDialog.Builder()
+                .setContext(activity!!)
+                .setMessage("Loading!!")
+                .setTheme(R.style.CustomProgess)
+                .build()
 
         tv_bonus_summery_balance = view.findViewById(R.id.tv_bonus_summery_balance)
         tv_bonus_summery_bonus = view.findViewById(R.id.tv_bonus_summery_bonus)
@@ -57,9 +64,10 @@ class EWalletSummaryFragment() : Fragment() {
         tv_bonus_tm_bonus = view.findViewById(R.id.tv_bonus_tm_bonus)
         tv_bonus_tm_balance = view.findViewById(R.id.tv_bonus_tm_balance)
         getSummery()
-
+        getSummerythisYear()
+        getSummerythisYear()
+        getSummerythismonth()
     }
-
 
     fun getSummery() {
 
@@ -68,10 +76,12 @@ class EWalletSummaryFragment() : Fragment() {
             return
         }
 
+        progressdialog!!.show()
         ApiClint.getInstance()?.getService()?.getSummery(id!!)
                 ?.enqueue(object : Callback<WalletSummery> {
                     override fun onFailure(call: Call<WalletSummery>?, t: Throwable?) {
                         print("error")
+                        progressdialog!!.dismiss()
                     }
 
                     override fun onResponse(call: Call<WalletSummery>?, response: Response<WalletSummery>?) {
@@ -81,9 +91,70 @@ class EWalletSummaryFragment() : Fragment() {
                         if (code == 200 && response.body() != null) {
                             var obj: WalletSummery = response.body()!!
 
-                            tv_bonus_summery_balance.setText(obj.bonus)
-                            tv_bonus_summery_bonus.setText(obj.witdraw)
+                            tv_bonus_summery_bonus.setText(obj.bonus)
+                            tv_bonus_summery_balance.setText(obj.witdraw)
                         }
+                    }
+                })
+
+    }
+
+    fun getSummerythisYear() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        ApiClint.getInstance()?.getService()?.getSummerythisYear(id!!)
+                ?.enqueue(object : Callback<WalletSummery> {
+                    override fun onFailure(call: Call<WalletSummery>?, t: Throwable?) {
+                        print("error")
+                        progressdialog!!.dismiss()
+
+                    }
+
+                    override fun onResponse(call: Call<WalletSummery>?, response: Response<WalletSummery>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+
+                        if (code == 200 && response.body() != null) {
+                            var obj: WalletSummery = response.body()!!
+
+                            tv_bonus_ty_bonus.setText(obj.bonus)
+                            tv_bonus_ty_balance.setText(obj.witdraw)
+                        }
+                    }
+                })
+
+    }
+
+    fun getSummerythismonth() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        ApiClint.getInstance()?.getService()?.getSummerythismonth(id!!)
+                ?.enqueue(object : Callback<WalletSummery> {
+                    override fun onFailure(call: Call<WalletSummery>?, t: Throwable?) {
+                        print("error")
+                        progressdialog!!.dismiss()
+                    }
+
+                    override fun onResponse(call: Call<WalletSummery>?, response: Response<WalletSummery>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+
+                        if (code == 200 && response.body() != null) {
+                            var obj: WalletSummery = response.body()!!
+
+                            tv_bonus_tm_bonus.setText(obj.bonus)
+                            tv_bonus_tm_balance.setText(obj.witdraw)
+                        }
+                        progressdialog!!.dismiss()
+
                     }
                 })
 

@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="333" />
+                android:text="0" />
 
         </LinearLayout>
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Balance"
+                android:text="0"
                 android:textSize="20dp" />
 
         </LinearLayout>
@@ -140,7 +140,7 @@ android:id="@+id/tv_bonus_ty_bonus"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="333" />
+                android:text="0" />
 
         </LinearLayout>
 
@@ -166,7 +166,7 @@ android:id="@+id/tv_bonus_ty_bonus"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Balance"
+                android:text="0"
                 android:textSize="20dp" />
 
         </LinearLayout>
@@ -221,7 +221,7 @@ android:id="@+id/tv_bonus_ty_bonus"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="333" />
+                android:text="0" />
 
         </LinearLayout>
 
@@ -247,7 +247,7 @@ android:id="@+id/tv_bonus_ty_bonus"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Balance"
+                android:text="0"
                 android:textSize="20dp" />
 
         </LinearLayout>

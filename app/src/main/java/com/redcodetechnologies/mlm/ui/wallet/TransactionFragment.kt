@@ -15,6 +15,7 @@ import com.redcodetechnologies.mlm.ui.wallet.adapter.WalletAdapter
 import com.redcodetechnologies.mlm.models.wallet.TransactionModal
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.SharedPrefs
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,6 +31,7 @@ class TransactionFragment : Fragment() {
     var transactionList: ArrayList<TransactionModal> = ArrayList()
     var tv_header: TextView? = null
     var tv_source: TextView? = null
+    var tv_no_data: LinearLayout? = null
     var tv_name: TextView? = null
     var tv_amount: TextView? = null
     var transaction_filter_group: RadioGroup? = null
@@ -40,9 +42,19 @@ class TransactionFragment : Fragment() {
     var overAllDisposable: Disposable? = null
     var mothlyDisposable: Disposable? = null
 
+    lateinit var prefs: SharedPrefs
+    var id: Int? = null
+    lateinit var token: String
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_transaction, container, false)
+        prefs = SharedPrefs.getInstance()!!
+
+        if (prefs.getUser(activity!!).userId != null) {
+            id = prefs.getUser(activity!!).userId
+            token = prefs.getToken(activity!!).accessToken!!
+        }
 
         frgement_type = arguments?.getString("Fragment").toString();
         initView(view)
@@ -51,15 +63,12 @@ class TransactionFragment : Fragment() {
 
     private fun initView(view: View?) {
 
-        transactionList.add(TransactionModal())
-        transactionList.add(TransactionModal())
-        transactionList.add(TransactionModal())
-
         recylcer_down = view!!.findViewById(R.id.recylcer_walt_down)
         tv_header = view.findViewById(R.id.tv_walt_header)
         tv_source = view.findViewById(R.id.tv_walt_source)
         tv_name = view.findViewById(R.id.tv_walt_name)
         tv_amount = view.findViewById(R.id.tv_walt_amount)
+        tv_no_data = view.findViewById(R.id.tv_no_data)
         tv_date = view.findViewById(R.id.tv_walt_date)
         transaction_filter_group = view.findViewById(R.id.transaction_filter_group)
         month_limit_filter = view.findViewById(R.id.month_limit_filter)
@@ -78,11 +87,11 @@ class TransactionFragment : Fragment() {
                         if(overAllDisposable!=null)
                             overAllDisposable!!.dispose()
                         if(frgement_type=="wallet_transactions"){
-//                        getThisMonthTransactionList()
+                        getThisMonthTransactionList()
                         }else if(frgement_type=="wallet_credits"){
-//                        getThisMonthEWalletCreditList()
+                        getThisMonthEWalletCreditList()
                         }else if(frgement_type=="wallet_debits"){
-//                        getThisMonthEWalletDebitList()
+                        getThisMonthEWalletDebitList()
                         }
 
                     }
@@ -91,11 +100,11 @@ class TransactionFragment : Fragment() {
                         if(mothlyDisposable!=null)
                             mothlyDisposable!!.dispose()
                         if(frgement_type=="wallet_transactions"){
-                            //getOverAllTransactionList()
+                            getOverAllTransactionList()
                         }else if(frgement_type=="wallet_credits"){
-//                        getOverAllEWalletCreditList()
+                        getOverAllEWalletCreditList()
                         }else if(frgement_type=="wallet_debits"){
-//                        getOverAllEWalletDebittList()
+                        getOverAllEWalletDebittList()
                         }
 
                     }
@@ -116,6 +125,15 @@ class TransactionFragment : Fragment() {
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Debits")
         }
 
+        if(frgement_type=="wallet_transactions"){
+            getOverAllTransactionList()
+        }else if(frgement_type=="wallet_credits"){
+            getOverAllEWalletCreditList()
+        }else if(frgement_type=="wallet_debits"){
+            getOverAllEWalletDebittList()
+        }
+
+
     }
 
     //<editor-fold desc="Transactions">
@@ -127,7 +145,7 @@ class TransactionFragment : Fragment() {
 
         progressBar!!.visibility = View.VISIBLE
         val transactionObserver = getOverAllObserver()
-        var transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getOverAllTransation()
+        var transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getOverAllTransation(id!!)
         transactionObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(transactionObserver)
@@ -142,7 +160,7 @@ class TransactionFragment : Fragment() {
         }
         progressBar!!.visibility = View.VISIBLE
         val thisMonthtransaction = getThisMonthObserver()
-        val thismothObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMonthlyTransation()
+        val thismothObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMonthlyTransation(id!!)
         thismothObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(thisMonthtransaction)
@@ -160,7 +178,7 @@ class TransactionFragment : Fragment() {
 
         progressBar!!.visibility = View.VISIBLE
         val transactionObserver = getOverAllObserver()
-        var transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getOverAllEWalletDebit()
+        var transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getOverAllEWalletDebit(id!!)
         transactionObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(transactionObserver)
@@ -175,7 +193,7 @@ class TransactionFragment : Fragment() {
         }
         progressBar!!.visibility = View.VISIBLE
         val thisMonthtransaction = getThisMonthObserver()
-        val thismothObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMonthlyEWalletDebit()
+        val thismothObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMonthlyEWalletDebit(id!!)
         thismothObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(thisMonthtransaction)
@@ -191,7 +209,7 @@ class TransactionFragment : Fragment() {
 
         progressBar!!.visibility = View.VISIBLE
         val transactionObserver = getOverAllObserver()
-        var transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getOverAllEWalletCredit()
+        var transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getOverAllEWalletCredit(id!!)
         transactionObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(transactionObserver)
@@ -206,7 +224,7 @@ class TransactionFragment : Fragment() {
         }
         progressBar!!.visibility = View.VISIBLE
         val thisMonthtransaction = getThisMonthObserver()
-        val thismothObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMonthlyEWalletCredit()
+        val thismothObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMonthlyEWalletCredit(id!!)
         thismothObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(thisMonthtransaction)
@@ -227,6 +245,11 @@ class TransactionFragment : Fragment() {
             override fun onNext(t: ArrayList<TransactionModal>) {
                 t.forEach{transaction->
                     transactionList.add(transaction)
+                }
+                if(t.size==0){
+                    progressBar!!.visibility = View.GONE
+                    recylcer_down!!.visibility = View.GONE
+                    tv_no_data!!.visibility=View.VISIBLE
                 }
 
             }
