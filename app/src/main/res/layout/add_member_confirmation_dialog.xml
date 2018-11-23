@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -18,7 +19,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Verify the detail"
+            android:text="Verify the details"
             android:textSize="25sp" />
 
         <LinearLayout
@@ -154,12 +155,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="10dp"
             android:weightSum="2">
 
             <Button
+                android:id="@+id/btn_confirm"
                 style="@style/ConfirmationStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Confirm"
@@ -168,9 +171,10 @@
                 />
 
             <Button
+                android:id="@+id/btn_cancel"
                 style="@style/ConfirmationStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Cancel"

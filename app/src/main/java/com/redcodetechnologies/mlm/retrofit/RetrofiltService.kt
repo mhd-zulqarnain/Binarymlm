@@ -1,11 +1,13 @@
 package com.redcodetechnologies.mlm.retrofit
 
 import com.redcodetechnologies.mlm.models.*
+import com.redcodetechnologies.mlm.models.profile.ProfileSetup
 import com.redcodetechnologies.mlm.models.users.DropDownMembers
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.models.users.UserTree
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.models.wallet.TransactionModal
+import com.redcodetechnologies.mlm.models.wallet.WalletSummery
 import com.redcodetechnologies.mlm.models.wallet.WithdrawalRequestModal
 import io.reactivex.Observable
 import retrofit2.Call
@@ -80,57 +82,78 @@ interface RetrofiltService {
     //</editor-fold>
 
     //<editor-fold desc="Adding memeber in tree">
-    @POST("maketabledetails/{userid}")
+    @POST("addleftmembers/{userid}")
     @Headers("Content-Type:application/json")
     fun addLeftMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body obj: UserTree):  Call<Response>
-    @POST("maketabledetails/{userid}")
+
+    @POST("addrightmembers/{userid}")
     @Headers("Content-Type:application/json")
     fun addRightMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body  obj: UserTree):  Call<Response>
     //</editor-fold>
 
     //<editor-fold desc="Transaction">
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("wallet/overalllist/{userId}")
     @Headers("Content-Type:application/json")
-    fun getOverAllTransation(): Observable<ArrayList<TransactionModal>>
+    fun getOverAllTransation(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("wallet/thismonth/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMonthlyTransation(): Observable<ArrayList<TransactionModal>>
+    fun getMonthlyTransation(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
     // <editor-fold desc="E wallet Credit">
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("gwallet/overall/{userId}")
     @Headers("Content-Type:application/json")
-    fun getOverAllEWalletCredit(): Observable<ArrayList<TransactionModal>>
+    fun getOverAllEWalletCredit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("gwallet/thismonth/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMonthlyEWalletCredit(): Observable<ArrayList<TransactionModal>>
+    fun getMonthlyEWalletCredit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
     // <editor-fold desc="E wallet Debit">
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("ewalletdebit/overall/{userId}")
     @Headers("Content-Type:application/json")
-    fun getOverAllEWalletDebit(): Observable<ArrayList<TransactionModal>>
+    fun getOverAllEWalletDebit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("ewalletdebit/thismonth/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMonthlyEWalletDebit(): Observable<ArrayList<TransactionModal>>
+    fun getMonthlyEWalletDebit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
     //<editor-fold desc="Geneology">
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("GetUserCommission/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMyPackageComission(): Observable<ArrayList<TransactionModal>>
+    fun getMyPackageComission(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("GetUserDirectCommission/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMyDirectCommsionList(): Observable<ArrayList<TransactionModal>>
+    fun getMyDirectCommsionList(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("GetUserMatchingCommission/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMyTableCommsionList(): Observable<ArrayList<TransactionModal>>
+    fun getMyTableCommsionList(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
+
+    //<editor-fold desc="summery wallet">
+    @GET("ewalletsummary/summary/{userId}/")
+    @Headers("Content-Type:application/json")
+    fun getSummery(@Path("userId") userId: String): Call<WalletSummery>
+
+    @GET("ewalletsummary/summarymonthly/{userId}/")
+    @Headers("Content-Type:application/json")
+    fun getSummerythisYear(@Path("userId") userId: String): Call<WalletSummery>
+
+    @GET("ewalletsummary/summaryyearly/{userId}/")
+    @Headers("Content-Type:application/json")
+    fun getSummerythismonth(@Path("userId") userId: String): Call<WalletSummery>
+    //</editor-fold>
+
+
+    @POST ("addprofilesetup/{userId}")
+    @Headers("Content-Type:application/json")
+    fun updateProfile(@Header("Authorization")auth:String,@Path("userId") userId: Int,@Body obj: ProfileSetup):  Call<Response>
+
 
     @GET ("gpenwdreq/overalllist/{userId}")
     @Headers("Content-Type:application/json")

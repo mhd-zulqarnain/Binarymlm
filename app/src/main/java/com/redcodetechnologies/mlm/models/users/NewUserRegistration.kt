@@ -92,6 +92,9 @@ class NewUserRegistration {
     @SerializedName("NICImage")
     @Expose
     var nicImage: Any? = null
+    @SerializedName("NICImage1")
+    @Expose
+    var nicImage1: Any? = null
     @SerializedName("ProfileImage")
     @Expose
     var profileImage: Any? = null

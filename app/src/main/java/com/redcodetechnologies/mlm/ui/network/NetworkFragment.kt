@@ -48,6 +48,8 @@ class NetworkFragment : Fragment() {
     var tv_totalAmountRightUsers: TextView? = null;
     var tv_totalAmountLeftUsers: TextView? = null;
     var tv_sponser: TextView? = null;
+    var tv_no_data: TextView? = null;
+
     lateinit var prefs: SharedPrefs
     var id: Int? = null
     lateinit var token: String
@@ -63,7 +65,7 @@ class NetworkFragment : Fragment() {
             token = prefs.getToken(activity!!).accessToken!!
         }
         initView(view)
-        (activity as DrawerActivity).getSupportActionBar()?.setTitle(frgement_type)
+
         return view
 
     }
@@ -83,6 +85,7 @@ class NetworkFragment : Fragment() {
         recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
         search_view = view.findViewById(R.id.search_view)
         fragment_title = view.findViewById(R.id.fragment_title)
+        tv_no_data = view.findViewById(R.id.tv_no_data)
 
         tv_leftRemaingAmount = view.findViewById(R.id.tv_leftRemaingAmount)
         tv_rightRemaingAmount = view.findViewById(R.id.tv_rightRemaingAmount)
@@ -167,20 +170,23 @@ class NetworkFragment : Fragment() {
             add_left!!.visibility = View.VISIBLE
             add_right!!.visibility = View.VISIBLE
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorWhite));
-            fragment_title!!.text = "Down-line Members List"
+            fragment_title!!.text = "Add new Member"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle( "Add new Member")
 
         } else if (frgement_type == "DownlineMembers") {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
 
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            fragment_title!!.text = "Down-line Members "
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle( "Down-line Members")
 
-            fragment_title!!.text = "Down-line Members List"
         } else {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            fragment_title!!.text = "Refered Members List"
+            fragment_title!!.text = "Direct Members"
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle( "Direct Members")
 
         }
     }
@@ -190,7 +196,6 @@ class NetworkFragment : Fragment() {
             println("data " + data.data)
         }
     }
-
 
     fun getviewData() {
 
@@ -275,6 +280,15 @@ class NetworkFragment : Fragment() {
                                 list.add(user)
                             }
                             adapter!!.notifyDataSetChanged()
+
+                            if(list.size==0){
+                                recylcer_down_member!!.visibility= View.GONE
+                                tv_no_data!!.visibility=View.VISIBLE
+                            }else{
+                                tv_no_data!!.visibility=View.GONE
+                                recylcer_down_member!!.visibility= View.VISIBLE
+
+                            }
                         }
                         progressdialog!!.dismiss();
 
@@ -311,7 +325,17 @@ class NetworkFragment : Fragment() {
                             response?.body()?.forEach { user ->
                                 list.add(user)
                             }
+
                             adapter!!.notifyDataSetChanged()
+                            if(list.size==0){
+                                recylcer_down_member!!.visibility= View.GONE
+                                tv_no_data!!.visibility=View.VISIBLE
+                            }else{
+                                tv_no_data!!.visibility=View.GONE
+                                recylcer_down_member!!.visibility= View.VISIBLE
+
+                            }
+
                         }
                         progressdialog!!.dismiss();
 
@@ -351,6 +375,14 @@ class NetworkFragment : Fragment() {
                                 list.add(user)
                             }
                             adapter!!.notifyDataSetChanged()
+                            if(list.size==0){
+                                recylcer_down_member!!.visibility= View.GONE
+                                tv_no_data!!.visibility=View.VISIBLE
+                            }else{
+                                tv_no_data!!.visibility=View.GONE
+                                recylcer_down_member!!.visibility= View.VISIBLE
+
+                            }
                         }
                         progressdialog!!.hide();
 
@@ -388,6 +420,15 @@ class NetworkFragment : Fragment() {
                                 list.add(user)
                             }
                             adapter!!.notifyDataSetChanged()
+
+                            if(list.size==0){
+                                recylcer_down_member!!.visibility= View.GONE
+                                tv_no_data!!.visibility=View.VISIBLE
+                            }else{
+                                tv_no_data!!.visibility=View.GONE
+                                recylcer_down_member!!.visibility= View.VISIBLE
+
+                            }
                         }
                         progressdialog!!.hide();
 

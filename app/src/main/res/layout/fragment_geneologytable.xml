@@ -113,16 +113,38 @@
                 android:layout_height="35dp"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:id="@+id/tv_no_data"
+            >
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/oswald_regular"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:text="No data found"
+                android:textColor="#cac4c4"
+                />
+        </LinearLayout>
+
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="#494A4B" />
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recylcer_down"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="horizontal"
         android:layout_weight="4" />
+
     </LinearLayout>
 
 
