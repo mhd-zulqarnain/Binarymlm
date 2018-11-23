@@ -15,6 +15,7 @@ import com.redcodetechnologies.mlm.models.wallet.TransactionModal
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.SharedPrefs
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -34,26 +35,28 @@ class GeneologyTableFragment : Fragment() {
     lateinit var tv_name: TextView
     lateinit var tv_amount: TextView
     lateinit var tv_date: TextView
+    lateinit var tv_no_data: LinearLayout
     lateinit var progressBar: LinearLayout
 
+    var pref = SharedPrefs.getInstance();
+    var id:Int ?=null
     var comissionDisposable: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_geneologytable, container, false)
         frgement_type = arguments?.getString("Fragment").toString();
+        id= pref!!.getUser(activity!!).userId
         initView(view)
         return view
     }
 
     private fun initView(view: View) {
 
-        commitionlist.add(TransactionModal("Checque", "HBL", "9000", "12-10-2018"))
-        commitionlist.add(TransactionModal("Checque", "ABL", "9500", "17-10-2018"))
-        commitionlist.add(TransactionModal("Checque", "NBP", "9030", "19-10-2018"))
         recylcer_down = view.findViewById(R.id.recylcer_down)
         tv_action = view.findViewById(R.id.tv_tran_action)
         tv_header = view.findViewById(R.id.tv_header)
+        tv_no_data = view.findViewById(R.id.tv_no_data)
         tv_source = view.findViewById(R.id.tv_tran_source)
         tv_name = view.findViewById(R.id.tv_tran_name)
         tv_amount = view.findViewById(R.id.tv_tran_amount)
@@ -77,15 +80,18 @@ class GeneologyTableFragment : Fragment() {
             tv_date.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
             tv_action.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
             tv_header.text = " My Package Commision List"
+            getPackageCommisionList()
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Package Commision List")
         } else if (frgement_type == "MyDirectCommisionList") {
             tv_action.visibility = View.VISIBLE
             tv_header.text = " My Direct Commision List"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Direct Commision List")
+            getMyDirectCommsionList()
         } else {
             tv_action.visibility = View.VISIBLE
             tv_header.text = " My Table Commision List"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Table Commision List")
+            getMyTableCommsionList()
 
         }
     }
@@ -98,7 +104,7 @@ class GeneologyTableFragment : Fragment() {
 
         progressBar!!.visibility = View.VISIBLE
         val commisionObserver = getCommisionObserver()
-        val transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMyPackageComission()
+        val transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMyPackageComission(id!!)
         transactionObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(commisionObserver)
@@ -113,7 +119,7 @@ class GeneologyTableFragment : Fragment() {
 
         progressBar!!.visibility = View.VISIBLE
         val commisionObserver = getCommisionObserver()
-        val transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMyDirectCommsionList()
+        val transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMyDirectCommsionList(id!!)
         transactionObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(commisionObserver)
@@ -128,7 +134,7 @@ class GeneologyTableFragment : Fragment() {
 
         progressBar!!.visibility = View.VISIBLE
         val commisionObserver = getCommisionObserver()
-        val transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMyTableCommsionList()
+        val transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMyTableCommsionList(id!!)
         transactionObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(commisionObserver)
@@ -138,7 +144,7 @@ class GeneologyTableFragment : Fragment() {
     fun getCommisionObserver(): Observer<ArrayList<TransactionModal>> {
         return object : Observer<ArrayList<TransactionModal>> {
             override fun onComplete() {
-                progressBar!!.visibility = View.VISIBLE
+                progressBar!!.visibility = View.GONE
             }
 
             override fun onSubscribe(d: Disposable) {
@@ -149,7 +155,11 @@ class GeneologyTableFragment : Fragment() {
                 t.forEach { transaction ->
                     commitionlist.add(transaction)
                 }
-
+               if(t.size==0){
+                   progressBar.visibility = View.GONE
+                   recylcer_down!!.visibility = View.GONE
+                   tv_no_data.visibility=View.VISIBLE
+               }
             }
 
             override fun onError(e: Throwable) {

@@ -7,6 +7,7 @@ import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.models.users.UserTree
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.models.wallet.TransactionModal
+import com.redcodetechnologies.mlm.models.wallet.WalletSummery
 import com.redcodetechnologies.mlm.models.wallet.WithdrawalRequestModal
 import io.reactivex.Observable
 import retrofit2.Call
@@ -118,19 +119,32 @@ interface RetrofiltService {
     //</editor-fold>
 
     //<editor-fold desc="Geneology">
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("GetUserCommission/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMyPackageComission(): Observable<ArrayList<TransactionModal>>
+    fun getMyPackageComission(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("GetUserDirectCommission/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMyDirectCommsionList(): Observable<ArrayList<TransactionModal>>
+    fun getMyDirectCommsionList(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/overalllist/{userId}")
+    @GET ("GetUserMatchingCommission/{userId}")
     @Headers("Content-Type:application/json")
-    fun getMyTableCommsionList(): Observable<ArrayList<TransactionModal>>
+    fun getMyTableCommsionList(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
+    //<editor-fold desc="summery wallet">
+    @GET("ewalletsummary/summary/{userId}/")
+    @Headers("Content-Type:application/json")
+    fun getSummery(@Path("email") email: String): Call<WalletSummery>
+
+    @GET("ewalletsummary/summarymonthly/{userId}/")
+    @Headers("Content-Type:application/json")
+    fun getSummerythisYear(@Path("email") email: String): Call<WalletSummery>
+
+    @GET("ewalletsummary/summaryyearly/{userId}/")
+    @Headers("Content-Type:application/json")
+    fun getSummerythismonth(@Path("email") email: String): Call<WalletSummery>
+    //</editor-fold>
 
 
     @POST ("addprofilesetup/{userId}")

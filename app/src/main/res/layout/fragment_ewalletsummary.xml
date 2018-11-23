@@ -54,6 +54,7 @@
             <TextView
 
                 style="@style/WalletContentStyle"
+                android:id="@+id/tv_bonus_summery_bonus"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -78,6 +79,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tv_bonus_summery_balance"
                 style="@style/WalletContentStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -132,7 +134,7 @@
                 android:text="Bonus" />
 
             <TextView
-
+android:id="@+id/tv_bonus_ty_bonus"
                 style="@style/WalletContentStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -158,6 +160,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tv_bonus_ty_balance"
                 style="@style/WalletContentStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -212,7 +215,7 @@
                 android:text="Bonus" />
 
             <TextView
-
+                android:id="@+id/tv_bonus_tm_bonus"
                 style="@style/WalletContentStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -238,6 +241,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:id="@+id/tv_bonus_tm_balance"
                 style="@style/WalletContentStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
