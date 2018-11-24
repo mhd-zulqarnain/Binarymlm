@@ -36,6 +36,7 @@ class GeneologyTableFragment : Fragment() {
     lateinit var tv_amount: TextView
     lateinit var tv_date: TextView
     lateinit var tv_no_data: LinearLayout
+    lateinit var txt_warning: LinearLayout
     lateinit var progressBar: LinearLayout
 
     var pref = SharedPrefs.getInstance();
@@ -61,11 +62,16 @@ class GeneologyTableFragment : Fragment() {
         tv_name = view.findViewById(R.id.tv_tran_name)
         tv_amount = view.findViewById(R.id.tv_tran_amount)
         tv_date = view.findViewById(R.id.tv_tran_date)
+        txt_warning = view.findViewById(R.id.txt_warning)
         progressBar = view.findViewById(R.id.progressBar)
 
         recylcer_down!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = PackageCommisionListAdapter(activity!!, frgement_type, commitionlist) { obj ->
             //perform action
+        }
+
+        if(!pref!!.getUser(activity!!).isVerify!!){
+            txt_warning.visibility = View.VISIBLE
         }
         recylcer_down!!.adapter = adapter
         showViews()
