@@ -86,11 +86,14 @@
                 android:id="@+id/ed_username"
                 style="@style/ProfileEditTextStyle"
                 android:layout_width="match_parent"
-
                 android:layout_height="match_parent"
-                android:backgroundTint="#a0a1a1"
+                android:drawableRight="@drawable/ic_edit_black_24dp"
+                android:focusable="false"
                 android:fontFamily="@font/ralewayregular"
-                android:hint="Enter  User name" />
+                android:hint="User Name"
+                android:imeOptions="actionNext"
+
+                />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout

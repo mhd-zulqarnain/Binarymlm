@@ -146,10 +146,15 @@ interface RetrofiltService {
     fun getSummerythismonth(@Path("userId") userId: String): Call<WalletSummery>
     //</editor-fold>
 
-
+    //<editor-fold desc="Profile update">
     @POST ("addprofilesetup/{userId}")
     @Headers("Content-Type:application/json")
     fun updateProfile(@Header("Authorization")auth:String,@Path("userId") userId: Int,@Body obj: ProfileSetup):  Call<Response>
+
+    @POST ("newusername/{username}/{userId}")
+    @Headers("Content-Type:application/json")
+    fun updateUserName(@Header("Authorization")auth:String,@Path("username") username: String,@Path("userId") userId: Int):  Call<Response>
+    //</editor-fold>
 
 
     @GET ("gpenwdreq/overalllist/{userId}")

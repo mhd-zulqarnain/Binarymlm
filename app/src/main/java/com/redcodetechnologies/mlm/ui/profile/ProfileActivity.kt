@@ -28,6 +28,8 @@ import com.redcodetechnologies.mlm.models.profile.ProfileSetup
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.ServiceError
+import com.redcodetechnologies.mlm.utils.ServiceListener
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 import de.hdodenhof.circleimageview.CircleImageView
@@ -78,11 +80,24 @@ class ProfileActivity : AppCompatActivity() {
     var nicImg1: String = ""
     //</editor-fold>
 
+    var id: Int? = null
+    var token: String? = null
+    var prefs = SharedPrefs.getInstance()!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         btn_back.setOnClickListener {
+            setResult(Activity.RESULT_OK)
             finish()
+
+        }
+
+
+
+        if (prefs.getUser(this@ProfileActivity).userId != null) {
+            id = prefs.getUser(this@ProfileActivity).userId
+            token = prefs.getToken(this@ProfileActivity).accessToken!!
         }
 
         progressdialog = SpotsDialog.Builder()
@@ -119,7 +134,7 @@ class ProfileActivity : AppCompatActivity() {
             nicImg = obj.nicImage.toString()
             nicImg1 = obj.nicImage1.toString()
 
-            if (profileImg !=null)
+            if (profileImg!=null)
                 profile_image!!.setImageBitmap(stringtoImage(profileImg))
         }
         updateprofile!!.setOnClickListener {
@@ -139,22 +154,27 @@ class ProfileActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
-        ed_password!!.setOnClickListener{
+        ed_password!!.setOnClickListener {
             showChangePasswordDialog()
 
         }
+        ed_username!!.setOnClickListener {
+            showChangeUsernameDialog()
 
-         /*       setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                val DRAWABLE_RIGHT = 2
-                if (event!!.getAction() === MotionEvent.ACTION_UP) {
-                    if (event!!.getRawX() >= (ed_password!!.getRight() - ed_password!!.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        return true
-                    }
-                }
-                return false
-            }
-        })*/
+        }
+
+
+        /*       setOnTouchListener(object : View.OnTouchListener {
+           override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+               val DRAWABLE_RIGHT = 2
+               if (event!!.getAction() === MotionEvent.ACTION_UP) {
+                   if (event!!.getRawX() >= (ed_password!!.getRight() - ed_password!!.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                       return true
+                   }
+               }
+               return false
+           }
+       })*/
 
         ed_upload_document!!.setOnClickListener {
             pickImage(SELECT_DOCUMENT_PHOTO)
@@ -300,14 +320,6 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun updateProfile() {
-        var id: Int? = null
-        var token: String? = null
-
-        var prefs = SharedPrefs.getInstance()!!
-        if (prefs.getUser(this@ProfileActivity).userId != null) {
-            id = prefs.getUser(this@ProfileActivity).userId
-            token = prefs.getToken(this@ProfileActivity).accessToken!!
-        }
 
         if (!Apputils.isNetworkAvailable(this@ProfileActivity)) {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
@@ -339,7 +351,7 @@ class ProfileActivity : AppCompatActivity() {
                         if (status!!) {
                             updatePref()
                             finish()
-
+                            setResult(Activity.RESULT_OK)
                         }
 
                         Apputils.showMsg(this@ProfileActivity, msg!!)
@@ -367,6 +379,75 @@ class ProfileActivity : AppCompatActivity() {
         obj.nicImage1 = profileSetup.NICImage1
 
         pref!!.setUser(this@ProfileActivity, obj)
+    }
+
+    fun updateUsernamePref(username:String) {
+        obj.username = username
+
+        pref!!.setUser(this@ProfileActivity, obj)
+    }
+    fun updateUserName(service: ServiceListener<String>, username: String) {
+
+
+        if (!Apputils.isNetworkAvailable(this@ProfileActivity)) {
+            service.success(" Network error")
+            return
+        }
+
+        ApiClint.getInstance()?.getService()?.updateUserName("bearer " + token!!, username, id!!)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        service.success("Failed")
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var msg = response!!.body()!!.message
+                        if (msg != null)
+                            service.success(msg)
+                        else
+                            service.success("Error")
+
+                    }
+                })
+
+    }
+
+    private fun showChangeUsernameDialog() {
+        val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dialog_update_username, null)
+        val alertBox = AlertDialog.Builder(this@ProfileActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(true)
+        val dialog = alertBox.create()
+
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
+        val ed_username: EditText = view.findViewById(R.id.ed_username)
+        val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
+
+        val btn_verify: Button = view.findViewById(R.id.btn_verify)
+        btn_verify.setOnClickListener {
+
+            var username = ed_username.text.toString()
+            if (username != obj.username && username.trim() != "") {
+                progressBar.visibility = View.VISIBLE
+                alertBox.setCancelable(false)
+                updateUserName(object : ServiceListener<String> {
+                    override fun success(response: String) {
+                        Apputils.showMsg(this@ProfileActivity, response)
+                        dialog.dismiss()
+                        updateUsernamePref(username)
+                    }
+
+                    override fun fail(error: ServiceError) {
+                        dialog.dismiss()
+                    }
+
+                },username)
+            }
+        }
+        dialog.show()
     }
 
     private fun showChangePasswordDialog() {
@@ -409,6 +490,7 @@ class ProfileActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    //<editor-fold desc="Image handling">
     private fun profileImageDialoge() {
         val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.select_image_dialog, null)
         val alertBox = AlertDialog.Builder(this@ProfileActivity)
@@ -539,6 +621,7 @@ class ProfileActivity : AppCompatActivity() {
             return null
         }
     }
+    //</editor-fold>
 
 }
 

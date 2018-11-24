@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="6dp"
@@ -216,13 +214,13 @@
                         android:text="Show E-Wallet Balance" />
 
                     <TextView
+                        android:id="@+id/GetEWalletSummarySponsorBonus"
+                        style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="invisible"
-                        android:id="@+id/tv_wallet_balance"
                         android:text="50 PKR"
-                        style="@style/CustomBlacktextStyle"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -275,6 +273,70 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:orientation="horizontal"
+            android:weightSum="6">
+
+            <LinearLayout
+                android:id="@+id/ads_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/tv_show_ads"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" Advertisements"
+                    android:gravity="center|top"
+                    android:textSize="21sp"
+                    android:fontFamily="@font/ralewaybold"
+                    android:textColor="@color/colorWhite"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:background="#f4b72227"
+
+                    />
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="12dp"
+                    android:id="@+id/recylcer_adds"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbarThumbHorizontal="@drawable/custom_scroll"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical"
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Loading Advertisment!!"
+                    android:fontFamily="@font/oswald_regular"
+                    android:textColor="#cac4c4"
+                    android:textSize="20sp"
+                    />
+                <ProgressBar
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:layout_height="50dp"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
