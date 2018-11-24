@@ -17,13 +17,10 @@ import android.text.TextWatcher
 import android.util.Base64
 
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Response
-import com.redcodetechnologies.mlm.models.profile.PrivacySetting
-import com.redcodetechnologies.mlm.models.profile.ProfileSetting
 import com.redcodetechnologies.mlm.models.profile.ProfileSetup
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.retrofit.ApiClint
@@ -367,7 +364,7 @@ class ProfileActivity : AppCompatActivity() {
 
     fun updatePref() {
         var mbl = "+92" + phone!!.text.toString()
-        obj.name = profileSetup.Address
+        obj.name = profileSetup.Name
         obj.country = profileSetup.Country!!.toInt()
         obj.documentImage = profileSetup.DocumentImage
         obj.password = mPassword
@@ -383,7 +380,7 @@ class ProfileActivity : AppCompatActivity() {
 
     fun updateUsernamePref(username:String) {
         obj.username = username
-
+        ed_username!!.setText(username)
         pref!!.setUser(this@ProfileActivity, obj)
     }
     fun updateUserName(service: ServiceListener<String>, username: String) {

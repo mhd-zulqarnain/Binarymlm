@@ -157,21 +157,21 @@ interface RetrofiltService {
     //</editor-fold>
 
 
-    @GET ("gpenwdreq/overalllist/{userId}")
+    @GET ("GetEWalletPendingWithdrawalRequests/{userId}")
     @Headers("Content-Type:application/json")
-    fun getPendingWdRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+    fun getPendingWdRequest(@Path("userId") userId:Int): Observable<ArrayList<WithdrawalRequestModal>>
 
-    @GET ("gapppenwdreq/overalllist/{userId}")
+    @GET ("GetEWalletApprovedRequestPendingPayment/{userId}")
     @Headers("Content-Type:application/json")
-    fun getApprovedPendingWdRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+    fun getApprovedPendingWdRequest(@Path("userId") userId:Int): Observable<ArrayList<WithdrawalRequestModal>>
 
-    @GET ("getapppaid/overalllist/{userId}")
+    @GET ("GetEWalletApprovedRequestPaidPayment/{userId}")
     @Headers("Content-Type:application/json")
-    fun getApprovedPaid(): Observable<ArrayList<WithdrawalRequestModal>>
+    fun getApprovedPaid(@Path("userId") userId:Int): Observable<ArrayList<WithdrawalRequestModal>>
 
-    @GET ("rejreq/overalllist/{userId}")
+    @GET ("GetEWalletRejectedWithdrawalRequests/{userId}")
     @Headers("Content-Type:application/json")
-    fun getRejectedRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+    fun getRejectedRequest(@Path("userId") userId:Int): Observable<ArrayList<WithdrawalRequestModal>>
 
 
 

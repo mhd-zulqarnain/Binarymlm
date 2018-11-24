@@ -39,6 +39,7 @@
             android:layout_marginBottom="15dp"
             android:hint="Enter new username"
             android:textColor="#000"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
             android:textColorHint="#DDAAAAAA"
             android:inputType="text"
             android:maxLines="1"
