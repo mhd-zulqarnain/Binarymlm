@@ -49,10 +49,12 @@ class NetworkFragment : Fragment() {
     var tv_totalAmountLeftUsers: TextView? = null;
     var tv_sponser: TextView? = null;
     var tv_no_data: TextView? = null;
+    var tv_total: TextView? = null;
 
     lateinit var prefs: SharedPrefs
     var id: Int? = null
     lateinit var token: String
+    var total:Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -86,6 +88,7 @@ class NetworkFragment : Fragment() {
         search_view = view.findViewById(R.id.search_view)
         fragment_title = view.findViewById(R.id.fragment_title)
         tv_no_data = view.findViewById(R.id.tv_no_data)
+        tv_total = view.findViewById(R.id.tv_total)
 
         tv_leftRemaingAmount = view.findViewById(R.id.tv_leftRemaingAmount)
         tv_rightRemaingAmount = view.findViewById(R.id.tv_rightRemaingAmount)
@@ -278,12 +281,14 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
+                                total+=user.PaidAmount!!.toInt()
                             }
                             adapter!!.notifyDataSetChanged()
 
                             if(list.size==0){
                                 recylcer_down_member!!.visibility= View.GONE
                                 tv_no_data!!.visibility=View.VISIBLE
+                                tv_total!!.text="Total: 0"
                             }else{
                                 tv_no_data!!.visibility=View.GONE
                                 recylcer_down_member!!.visibility= View.VISIBLE
@@ -324,18 +329,19 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
+                                total+=user.PaidAmount!!.toInt()
                             }
-
                             adapter!!.notifyDataSetChanged()
+
                             if(list.size==0){
                                 recylcer_down_member!!.visibility= View.GONE
                                 tv_no_data!!.visibility=View.VISIBLE
+                                tv_total!!.text="Total: 0"
                             }else{
                                 tv_no_data!!.visibility=View.GONE
                                 recylcer_down_member!!.visibility= View.VISIBLE
 
                             }
-
                         }
                         progressdialog!!.dismiss();
 
@@ -373,11 +379,14 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
+                                total+=user.PaidAmount!!.toInt()
                             }
                             adapter!!.notifyDataSetChanged()
+
                             if(list.size==0){
                                 recylcer_down_member!!.visibility= View.GONE
                                 tv_no_data!!.visibility=View.VISIBLE
+                                tv_total!!.text="Total: 0"
                             }else{
                                 tv_no_data!!.visibility=View.GONE
                                 recylcer_down_member!!.visibility= View.VISIBLE
@@ -418,12 +427,14 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
+                                total+=user.PaidAmount!!.toInt()
                             }
                             adapter!!.notifyDataSetChanged()
 
                             if(list.size==0){
                                 recylcer_down_member!!.visibility= View.GONE
                                 tv_no_data!!.visibility=View.VISIBLE
+                                tv_total!!.text="Total: 0"
                             }else{
                                 tv_no_data!!.visibility=View.GONE
                                 recylcer_down_member!!.visibility= View.VISIBLE

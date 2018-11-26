@@ -26,7 +26,7 @@ interface RetrofiltService {
     fun getNewRegistoredUser(@Header("Authorization")auth:String,@Path("username") username: String): Call<NewUserRegistration>
 
     /*forget password*/
-    @GET("forgetpassword/{email}/")
+    @POST("forgetpassword/{email}/")
     @Headers("Content-Type:application/json")
     fun forgetPassword(@Path("email") email: String): Call<Response>
     //</editor-fold>

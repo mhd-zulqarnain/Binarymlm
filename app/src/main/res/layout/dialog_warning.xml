@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:background="#fff"
+                >
+               <ImageView
+                   android:layout_width="60dp"
+                   android:layout_height="60dp"
+                   android:src="@drawable/ic_error_outline_black_24dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="We are reviewing your account!!"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:fontFamily="@font/ralewayregular"
+                    />
+
+                <Button
+                    android:id="@+id/btn_ok"
+                    android:layout_margin="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:background="@color/colorRed"
+                    android:text="Ok"
+                    android:textColor="#fff"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+
+
+
+
+</LinearLayout>

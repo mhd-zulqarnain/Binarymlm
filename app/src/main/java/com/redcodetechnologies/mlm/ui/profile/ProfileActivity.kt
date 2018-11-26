@@ -38,7 +38,7 @@ import java.io.ByteArrayOutputStream
 
 
 class ProfileActivity : AppCompatActivity() {
-//    var adapter :ViewPagerAdapter?= null
+
 
     //<editor-fold desc="privacy">
     var ed_password: EditText? = null
@@ -65,9 +65,6 @@ class ProfileActivity : AppCompatActivity() {
     var ed_upload_nic_backside: EditText? = null
     var profile_image: CircleImageView? = null
     var spinner_country: SearchableSpinner? = null
-    var userdocumentImage: String? = null
-    var userNicImage: String? = null
-    var userNicImageBackside: String? = null
     var profileSetup: ProfileSetup = ProfileSetup()
     var mPassword: String = ""
     var progressdialog: android.app.AlertDialog? = null
@@ -75,6 +72,8 @@ class ProfileActivity : AppCompatActivity() {
     var profileImg: String = ""
     var nicImg: String = ""
     var nicImg1: String = ""
+    var userdocumentImage: String? = null
+
     //</editor-fold>
 
     var id: Int? = null
@@ -90,11 +89,13 @@ class ProfileActivity : AppCompatActivity() {
 
         }
 
-
-
         if (prefs.getUser(this@ProfileActivity).userId != null) {
             id = prefs.getUser(this@ProfileActivity).userId
             token = prefs.getToken(this@ProfileActivity).accessToken!!
+
+            if (prefs.getUser(this@ProfileActivity).isBlock!!) {
+                showWarningDialog()
+            }
         }
 
         progressdialog = SpotsDialog.Builder()
@@ -102,6 +103,8 @@ class ProfileActivity : AppCompatActivity() {
                 .setMessage("Loading!!")
                 .setTheme(R.style.CustomProgess)
                 .build()
+
+
         initView()
     }
 
@@ -131,13 +134,14 @@ class ProfileActivity : AppCompatActivity() {
             nicImg = obj.nicImage.toString()
             nicImg1 = obj.nicImage1.toString()
 
-            if (profileImg!=null)
+            if (profileImg != "" && profileImg != "null")
                 profile_image!!.setImageBitmap(stringtoImage(profileImg))
         }
         updateprofile!!.setOnClickListener {
 
             validiation()
         }
+
 
 
         phone!!.addTextChangedListener(object : TextWatcher {
@@ -159,7 +163,19 @@ class ProfileActivity : AppCompatActivity() {
             showChangeUsernameDialog()
 
         }
+        ed_accountnumber.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+                if (editable!!.length == 4 || editable.length == 15) {
+                    editable.append('-');
+                }
+            }
 
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
 
         /*       setOnTouchListener(object : View.OnTouchListener {
            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -195,22 +211,42 @@ class ProfileActivity : AppCompatActivity() {
         spinner_country!!.setSelection(166)
 
         if (obj.upperId != null) {
+            val u_email =if(obj.email.toString()=="null") "" else obj.email.toString()
+            val u_address =if(obj.address.toString()=="null") "" else obj.address.toString()
+            val u_bank =if(obj.bankName.toString()=="null") "" else obj.bankName.toString()
+            val u_account =if(obj.accountNumber.toString()=="null") "" else obj.accountNumber.toString()
+
             ed_password!!.setText(obj.password.toString())
-            bankname!!.setText(obj.bankName.toString())
-            accountnumber!!.setText(obj.accountNumber.toString())
-            email!!.setText(obj.email.toString())
+            bankname!!.setText(u_bank)
+            accountnumber!!.setText(u_account)
+            email!!.setText(u_email)
             mPassword = pref!!.getUser(this@ProfileActivity).password!!
             name!!.setText(obj.name)
             username!!.setText(obj.username)
-            address!!.setText(obj.address.toString())
+            address!!.setText(u_address)
             cleanMobileNumeber(obj.phone.toString())
 
-        } else {
-            ed_password!!.setText("12345678")
         }
-
         if (obj.documentImage != null)
             userdocumentImage = obj.documentImage.toString()
+
+    }
+
+    fun showWarningDialog() {
+        val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dialog_warning, null)
+        val alertBox = AlertDialog.Builder(this@ProfileActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(false)
+        val dialog = alertBox.create()
+
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
+
+        val btn_ok: Button = view.findViewById(R.id.btn_ok)
+        btn_ok.setOnClickListener {
+            dialog.dismiss()
+            finish()
+        }
+        dialog.show()
 
     }
 
@@ -281,11 +317,18 @@ class ProfileActivity : AppCompatActivity() {
                 return
             }
 
-            /* if (userNicImage == null) {
-                 ed_upload_nic!!.error = Html.fromHtml("<font color='#E0796C'>Please upload Nic</font>")
-                 ed_upload_nic!!.requestFocus()
-                 return
-             }*/
+            if (profileImg == "") {
+                Apputils.showMsg(this@ProfileActivity, "Please update profile picture")
+                return
+            }
+            if (nicImg == ""||nicImg=="null") {
+                Apputils.showMsg(this@ProfileActivity, "Please Upload Front Side of NIC")
+                return
+            }
+            if (nicImg1 == "" || nicImg1=="null") {
+                Apputils.showMsg(this@ProfileActivity, "Please Upload Back Side of NIC")
+                return
+            }
 
             var countryIndex = 0;
             if (spinner_country!!.getSelectedItemPosition() != 0) {
@@ -356,12 +399,6 @@ class ProfileActivity : AppCompatActivity() {
                 })
     }
 
-    fun pickImage(code: Int) {
-        val photoPickerIntent = Intent(Intent.ACTION_PICK)
-        photoPickerIntent.setType("image/*")
-        startActivityForResult(photoPickerIntent, code)
-    }
-
     fun updatePref() {
         var mbl = "+92" + phone!!.text.toString()
         obj.name = profileSetup.Name
@@ -369,20 +406,24 @@ class ProfileActivity : AppCompatActivity() {
         obj.documentImage = profileSetup.DocumentImage
         obj.password = mPassword
         obj.phone = mbl
+        obj.address = profileSetup.Address + " "
         obj.email = profileSetup.Email
         obj.bankName = profileSetup.BankName
         obj.accountNumber = profileSetup.AccountNumber
+        obj.profileImage = profileImg
         obj.nicImage = profileSetup.NICImage
         obj.nicImage1 = profileSetup.NICImage1
-
+        obj.isBlock=true
         pref!!.setUser(this@ProfileActivity, obj)
     }
 
-    fun updateUsernamePref(username:String) {
+    //<editor-fold desc="User name update">
+    fun updateUsernamePref(username: String) {
         obj.username = username
         ed_username!!.setText(username)
         pref!!.setUser(this@ProfileActivity, obj)
     }
+
     fun updateUserName(service: ServiceListener<String>, username: String) {
 
 
@@ -401,12 +442,18 @@ class ProfileActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
-                        var msg = response!!.body()!!.message
-                        if (msg != null)
-                            service.success(msg)
-                        else
-                            service.success("Error")
 
+                        var code = response!!.code()
+                        if (code == 200) {
+
+                            var msg = response!!.body()!!.message
+                            if (msg != null)
+                                service.success(msg)
+                            else
+                                service.success("Error")
+                        } else {
+                            service.success("Failed")
+                        }
                     }
                 })
 
@@ -441,11 +488,12 @@ class ProfileActivity : AppCompatActivity() {
                         dialog.dismiss()
                     }
 
-                },username)
+                }, username)
             }
         }
         dialog.show()
     }
+    //</editor-fold>
 
     private fun showChangePasswordDialog() {
         val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dilalog_new_pass, null)
@@ -488,6 +536,12 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     //<editor-fold desc="Image handling">
+    fun pickImage(code: Int) {
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.setType("image/*")
+        startActivityForResult(photoPickerIntent, code)
+    }
+
     private fun profileImageDialoge() {
         val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.select_image_dialog, null)
         val alertBox = AlertDialog.Builder(this@ProfileActivity)
@@ -597,7 +651,7 @@ class ProfileActivity : AppCompatActivity() {
                         } catch (e: Exception) {
                         }
                         ed_upload_nic_backside!!.setText(filename)
-                        nicImg = imageTostring(bitmap)
+                        nicImg1 = imageTostring(bitmap)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }

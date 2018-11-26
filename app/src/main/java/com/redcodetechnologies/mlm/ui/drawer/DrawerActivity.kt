@@ -97,11 +97,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             headerView.findViewById<TextView>(R.id.tv_email).setText(obj.email);
         if (obj.userDesignation != null)
             headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
-        if (obj.userPackage != null)
-            headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.userPackage.toString());
+        if (obj.phone != null)
+            headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.phone.toString());
         if (obj.profileImage != null){
             var img = obj.profileImage
-            if (img!="")
+            if (img!=""&&img!="null")
                 headerView.findViewById<CircleImageView>(R.id.profile_image_citizen).setImageBitmap(stringtoImage(img.toString()))
         }
     }
