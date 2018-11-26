@@ -54,7 +54,7 @@ class NetworkFragment : Fragment() {
     lateinit var prefs: SharedPrefs
     var id: Int? = null
     lateinit var token: String
-    var total:Int = 0
+    var total: Double = 0.0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -115,16 +115,18 @@ class NetworkFragment : Fragment() {
         layout_add_left!!.setOnClickListener {
             layout_add_right!!.setBackgroundResource(R.color.colorGray);
             layout_add_left!!.setBackgroundResource(R.color.colorRed);
+            total = 0.0
             if (frgement_type == "MakeTable")
                 getMakeTableLeft()
-            else{
+            else {
                 getAllDownlineMembersLeft()
-                 }
+            }
 
         }
         layout_add_right!!.setOnClickListener {
             layout_add_left!!.setBackgroundResource(R.color.colorGray);
             layout_add_right!!.setBackgroundResource(R.color.colorRed);
+            total = 0.0
             if (frgement_type == "MakeTable")
                 getMakeTableRight()
             else
@@ -134,6 +136,7 @@ class NetworkFragment : Fragment() {
         add_left!!.setOnClickListener {
             var intent = Intent(activity!!, AddMemberActivity::class.java)
             intent.putExtra("type", "left")
+
             activity!!.startActivity(intent)
 //            showDialog("left")
         }
@@ -161,7 +164,7 @@ class NetworkFragment : Fragment() {
         showViews()
         if (frgement_type == "MakeTable")
             getMakeTableLeft()
-        else{
+        else {
             getAllDownlineMembersLeft()
 
         }
@@ -174,7 +177,7 @@ class NetworkFragment : Fragment() {
             add_right!!.visibility = View.VISIBLE
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorWhite));
             fragment_title!!.text = "Add new Member"
-            (activity as DrawerActivity).getSupportActionBar()?.setTitle( "Add new Member")
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Add new Member")
 
         } else if (frgement_type == "DownlineMembers") {
             add_left!!.visibility = View.GONE
@@ -182,14 +185,14 @@ class NetworkFragment : Fragment() {
 
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             fragment_title!!.text = "Down-line Members "
-            (activity as DrawerActivity).getSupportActionBar()?.setTitle( "Down-line Members")
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Down-line Members")
 
         } else {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             fragment_title!!.text = "Direct Members"
-            (activity as DrawerActivity).getSupportActionBar()?.setTitle( "Direct Members")
+            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Direct Members")
 
         }
     }
@@ -281,17 +284,17 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
-                                total+=user.PaidAmount!!.toInt()
+                                total += user.PaidAmount!!.toInt()
                             }
                             adapter!!.notifyDataSetChanged()
 
-                            if(list.size==0){
-                                recylcer_down_member!!.visibility= View.GONE
-                                tv_no_data!!.visibility=View.VISIBLE
-                                tv_total!!.text="Total: 0"
-                            }else{
-                                tv_no_data!!.visibility=View.GONE
-                                recylcer_down_member!!.visibility= View.VISIBLE
+                            if (list.size == 0) {
+                                recylcer_down_member!!.visibility = View.GONE
+                                tv_no_data!!.visibility = View.VISIBLE
+                                tv_total!!.text = "Total: 0"
+                            } else {
+                                tv_no_data!!.visibility = View.GONE
+                                recylcer_down_member!!.visibility = View.VISIBLE
 
                             }
                         }
@@ -329,17 +332,17 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
-                                total+=user.PaidAmount!!.toInt()
+                                total += user.PaidAmount!!.toInt()
                             }
                             adapter!!.notifyDataSetChanged()
 
-                            if(list.size==0){
-                                recylcer_down_member!!.visibility= View.GONE
-                                tv_no_data!!.visibility=View.VISIBLE
-                                tv_total!!.text="Total: 0"
-                            }else{
-                                tv_no_data!!.visibility=View.GONE
-                                recylcer_down_member!!.visibility= View.VISIBLE
+                            if (list.size == 0) {
+                                recylcer_down_member!!.visibility = View.GONE
+                                tv_no_data!!.visibility = View.VISIBLE
+                                tv_total!!.text = "Total: 0"
+                            } else {
+                                tv_no_data!!.visibility = View.GONE
+                                recylcer_down_member!!.visibility = View.VISIBLE
 
                             }
                         }
@@ -379,17 +382,17 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
-                                total+=user.PaidAmount!!.toInt()
+                                total += user.PaidAmount!!.toDouble()
                             }
                             adapter!!.notifyDataSetChanged()
 
-                            if(list.size==0){
-                                recylcer_down_member!!.visibility= View.GONE
-                                tv_no_data!!.visibility=View.VISIBLE
-                                tv_total!!.text="Total: 0"
-                            }else{
-                                tv_no_data!!.visibility=View.GONE
-                                recylcer_down_member!!.visibility= View.VISIBLE
+                            if (list.size == 0) {
+                                recylcer_down_member!!.visibility = View.GONE
+                                tv_no_data!!.visibility = View.VISIBLE
+                                tv_total!!.text = "Total: 0"
+                            } else {
+                                tv_no_data!!.visibility = View.GONE
+                                recylcer_down_member!!.visibility = View.VISIBLE
 
                             }
                         }
@@ -427,17 +430,17 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
-                                total+=user.PaidAmount!!.toInt()
+                                total += user.PaidAmount!!.toDouble()
                             }
                             adapter!!.notifyDataSetChanged()
 
-                            if(list.size==0){
-                                recylcer_down_member!!.visibility= View.GONE
-                                tv_no_data!!.visibility=View.VISIBLE
-                                tv_total!!.text="Total: 0"
-                            }else{
-                                tv_no_data!!.visibility=View.GONE
-                                recylcer_down_member!!.visibility= View.VISIBLE
+                            if (list.size == 0) {
+                                recylcer_down_member!!.visibility = View.GONE
+                                tv_no_data!!.visibility = View.VISIBLE
+                                tv_total!!.text = "Total: 0"
+                            } else {
+                                tv_no_data!!.visibility = View.GONE
+                                recylcer_down_member!!.visibility = View.VISIBLE
 
                             }
                         }

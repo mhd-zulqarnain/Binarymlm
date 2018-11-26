@@ -78,6 +78,7 @@ class RejectedRequestFragement : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(thisMonthtransaction)
     }
+
     fun getThisMonthObserver(): Observer<ArrayList<WithdrawalRequestModal>> {
         return object : Observer<ArrayList<WithdrawalRequestModal>> {
             override fun onComplete() {
