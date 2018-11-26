@@ -74,8 +74,6 @@ interface RetrofiltService {
     fun getMaketableData(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<MakeTableData>
 
 
-
-
     //</editor-fold>
 
     //<editor-fold desc="Adding memeber in tree">
@@ -155,6 +153,16 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun updateUserName(@Header("Authorization")auth:String,@Path("username") username: String,@Path("userId") userId: Int):  Call<Response>
     //</editor-fold>
+
+    @POST ("approvesaleexecutive/{userId}")
+    @Headers("Content-Type:application/json")
+    fun approvesaleexecutive(@Header("Authorization")auth:String,@Path("userId") userId: Int):  Call<Response>
+
+    @POST ("approvesleepingpartner/{userId}")
+    @Headers("Content-Type:application/json")
+    fun approvesleepingpartner(@Header("Authorization")auth:String,@Path("userId") userId: Int):  Call<Response>
+
+
 
 
     @GET ("GetEWalletPendingWithdrawalRequests/{userId}")
