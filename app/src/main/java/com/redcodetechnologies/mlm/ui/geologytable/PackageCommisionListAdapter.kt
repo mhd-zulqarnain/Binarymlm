@@ -54,10 +54,10 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
                 tv_date!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
                 btn_ok!!.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
             }
-                /*tv_source!!.text = packagecommisionlist.tran_source
-                tv_name!!.text = packagecommisionlist.tran_name
-                tv_amount!.text = packagecommisionlist.amount
-                tv_date!!.text = packagecommisionlist.tran_date*/
+                tv_source!!.text = packagecommisionlist.TransactionSource
+                tv_name!!.text = packagecommisionlist.TransactionName
+                tv_amount!!.text = packagecommisionlist.Amount
+                tv_date!!.text = packagecommisionlist.TransactionDate
 
 
             //  tv_price!!.text = order.BitPrice!

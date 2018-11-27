@@ -56,7 +56,9 @@ class SleepingDashboardFragment : Fragment() {
         }
 
         progressBar = view.findViewById(R.id.progressBar)
-        adapter=AdvertismentAdapter(activity!!, "", adsList)
+        adapter=AdvertismentAdapter(activity!!, "", adsList){ads->
+
+        }
         val manager = LinearLayoutManager(activity!!, LinearLayout.HORIZONTAL, false)
         recycler_adds!!.layoutManager = manager
         recycler_adds!!.adapter = adapter

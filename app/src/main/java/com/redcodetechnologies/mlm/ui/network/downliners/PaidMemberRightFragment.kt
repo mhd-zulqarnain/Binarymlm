@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,8 @@ class PaidMemberRightFragment : Fragment() {
     lateinit var tv_total: TextView
     var total: Double = 0.0
 
+    var search_view: SearchView? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -76,7 +79,23 @@ class PaidMemberRightFragment : Fragment() {
         recylcer_wd = view!!.findViewById(R.id.recylcer_down_member)
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = StatusAdapter(activity!!, wdList)
+
         recylcer_wd!!.adapter = adapter
+        search_view = view.findViewById(R.id.search_view)
+        search_view!!.setOnClickListener {
+            search_view!!.setIconified(false)
+        }
+
+        search_view!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                adapter!!.getFilter().filter(query)
+                return false
+            }
+        })
 
         getUsersData()
     }

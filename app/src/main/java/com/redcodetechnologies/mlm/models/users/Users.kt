@@ -9,5 +9,4 @@ data class Users(var UserId: String? = null,
                  var SponsorId: String? = null,
                  var PaidAmount: String? = null,
                  var SponsorName: String? = null
-
 )

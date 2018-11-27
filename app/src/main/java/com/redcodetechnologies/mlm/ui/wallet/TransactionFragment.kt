@@ -235,7 +235,7 @@ class TransactionFragment : Fragment() {
     fun getOverAllObserver(): Observer<ArrayList<TransactionModal>> {
         return object : Observer<ArrayList<TransactionModal>> {
             override fun onComplete() {
-                progressBar!!.visibility = View.VISIBLE
+                progressBar!!.visibility = View.GONE
             }
 
             override fun onSubscribe(d: Disposable) {
@@ -246,6 +246,7 @@ class TransactionFragment : Fragment() {
                 t.forEach{transaction->
                     transactionList.add(transaction)
                 }
+                adapter!!.notifyDataSetChanged()
                 if(t.size==0){
                     progressBar!!.visibility = View.GONE
                     recylcer_down!!.visibility = View.GONE
@@ -256,6 +257,9 @@ class TransactionFragment : Fragment() {
 
             override fun onError(e: Throwable) {
                 println("error")
+                progressBar!!.visibility = View.GONE
+                recylcer_down!!.visibility = View.GONE
+                tv_no_data!!.visibility=View.VISIBLE
             }
 
         }
@@ -275,10 +279,19 @@ class TransactionFragment : Fragment() {
                 t?.forEach{tranactions->
                     transactionList.add(tranactions)
                 }
+                adapter!!.notifyDataSetChanged()
+                if(t.size==0){
+                    progressBar!!.visibility = View.GONE
+                    recylcer_down!!.visibility = View.GONE
+                    tv_no_data!!.visibility=View.VISIBLE
+                }
             }
 
             override fun onError(e: Throwable) {
                 println("error")
+                progressBar!!.visibility = View.GONE
+                recylcer_down!!.visibility = View.GONE
+                tv_no_data!!.visibility=View.VISIBLE
             }
         }
     }

@@ -41,10 +41,10 @@ class WalletAdapter(var ctx: Context, var type: String, var list: ArrayList<Tran
             tv_date = itemView.findViewById(R.id.tv_walt_date)
 
 
-            tv_source!!.text = "test source"
-            tv_name!!.text ="test name"
-            tv_amount!!.text ="1000"
-            tv_date!!.text = "10-3-2123"
+            tv_source!!.text =walletmodal.TransactionSource
+            tv_name!!.text =walletmodal.TransactionName
+            tv_amount!!.text =walletmodal.Amount
+            tv_date!!.text = walletmodal.TransactionDate
 
 
             //  tv_price!!.text = order.BitPrice

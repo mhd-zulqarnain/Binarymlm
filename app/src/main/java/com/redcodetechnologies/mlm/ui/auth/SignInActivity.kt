@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import com.google.firebase.iid.FirebaseInstanceId
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.utils.Apputils
@@ -46,6 +47,8 @@ class SignInActivity : AppCompatActivity() {
                 .build()
 
         tv_forgetpassword.setText(content)
+        var token = FirebaseInstanceId.getInstance().getToken()
+        println(token)
 
         btn_submit.setOnClickListener(View.OnClickListener {
 

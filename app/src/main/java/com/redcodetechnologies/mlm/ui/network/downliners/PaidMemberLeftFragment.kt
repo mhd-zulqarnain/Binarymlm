@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +52,7 @@ class PaidMemberLeftFragment : Fragment() {
     lateinit var tv_total: TextView
     var total: Double = 0.0
 
+    var search_view: SearchView? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -80,6 +82,22 @@ class PaidMemberLeftFragment : Fragment() {
         adapter = StatusAdapter(activity!!, wdList)
         recylcer_wd!!.adapter = adapter
 
+        search_view = view.findViewById(R.id.search_view)
+        search_view!!.setOnClickListener {
+            search_view!!.setIconified(false)
+        }
+
+        search_view!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                adapter!!.getFilter().filter(query)
+                return false
+            }
+        })
+
         getUsersData()
     }
 
@@ -87,47 +105,39 @@ class PaidMemberLeftFragment : Fragment() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
-            return
         }
-        progressdialog!!.show()
 
-        val dataOberver = getDataOberver()
-        val thismothObservable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getuserpaidmembersleftlist(id!!)
-        thismothObservable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(dataOberver)
-    }
 
-    fun getDataOberver(): Observer<ArrayList<Users>> {
-        return object : Observer<ArrayList<Users>> {
-            override fun onComplete() {
-                progressdialog!!.hide()
-            }
 
-            override fun onSubscribe(d: Disposable) {
-                disposable = d
-            }
-
-            override fun onNext(t: ArrayList<Users>) {
-                t.forEach { users ->
-                    wdList.add(users)
-                    total += users.PaidAmount!!.toDouble()
+        fun getDataOberver(): Observer<ArrayList<Users>> {
+            return object : Observer<ArrayList<Users>> {
+                override fun onComplete() {
+                    progressdialog!!.hide()
                 }
-                adapter!!.notifyDataSetChanged()
-                if (t.size == 0) {
-                    tv_no_data.visibility = View.VISIBLE
-                    tv_total.setText("0 PKR (0 PKR Total)")
-                } else {
-                    tv_no_data.visibility = View.GONE
-                    tv_total.setText("$total PKR ($total PKR Total)")
+
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+                }
+
+                override fun onNext(t: ArrayList<Users>) {
+                    t.forEach { users ->
+                        wdList.add(users)
+                        total += users.PaidAmount!!.toDouble()
+                    }
+                    adapter!!.notifyDataSetChanged()
+                    if (t.size == 0) {
+                        tv_no_data.visibility = View.VISIBLE
+                        tv_total.setText("0 PKR (0 PKR Total)")
+                    } else {
+                        tv_no_data.visibility = View.GONE
+                        tv_total.setText("$total PKR ($total PKR Total)")
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+                    println("error")
                 }
             }
-
-            override fun onError(e: Throwable) {
-                println("error")
-            }
         }
-    }
 
-
-}
+    }}

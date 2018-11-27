@@ -17,7 +17,7 @@ import java.io.ByteArrayInputStream
 import java.io.InputStream
 
 
-class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayList<Advertisement>) : RecyclerView.Adapter<AdvertismentAdapter.MyViewHolder>() {
+class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayList<Advertisement>, private val onClick:(Advertisement)->Unit) : RecyclerView.Adapter<AdvertismentAdapter.MyViewHolder>() {
 
 
 
@@ -32,6 +32,9 @@ class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayLis
 
     override fun onBindViewHolder(p0: MyViewHolder, p1: Int) {
         p0.bindView(list[p1])
+        p0.itemView.setOnClickListener {
+            onClick(list[p1])
+        }
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

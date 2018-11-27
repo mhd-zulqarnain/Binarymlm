@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "263194524851",
+    "firebase_url": "https://binary-mlm-push-notification.firebaseio.com",
+    "project_id": "binary-mlm-push-notification",
+    "storage_bucket": "binary-mlm-push-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263194524851:android:a47b442bc4475d54",
+        "android_client_info": {
+          "package_name": "com.redcodetechnologies.mlm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263194524851-6c95ta15il7dcqlqn8qn3ecio8r3k1as.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redcodetechnologies.mlm",
+            "certificate_hash": "72b9ce81ae9f62503edb249e80e13c250ad0fe75"
+          }
+        },
+        {
+          "client_id": "263194524851-u7h48jh01r37jh7icv7jdknk8pgvj39e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAApTOypQfjFI9_9QWcW1TlakqECc6YjfU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263194524851-u7h48jh01r37jh7icv7jdknk8pgvj39e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
