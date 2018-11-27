@@ -312,8 +312,7 @@ class ProfileActivity : AppCompatActivity() {
                 return
             }
             if (userdocumentImage == null) {
-                ed_upload_document!!.error = Html.fromHtml("<font color='#E0796C'>Please upload document</font>")
-                ed_upload_document!!.requestFocus()
+                Apputils.showMsg(this@ProfileActivity, "Please upload document")
                 return
             }
 

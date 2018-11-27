@@ -90,7 +90,7 @@ class UnPaidMemberLeftFragment : Fragment() {
         progressdialog!!.show()
 
         val dataOberver = getDataOberver()
-        val thismothObservable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getuserPaidmembersrightlist(id!!)
+        val thismothObservable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getuserunpaidmembersleftlist(id!!)
         thismothObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(dataOberver)
