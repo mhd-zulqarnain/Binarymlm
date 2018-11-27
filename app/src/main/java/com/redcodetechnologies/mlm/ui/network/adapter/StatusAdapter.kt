@@ -5,14 +5,25 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.users.Users
-import com.redcodetechnologies.mlm.models.wallet.TransactionModal
-import com.redcodetechnologies.mlm.models.wallet.WithdrawalRequestModal
 
-class StatusAdapter(var ctx: Context, var list: ArrayList<Users>) : RecyclerView.Adapter<StatusAdapter.MyViewHolder>() {
 
+class StatusAdapter(var ctx: Context, var list: ArrayList<Users>) : RecyclerView.Adapter<StatusAdapter.MyViewHolder>(), Filterable {
+    var customFilter: DirectMemberSearch? = null
+
+    override fun getFilter(): Filter {
+        if (customFilter == null)
+            customFilter = DirectMemberSearch(list, this
+            )
+        else
+            customFilter
+
+        return customFilter!!
+    }
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {
         var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_row_status, parent, false))
         return v
