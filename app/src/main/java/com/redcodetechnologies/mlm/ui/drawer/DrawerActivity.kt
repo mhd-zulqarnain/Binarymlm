@@ -1,6 +1,7 @@
 package com.redcodetechnologies.mlm.ui.drawer
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -27,6 +28,7 @@ import com.redcodetechnologies.mlm.ui.dashboard.DashBoardFragment
 import com.redcodetechnologies.mlm.ui.dashboard.SleepingDashboardFragment
 import com.redcodetechnologies.mlm.ui.geologytable.GeneologyTableFragment
 import com.redcodetechnologies.mlm.ui.network.NetworkFragment
+import com.redcodetechnologies.mlm.ui.network.downliners.DirectMemberFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DownlinerStatusFragment
 import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
@@ -40,7 +42,6 @@ import com.redcodetechnologies.mlm.utils.SharedPrefs
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var listDataHeader: ArrayList<String>? = null
@@ -49,19 +50,25 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     var expListViewright: ExpandableListView? = null
     var nav_view: NavigationView? = null
     var lastExpandedPosition = -1
-    //    var category:String?=null
     var category: String = "Sales"
     var mPref: SharedPrefs? = null
     lateinit var headerView: View
+
+    val PRFILE_UPDATE_REQ:Int = 44
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mPref = SharedPrefs.getInstance()
         setSupportActionBar(toolbar)
+        initView()
+    }
+
+    fun initView(){
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
+
         toggle.syncState()
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp)
         nav_view = findViewById(R.id.nav_view) as NavigationView
@@ -81,7 +88,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         makeView()
         askPermission(Manifest.permission.CAMERA, 1)
     }
-
     fun makeView() {
 
 
@@ -92,11 +98,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             headerView.findViewById<TextView>(R.id.tv_email).setText(obj.email);
         if (obj.userDesignation != null)
             headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
-        if (obj.userPackage != null)
-            headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.userPackage.toString());
+        if (obj.phone != null)
+            headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.phone.toString());
         if (obj.profileImage != null){
             var img = obj.profileImage
-            if (img!="")
+            if (img!=""&&img!="null")
                 headerView.findViewById<CircleImageView>(R.id.profile_image_citizen).setImageBitmap(stringtoImage(img.toString()))
         }
     }
@@ -109,6 +115,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
 
+    //<editor-fold desc="Menu control">
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return true
@@ -126,7 +133,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 return true
             }
             R.id.action_myprofile -> {
-                startActivity(Intent(this@DrawerActivity, ProfileActivity::class.java))
+
+                var intent = Intent(this@DrawerActivity, ProfileActivity::class.java)
+                startActivityForResult(intent,PRFILE_UPDATE_REQ)
 
                 return true
             }
@@ -138,7 +147,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return true
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Expendable list">
     private fun enableExpandableList() {
         listDataHeader = ArrayList()
         listDataChild = HashMap()
@@ -202,7 +213,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     } else if (childPosition == 2) {
                         args.putString("Fragment", "ReferredMembers") //Direct Members
                         gt.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, DirectMemberFragment()).commit()
                     }
                     else if (childPosition == 3) {
                         args.putString("Fragment", "Paid-unPaid Downliners")
@@ -513,6 +524,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataChild[listDataHeader[5]] = support
 
     }
+    //</editor-fold>
 
     fun askPermission(permission: String, requestcode: Int) {
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
@@ -523,6 +535,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
         fragment!!.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode ==PRFILE_UPDATE_REQ && resultCode == Activity.RESULT_OK){
+            makeView()
+        }
     }
 
     fun stringtoImage(encodedString: String): Bitmap? {

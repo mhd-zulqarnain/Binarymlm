@@ -49,7 +49,6 @@ class SignInActivity : AppCompatActivity() {
 
         btn_submit.setOnClickListener(View.OnClickListener {
 
-            Log.wtf("", "Validiate password!")
 
             if (ed_username.text.toString().trim(' ').length < 1) {
                 ed_username.error = Html.fromHtml("<font color='#E0796C'>User name could not be empty</font>")

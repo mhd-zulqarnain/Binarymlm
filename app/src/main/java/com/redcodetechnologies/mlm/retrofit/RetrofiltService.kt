@@ -18,15 +18,15 @@ interface RetrofiltService {
     //<editor-fold desc="Authoriztion">
     @FormUrlEncoded
     @POST("token")
-    fun verifyEmail(@Field("grant_type")grant_type: String,@Field("username")email: String,
-                    @Field("password")password: String):  Call<ApiToken>
+    fun verifyEmail(@Field("grant_type") grant_type: String, @Field("username") email: String,
+                    @Field("password") password: String): Call<ApiToken>
 
     @GET("getuser/{username}")
     @Headers("Content-Type:application/json")
-    fun getNewRegistoredUser(@Header("Authorization")auth:String,@Path("username") username: String): Call<NewUserRegistration>
+    fun getNewRegistoredUser(@Header("Authorization") auth: String, @Path("username") username: String): Call<NewUserRegistration>
 
     /*forget password*/
-    @GET("forgetpassword/{email}/")
+    @POST("forgetpassword/{email}/")
     @Headers("Content-Type:application/json")
     fun forgetPassword(@Path("email") email: String): Call<Response>
     //</editor-fold>
@@ -34,7 +34,7 @@ interface RetrofiltService {
     //<editor-fold desc="Dashboard">
     @GET("dashboard/{userid}")
     @Headers("Content-Type:application/json")
-    fun getdashboardData(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<DasboardData>
+    fun getdashboardData(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<DasboardData>
 
     @GET("getAds")
     @Headers("Content-Type:application/json")
@@ -48,91 +48,82 @@ interface RetrofiltService {
     //<editor-fold desc="Make table ">
     @GET("getAllDownlineMembersRight/{userid}")
     @Headers("Content-Type:application/json")
-    fun getAllDownlineMembersRight(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<Users>>
+    fun getAllDownlineMembersRight(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
 
     @GET("getAllDownlineMembersLeft/{userid}")
     @Headers("Content-Type:application/json")
-    fun getAllDownlineMembersLeft(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<Users>>
+    fun getAllDownlineMembersLeft(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
 
     @GET("dropdownright/{userid}")
     @Headers("Content-Type:application/json")
-    fun getdropDownMembersRight(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<DropDownMembers>>
+    fun getdropDownMembersRight(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<DropDownMembers>>
 
     @GET("dropdownleft/{userid}")
     @Headers("Content-Type:application/json")
-    fun getdropDownMembersLeft(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<DropDownMembers>>
+    fun getdropDownMembersLeft(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<DropDownMembers>>
 
     @GET("setting/packages")
     @Headers("Content-Type:application/json")
-    fun getpackages():  Call<ArrayList<Packages>>
+    fun getpackages(): Call<ArrayList<Packages>>
 
     @GET("maketablemembersright/{userid}")
     @Headers("Content-Type:application/json")
-    fun getMakeTableRight(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<Users>>
+    fun getMakeTableRight(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
 
     @GET("maketablemembersleft/{userid}")
     @Headers("Content-Type:application/json")
-    fun getMakeTableLeft(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<ArrayList<Users>>
+    fun getMakeTableLeft(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
 
     @GET("maketabledetails/{userid}")
     @Headers("Content-Type:application/json")
-    fun getMaketableData(@Header("Authorization")auth:String,@Path("userid") userid: Int):  Call<MakeTableData>
+    fun getMaketableData(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<MakeTableData>
 
 
     //</editor-fold>
+
+    @GET("GetUserReferedMembers/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getUserReferedMembers(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
+
 
     //<editor-fold desc="Adding memeber in tree">
     @POST("addleftmembers/{userid}")
     @Headers("Content-Type:application/json")
-    fun addLeftMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body obj: UserTree):  Call<Response>
+    fun addLeftMember(@Header("Authorization") auth: String, @Path("userid") userid: Int, @Body obj: UserTree): Call<Response>
 
     @POST("addrightmembers/{userid}")
     @Headers("Content-Type:application/json")
-    fun addRightMember(@Header("Authorization")auth:String,@Path("userid") userid: Int,@Body  obj: UserTree):  Call<Response>
+    fun addRightMember(@Header("Authorization") auth: String, @Path("userid") userid: Int, @Body obj: UserTree): Call<Response>
     //</editor-fold>
 
     //<editor-fold desc="Transaction">
-    @GET ("wallet/overalllist/{userId}")
+    @GET("wallet/overalllist/{userId}")
     @Headers("Content-Type:application/json")
     fun getOverAllTransation(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("wallet/thismonth/{userId}")
+    @GET("wallet/thismonth/{userId}")
     @Headers("Content-Type:application/json")
     fun getMonthlyTransation(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
     // <editor-fold desc="E wallet Credit">
-    @GET ("gwallet/overall/{userId}")
+    @GET("gwallet/overall/{userId}")
     @Headers("Content-Type:application/json")
     fun getOverAllEWalletCredit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("gwallet/thismonth/{userId}")
+    @GET("gwallet/thismonth/{userId}")
     @Headers("Content-Type:application/json")
     fun getMonthlyEWalletCredit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
     // <editor-fold desc="E wallet Debit">
-    @GET ("ewalletdebit/overall/{userId}")
+    @GET("ewalletdebit/overall/{userId}")
     @Headers("Content-Type:application/json")
     fun getOverAllEWalletDebit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET ("ewalletdebit/thismonth/{userId}")
+    @GET("ewalletdebit/thismonth/{userId}")
     @Headers("Content-Type:application/json")
     fun getMonthlyEWalletDebit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
-    //</editor-fold>
-
-    //<editor-fold desc="Geneology">
-    @GET ("GetUserCommission/{userId}")
-    @Headers("Content-Type:application/json")
-    fun getMyPackageComission(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
-
-    @GET ("GetUserDirectCommission/{userId}")
-    @Headers("Content-Type:application/json")
-    fun getMyDirectCommsionList(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
-
-    @GET ("GetUserMatchingCommission/{userId}")
-    @Headers("Content-Type:application/json")
-    fun getMyTableCommsionList(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
 
     //<editor-fold desc="summery wallet">
@@ -149,28 +140,78 @@ interface RetrofiltService {
     fun getSummerythismonth(@Path("userId") userId: String): Call<WalletSummery>
     //</editor-fold>
 
-
-    @POST ("addprofilesetup/{userId}")
+    //<editor-fold desc="Wallet request">
+    @GET("GetEWalletPendingWithdrawalRequests/{userId}")
     @Headers("Content-Type:application/json")
-    fun updateProfile(@Header("Authorization")auth:String,@Path("userId") userId: Int,@Body obj: ProfileSetup):  Call<Response>
+    fun getPendingWdRequest(@Path("userId") userId: Int): Observable<ArrayList<WithdrawalRequestModal>>
 
-
-    @GET ("gpenwdreq/overalllist/{userId}")
+    @GET("GetEWalletApprovedRequestPendingPayment/{userId}")
     @Headers("Content-Type:application/json")
-    fun getPendingWdRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+    fun getApprovedPendingWdRequest(@Path("userId") userId: Int): Observable<ArrayList<WithdrawalRequestModal>>
 
-    @GET ("gapppenwdreq/overalllist/{userId}")
+    @GET("GetEWalletApprovedRequestPaidPayment/{userId}")
     @Headers("Content-Type:application/json")
-    fun getApprovedPendingWdRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+    fun getApprovedPaid(@Path("userId") userId: Int): Observable<ArrayList<WithdrawalRequestModal>>
 
-    @GET ("getapppaid/overalllist/{userId}")
+    @GET("GetEWalletRejectedWithdrawalRequests/{userId}")
     @Headers("Content-Type:application/json")
-    fun getApprovedPaid(): Observable<ArrayList<WithdrawalRequestModal>>
+    fun getRejectedRequest(@Path("userId") userId: Int): Observable<ArrayList<WithdrawalRequestModal>>
+    //</editor-fold>
 
-    @GET ("rejreq/overalllist/{userId}")
+    //<editor-fold desc="Profile update">
+    @POST("addprofilesetup/{userId}")
     @Headers("Content-Type:application/json")
-    fun getRejectedRequest(): Observable<ArrayList<WithdrawalRequestModal>>
+    fun updateProfile(@Header("Authorization") auth: String, @Path("userId") userId: Int, @Body obj: ProfileSetup): Call<Response>
 
+    @POST("newusername/{username}/{userId}")
+    @Headers("Content-Type:application/json")
+    fun updateUserName(@Header("Authorization") auth: String, @Path("username") username: String, @Path("userId") userId: Int): Call<Response>
+    //</editor-fold>
+
+    //<editor-fold desc="Geneology">
+    @GET("GetUserCommission/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getMyPackageComission(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
+
+    @GET("GetUserDirectCommission/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getMyDirectCommsionList(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
+
+    @GET("GetUserMatchingCommission/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getMyTableCommsionList(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
+
+    //</editor-fold>
+
+    //<editor-fold desc="Category option">
+    @POST("approvesaleexecutive/{userId}")
+    @Headers("Content-Type:application/json")
+    fun approvesaleexecutive(@Header("Authorization") auth: String, @Path("userId") userId: Int): Call<Response>
+
+    @POST("approvesleepingpartner/{userId}")
+    @Headers("Content-Type:application/json")
+    fun approvesleepingpartner(@Header("Authorization") auth: String, @Path("userId") userId: Int): Call<Response>
+    //</editor-fold>
+
+    //<editor-fold desc="status of members">
+    @GET("getuserPaidmembersrightlist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getuserPaidmembersrightlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
+
+
+    @GET("getuserpaidmembersleftlist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getuserpaidmembersleftlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
+
+
+    @GET("getuserunpaidmembersleftlist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getuserunpaidmembersleftlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
+
+    @GET("getuserunpaidmembersleftlist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getuserunpaidmembersrightlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
+    //</editor-fold>
 
 
 

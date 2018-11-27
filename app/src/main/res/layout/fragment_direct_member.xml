@@ -289,78 +289,11 @@
             android:layout_weight=".8"
             android:fontFamily="@font/ralewayregular"
             android:gravity="center_vertical"
-            android:text="@string/down_line_text"
+            android:text="Reffered Member"
             android:textColor="@color/colorRed"
             android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".7"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="2.3">
-
-            <LinearLayout
-                android:id="@+id/layout_add_left"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="6px"
-                android:layout_weight="1"
-                android:background="@color/colorRed"
-                android:orientation="horizontal"
-
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="12dp"
-                    android:fontFamily="@font/ralewaybold"
-                    android:text="LEFT"
-                    android:textColor="@color/colorWhite" />
-
-                <ImageView
-                    android:id="@+id/add_left"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="72dp"
-                    android:src="@drawable/ic_add_black_24dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_add_right"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="6px"
-                android:layout_weight="1"
-                android:background="@color/colorGray"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="12dp"
-                    android:fontFamily="@font/ralewaybold"
-                    android:text="RIGHT"
-                    android:textColor="@color/colorWhite" />
-
-                <ImageView
-                    android:id="@+id/add_right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="70dp"
-                    android:src="@drawable/ic_add_black_24dp" />
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
+  <!--      <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".7"
@@ -377,20 +310,20 @@
                 android:theme="@style/SeachViewStyle"
                 app:defaultQueryHint="Search.." />
         </LinearLayout>
-
+-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="5.1"
             android:orientation="vertical"
             android:weightSum="6">
 
             <LinearLayout
                 android:id="@+id/seller_table_spinner"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+
                 android:orientation="vertical">
 
                 <View
@@ -402,7 +335,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="6">
+                    android:weightSum="2">
 
                     <TextView
                         style="@style/CustomHeaderBlacktextStyle"
@@ -410,39 +343,16 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:textSize="15sp"
                         android:text="Userame" />
 
                     <TextView
                         style="@style/CustomHeaderBlacktextStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:gravity="center"
-                        android:text="Phone" />
-
-                    <TextView
-                        style="@style/CustomHeaderBlacktextStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Bank Name" />
-
-                    <TextView
-                        android:id="@+id/tv_sponser"
-                        style="@style/CustomHeaderBlacktextStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:gravity="center"
-                        android:text="Sponser" />
-
-                    <TextView
-                        style="@style/CustomHeaderBlacktextStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
+                        android:textSize="15sp"
                         android:text="Paid Amount" />
 
                 </LinearLayout>
@@ -472,22 +382,9 @@
                 android:id="@+id/recylcer_down_member"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4"
+                android:layout_weight="5"
                 android:scrollbars="horizontal" />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:background="#50000000" />
-
-            <TextView
-                android:id="@+id/tv_total"
-                style="@style/CustomBlacktextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="Total: 0" />
 
         </LinearLayout>
 
