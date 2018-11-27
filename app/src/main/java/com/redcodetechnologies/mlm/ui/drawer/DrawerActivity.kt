@@ -28,6 +28,7 @@ import com.redcodetechnologies.mlm.ui.dashboard.DashBoardFragment
 import com.redcodetechnologies.mlm.ui.dashboard.SleepingDashboardFragment
 import com.redcodetechnologies.mlm.ui.geologytable.GeneologyTableFragment
 import com.redcodetechnologies.mlm.ui.network.NetworkFragment
+import com.redcodetechnologies.mlm.ui.network.downliners.DirectMemberFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DownlinerStatusFragment
 import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
@@ -212,7 +213,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     } else if (childPosition == 2) {
                         args.putString("Fragment", "ReferredMembers") //Direct Members
                         gt.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, DirectMemberFragment()).commit()
                     }
                     else if (childPosition == 3) {
                         args.putString("Fragment", "Paid-unPaid Downliners")

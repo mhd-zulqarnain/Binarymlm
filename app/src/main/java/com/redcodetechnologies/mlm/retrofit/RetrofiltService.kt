@@ -77,6 +77,11 @@ interface RetrofiltService {
 
     //</editor-fold>
 
+    @GET("GetUserReferedMembers/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getUserReferedMembers(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
+
+
     //<editor-fold desc="Adding memeber in tree">
     @POST("addleftmembers/{userid}")
     @Headers("Content-Type:application/json")
@@ -173,6 +178,8 @@ interface RetrofiltService {
     fun getMyTableCommsionList(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
     //</editor-fold>
+
+    //<editor-fold desc="Category option">
     @POST("approvesaleexecutive/{userId}")
     @Headers("Content-Type:application/json")
     fun approvesaleexecutive(@Header("Authorization") auth: String, @Path("userId") userId: Int): Call<Response>
@@ -180,8 +187,9 @@ interface RetrofiltService {
     @POST("approvesleepingpartner/{userId}")
     @Headers("Content-Type:application/json")
     fun approvesleepingpartner(@Header("Authorization") auth: String, @Path("userId") userId: Int): Call<Response>
+    //</editor-fold>
 
-
+    //<editor-fold desc="status of members">
     @GET("getuserPaidmembersrightlist/{userId}")
     @Headers("Content-Type:application/json")
     fun getuserPaidmembersrightlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
@@ -199,6 +207,7 @@ interface RetrofiltService {
     @GET("getuserunpaidmembersleftlist/{userId}")
     @Headers("Content-Type:application/json")
     fun getuserunpaidmembersrightlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
+    //</editor-fold>
 
 
 }
