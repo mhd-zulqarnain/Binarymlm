@@ -57,7 +57,7 @@ class PaidMemberLeftFragment : Fragment() {
         }
 
         val adsObserver = getDownlinerObserver(id!!)
-        var adsObservable: Observable<ArrayList<UserTree>> = MyApiRxClint.getInstance()?.getService()?.getUserUnpaidMembersLeft(id!!)!!
+        var adsObservable: Observable<ArrayList<UserTree>> = MyApiRxClint.getInstance()!!.getService()!!.getUserUnpaidMembersLeft(id!!)!!
         adsObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(adsObserver)
