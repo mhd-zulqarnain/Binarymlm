@@ -183,4 +183,12 @@ interface RetrofiltService {
 
 
 
+     @GET ("getuserPaidmembersrightlist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getuserPaidmembersrightlist(@Path("userId") userId:Int): Observable<ArrayList<Users>>
+
+
+
+
+
 }

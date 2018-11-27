@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 
 import com.redcodetechnologies.mlm.R
@@ -38,7 +39,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class PaidMemberLeftFragment : Fragment() {
 
-    var mothlyDisposable: Disposable? = null
+    var disposable: Disposable? = null
     var wdList: ArrayList<Users> = ArrayList()
     lateinit var prefs: SharedPrefs
     var id: Int? = null
@@ -47,6 +48,8 @@ class PaidMemberLeftFragment : Fragment() {
     var progressdialog: android.app.AlertDialog? = null
     var recylcer_wd: RecyclerView? = null
     var adapter: StatusAdapter? = null
+    lateinit var tv_total: TextView
+    var total: Double = 0.0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -68,50 +71,56 @@ class PaidMemberLeftFragment : Fragment() {
 
         return view
     }
+
     private fun initView(view: View?) {
         tv_no_data = view!!.findViewById(R.id.tv_no_data)
-        recylcer_wd = view!!.findViewById(R.id.recylcer_wd_request)
+        tv_total = view!!.findViewById(R.id.tv_total)
+        recylcer_wd = view!!.findViewById(R.id.recylcer_down_member)
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = StatusAdapter(activity!!, wdList)
         recylcer_wd!!.adapter = adapter
 
-        getRejectedRequest()
+        getUsersData()
     }
 
-    fun getRejectedRequest() {
+    fun getUsersData() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
             return
         }
-        val thisMonthtransaction = getThisMonthObserver()
-        val thismothObservable: Observable<ArrayList<WithdrawalRequestModal>> = MyApiRxClint.getInstance()!!.getService()!!.getRejectedRequest(id!!)
+        progressdialog!!.show()
+
+        val dataOberver = getDataOberver()
+        val thismothObservable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getuserPaidmembersrightlist(id!!)
         thismothObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(thisMonthtransaction)
+                .subscribe(dataOberver)
     }
 
-    fun getThisMonthObserver(): Observer<ArrayList<WithdrawalRequestModal>> {
-        return object : Observer<ArrayList<WithdrawalRequestModal>> {
+    fun getDataOberver(): Observer<ArrayList<Users>> {
+        return object : Observer<ArrayList<Users>> {
             override fun onComplete() {
                 progressdialog!!.hide()
             }
 
             override fun onSubscribe(d: Disposable) {
-                mothlyDisposable = d
+                disposable = d
             }
 
-            override fun onNext(t: ArrayList<WithdrawalRequestModal>) {
-                t?.forEach { tranactions ->
-                    wdList.add(tranactions)
+            override fun onNext(t: ArrayList<Users>) {
+                t.forEach { users ->
+                    wdList.add(users)
+                    total += users.PaidAmount!!.toDouble()
                 }
                 adapter!!.notifyDataSetChanged()
-                if(t.size==0){
-                    tv_no_data.visibility=View.VISIBLE
+                if (t.size == 0) {
+                    tv_no_data.visibility = View.VISIBLE
+                    tv_total.setText("0 PKR (0 PKR Total)")
+                } else {
+                    tv_no_data.visibility = View.GONE
+                    tv_total.setText("$total PKR ($total PKR Total)")
                 }
-                else
-                    tv_no_data.visibility=View.GONE
-
             }
 
             override fun onError(e: Throwable) {

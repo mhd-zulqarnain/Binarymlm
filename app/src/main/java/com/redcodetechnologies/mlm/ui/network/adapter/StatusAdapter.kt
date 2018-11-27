@@ -14,7 +14,7 @@ import com.redcodetechnologies.mlm.models.wallet.WithdrawalRequestModal
 class StatusAdapter(var ctx: Context, var list: ArrayList<Users>) : RecyclerView.Adapter<StatusAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {
-        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_row_wallet, parent, false))
+        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_row_status, parent, false))
         return v
     }
 
@@ -28,23 +28,19 @@ class StatusAdapter(var ctx: Context, var list: ArrayList<Users>) : RecyclerView
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var tv_source: TextView? = null
-        var tv_name: TextView? = null
+        var tv_username: TextView? = null
+        var tv_sponername : TextView? = null
         var tv_amount: TextView? = null
-        var tv_date: TextView? = null
         fun bindView(model : Users) {
 
-            tv_source = itemView.findViewById(R.id.tv_walt_source)
-            tv_name = itemView.findViewById(R.id.tv_walt_name)
-            tv_amount = itemView.findViewById(R.id.tv_walt_amount)
-            tv_date = itemView.findViewById(R.id.tv_walt_date)
+            tv_username = itemView.findViewById(R.id.tv_username)
+            tv_amount = itemView.findViewById(R.id.tv_amount)
+            tv_sponername = itemView.findViewById(R.id.tv_sponername)
 
 
-            tv_source!!.text = "test source"
-            tv_name!!.text ="test name"
-            tv_amount!!.text ="1000"
-            tv_date!!.text = "10-3-2123"
-
+            tv_username!!.text = model.Username
+            tv_amount!!.text = model.PaidAmount
+            tv_sponername!!.text = model.SponsorName
 
             //  tv_price!!.text = order.BitPrice
 

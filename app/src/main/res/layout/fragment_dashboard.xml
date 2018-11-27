@@ -104,7 +104,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="6"
+                            android:text="0"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -146,7 +146,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="6"
+                            android:text="0"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -417,7 +417,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="50 PKR "
+                            android:text="0"
                             android:textStyle="bold" />
 
                     </LinearLayout>

@@ -284,7 +284,10 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
-                                total += user.PaidAmount!!.toInt()
+                                try{
+                                    var amount = user.PaidAmount!!.split(".")
+                                    total += amount[0].toInt()
+                                }catch (e:Exception){}
                             }
                             adapter!!.notifyDataSetChanged()
 
@@ -295,7 +298,7 @@ class NetworkFragment : Fragment() {
                             } else {
                                 tv_no_data!!.visibility = View.GONE
                                 recylcer_down_member!!.visibility = View.VISIBLE
-
+                                tv_total!!.text = "Total: $total"
                             }
                         }
                         progressdialog!!.dismiss();
@@ -332,7 +335,10 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
-                                total += user.PaidAmount!!.toInt()
+                                try{
+                                    var amount = user.PaidAmount!!.split(".")
+                                total += amount[0].toInt()
+                                }catch (e:Exception){}
                             }
                             adapter!!.notifyDataSetChanged()
 
@@ -343,7 +349,7 @@ class NetworkFragment : Fragment() {
                             } else {
                                 tv_no_data!!.visibility = View.GONE
                                 recylcer_down_member!!.visibility = View.VISIBLE
-
+                                tv_total!!.text = "Total: $total"
                             }
                         }
                         progressdialog!!.dismiss();
@@ -382,7 +388,10 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
-                                total += user.PaidAmount!!.toDouble()
+                                try{
+                                    var amount = user.PaidAmount!!.split(".")
+                                    total += amount[0].toInt()
+                                }catch (e:Exception){}
                             }
                             adapter!!.notifyDataSetChanged()
 
@@ -393,7 +402,7 @@ class NetworkFragment : Fragment() {
                             } else {
                                 tv_no_data!!.visibility = View.GONE
                                 recylcer_down_member!!.visibility = View.VISIBLE
-
+                                tv_total!!.text = "Total: $total"
                             }
                         }
                         progressdialog!!.hide();
@@ -430,7 +439,10 @@ class NetworkFragment : Fragment() {
                         if (code == 200) {
                             response?.body()?.forEach { user ->
                                 list.add(user)
-                                total += user.PaidAmount!!.toDouble()
+                                try{
+                                    var amount = user.PaidAmount!!.split(".")
+                                    total += amount[0].toInt()
+                                }catch (e:Exception){}
                             }
                             adapter!!.notifyDataSetChanged()
 
@@ -441,7 +453,7 @@ class NetworkFragment : Fragment() {
                             } else {
                                 tv_no_data!!.visibility = View.GONE
                                 recylcer_down_member!!.visibility = View.VISIBLE
-
+                                tv_total!!.text = "Total: $total"
                             }
                         }
                         progressdialog!!.hide();
