@@ -78,6 +78,10 @@ class PaidMemberLeftFragment : Fragment() {
         tv_no_data = view!!.findViewById(R.id.tv_no_data)
         tv_total = view!!.findViewById(R.id.tv_total)
         recylcer_wd = view!!.findViewById(R.id.recylcer_down_member)
+        recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
+        adapter = StatusAdapter(activity!!, wdList)
+        recylcer_wd!!.adapter = adapter
+
         search_view = view.findViewById(R.id.search_view)
         search_view!!.setOnClickListener {
             search_view!!.setIconified(false)
@@ -93,10 +97,6 @@ class PaidMemberLeftFragment : Fragment() {
                 return false
             }
         })
-
-        recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
-        adapter = StatusAdapter(activity!!, wdList)
-        recylcer_wd!!.adapter = adapter
 
         getUsersData()
     }

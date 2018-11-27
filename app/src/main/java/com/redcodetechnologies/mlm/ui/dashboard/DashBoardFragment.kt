@@ -106,7 +106,9 @@ class DashBoardFragment : Fragment() {
 
         val manager = GridLayoutManager(activity!!, 2)
         recycler_adds!!.layoutManager = manager
-        adapter = AdvertismentAdapter(activity!!, frgement_type, adsList)
+        adapter = AdvertismentAdapter(activity!!, frgement_type, adsList){ads->
+
+        }
         if (prefs.getUser(activity!!).userId != null) {
             id = prefs.getUser(activity!!).userId
             token = prefs.getToken(activity!!).accessToken!!

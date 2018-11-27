@@ -75,7 +75,7 @@
             android:layout_gravity="center_vertical"
             android:id="@+id/btn_ok"
             android:clickable="true"
-            android:textColor="#058C09"
+            android:textColor="#fcfffc"
             android:background="@drawable/button_circle_blue"
             android:textSize="13sp"
             android:text="Done"

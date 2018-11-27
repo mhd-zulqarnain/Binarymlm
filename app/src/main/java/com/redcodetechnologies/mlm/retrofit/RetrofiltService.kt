@@ -103,11 +103,11 @@ interface RetrofiltService {
     //</editor-fold>
 
     // <editor-fold desc="E wallet Credit">
-    @GET("gwallet/overall/{userId}")
+    @GET("ewalletcredit/overall/{userId}")
     @Headers("Content-Type:application/json")
     fun getOverAllEWalletCredit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
 
-    @GET("gwallet/thismonth/{userId}")
+    @GET("ewalletcredit/thismonth/{userId}")
     @Headers("Content-Type:application/json")
     fun getMonthlyEWalletCredit(@Path("userId") userId: Int): Observable<ArrayList<TransactionModal>>
     //</editor-fold>
