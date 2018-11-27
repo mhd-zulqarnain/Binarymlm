@@ -43,9 +43,9 @@ class DashBoardFragment : Fragment() {
     var tv_show_ads: TextView? = null
     var adsList: ArrayList<Advertisement> = ArrayList()
     var adapter: AdvertismentAdapter? = null
-    var progressdialog: android.app.AlertDialog? = null
     var adsdisposable: Disposable? = null
-    var progressBar: LinearLayout? = null
+    var progressbar_dash: LinearLayout? = null
+    var progressbar_add: LinearLayout? = null
 
     var id: Int? = null
     lateinit var token: String
@@ -73,6 +73,7 @@ class DashBoardFragment : Fragment() {
 
 
         initView(view)
+
         getviewData()
         return view
 
@@ -81,15 +82,12 @@ class DashBoardFragment : Fragment() {
     private fun initView(view: View) {
 
         balance_card = view.findViewById(R.id.dashboardbalance) as CardView;
-        progressdialog = SpotsDialog.Builder()
-                .setContext(activity!!)
-                .setMessage("Loading please wait!!")
-                .setTheme(R.style.CustomProgess)
-                .build()
+
 
         recycler_adds = view.findViewById(R.id.recylcer_adds)
         tv_show_ads = view.findViewById(R.id.tv_show_ads)
-        progressBar = view.findViewById(R.id.progressBar)
+        progressbar_dash = view.findViewById(R.id.progressbar_dash)
+        progressbar_add = view.findViewById(R.id.progressbar_add)
         totaldirectcommission = view.findViewById(R.id.totaldirectcommission)
         GetEwalletCredit = view.findViewById(R.id.GetEwalletCredit)
         GetEWalletDebitSum = view.findViewById(R.id.GetEWalletDebitSum)
@@ -170,7 +168,7 @@ class DashBoardFragment : Fragment() {
             return
         }
 
-        progressBar!!.visibility = View.VISIBLE
+        progressbar_add!!.visibility = View.VISIBLE
         val adsObserver = getadvertismentObserver()
         var adsObservable: Observable<ArrayList<Advertisement>> = MyApiRxClint.getInstance()?.getService()?.getCoinData()!!
         adsObservable.subscribeOn(Schedulers.io())
@@ -182,7 +180,7 @@ class DashBoardFragment : Fragment() {
         return object : Observer<ArrayList<Advertisement>> {
             override fun onComplete() {
                 println("completed")
-                progressBar!!.visibility = View.GONE
+                progressbar_add!!.visibility = View.GONE
 
             }
 
@@ -192,7 +190,7 @@ class DashBoardFragment : Fragment() {
             }
 
             override fun onError(e: Throwable) {
-                progressBar!!.visibility = View.VISIBLE
+                progressbar_dash!!.visibility = View.VISIBLE
                 Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
 
             }
@@ -215,13 +213,11 @@ class DashBoardFragment : Fragment() {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
-        progressdialog!!.show()
-        progressdialog!!.setCancelable(false)
         ApiClint.getInstance()?.getService()?.getdashboardData("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<DasboardData> {
                     override fun onFailure(call: Call<DasboardData>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.dismiss();
+                        progressbar_dash!!.visibility = View.GONE
 
                     }
 
@@ -278,7 +274,7 @@ class DashBoardFragment : Fragment() {
 
 
                         }
-                        progressdialog!!.hide();
+                        progressbar_dash!!.visibility = View.GONE
 
 
                     }

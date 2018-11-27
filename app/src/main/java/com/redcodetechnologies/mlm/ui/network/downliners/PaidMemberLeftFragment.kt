@@ -105,47 +105,39 @@ class PaidMemberLeftFragment : Fragment() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
-            return
         }
-        progressdialog!!.show()
 
-        val dataOberver = getDataOberver()
-        val thismothObservable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getuserpaidmembersleftlist(id!!)
-        thismothObservable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(dataOberver)
-    }
 
-    fun getDataOberver(): Observer<ArrayList<Users>> {
-        return object : Observer<ArrayList<Users>> {
-            override fun onComplete() {
-                progressdialog!!.hide()
-            }
 
-            override fun onSubscribe(d: Disposable) {
-                disposable = d
-            }
-
-            override fun onNext(t: ArrayList<Users>) {
-                t.forEach { users ->
-                    wdList.add(users)
-                    total += users.PaidAmount!!.toDouble()
+        fun getDataOberver(): Observer<ArrayList<Users>> {
+            return object : Observer<ArrayList<Users>> {
+                override fun onComplete() {
+                    progressdialog!!.hide()
                 }
-                adapter!!.notifyDataSetChanged()
-                if (t.size == 0) {
-                    tv_no_data.visibility = View.VISIBLE
-                    tv_total.setText("0 PKR (0 PKR Total)")
-                } else {
-                    tv_no_data.visibility = View.GONE
-                    tv_total.setText("$total PKR ($total PKR Total)")
+
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+                }
+
+                override fun onNext(t: ArrayList<Users>) {
+                    t.forEach { users ->
+                        wdList.add(users)
+                        total += users.PaidAmount!!.toDouble()
+                    }
+                    adapter!!.notifyDataSetChanged()
+                    if (t.size == 0) {
+                        tv_no_data.visibility = View.VISIBLE
+                        tv_total.setText("0 PKR (0 PKR Total)")
+                    } else {
+                        tv_no_data.visibility = View.GONE
+                        tv_total.setText("$total PKR ($total PKR Total)")
+                    }
+                }
+
+                override fun onError(e: Throwable) {
+                    println("error")
                 }
             }
-
-            override fun onError(e: Throwable) {
-                println("error")
-            }
         }
-    }
 
-
-}
+    }}

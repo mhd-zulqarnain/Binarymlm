@@ -41,6 +41,10 @@ interface RetrofiltService {
     fun getCoinData(): Observable<ArrayList<Advertisement>>
     //</editor-fold>
 
+    @GET("getuserunpaidmembersleftlist/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getUserUnpaidMembersLeft(@Path("userId")  userid: Int): Observable<ArrayList<UserTree>>
+
     //<editor-fold desc="Make table ">
     @GET("getAllDownlineMembersRight/{userid}")
     @Headers("Content-Type:application/json")
@@ -208,6 +212,7 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getuserunpaidmembersrightlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
     //</editor-fold>
+
 
 
 }
