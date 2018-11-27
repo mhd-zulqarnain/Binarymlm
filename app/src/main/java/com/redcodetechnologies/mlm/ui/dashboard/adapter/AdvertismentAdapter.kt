@@ -19,7 +19,6 @@ import java.io.InputStream
 
 class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayList<Advertisement>) : RecyclerView.Adapter<AdvertismentAdapter.MyViewHolder>() {
 
-    var typ = type
 
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {
@@ -32,14 +31,14 @@ class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayLis
     }
 
     override fun onBindViewHolder(p0: MyViewHolder, p1: Int) {
-        p0.bindView(list[p1], typ)
+        p0.bindView(list[p1])
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var tv_first_image: ImageView? = null
 
-        fun bindView(addsmodal: Advertisement, typ: String) {
+        fun bindView(addsmodal: Advertisement ) {
             tv_first_image = itemView.findViewById(R.id.first_image)
             if (addsmodal.AdvertisementImage != null) {
                 val decodedImage= Apputils.decodeFromBase64(addsmodal.AdvertisementImage!!)

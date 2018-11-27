@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -16,23 +17,28 @@ import android.text.TextWatcher
 import android.util.Base64
 
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.profile.PrivacySetting
-import com.redcodetechnologies.mlm.models.profile.ProfileSetting
+import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.models.profile.ProfileSetup
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
+import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.ServiceError
+import com.redcodetechnologies.mlm.utils.ServiceListener
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 import de.hdodenhof.circleimageview.CircleImageView
+import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_profile.*
+import retrofit2.Call
+import retrofit2.Callback
 import java.io.ByteArrayOutputStream
 
 
 class ProfileActivity : AppCompatActivity() {
-//    var adapter :ViewPagerAdapter?= null
+
 
     //<editor-fold desc="privacy">
     var ed_password: EditText? = null
@@ -59,20 +65,46 @@ class ProfileActivity : AppCompatActivity() {
     var ed_upload_nic_backside: EditText? = null
     var profile_image: CircleImageView? = null
     var spinner_country: SearchableSpinner? = null
-    var userdocumentImage: String? = null
-    var userNicImage: String? = null
-    var userNicImageBackside: String? = null
-    var profileSetting: ProfileSetting = ProfileSetting()
-    var privacySetting: PrivacySetting = PrivacySetting()
+    var profileSetup: ProfileSetup = ProfileSetup()
     var mPassword: String = ""
+    var progressdialog: android.app.AlertDialog? = null
+
+    var profileImg: String = ""
+    var nicImg: String = ""
+    var nicImg1: String = ""
+    var userdocumentImage: String? = null
+
     //</editor-fold>
+
+    var id: Int? = null
+    var token: String? = null
+    var prefs = SharedPrefs.getInstance()!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         btn_back.setOnClickListener {
+            setResult(Activity.RESULT_OK)
             finish()
+
         }
+
+        if (prefs.getUser(this@ProfileActivity).userId != null) {
+            id = prefs.getUser(this@ProfileActivity).userId
+            token = prefs.getToken(this@ProfileActivity).accessToken!!
+
+            if (prefs.getUser(this@ProfileActivity).isBlock!!) {
+                showWarningDialog()
+            }
+        }
+
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this)
+                .setMessage("Loading!!")
+                .setTheme(R.style.CustomProgess)
+                .build()
+
+
         initView()
     }
 
@@ -97,10 +129,20 @@ class ProfileActivity : AppCompatActivity() {
         pref = SharedPrefs.getInstance()
         obj = pref!!.getUser(this@ProfileActivity)
 
+        if (obj.userId != null) {
+            profileImg = obj.profileImage.toString()
+            nicImg = obj.nicImage.toString()
+            nicImg1 = obj.nicImage1.toString()
+
+            if (profileImg != "" && profileImg != "null")
+                profile_image!!.setImageBitmap(stringtoImage(profileImg))
+        }
         updateprofile!!.setOnClickListener {
 
             validiation()
         }
+
+
 
         phone!!.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -113,18 +155,39 @@ class ProfileActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
-        ed_password!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                val DRAWABLE_RIGHT = 2
-                if (event!!.getAction() === MotionEvent.ACTION_UP) {
-                    if (event!!.getRawX() >= (ed_password!!.getRight() - ed_password!!.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        showChangePasswordDialog()
-                        return true
-                    }
+        ed_password!!.setOnClickListener {
+            showChangePasswordDialog()
+
+        }
+        ed_username!!.setOnClickListener {
+            showChangeUsernameDialog()
+
+        }
+        ed_accountnumber.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+                if (editable!!.length == 4 || editable.length == 15) {
+                    editable.append('-');
                 }
-                return false
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
+
+        /*       setOnTouchListener(object : View.OnTouchListener {
+           override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+               val DRAWABLE_RIGHT = 2
+               if (event!!.getAction() === MotionEvent.ACTION_UP) {
+                   if (event!!.getRawX() >= (ed_password!!.getRight() - ed_password!!.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                       return true
+                   }
+               }
+               return false
+           }
+       })*/
 
         ed_upload_document!!.setOnClickListener {
             pickImage(SELECT_DOCUMENT_PHOTO)
@@ -148,28 +211,48 @@ class ProfileActivity : AppCompatActivity() {
         spinner_country!!.setSelection(166)
 
         if (obj.upperId != null) {
+            val u_email =if(obj.email.toString()=="null") "" else obj.email.toString()
+            val u_address =if(obj.address.toString()=="null") "" else obj.address.toString()
+            val u_bank =if(obj.bankName.toString()=="null") "" else obj.bankName.toString()
+            val u_account =if(obj.accountNumber.toString()=="null") "" else obj.accountNumber.toString()
+
             ed_password!!.setText(obj.password.toString())
-            bankname!!.setText(obj.bankName.toString())
-            accountnumber!!.setText(obj.accountNumber.toString())
-            email!!.setText(obj.email.toString())
+            bankname!!.setText(u_bank)
+            accountnumber!!.setText(u_account)
+            email!!.setText(u_email)
             mPassword = pref!!.getUser(this@ProfileActivity).password!!
             name!!.setText(obj.name)
             username!!.setText(obj.username)
-            address!!.setText(obj.address.toString())
+            address!!.setText(u_address)
             cleanMobileNumeber(obj.phone.toString())
 
-        } else {
-            ed_password!!.setText("12345678")
         }
-
         if (obj.documentImage != null)
             userdocumentImage = obj.documentImage.toString()
 
     }
 
+    fun showWarningDialog() {
+        val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dialog_warning, null)
+        val alertBox = AlertDialog.Builder(this@ProfileActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(false)
+        val dialog = alertBox.create()
+
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
+
+        val btn_ok: Button = view.findViewById(R.id.btn_ok)
+        btn_ok.setOnClickListener {
+            dialog.dismiss()
+            finish()
+        }
+        dialog.show()
+
+    }
+
     private fun cleanMobileNumeber(number: String) {
         var temp = number;
-        if (number == "+92") {
+        if (number.length == 3) {
             temp = ""
         } else {
             if (number != "") {
@@ -229,14 +312,20 @@ class ProfileActivity : AppCompatActivity() {
                 return
             }
             if (userdocumentImage == null) {
-                ed_upload_document!!.error = Html.fromHtml("<font color='#E0796C'>Please upload document</font>")
-                ed_upload_document!!.requestFocus()
+                Apputils.showMsg(this@ProfileActivity, "Please upload document")
                 return
             }
 
-            if (userNicImage == null) {
-                ed_upload_nic!!.error = Html.fromHtml("<font color='#E0796C'>Please upload Nic</font>")
-                ed_upload_nic!!.requestFocus()
+            if (profileImg == "") {
+                Apputils.showMsg(this@ProfileActivity, "Please update profile picture")
+                return
+            }
+            if (nicImg == ""||nicImg=="null") {
+                Apputils.showMsg(this@ProfileActivity, "Please Upload Front Side of NIC")
+                return
+            }
+            if (nicImg1 == "" || nicImg1=="null") {
+                Apputils.showMsg(this@ProfileActivity, "Please Upload Back Side of NIC")
                 return
             }
 
@@ -245,27 +334,165 @@ class ProfileActivity : AppCompatActivity() {
                 countryIndex = spinner_country!!.getSelectedItemPosition() - 1
             }
 
-            profileSetting.Name = name!!.text.toString()
-            profileSetting.Username = username!!.text.toString()
-            profileSetting.Address = address!!.text.toString()
-            profileSetting.Country = countryIndex
-            profileSetting.DocumentImage = userdocumentImage
-            privacySetting.Password = mPassword;
-            privacySetting.Phone = phone!!.text.toString();
-            privacySetting.Email = email!!.text.toString();
-            privacySetting.BankName = bankname!!.text.toString();
-            privacySetting.AccountNumber = accountnumber!!.text.toString();
+            var mbl = "+92" + phone!!.text.toString()
+            profileSetup.Name = name!!.text.toString()
+//            profileSetup.Username = username!!.text.toString()
+            profileSetup.Address = address!!.text.toString()
+            profileSetup.Country = countryIndex.toString()
+            profileSetup.DocumentImage = userdocumentImage
+            profileSetup.Password = mPassword;
+            profileSetup.Phone = mbl
+            profileSetup.Email = email!!.text.toString();
+            profileSetup.BankName = bankname!!.text.toString();
+            profileSetup.AccountNumber = accountnumber!!.text.toString();
+
+            profileSetup.NICImage1 = nicImg1;
+            profileSetup.NICImage = nicImg;
+            profileSetup.ProfileImage = profileImg;
+
+            print(profileSetup)
+            updateProfile()
 
             Toast.makeText(this@ProfileActivity, "Privacy has been Updated!", Toast.LENGTH_LONG).show()
         }
 
     }
 
-    fun pickImage(code: Int) {
-        val photoPickerIntent = Intent(Intent.ACTION_PICK)
-        photoPickerIntent.setType("image/*")
-        startActivityForResult(photoPickerIntent, code)
+    private fun updateProfile() {
+
+        if (!Apputils.isNetworkAvailable(this@ProfileActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog!!.show()
+        progressdialog!!.setCancelable(false)
+
+        ApiClint.getInstance()?.getService()?.updateProfile("bearer " + token!!, id!!, profileSetup)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        var status = response.body()!!.success
+                        var msg = response.body()!!.message
+                        if (code == 200) {
+                        } else {
+                            progressdialog!!.dismiss()
+                            print("error")
+                        }
+
+                        progressdialog!!.dismiss()
+                        if (status!!) {
+                            updatePref()
+                            finish()
+                            setResult(Activity.RESULT_OK)
+                        }
+
+                        Apputils.showMsg(this@ProfileActivity, msg!!)
+                    }
+                })
     }
+
+    fun updatePref() {
+        var mbl = "+92" + phone!!.text.toString()
+        obj.name = profileSetup.Name
+        obj.country = profileSetup.Country!!.toInt()
+        obj.documentImage = profileSetup.DocumentImage
+        obj.password = mPassword
+        obj.phone = mbl
+        obj.address = profileSetup.Address + " "
+        obj.email = profileSetup.Email
+        obj.bankName = profileSetup.BankName
+        obj.accountNumber = profileSetup.AccountNumber
+        obj.profileImage = profileImg
+        obj.nicImage = profileSetup.NICImage
+        obj.nicImage1 = profileSetup.NICImage1
+        obj.isBlock=true
+        pref!!.setUser(this@ProfileActivity, obj)
+    }
+
+    //<editor-fold desc="User name update">
+    fun updateUsernamePref(username: String) {
+        obj.username = username
+        ed_username!!.setText(username)
+        pref!!.setUser(this@ProfileActivity, obj)
+    }
+
+    fun updateUserName(service: ServiceListener<String>, username: String) {
+
+
+        if (!Apputils.isNetworkAvailable(this@ProfileActivity)) {
+            service.success(" Network error")
+            return
+        }
+
+        ApiClint.getInstance()?.getService()?.updateUserName("bearer " + token!!, username, id!!)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        service.success("Failed")
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+
+                        var code = response!!.code()
+                        if (code == 200) {
+
+                            var msg = response!!.body()!!.message
+                            if (msg != null)
+                                service.success(msg)
+                            else
+                                service.success("Error")
+                        } else {
+                            service.success("Failed")
+                        }
+                    }
+                })
+
+    }
+
+    private fun showChangeUsernameDialog() {
+        val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dialog_update_username, null)
+        val alertBox = AlertDialog.Builder(this@ProfileActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(true)
+        val dialog = alertBox.create()
+
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
+        val ed_username: EditText = view.findViewById(R.id.ed_username)
+        val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
+
+        val btn_verify: Button = view.findViewById(R.id.btn_verify)
+        btn_verify.setOnClickListener {
+
+            var username = ed_username.text.toString()
+            if (username != obj.username && username.trim() != "") {
+                progressBar.visibility = View.VISIBLE
+                alertBox.setCancelable(false)
+                updateUserName(object : ServiceListener<String> {
+                    override fun success(response: String) {
+                        Apputils.showMsg(this@ProfileActivity, response)
+                        dialog.dismiss()
+                        updateUsernamePref(username)
+                    }
+
+                    override fun fail(error: ServiceError) {
+                        dialog.dismiss()
+                    }
+
+                }, username)
+            }
+        }
+        dialog.show()
+    }
+    //</editor-fold>
 
     private fun showChangePasswordDialog() {
         val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dilalog_new_pass, null)
@@ -305,6 +532,13 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
         dialog.show()
+    }
+
+    //<editor-fold desc="Image handling">
+    fun pickImage(code: Int) {
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.setType("image/*")
+        startActivityForResult(photoPickerIntent, code)
     }
 
     private fun profileImageDialoge() {
@@ -376,7 +610,7 @@ class ProfileActivity : AppCompatActivity() {
                 SELECT_CAMERA_IMAGE ->
                     try {
                         var bitmap = data.extras.get("data") as Bitmap?
-                        userdocumentImage = imageTostring(bitmap!!)
+                        profileImg = imageTostring(bitmap!!)
                         profile_image!!.setImageBitmap(bitmap)
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -385,7 +619,7 @@ class ProfileActivity : AppCompatActivity() {
                     try {
                         val imageUri = data.data
                         val bitmap = MediaStore.Images.Media.getBitmap(this@ProfileActivity.getContentResolver(), imageUri);
-                        userdocumentImage = imageTostring(bitmap)
+                        profileImg = imageTostring(bitmap)
                         profile_image!!.setImageBitmap(bitmap)
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -401,7 +635,7 @@ class ProfileActivity : AppCompatActivity() {
                         } catch (e: Exception) {
                         }
                         ed_upload_nic!!.setText(filename)
-                        userNicImage = imageTostring(bitmap)
+                        nicImg = imageTostring(bitmap)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -416,7 +650,7 @@ class ProfileActivity : AppCompatActivity() {
                         } catch (e: Exception) {
                         }
                         ed_upload_nic_backside!!.setText(filename)
-                        userNicImageBackside = imageTostring(bitmap)
+                        nicImg1 = imageTostring(bitmap)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -425,8 +659,20 @@ class ProfileActivity : AppCompatActivity() {
 
 
         }
-        }
-
     }
+
+    fun stringtoImage(encodedString: String): Bitmap? {
+        try {
+            var encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            var bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
+            return bitmap;
+
+        } catch (e: Exception) {
+            return null
+        }
+    }
+    //</editor-fold>
+
+}
 
 

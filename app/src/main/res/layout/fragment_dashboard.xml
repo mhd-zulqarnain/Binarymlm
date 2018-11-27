@@ -104,7 +104,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="6"
+                            android:text="0"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -146,7 +146,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="6"
+                            android:text="0"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -417,7 +417,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="50 PKR "
+                            android:text="0"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -482,6 +482,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:textSize="12dp"
+
                             android:text="Total Left Amount " />
 
 
@@ -490,7 +492,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4587212 "
+                            android:text="0"
                             android:textStyle="bold" />
 
 
@@ -522,6 +524,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:textSize="12dp"
                             android:text="Total Right Amount " />
 
                         <TextView
@@ -529,7 +532,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="454564553"
+                            android:text="0"
                             android:textStyle="bold" />
 
 
@@ -565,6 +568,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:textSize="12dp"
+
                             android:text="Remaining Left Amount " />
 
                         <TextView
@@ -572,7 +577,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="654654 "
+                            android:text="0"
                             android:textStyle="bold" />
 
 
@@ -608,6 +613,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:textSize="12dp"
                             android:text="Remaining Right Amount " />
 
                         <TextView
@@ -615,7 +621,7 @@
                             style="@style/CustomBlacktextStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="5656056 "
+                            android:text="0 "
                             android:textStyle="bold" />
 
                     </LinearLayout>

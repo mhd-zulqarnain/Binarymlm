@@ -282,6 +282,7 @@ class AddMemberActivity : AppCompatActivity() {
         downlinerAdapter = DownlinerSpinnerAdapter(this@AddMemberActivity, listdownliner)
         spinner_downliner!!.adapter = downlinerAdapter;
     }
+
     /* fun setpackagepinner() {
 
          packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
@@ -346,7 +347,7 @@ class AddMemberActivity : AppCompatActivity() {
                 Apputils.showMsg(this@AddMemberActivity, "Please select downliner")
                 return
             } else
-                downlineMemberId = 1////memeber id spinner
+                downlineMemberId = null////memeber id spinner
 
         }
 
@@ -363,7 +364,7 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.phone = mobile
         userModel.email = ed_email.text.toString()
         userModel.accountNumber = ""
-        userModel.downlineMemberId = downlineMemberId.toString()!!
+        userModel.downlineMemberId = if(downlineMemberId==null) null else downlineMemberId.toString()!!
         userModel.documentImage = userdocumentImage!! //from spinner
 
         confirmationDialog()
