@@ -51,6 +51,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     var nav_view: NavigationView? = null
     var lastExpandedPosition = -1
     var category: String = "Sales"
+    var notification: String = ""
     var mPref: SharedPrefs? = null
     lateinit var headerView: View
 
@@ -73,8 +74,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp)
         nav_view = findViewById(R.id.nav_view) as NavigationView
         nav_view!!.setNavigationItemSelectedListener(this)
-        if (intent.getStringExtra("Category") != null)
+        if (intent.getStringExtra("Category") != null){
             category = intent.getStringExtra("Category");
+            notification = intent.getStringExtra("notification")
+        }
         headerView = nav_view!!.getHeaderView(0)
         if (category == "Sales") {
             enableExpandableList()
@@ -540,6 +543,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             makeView()
         }
     }
+
 
     fun stringtoImage(encodedString: String): Bitmap? {
         try {
