@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="12dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorRed"
+        android:text=" Videos List"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/ralewaybold"
+        android:textSize="17sp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:id="@+id/tv_notific_header"
+        />
+
+
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#50000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4.5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="Notification Name"
+            android:textColor="#494A4B"
+            android:fontFamily="@font/ralewaybold"
+            android:textSize="12sp"
+            android:id="@+id/tv_notifi_name"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="Notification Description"
+            android:textColor="#494A4B"
+            android:fontFamily="@font/ralewaybold"
+            android:textSize="12sp"
+            android:id="@+id/tv_notifi_desc"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Actions"
+            android:textColor="#494A4B"
+            android:fontFamily="@font/ralewaybold"
+            android:textSize="12sp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/tv_notifi_action"
+            />
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#494A4B" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recylcer_videos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="horizontal"
+        android:layout_weight="4" />
+
+
+
+</LinearLayout>
+

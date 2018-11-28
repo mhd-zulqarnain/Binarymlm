@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="12dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4.5"
+        android:layout_marginBottom="5dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="Notification Name"
+            android:textColor="#494A4B"
+            android:fontFamily="@font/ralewayregular"
+            android:textSize="12sp"
+            android:id="@+id/tv_notific_name"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="Notification Description"
+            android:textColor="#494A4B"
+            android:fontFamily="@font/ralewayregular"
+            android:textSize="12sp"
+            android:id="@+id/tv_notific_desc"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Actions"
+            android:textColor="#494A4B"
+            android:fontFamily="@font/ralewayregular"
+            android:textSize="12sp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/tv_notofic_action"
+            />
+
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#1a000000" />
+
+</LinearLayout>
