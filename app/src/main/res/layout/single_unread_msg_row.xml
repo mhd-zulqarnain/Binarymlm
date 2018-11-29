@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3.2"
-        android:background="@drawable/messagebox"
+        android:background="@drawable/read_message_box"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
         >
@@ -30,17 +30,6 @@
             android:fontFamily="@font/ralewayregular"
             />
 
-        <TextView
-            android:id="@+id/tv_status"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Status"
-            android:textColor="#000"
-            android:textSize="10sp"
-            android:visibility="gone"
-            />
 
 
         <TextView
@@ -61,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="0.5"
-            android:text="Reply"
+            android:text="View"
             android:textColor="#fff"
             android:background="@drawable/button_circle_blue"
             android:textSize="12sp"

@@ -198,6 +198,7 @@ class NetworkFragment : Fragment() {
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorWhite));
             fragment_title!!.text = "Add new Member"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Add new Member")
+            (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
 
         } else if (frgement_type == "DownlineMembers") {
             add_left!!.visibility = View.GONE
@@ -206,6 +207,7 @@ class NetworkFragment : Fragment() {
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             fragment_title!!.text = "Down-line Members "
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Down-line Members")
+            (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
 
         } else {
             add_left!!.visibility = View.GONE
@@ -213,6 +215,8 @@ class NetworkFragment : Fragment() {
             tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             fragment_title!!.text = "Direct Members"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Direct Members")
+            (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
+
 
         }
     }

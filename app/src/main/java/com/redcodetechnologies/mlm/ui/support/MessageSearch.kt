@@ -1,13 +1,12 @@
-package com.redcodetechnologies.mlm.utils
+package com.redcodetechnologies.mlm.ui.support
 
 
 import android.widget.Filter;
-import com.redcodetechnologies.mlm.ui.support.adapter.InboxAdapter
-import com.redcodetechnologies.mlm.models.Inbox
+import com.redcodetechnologies.mlm.ui.support.adapter.MessageAdapter
 import com.redcodetechnologies.mlm.models.Messages
 
 
-class InboxSearch(var filterList: java.util.ArrayList<Messages>, var adapter: InboxAdapter): Filter() {
+class MessageSearch(var filterList: java.util.ArrayList<Messages>, var adapter: MessageAdapter): Filter() {
 
     override fun performFiltering(constraint: CharSequence?): Filter.FilterResults {
         var constraint = constraint

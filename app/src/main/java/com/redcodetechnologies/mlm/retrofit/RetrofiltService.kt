@@ -231,6 +231,12 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun deleteinboxmsg( @Path("userid") userid: Int): Call<Response>
 
+    @POST("replymessagesponsorsupport/{u_id}/{msg}/{userId}/{username}")
+    @Headers("Content-Type:application/json")
+    fun replymessagesponsor( @Path("u_id") sponsorId: Int, @Path("msg") msg: String,
+                             @Path("userId") userid: Int,
+                             @Path("username") username: String): Call<Response>
+
     @GET("viewallreadmessage/{userId}")
     @Headers("Content-Type:application/json")
     fun viewallmessagesupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>

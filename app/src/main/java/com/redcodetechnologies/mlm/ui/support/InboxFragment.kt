@@ -11,10 +11,11 @@ import android.view.*
 import android.widget.*
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.ui.support.adapter.InboxAdapter
-import com.redcodetechnologies.mlm.models.Inbox
+import com.redcodetechnologies.mlm.ui.support.adapter.MessageAdapter
 import com.redcodetechnologies.mlm.models.Messages
-import com.redcodetechnologies.mlm.models.MyNotification
+import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
+import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.SharedPrefs
@@ -23,18 +24,24 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import retrofit2.Call
+import retrofit2.Callback
 import java.util.*
 
 class InboxFragment : Fragment() {
     var search_view: SearchView? = null
-    //    var inboxAdapater: InboxAdapter? = null
+    //    var inboxAdapater: MessageAdapter? = null
     var data: ArrayList<Messages> = ArrayList()
 //    var inbox_recycler: RecyclerView? = null
-    var adapter: InboxAdapter? = null
+    var adapter: MessageAdapter? = null
     var disposable: Disposable? = null
     lateinit var progressBar: LinearLayout
     lateinit var tv_no_data: LinearLayout
     lateinit var recyclerView:RecyclerView
+
+    var userId:Int?=null
+    var sponserId:Int?=null
+    var userName:String?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_inbox, container, false)
@@ -44,6 +51,10 @@ class InboxFragment : Fragment() {
 
     private fun initView(view: View) {
 
+        val user:NewUserRegistration = SharedPrefs.getInstance()!!.getUser(activity!!)
+        userId = user.userId
+        sponserId = user.sponsorId
+        userName = user.username
 
         search_view = view.findViewById(R.id.search_view)
         progressBar = view.findViewById(R.id.progressBar)
@@ -52,14 +63,10 @@ class InboxFragment : Fragment() {
          recyclerView = view.findViewById(R.id.unread_inbox_recycler) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
 
-        adapter = InboxAdapter(activity!!, data) { postion, type ->
-            if (type == "viewandreply") {
-                viewAndReply(data[postion])
-            }
+        adapter = MessageAdapter(activity!!, data,"inbox") { obj ->
+                viewAndReply(obj)
         }
-        /*{ onItemClick(post,type)
-            openreportdialog(data[post])
-        }*/
+
         recyclerView.adapter = adapter
         adapter!!.notifyDataSetChanged()
         getMessages()
@@ -138,17 +145,58 @@ class InboxFragment : Fragment() {
 
         dialog!!.setCancelable(true);
         val message: TextView = v.findViewById(R.id.message)
-        val usser_view: TextView = v.findViewById(R.id.usser_view)
+        val tv_sender_name: TextView = v.findViewById(R.id.tv_sender_name)
         val btn_submit: Button = v.findViewById(R.id.btn_submit)
+        val rep_message: EditText = v.findViewById(R.id.rep_message)
 
         message.text = inbox.Message
-        usser_view.text = inbox.Sender_Name
+        tv_sender_name.text = inbox.Sender_Name+":"
 
         btn_submit.setOnClickListener {
-            dialog.dismiss()
+            if(rep_message.text.toString().trim()!=""){
+                replymessagesponsor(rep_message.text.toString())
+                dialog.dismiss()
+            }else
+                Apputils.showMsg(activity!!,"Message could not be empty!!")
         }
         dialog.show()
     }
+
+    private fun replymessagesponsor(msg:String) {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        ApiClint.getInstance()?.getService()?.replymessagesponsor( sponserId!!,msg,userId!!,userName!!)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                            Toast.makeText(activity!!, " Message sent ", Toast.LENGTH_SHORT).show()
+                           /* if (!data.isEmpty())
+                                data.clear()
+                            getMessages()*/
+                        }
+
+                        if (code != 200) {
+                            Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    }
+                })
+    }
+
 
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)

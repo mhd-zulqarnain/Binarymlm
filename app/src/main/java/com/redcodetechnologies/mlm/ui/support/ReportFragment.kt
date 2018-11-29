@@ -143,6 +143,7 @@ class ReportFragment : Fragment() {
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()?.setTitle("Report")
+        (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -46,39 +46,6 @@
 
         </ScrollView>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/ralewayregular"
-            android:paddingLeft="10dp"
-            android:text="You"
-            android:textColor="#101010"
-            android:textSize="20sp" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="80dp">
-
-
-            <EditText
-                android:id="@+id/rep_message"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/edittext_style1"
-                android:fontFamily="@font/ralewayregular"
-                android:hint="Message Body"
-                android:paddingBottom="20dp"
-                android:paddingLeft="5dp"
-                android:textColor="#000"
-                android:textColorHint="#8A8A8A"
-                android:textSize="18sp" />
-
-        </ScrollView>
-
-
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="wrap_content"
@@ -90,7 +57,7 @@
             android:fontFamily="@font/ralewayregular"
             android:gravity="center"
             android:onClick="signIn"
-            android:text="Send"
+            android:text="Done"
             android:textColor="#FFFBFB"
             android:textSize="20sp"
             android:textStyle="bold" />

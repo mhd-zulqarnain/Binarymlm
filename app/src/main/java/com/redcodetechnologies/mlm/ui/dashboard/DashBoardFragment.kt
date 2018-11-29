@@ -292,6 +292,8 @@ class DashBoardFragment : Fragment() {
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Dashboard")
+        (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
+
     }
 
     override fun onDestroyView() {
