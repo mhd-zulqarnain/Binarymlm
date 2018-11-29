@@ -15,16 +15,25 @@ import com.redcodetechnologies.mlm.*
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.ui.network.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.models.MakeTableData
+import com.redcodetechnologies.mlm.models.MyNotification
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.retrofit.ApiClint
+import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import dmax.dialog.SpotsDialog
+import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class NetworkFragment : Fragment() {
@@ -55,6 +64,9 @@ class NetworkFragment : Fragment() {
     var id: Int? = null
     lateinit var token: String
     var total: Double = 0.0
+
+    var disposable: Disposable? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -111,8 +123,13 @@ class NetworkFragment : Fragment() {
         }
 
         recylcer_down_member!!.adapter = adapter
+        recylcer_down_member!!.setItemAnimator(null);
 
         layout_add_left!!.setOnClickListener {
+
+            if(disposable!=null){
+                disposable!!.dispose()
+            }
             layout_add_right!!.setBackgroundResource(R.color.colorGray);
             layout_add_left!!.setBackgroundResource(R.color.colorRed);
             total = 0.0
@@ -124,6 +141,10 @@ class NetworkFragment : Fragment() {
 
         }
         layout_add_right!!.setOnClickListener {
+            if(disposable!=null){
+                disposable!!.dispose()
+            }
+
             layout_add_left!!.setBackgroundResource(R.color.colorGray);
             layout_add_right!!.setBackgroundResource(R.color.colorRed);
             total = 0.0
@@ -166,7 +187,6 @@ class NetworkFragment : Fragment() {
             getMakeTableLeft()
         else {
             getAllDownlineMembersLeft()
-
         }
 
     }
@@ -263,49 +283,17 @@ class NetworkFragment : Fragment() {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
+        if (!list.isEmpty())
         list.clear()
         progressdialog!!.show()
-        ApiClint.getInstance()?.getService()?.getAllDownlineMembersRight("bearer " + token!!, id!!)
-                ?.enqueue(object : Callback<ArrayList<Users>> {
-                    override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
-                        println("error")
-                        progressdialog!!.dismiss();
-
-                    }
-
-                    override fun onResponse(call: Call<ArrayList<Users>>?, response: retrofit2.Response<ArrayList<Users>>?) {
-                        print("object success ")
-                        var code: Int = response!!.code()
-
-                        if (code == 401) {
-                            Apputils.showMsg(activity!!, "Token Expired")
-                            tokenExpire();
-                        }
-                        if (code == 200) {
-                            response?.body()?.forEach { user ->
-                                list.add(user)
-                                try{
-                                    var amount = user.PaidAmount!!.split(".")
-                                    total += amount[0].toInt()
-                                }catch (e:Exception){}
-                            }
-                            adapter!!.notifyDataSetChanged()
-
-                            if (list.size == 0) {
-                                recylcer_down_member!!.visibility = View.GONE
-                                tv_no_data!!.visibility = View.VISIBLE
-                                tv_total!!.text = "Total: 0"
-                            } else {
-                                tv_no_data!!.visibility = View.GONE
-                                recylcer_down_member!!.visibility = View.VISIBLE
-                                tv_total!!.text = "Total: $total"
-                            }
-                        }
-                        progressdialog!!.dismiss();
 
 
-                    }
-                })
+        val observer = getObserver()
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token!!, id!!)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
+
     }
 
     fun getAllDownlineMembersLeft() {
@@ -314,49 +302,15 @@ class NetworkFragment : Fragment() {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
+        if (!list.isEmpty())
         list.clear()
         progressdialog!!.show()
-        ApiClint.getInstance()?.getService()?.getAllDownlineMembersLeft("bearer " + token!!, id!!)
-                ?.enqueue(object : Callback<ArrayList<Users>> {
-                    override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
-                        println("error")
-                        progressdialog!!.dismiss();
 
-                    }
-
-                    override fun onResponse(call: Call<ArrayList<Users>>?, response: retrofit2.Response<ArrayList<Users>>?) {
-                        print("object success ")
-                        var code: Int = response!!.code()
-
-                        if (code == 401) {
-                            Apputils.showMsg(activity!!, "Token Expired")
-                            tokenExpire();
-                        }
-                        if (code == 200) {
-                            response?.body()?.forEach { user ->
-                                list.add(user)
-                                try{
-                                    var amount = user.PaidAmount!!.split(".")
-                                total += amount[0].toInt()
-                                }catch (e:Exception){}
-                            }
-                            adapter!!.notifyDataSetChanged()
-
-                            if (list.size == 0) {
-                                recylcer_down_member!!.visibility = View.GONE
-                                tv_no_data!!.visibility = View.VISIBLE
-                                tv_total!!.text = "Total: 0"
-                            } else {
-                                tv_no_data!!.visibility = View.GONE
-                                recylcer_down_member!!.visibility = View.VISIBLE
-                                tv_total!!.text = "Total: $total"
-                            }
-                        }
-                        progressdialog!!.dismiss();
-
-
-                    }
-                })
+        val observer = getObserver()
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, id!!)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
     }
     //</editor-fold>
 
@@ -367,49 +321,15 @@ class NetworkFragment : Fragment() {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
+        if (!list.isEmpty())
         list.clear()
         progressdialog!!.show()
-        ApiClint.getInstance()?.getService()?.getMakeTableRight("bearer " + token!!, id!!)
-                ?.enqueue(object : Callback<ArrayList<Users>> {
-                    override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
-                        println("error")
-                        progressdialog!!.dismiss();
 
-                    }
-
-                    override fun onResponse(call: Call<ArrayList<Users>>?, response: retrofit2.Response<ArrayList<Users>>?) {
-                        print("object success ")
-                        var code: Int = response!!.code()
-
-                        if (code == 401) {
-                            Apputils.showMsg(activity!!, "Token Expired")
-                            tokenExpire();
-                        }
-                        if (code == 200) {
-                            response?.body()?.forEach { user ->
-                                list.add(user)
-                                try{
-                                    var amount = user.PaidAmount!!.split(".")
-                                    total += amount[0].toInt()
-                                }catch (e:Exception){}
-                            }
-                            adapter!!.notifyDataSetChanged()
-
-                            if (list.size == 0) {
-                                recylcer_down_member!!.visibility = View.GONE
-                                tv_no_data!!.visibility = View.VISIBLE
-                                tv_total!!.text = "Total: 0"
-                            } else {
-                                tv_no_data!!.visibility = View.GONE
-                                recylcer_down_member!!.visibility = View.VISIBLE
-                                tv_total!!.text = "Total: $total"
-                            }
-                        }
-                        progressdialog!!.hide();
-
-
-                    }
-                })
+        val observer = getObserver()
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getMakeTableRight("bearer " + token!!, id!!)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
     }
 
     fun getMakeTableLeft() {
@@ -418,53 +338,75 @@ class NetworkFragment : Fragment() {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
+        if (!list.isEmpty())
         list.clear()
         progressdialog!!.show()
-        ApiClint.getInstance()?.getService()?.getMakeTableLeft("bearer " + token!!, id!!)
-                ?.enqueue(object : Callback<ArrayList<Users>> {
-                    override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
-                        println("error")
-                        progressdialog!!.hide();
-
-                    }
-
-                    override fun onResponse(call: Call<ArrayList<Users>>?, response: retrofit2.Response<ArrayList<Users>>?) {
-                        print("object success ")
-                        var code: Int = response!!.code()
-
-                        if (code == 401) {
-                            Apputils.showMsg(activity!!, "Token Expired")
-                            tokenExpire();
-                        }
-                        if (code == 200) {
-                            response?.body()?.forEach { user ->
-                                list.add(user)
-                                try{
-                                    var amount = user.PaidAmount!!.split(".")
-                                    total += amount[0].toInt()
-                                }catch (e:Exception){}
-                            }
-                            adapter!!.notifyDataSetChanged()
-
-                            if (list.size == 0) {
-                                recylcer_down_member!!.visibility = View.GONE
-                                tv_no_data!!.visibility = View.VISIBLE
-                                tv_total!!.text = "Total: 0"
-                            } else {
-                                tv_no_data!!.visibility = View.GONE
-                                recylcer_down_member!!.visibility = View.VISIBLE
-                                tv_total!!.text = "Total: $total"
-                            }
-                        }
-                        progressdialog!!.hide();
 
 
-                    }
-                })
+        val observer = getObserver()
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getMakeTableLeft("bearer " + token!!, id!!)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
+
     }
     //</editor-fold>
 
+
+    fun getObserver(): Observer<ArrayList<Users>> {
+
+        return object : Observer<ArrayList<Users>> {
+            override fun onComplete() {
+                progressdialog!!.hide()
+
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+                disposable = d
+            }
+
+            override fun onNext(t: ArrayList<Users>) {
+
+                t.forEach { obj ->
+                    list.add(obj)
+                    try {
+                        val amount = obj.PaidAmount!!.split(".")
+                        total += amount[0].toInt()
+                    } catch (e: Exception) {
+                    }
+                }
+                adapter!!.notifyDataSetChanged()
+                adapter!!.notifyDataSetChanged()
+
+                if (t.size == 0) {
+                    recylcer_down_member!!.visibility = View.GONE
+                    tv_no_data!!.visibility = View.VISIBLE
+                    tv_total!!.text = "Total: 0"
+                } else {
+                    tv_no_data!!.visibility = View.GONE
+                    recylcer_down_member!!.visibility = View.VISIBLE
+                    tv_total!!.text = "Total: $total"
+                }
+            }
+
+            override fun onError(e: Throwable) {
+                print("error")
+                Apputils.showMsg(activity!!, "Token Expired")
+                tokenExpire();
+            }
+        }
+    }
+
     //token expire
+
+
+    override fun onDestroyView() {
+        if (disposable != null)
+            disposable!!.dispose()
+        super.onDestroyView()
+    }
+
     fun tokenExpire() {
         prefs.clearToken(activity!!)
         prefs.clearUser(activity!!)

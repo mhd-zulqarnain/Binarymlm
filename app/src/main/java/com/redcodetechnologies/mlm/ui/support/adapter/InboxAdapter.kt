@@ -14,11 +14,12 @@ import android.view.ViewGroup
 import android.widget.*
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Inbox
+import com.redcodetechnologies.mlm.models.Messages
 import com.redcodetechnologies.mlm.utils.InboxSearch
 import java.util.ArrayList
 
 
-class InboxAdapter (var ctx: Context, var datalist: ArrayList<Inbox>, private val onItemClick: (Int, String) -> Unit): RecyclerView.Adapter<InboxAdapter.ViewHolder>(), Filterable {
+class InboxAdapter (var ctx: Context, var datalist: ArrayList<Messages>, private val onItemClick: (Int, String) -> Unit): RecyclerView.Adapter<InboxAdapter.ViewHolder>(), Filterable {
     var inboxFilter: InboxSearch? = null
     var face : Typeface? = null
 
@@ -42,34 +43,33 @@ class InboxAdapter (var ctx: Context, var datalist: ArrayList<Inbox>, private va
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val inbox: Inbox = datalist[position]
-        holder?.Sender?.text = inbox.Sender_Name
-        holder?.Date?.text = inbox.Date
-        holder?.Status?.text = inbox.Status
+        val inbox: Messages = datalist[position]
+        holder.Sender?.text = inbox.Sender_Name
+        holder.Date?.text = inbox.CreateDate!!.split('T')[0]
+        holder.Status?.text = inbox.IsRead.toString()
 
-        if (holder?.Status.text.equals("new")) {
-            holder?.Sender.setTextColor(Color.parseColor("#09AF00"));
-            holder?.Sender.setTypeface(holder?.Sender.getTypeface(), Typeface.BOLD)
-            holder?.Date.setTextColor(Color.parseColor("#09AF00"));
-            holder?.Date.setTypeface(holder?.Sender.getTypeface(), Typeface.BOLD)
+        if ( holder.Status.text.equals("new")) {
+            holder.Sender.setTextColor(Color.parseColor("#09AF00"));
+            holder.Sender.setTypeface( holder.Sender.getTypeface(), Typeface.BOLD)
+            holder.Date.setTextColor(Color.parseColor("#09AF00"));
+            holder.Date.setTypeface( holder.Sender.getTypeface(), Typeface.BOLD)
         } else {
-            holder?.Sender.setTextColor(Color.parseColor("#000000"));
-            holder?.Sender.setTypeface(face, Typeface.NORMAL)
-            holder?.Date.setTextColor(Color.parseColor("#000000"));
-            holder?.Date.setTypeface(face, Typeface.NORMAL)
+            holder.Sender.setTextColor(Color.parseColor("#000000"));
+            holder.Sender.setTypeface(face, Typeface.NORMAL)
+            holder.Date.setTextColor(Color.parseColor("#000000"));
+            holder.Date.setTypeface(face, Typeface.NORMAL)
         }
 
-        holder?.btn_reply.setOnClickListener() {
-            holder?.Sender.setTextColor(Color.parseColor("#000000"));
-            holder?.Sender.setTypeface(face, Typeface.NORMAL)
-            holder?.Date.setTextColor(Color.parseColor("#000000"));
-            holder?.Date.setTypeface(face, Typeface.NORMAL)
-            holder?.Status.setText("read")
+        holder.btn_reply.setOnClickListener() {
+            holder.Sender.setTextColor(Color.parseColor("#000000"));
+            holder.Sender.setTypeface(face, Typeface.NORMAL)
+            holder.Date.setTextColor(Color.parseColor("#000000"));
+            holder.Date.setTypeface(face, Typeface.NORMAL)
+            holder.Status.setText("read")
             onItemClick(position, "viewandreply")
 
         }
-        holder?.btn_dlt.setOnClickListener() {
-            //onItemClick(position,"delete")
+        holder.btn_dlt.setOnClickListener() {
             removeItem(inbox)
         }
 
@@ -82,11 +82,7 @@ class InboxAdapter (var ctx: Context, var datalist: ArrayList<Inbox>, private va
             var btn_dlt= itemView.findViewById(R.id.btn_dlt) as Button
         }
 
-
-
-
-    private fun removeItem(inbox: Inbox) {
-
+    private fun removeItem(inbox: Messages) {
         val currPosition = datalist.indexOf(inbox)
         datalist.removeAt(currPosition)
         notifyItemRemoved(currPosition)

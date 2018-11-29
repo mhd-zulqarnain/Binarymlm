@@ -14,12 +14,18 @@ import com.google.gson.Gson
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.retrofit.ApiClint
+import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.network.adapter.DialogMemberAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import dmax.dialog.SpotsDialog
+import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_member_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,6 +43,9 @@ class MemberDetailActivity : AppCompatActivity() {
     var progressBar: LinearLayout? = null
     var layout_add_right: LinearLayout?=null
     var layout_add_left: LinearLayout?=null
+
+    var disposable: Disposable? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +114,11 @@ class MemberDetailActivity : AppCompatActivity() {
             getAllDownlineMembersRight()
         }
 
+        dialog.setOnDismissListener{
+            if(disposable!=null){
+                disposable!!.dispose()
+            }
+        }
         dialog.show()
 
     }
@@ -130,40 +144,13 @@ class MemberDetailActivity : AppCompatActivity() {
         }
         userList.clear()
         showPrgressbar()
-        ApiClint.getInstance()?.getService()?.getAllDownlineMembersRight("bearer " + token, id!!)
-                ?.enqueue(object : Callback<ArrayList<Users>> {
-                    override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
-                        println("error")
-                        //progressdialog!!.hide();
-                        hideprogressbar()
 
-                    }
+        val observer = getObserver()
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token!!, id!!)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
 
-                    override fun onResponse(call: Call<ArrayList<Users>>?, response: retrofit2.Response<ArrayList<Users>>?) {
-                        print("object success ")
-                        var code: Int = response!!.code()
-
-                        if (code == 401) {
-                            Apputils.showMsg(this@MemberDetailActivity, "Token Expired")
-                            tokenExpire();
-                        }
-                        if (code == 200) {
-                            response?.body()?.forEach { user ->
-                                userList.add(user)
-                            }
-                            adapter!!.notifyDataSetChanged()
-                            if(response.body()!!.size==0){
-                                tv_no_data!!.visibility = View.VISIBLE
-                            }
-                            else
-                                tv_no_data!!.visibility = View.GONE
-                        }
-                        hideprogressbar()
-                        //progressdialog!!.dismiss();
-
-
-                    }
-                })
     }
 
     //getDownLineRight
@@ -175,42 +162,51 @@ class MemberDetailActivity : AppCompatActivity() {
         }
         userList.clear()
         showPrgressbar()
-
-        ApiClint.getInstance()?.getService()?.getAllDownlineMembersLeft("bearer " + token, id!!)
-                ?.enqueue(object : Callback<ArrayList<Users>> {
-                    override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
-                        println("error")
-                        hideprogressbar()
-
-
-                    }
-
-                    override fun onResponse(call: Call<ArrayList<Users>>?, response: retrofit2.Response<ArrayList<Users>>?) {
-                        print("object success ")
-                        var code: Int = response!!.code()
-
-                        if (code == 401) {
-                            Apputils.showMsg(this@MemberDetailActivity, "Token Expired")
-                            tokenExpire();
-                        }
-                        if (code == 200) {
-                            response?.body()?.forEach { user ->
-                                userList.add(user)
-                            }
-                            if(response.body()!!.size==0){
-                                tv_no_data!!.visibility = View.VISIBLE
-                            }
-                            else
-                                tv_no_data!!.visibility = View.GONE
-
-                            adapter!!.notifyDataSetChanged()
-                        }
-                        hideprogressbar()
+        val observer = getObserver()
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, id!!)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
 
 
-                    }
-                })
     }
+
+    fun getObserver(): Observer<ArrayList<Users>> {
+
+        return object : Observer<ArrayList<Users>> {
+            override fun onComplete() {
+                hideprogressbar()
+            }
+
+            override fun onSubscribe(d: Disposable) {
+                disposable = d
+            }
+
+            override fun onNext(t: ArrayList<Users>) {
+
+                t.forEach { obj ->
+                    userList.add(obj)
+
+                }
+                adapter!!.notifyDataSetChanged()
+
+                if(t.size==0){
+                    tv_no_data!!.visibility = View.VISIBLE
+                }
+                else
+                    tv_no_data!!.visibility = View.GONE
+            }
+
+            override fun onError(e: Throwable) {
+                print("error")
+                hideprogressbar()
+
+                Apputils.showMsg(this@MemberDetailActivity, "Token Expired")
+                tokenExpire();
+            }
+        }
+    }
+
     fun tokenExpire() {
         prefs.clearToken(this@MemberDetailActivity)
         prefs.clearUser(this@MemberDetailActivity)
