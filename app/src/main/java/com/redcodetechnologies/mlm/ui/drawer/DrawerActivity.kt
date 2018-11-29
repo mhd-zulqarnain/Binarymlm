@@ -2,7 +2,6 @@ package com.redcodetechnologies.mlm.ui.drawer
 
 import android.Manifest
 import android.app.Activity
-import android.app.Notification
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -14,7 +13,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.text.Html
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.Menu
@@ -25,8 +23,9 @@ import android.widget.ExpandableListView.OnGroupExpandListener
 import com.google.gson.Gson
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.MyNotification
+import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.drawer.adapter.ExpandListAdapter
-import com.redcodetechnologies.mlm.ui.*
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.dashboard.DashBoardFragment
 import com.redcodetechnologies.mlm.ui.dashboard.SleepingDashboardFragment
@@ -34,6 +33,7 @@ import com.redcodetechnologies.mlm.ui.geologytable.GeneologyTableFragment
 import com.redcodetechnologies.mlm.ui.network.NetworkFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DirectMemberFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DownlinerStatusFragment
+import com.redcodetechnologies.mlm.ui.notification.NoficationListFragment
 import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
 import com.redcodetechnologies.mlm.ui.profile.ProfileActivity
@@ -42,10 +42,15 @@ import com.redcodetechnologies.mlm.ui.wallet.EWalletSummaryFragment
 import com.redcodetechnologies.mlm.ui.wallet.TransactionFragment
 import com.redcodetechnologies.mlm.ui.wallet.WithdrawalFundFragment
 import com.redcodetechnologies.mlm.ui.wallet.withdraw.MyWithdrawalRequestFragment
+import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.ServiceError
+import com.redcodetechnologies.mlm.utils.ServiceListener
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import retrofit2.Call
+import retrofit2.Callback
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var listDataHeader: ArrayList<String>? = null
@@ -126,18 +131,26 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         alertBox.setView(view)
         alertBox.setCancelable(false)
         val dialog = alertBox.create()
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
+        //dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         val tvtitle: TextView = view.findViewById(R.id.tv_title)
         val tvdescription: TextView = view.findViewById(R.id.tv_des)
         var obj = Gson().fromJson<MyNotification>(notification, MyNotification::class.java)
         tvtitle.setText(obj.NotificationName)
         tvdescription.setText(obj.NotificationDescription)
         val btn_dismiss: Button = view.findViewById(R.id.btn_dismiss)
-        val button_submit: Button = view.findViewById(R.id.btn_submit)
+        val btn_save: Button = view.findViewById(R.id.btn_save)
 
-        button_submit.setOnClickListener {
-            //save
+        btn_save.setOnClickListener {
+            //save.
+            saveNotification(obj,object: ServiceListener<String>{
+                override fun success(obj: String) {
+                  Apputils.showMsg(this@DrawerActivity,"Notication saved")
+                    dialog.dismiss()
+                }
+                override fun fail(error: ServiceError) {
+                    dialog.dismiss()
+                }
+            })
         }
         btn_dismiss.setOnClickListener {
             dialog.dismiss()
@@ -146,13 +159,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     }
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
 
     //<editor-fold desc="Menu control">
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -564,6 +570,39 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
     //</editor-fold>
 
+    fun saveNotification(obj: MyNotification,service: ServiceListener<String>) {
+
+        if (!Apputils.isNetworkAvailable(this@DrawerActivity)) {
+            service.success("network error")
+            return
+        }
+        val id = SharedPrefs.getInstance()!!.getUser(this@DrawerActivity).userId
+        ApiClint.getInstance()?.getService()?.saveNotification(id!!, obj)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        service.success("failed")
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        //var code: Int = response!!.code()
+                        val msg = response!!.message()
+                        service.success(msg)
+                    }
+                })
+
+    }
+
+    fun stringtoImage(encodedString: String): Bitmap? {
+        try {
+            var encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            var bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
+            return bitmap;
+
+        } catch (e: Exception) {
+            return null
+        }
+    }
+
     fun askPermission(permission: String, requestcode: Int) {
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(permission), requestcode)
@@ -579,15 +618,13 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
 
-
-    fun stringtoImage(encodedString: String): Bitmap? {
-        try {
-            var encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            var bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
-            return bitmap;
-
-        } catch (e: Exception) {
-            return null
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
+
+
 }

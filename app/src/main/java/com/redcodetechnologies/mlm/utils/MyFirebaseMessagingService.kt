@@ -71,7 +71,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
             val channelId = "Default"
             val builder = NotificationCompat.Builder(this, channelId)
-                    .setSmallIcon(R.drawable.main_logo)
+                    .setSmallIcon(R.drawable.sleepinglogo)
                     .setContentTitle(notification.NotificationName)
                     .setContentText(notification.NotificationDescription).setAutoCancel(true).setContentIntent(pendingIntent)
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
