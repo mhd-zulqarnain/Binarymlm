@@ -213,6 +213,13 @@ interface RetrofiltService {
     fun getuserunpaidmembersrightlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
     //</editor-fold>
 
+    @POST("notificationsetup/{userid}")
+    @Headers("Content-Type:application/json")
+    fun saveNotification( @Path("userid") userid: Int,@Body obj: MyNotification): Call<Response>
+
+    @GET("getnotificationlistbyuser/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getNotificationList(@Path("userId") userId: Int): Observable<ArrayList<MyNotification>>
 
 
 }

@@ -161,6 +161,7 @@ class GeneologyTableFragment : Fragment() {
                 t.forEach { transaction ->
                     commitionlist.add(transaction)
                 }
+                adapter!!.notifyDataSetChanged()
                if(t.size==0){
                    progressBar.visibility = View.GONE
                    recylcer_down!!.visibility = View.GONE

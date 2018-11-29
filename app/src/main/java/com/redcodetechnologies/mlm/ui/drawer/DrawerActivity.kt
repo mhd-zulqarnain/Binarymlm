@@ -14,15 +14,18 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Base64
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ExpandableListView
+import android.widget.*
 import android.widget.ExpandableListView.OnGroupExpandListener
-import android.widget.TextView
+import com.google.gson.Gson
 import com.redcodetechnologies.mlm.R
+import com.redcodetechnologies.mlm.models.MyNotification
+import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.drawer.adapter.ExpandListAdapter
-import com.redcodetechnologies.mlm.ui.*
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.dashboard.DashBoardFragment
 import com.redcodetechnologies.mlm.ui.dashboard.SleepingDashboardFragment
@@ -30,6 +33,7 @@ import com.redcodetechnologies.mlm.ui.geologytable.GeneologyTableFragment
 import com.redcodetechnologies.mlm.ui.network.NetworkFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DirectMemberFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DownlinerStatusFragment
+import com.redcodetechnologies.mlm.ui.notification.NoficationListFragment
 import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
 import com.redcodetechnologies.mlm.ui.profile.ProfileActivity
@@ -38,10 +42,15 @@ import com.redcodetechnologies.mlm.ui.wallet.EWalletSummaryFragment
 import com.redcodetechnologies.mlm.ui.wallet.TransactionFragment
 import com.redcodetechnologies.mlm.ui.wallet.WithdrawalFundFragment
 import com.redcodetechnologies.mlm.ui.wallet.withdraw.MyWithdrawalRequestFragment
+import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.ServiceError
+import com.redcodetechnologies.mlm.utils.ServiceListener
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import retrofit2.Call
+import retrofit2.Callback
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var listDataHeader: ArrayList<String>? = null
@@ -51,10 +60,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     var nav_view: NavigationView? = null
     var lastExpandedPosition = -1
     var category: String = "Sales"
+    var notification: String = ""
     var mPref: SharedPrefs? = null
     lateinit var headerView: View
 
-    val PRFILE_UPDATE_REQ:Int = 44
+    val PRFILE_UPDATE_REQ: Int = 44
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +74,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         initView()
     }
 
-    fun initView(){
+    fun initView() {
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -73,8 +83,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp)
         nav_view = findViewById(R.id.nav_view) as NavigationView
         nav_view!!.setNavigationItemSelectedListener(this)
-        if (intent.getStringExtra("Category") != null)
+        if (intent.getStringExtra("Category") != null) {
             category = intent.getStringExtra("Category");
+            if (intent.getStringExtra("notification") != null) {
+                notification = intent.getStringExtra("notification")
+
+                showNotificationDialog();
+            }
+        }
         headerView = nav_view!!.getHeaderView(0)
         if (category == "Sales") {
             enableExpandableList()
@@ -88,6 +104,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         makeView()
         askPermission(Manifest.permission.CAMERA, 1)
     }
+
     fun makeView() {
 
 
@@ -100,20 +117,48 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
         if (obj.phone != null)
             headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.phone.toString());
-        if (obj.profileImage != null){
+        if (obj.profileImage != null) {
             var img = obj.profileImage
-            if (img!=""&&img!="null")
+            if (img != "" && img != "null")
                 headerView.findViewById<CircleImageView>(R.id.profile_image_citizen).setImageBitmap(stringtoImage(img.toString()))
         }
     }
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
+    private fun showNotificationDialog() {
+
+        val view: View = LayoutInflater.from(this@DrawerActivity).inflate(R.layout.dialog_notification, null)
+        val alertBox = android.support.v7.app.AlertDialog.Builder(this@DrawerActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(false)
+        val dialog = alertBox.create()
+        //dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        val tvtitle: TextView = view.findViewById(R.id.tv_title)
+        val tvdescription: TextView = view.findViewById(R.id.tv_des)
+        var obj = Gson().fromJson<MyNotification>(notification, MyNotification::class.java)
+        tvtitle.setText(obj.NotificationName)
+        tvdescription.setText(obj.NotificationDescription)
+        val btn_dismiss: Button = view.findViewById(R.id.btn_dismiss)
+        val btn_save: Button = view.findViewById(R.id.btn_save)
+
+        btn_save.setOnClickListener {
+            //save.
+            saveNotification(obj,object: ServiceListener<String>{
+                override fun success(obj: String) {
+                  Apputils.showMsg(this@DrawerActivity,"Notication saved")
+                    dialog.dismiss()
+                }
+                override fun fail(error: ServiceError) {
+                    dialog.dismiss()
+                }
+            })
         }
+        btn_dismiss.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+
     }
+
 
     //<editor-fold desc="Menu control">
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -135,7 +180,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.action_myprofile -> {
 
                 var intent = Intent(this@DrawerActivity, ProfileActivity::class.java)
-                startActivityForResult(intent,PRFILE_UPDATE_REQ)
+                startActivityForResult(intent, PRFILE_UPDATE_REQ)
 
                 return true
             }
@@ -214,8 +259,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         args.putString("Fragment", "ReferredMembers") //Direct Members
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, DirectMemberFragment()).commit()
-                    }
-                    else if (childPosition == 3) {
+                    } else if (childPosition == 3) {
                         args.putString("Fragment", "Paid-unPaid Downliners")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, DownlinerStatusFragment()).commit()
@@ -526,19 +570,26 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
     //</editor-fold>
 
-    fun askPermission(permission: String, requestcode: Int) {
-        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(permission), requestcode)
-        }
-    }
+    fun saveNotification(obj: MyNotification,service: ServiceListener<String>) {
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
-        fragment!!.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode ==PRFILE_UPDATE_REQ && resultCode == Activity.RESULT_OK){
-            makeView()
+        if (!Apputils.isNetworkAvailable(this@DrawerActivity)) {
+            service.success("network error")
+            return
         }
+        val id = SharedPrefs.getInstance()!!.getUser(this@DrawerActivity).userId
+        ApiClint.getInstance()?.getService()?.saveNotification(id!!, obj)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        service.success("failed")
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        //var code: Int = response!!.code()
+                        val msg = response!!.message()
+                        service.success(msg)
+                    }
+                })
+
     }
 
     fun stringtoImage(encodedString: String): Bitmap? {
@@ -551,4 +602,29 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             return null
         }
     }
+
+    fun askPermission(permission: String, requestcode: Int) {
+        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(permission), requestcode)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
+        fragment!!.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PRFILE_UPDATE_REQ && resultCode == Activity.RESULT_OK) {
+            makeView()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+
 }
