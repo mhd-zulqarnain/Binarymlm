@@ -34,6 +34,7 @@ import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
 import com.redcodetechnologies.mlm.ui.profile.ProfileActivity
 import com.redcodetechnologies.mlm.ui.support.ReportFragment
+import com.redcodetechnologies.mlm.ui.videos.VideosListFragment
 import com.redcodetechnologies.mlm.ui.wallet.EWalletSummaryFragment
 import com.redcodetechnologies.mlm.ui.wallet.TransactionFragment
 import com.redcodetechnologies.mlm.ui.wallet.WithdrawalFundFragment
