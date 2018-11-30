@@ -111,6 +111,10 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             icon.setImageResource(R.drawable.icon_dashboard);
             group.setVisibility(View.INVISIBLE);
         }
+        if (headerTitle == "Videos") {
+            icon.setImageResource(R.drawable.icon_videos);
+            group.setVisibility(View.INVISIBLE);
+        }
         if (headerTitle == "Network") {
             icon.setImageResource(R.drawable.icon_network);
             group.setVisibility(View.VISIBLE);

@@ -38,6 +38,7 @@ import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
 import com.redcodetechnologies.mlm.ui.profile.ProfileActivity
 import com.redcodetechnologies.mlm.ui.support.ReportFragment
+import com.redcodetechnologies.mlm.ui.videos.VideosListFragment
 import com.redcodetechnologies.mlm.ui.wallet.EWalletSummaryFragment
 import com.redcodetechnologies.mlm.ui.wallet.TransactionFragment
 import com.redcodetechnologies.mlm.ui.wallet.WithdrawalFundFragment
@@ -231,7 +232,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, NoficationListFragment()).commit()
                     return true
-                } else   // for child parents
+                }
+                else if (id == 8L) {
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
+                    return true
+                }
+
+                else   // for child parents
                     return false
             }
         })
@@ -327,7 +335,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     }
-                } else if (groupPosition == 6 || groupPosition == 7) {
+
+                }
+
+                else if (groupPosition == 6 || groupPosition == 7) {
                     val gt: InboxFragment = InboxFragment()
                     val gta: SentFragment = SentFragment()
 
@@ -349,6 +360,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta).commit()
                     }
                 }
+
                 return true
             }
         })
@@ -366,6 +378,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataHeader.add("Reports")
         listDataHeader.add("Sponsor Support")
         listDataHeader.add("IT Support")
+        listDataHeader.add("Videos")
 
         // Adding child data
 
@@ -446,7 +459,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, NoficationListFragment()).commit()
                     return true
-                } else   // for child parents
+                }
+
+                else if (id == 8L) {
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
+                    return true
+                }
+                else   // for child parents
                     return false
             }
         })
