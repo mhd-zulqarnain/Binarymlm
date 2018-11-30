@@ -43,6 +43,10 @@ class InboxFragment : Fragment() {
     var userId:Int?=null
     var sponserId:Int?=null
     var userName:String?=null
+
+    val SPONSER_INBOX:String="Sponser_Inbox"
+    val IT_INBOX:String="IT_Inbox"
+
     lateinit var user:NewUserRegistration
     lateinit var frgementType:String
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -106,8 +110,13 @@ class InboxFragment : Fragment() {
 
         val observer =getObserver()
         val userId = SharedPrefs.getInstance()!!.getUser(activity!!).userId
-        val observable: Observable<ArrayList<Messages>> = MyApiRxClint.getInstance()!!.getService()!!.viewallmessagesupport(userId!!)
+        var observable : Observable<ArrayList<Messages>>
 
+        if(frgementType==SPONSER_INBOX)
+         observable = MyApiRxClint.getInstance()!!.getService()!!.viewallmessagesupport(userId!!)
+        else{
+            observable = MyApiRxClint.getInstance()!!.getService()!!.viewallmessageItsupport(userId!!)
+        }
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer)
@@ -157,15 +166,25 @@ class InboxFragment : Fragment() {
         dialog!!.setCancelable(true);
         val message: TextView = v.findViewById(R.id.message)
         val tv_sender_name: TextView = v.findViewById(R.id.tv_sender_name)
+        val tv_reply: TextView = v.findViewById(R.id.tv_reply)
+        val sc_reply_view: ScrollView = v.findViewById(R.id.sc_reply_view)
         val btn_submit: Button = v.findViewById(R.id.btn_submit)
         val rep_message: EditText = v.findViewById(R.id.rep_message)
 
         message.text = inbox.Message
-        tv_sender_name.text = inbox.Sender_Name+":"
 
+
+        if(frgementType==IT_INBOX){
+            tv_sender_name.text = "Support:"
+            tv_reply.visibility = View.GONE
+            sc_reply_view.visibility = View.GONE
+        }else{
+            tv_sender_name.text = inbox.Sender_Name+":"
+        }
         btn_submit.setOnClickListener {
             if(rep_message.text.toString().trim()!=""){
                 replymessagesponsor(rep_message.text.toString())
+
                 dialog.dismiss()
             }else
                 Apputils.showMsg(activity!!,"Message could not be empty!!")
@@ -201,7 +220,6 @@ class InboxFragment : Fragment() {
                     reciverId=1
             }
         })
-
 
         btn_submit.setOnClickListener {
             if(rep_message.text.toString().trim()!=""){

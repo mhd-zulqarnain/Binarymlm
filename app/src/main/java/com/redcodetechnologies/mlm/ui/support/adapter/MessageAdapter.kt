@@ -23,6 +23,9 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
     var messageFilter: MessageSearch? = null
     var face: Typeface? = null
 
+    val SPONSER_INBOX:String="Sponser_Inbox"
+    val IT_INBOX:String="IT_Inbox"
+
     override fun getFilter(): Filter {
         if (messageFilter == null)
             messageFilter = MessageSearch(datalist, this

@@ -223,10 +223,9 @@ interface RetrofiltService {
     fun getNotificationList(@Path("userId") userId: Int): Observable<ArrayList<MyNotification>>
     //</editor-fold>
 
-    @POST("viewallreadmessage/{userid}")
-    @Headers("Content-Type:application/json")
-    fun replymessagesponsorsupport( @Path("userid") userid: Int,@Body obj: Messages): Call<Response>
 
+
+    //<editor-fold desc="sponser messages">
     @POST("deleteinboxmsg/{userid}")
     @Headers("Content-Type:application/json")
     fun deleteSponserinboxmsg( @Path("userid") userid: Int): Call<Response>
@@ -248,5 +247,10 @@ interface RetrofiltService {
     @GET("getsentmessagessponsorsupport/{userId}")
     @Headers("Content-Type:application/json")
     fun getsentmessagessponsorsupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
+    //</editor-fold>
+
+    @GET("viewallreadmessageitsupport/{userId}")
+    @Headers("Content-Type:application/json")
+    fun viewallmessageItsupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
 
 }

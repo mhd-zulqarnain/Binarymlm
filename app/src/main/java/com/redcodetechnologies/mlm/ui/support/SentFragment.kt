@@ -94,6 +94,8 @@ class SentFragment : Fragment() {
 
         val observer =getObserver()
         val userId = SharedPrefs.getInstance()!!.getUser(activity!!).userId
+
+
         val observable: Observable<java.util.ArrayList<Messages>> = MyApiRxClint.getInstance()!!.getService()!!.getsentmessagessponsorsupport(userId!!)
 
         observable.subscribeOn(Schedulers.io())
