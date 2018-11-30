@@ -32,7 +32,6 @@ class VideosAdapter:RecyclerView.Adapter<YoutubeViewHolder> {
     override fun onBindViewHolder(holder: YoutubeViewHolder, position: Int) {
         val youtubeVideoModel = youtubeVideoModelArrayList.get(position)
         holder.videoTitle.setText(youtubeVideoModel.getTitle())
-        holder.videoDuration.setText(youtubeVideoModel.getDuration())
         /* initialize the thumbnail image view , we need to pass Developer Key */
         holder.videoThumbnailImageView.initialize(Constants.DEVELOPER_KEY, object : YouTubeThumbnailView.OnInitializedListener {
             override fun onInitializationSuccess(youTubeThumbnailView: YouTubeThumbnailView, youTubeThumbnailLoader: YouTubeThumbnailLoader) {

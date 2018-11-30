@@ -11,11 +11,9 @@ class YoutubeViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
 
     var videoThumbnailImageView: YouTubeThumbnailView
     var videoTitle:TextView
-    var videoDuration:TextView
 
     init{
         videoThumbnailImageView = itemView.findViewById(R.id.video_thumbnail_image_view)
         videoTitle = itemView.findViewById(R.id.video_title_label)
-        videoDuration = itemView.findViewById(R.id.video_duration_label)
     }
 }
