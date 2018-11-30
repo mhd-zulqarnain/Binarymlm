@@ -9,55 +9,58 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+
         android:background="@drawable/dialog_background"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_sender_name"
+
+        <Spinner
+            android:id="@+id/spinner_receiver"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/ralewayregular"
-            android:paddingLeft="10dp"
-            android:text="Sender Name:"
-            android:textColor="#101010"
-            android:textSize="18sp" />
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+
+            />
+
 
         <ScrollView
             android:layout_width="match_parent"
-            android:background="@drawable/unread_message_box"
-
             android:layout_height="80dp">
 
-            <TextView
-                android:id="@+id/message"
+
+            <EditText
+                android:id="@+id/rep_message"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:background="@drawable/edittext_style1"
                 android:fontFamily="@font/ralewayregular"
-                android:imeOptions="actionDone"
+                android:hint="Message Body"
+                android:paddingBottom="20dp"
                 android:paddingLeft="5dp"
-                android:text="Message"
-                android:textColor="#2a2828"
-                android:textSize="18sp"
-                android:background="@null"/>
+                android:textColor="#000"
+                android:textColorHint="#8A8A8A"
+                android:textSize="18sp" />
 
         </ScrollView>
+
 
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="8dp"
             android:background="#C42D2D"
             android:fontFamily="@font/ralewayregular"
             android:gravity="center"
-            android:text="Ok"
+            android:onClick="signIn"
+            android:text="Send"
             android:textColor="#FFFBFB"
-            android:textSize="10sp"
-            android:layout_margin="5dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
 

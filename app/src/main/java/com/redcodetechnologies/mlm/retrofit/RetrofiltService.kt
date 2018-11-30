@@ -229,7 +229,11 @@ interface RetrofiltService {
 
     @POST("deleteinboxmsg/{userid}")
     @Headers("Content-Type:application/json")
-    fun deleteinboxmsg( @Path("userid") userid: Int): Call<Response>
+    fun deleteSponserinboxmsg( @Path("userid") userid: Int): Call<Response>
+
+    @POST("inboxsponsersupport")
+    @Headers("Content-Type:application/json")
+    fun newMessageSponser( @Body obj:Messages): Call<Response>
 
     @POST("replymessagesponsorsupport/{u_id}/{msg}/{userId}/{username}")
     @Headers("Content-Type:application/json")

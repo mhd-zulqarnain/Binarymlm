@@ -279,7 +279,10 @@
         <item>	Zimbabwe	</item>
 
     </string-array>
-
+    <string-array name="compose_sponsor_spinner">
+        <item>Admin</item>
+        <item>Sponsor</item>
+    </string-array>
     <string name="title_activity_user_category">UserCategoryActivity</string>
 
 

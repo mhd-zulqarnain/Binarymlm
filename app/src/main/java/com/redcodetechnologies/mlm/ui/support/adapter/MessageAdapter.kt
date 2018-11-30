@@ -91,7 +91,7 @@ class MessageAdapter (var ctx: Context, var datalist: ArrayList<Messages> , var 
         }
 
 
-        ApiClint.getInstance()?.getService()?.deleteinboxmsg( message.Id!!)
+        ApiClint.getInstance()?.getService()?.deleteSponserinboxmsg( message.Id!!)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         println("error")

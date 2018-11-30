@@ -31,6 +31,18 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btn_compose"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:text="Compose"
+            android:background="#bbf4c026"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:padding="3dp"
+
+            android:drawableRight="@drawable/ic_message"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,7 +100,7 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#AE050C" />
+            android:background="#3cae050c" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/unread_inbox_recycler"
@@ -130,7 +142,7 @@
                 android:fontFamily="@font/oswald_regular"
                 android:textSize="20sp"
                 android:gravity="center"
-                android:text="Notification not found!"
+                android:text="No message found!"
                 android:textColor="#cac4c4"
                 />
         </LinearLayout>
