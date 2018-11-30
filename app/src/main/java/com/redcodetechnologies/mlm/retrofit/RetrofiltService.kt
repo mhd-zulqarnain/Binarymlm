@@ -48,11 +48,11 @@ interface RetrofiltService {
     //<editor-fold desc="Make table ">
     @GET("getAllDownlineMembersRight/{userid}")
     @Headers("Content-Type:application/json")
-    fun getAllDownlineMembersRight(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
+    fun getAllDownlineMembersRight(@Header("Authorization") auth: String, @Path("userid") userid: Int): Observable<ArrayList<Users>>
 
     @GET("getAllDownlineMembersLeft/{userid}")
     @Headers("Content-Type:application/json")
-    fun getAllDownlineMembersLeft(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
+    fun getAllDownlineMembersLeft(@Header("Authorization") auth: String, @Path("userid") userid: Int): Observable<ArrayList<Users>>
 
     @GET("dropdownright/{userid}")
     @Headers("Content-Type:application/json")
@@ -68,11 +68,11 @@ interface RetrofiltService {
 
     @GET("maketablemembersright/{userid}")
     @Headers("Content-Type:application/json")
-    fun getMakeTableRight(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
+    fun getMakeTableRight(@Header("Authorization") auth: String, @Path("userid") userid: Int): Observable<ArrayList<Users>>
 
     @GET("maketablemembersleft/{userid}")
     @Headers("Content-Type:application/json")
-    fun getMakeTableLeft(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<ArrayList<Users>>
+    fun getMakeTableLeft(@Header("Authorization") auth: String, @Path("userid") userid: Int): Observable<ArrayList<Users>>
 
     @GET("maketabledetails/{userid}")
     @Headers("Content-Type:application/json")
@@ -208,11 +208,12 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getuserunpaidmembersleftlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
 
-    @GET("getuserunpaidmembersleftlist/{userId}")
+    @GET("getuserunpaidmembersrightlist/{userId}")
     @Headers("Content-Type:application/json")
     fun getuserunpaidmembersrightlist(@Path("userId") userId: Int): Observable<ArrayList<Users>>
     //</editor-fold>
 
+    //<editor-fold desc="Notification ">
     @POST("notificationsetup/{userid}")
     @Headers("Content-Type:application/json")
     fun saveNotification( @Path("userid") userid: Int,@Body obj: MyNotification): Call<Response>
@@ -220,6 +221,36 @@ interface RetrofiltService {
     @GET("getnotificationlistbyuser/{userId}")
     @Headers("Content-Type:application/json")
     fun getNotificationList(@Path("userId") userId: Int): Observable<ArrayList<MyNotification>>
+    //</editor-fold>
 
+
+
+    //<editor-fold desc="sponser messages">
+    @POST("deleteinboxmsg/{userid}")
+    @Headers("Content-Type:application/json")
+    fun deleteSponserinboxmsg( @Path("userid") userid: Int): Call<Response>
+
+    @POST("inboxsponsersupport")
+    @Headers("Content-Type:application/json")
+    fun newMessageSponser( @Body obj:Messages): Call<Response>
+
+    @POST("replymessagesponsorsupport/{u_id}/{msg}/{userId}/{username}")
+    @Headers("Content-Type:application/json")
+    fun replymessagesponsor( @Path("u_id") sponsorId: Int, @Path("msg") msg: String,
+                             @Path("userId") userid: Int,
+                             @Path("username") username: String): Call<Response>
+
+    @GET("viewallreadmessage/{userId}")
+    @Headers("Content-Type:application/json")
+    fun viewallmessagesupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
+
+    @GET("getsentmessagessponsorsupport/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getsentmessagessponsorsupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
+    //</editor-fold>
+
+    @GET("viewallreadmessageitsupport/{userId}")
+    @Headers("Content-Type:application/json")
+    fun viewallmessageItsupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
 
 }

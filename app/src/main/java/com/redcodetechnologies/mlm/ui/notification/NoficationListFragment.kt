@@ -53,13 +53,15 @@ class NoficationListFragment : Fragment() {
     private fun initView(view: View?) {
 
         recylcer_notification = view!!.findViewById(R.id.recylcer_notification)
-        tv_name = view!!.findViewById(R.id.tv_notific_name)
-        tv_desc = view!!.findViewById(R.id.tv_notific_desc)
+        tv_name = view.findViewById(R.id.tv_notific_name)
+        tv_desc = view.findViewById(R.id.tv_notific_desc)
         progressBar = view.findViewById(R.id.progressBar)
         tv_no_data = view.findViewById(R.id.tv_no_data)
 
         recylcer_notification!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
-        adapter = NotificationAdapter(activity!!, list)
+        adapter = NotificationAdapter(activity!!, list){obj->
+            //action
+        }
         recylcer_notification!!.adapter = adapter
 
         getNotifications()
@@ -71,7 +73,7 @@ class NoficationListFragment : Fragment() {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
             return
         }
-        progressBar!!.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
 
         val observer =getObserver()
         val userId = SharedPrefs.getInstance()!!.getUser(activity!!).userId
@@ -86,7 +88,7 @@ class NoficationListFragment : Fragment() {
 
         return object: Observer<ArrayList<MyNotification>>{
             override fun onComplete() {
-                progressBar!!.visibility = View.GONE
+                progressBar.visibility = View.GONE
 
             }
 
@@ -95,6 +97,7 @@ class NoficationListFragment : Fragment() {
             }
 
             override fun onNext(t: ArrayList<MyNotification>) {
+
                 t.forEach{obj->
                     list.add(obj)
                 }
@@ -114,6 +117,7 @@ class NoficationListFragment : Fragment() {
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()?.setTitle("Notifications")
+        (activity as DrawerActivity).getSupportActionBar()?.setIcon(R.drawable.ic_notifications_black_24dp)
     }
     override fun onDestroyView() {
         if (disposable != null)

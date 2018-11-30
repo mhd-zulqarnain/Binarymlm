@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:background="@drawable/unread_message_box"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+                android:background="#fff"
+            android:layout_height="80dp">
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/ralewayregular"
+                android:imeOptions="actionDone"
+                android:paddingLeft="5dp"
+                android:text="Message"
+                android:textColor="#2a2828"
+                android:textSize="18sp"
+                android:background="@null"/>
+
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="#C42D2D"
+            android:fontFamily="@font/ralewayregular"
+            android:gravity="center"
+            android:text="Ok"
+            android:textColor="#FFFBFB"
+            android:textSize="10sp"
+            android:layout_margin="5dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

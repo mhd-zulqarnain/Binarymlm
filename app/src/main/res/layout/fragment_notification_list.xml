@@ -4,73 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="12dp"
     >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorRed"
-        android:text=" Notification List"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/ralewaybold"
-        android:textSize="17sp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:id="@+id/tv_notific_header"
-        />
-
-
-    <View
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="#50000000" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="5dp"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Name"
-            android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
-            android:textSize="15sp"
-            android:id="@+id/tv_notifi_name"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center"
-            android:text="Notification Description"
-            android:textColor="#494A4B"
-            android:fontFamily="@font/ralewaybold"
-            android:textSize="15sp"
-            android:id="@+id/tv_notifi_desc"
-            />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="#494A4B" />
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recylcer_notification"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="horizontal"
+        android:layout_margin="4dp"
         android:layout_weight="4" />
 
     <LinearLayout
@@ -104,7 +45,7 @@
             android:fontFamily="@font/oswald_regular"
             android:textSize="20sp"
             android:gravity="center"
-            android:text="No data found"
+            android:text="Notification not found!"
             android:textColor="#cac4c4"
             />
     </LinearLayout>

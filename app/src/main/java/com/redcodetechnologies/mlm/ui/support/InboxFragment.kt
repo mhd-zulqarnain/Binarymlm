@@ -1,4 +1,5 @@
 package com.redcodetechnologies.mlm.ui.support
+
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -7,89 +8,306 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.*
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.ui.support.adapter.InboxAdapter
-import com.redcodetechnologies.mlm.models.Inbox
+import com.redcodetechnologies.mlm.ui.support.adapter.MessageAdapter
+import com.redcodetechnologies.mlm.models.Messages
+import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
+import com.redcodetechnologies.mlm.retrofit.ApiClint
+import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
+import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.SharedPrefs
+import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import retrofit2.Call
+import retrofit2.Callback
 import java.util.*
+
 class InboxFragment : Fragment() {
     var search_view: SearchView? = null
-//    var inboxAdapater: InboxAdapter? = null
-//    var inboxList: ArrayList<Inbox> = ArrayList()
+    //    var inboxAdapater: MessageAdapter? = null
+    var data: ArrayList<Messages> = ArrayList()
 //    var inbox_recycler: RecyclerView? = null
+    var adapter: MessageAdapter? = null
+    var disposable: Disposable? = null
+    lateinit var progressBar: LinearLayout
+    lateinit var tv_no_data: LinearLayout
+    lateinit var btn_compose: Button
+    lateinit var recyclerView:RecyclerView
+
+    var userId:Int?=null
+    var sponserId:Int?=null
+    var userName:String?=null
+
+    val SPONSER_INBOX:String="Sponser_Inbox"
+    val IT_INBOX:String="IT_Inbox"
+
+    lateinit var user:NewUserRegistration
+    lateinit var frgementType:String
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view:View =inflater.inflate(R.layout.fragment_inbox, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_inbox, container, false)
+        frgementType = arguments?.getString("Fragment").toString();
+
         initView(view)
         return view
     }
-    private fun initView(view:View) {
 
-        val data = ArrayList<Inbox>()
-        data.add(Inbox("Basit","How r u Admin a;s Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;l Admin a;skldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;lkldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;lskj dfa;lskkha dfjsahlf alk hakljh dkalsh fdlajfdlaksdfjalskdjfl;kasjdfkldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;lskj dfa;lskkha dfjsahlf alk hakljh dkalsh fdlajfdlaksdfjalskdjfl;kasjkldjflaskdjflaskdjf alksjdf alkjs dfka;lsjd f;alkjs dfa;lskj dfa;lskkha dfjsahlf alk hakljh dkalsh fdlajfdlaksdfjalskdjfl;kasj;lkas;djf;aslkfdj7 ","read","16/04.2018"))
-        data.add(Inbox("Arif Bozdar","How r u Ali","new","15/04.2018"))
-        data.add(Inbox("Shakoor","How r u Z.Baliti","read","15/04.2018"))
-        data.add(Inbox("Ali","How r u Arif","new","11/04.2018"))
-        data.add(Inbox("Basit","How r u Admin","read","16/04.2018"))
-        data.add(Inbox("Arif Bozdar","How r u Ali","read","15/04.2018"))
-        data.add(Inbox("Shakoor","How r u Z.Baliti","read","15/04.2018"))
-        data.add(Inbox("Ali", "How r u Arif", "new", "11/04.2018"))
+    private fun initView(view: View) {
+
+        user  = SharedPrefs.getInstance()!!.getUser(activity!!)
+        userId = user.userId
+        sponserId = user.sponsorId
+        userName = user.username
 
         search_view = view.findViewById(R.id.search_view)
-        val recyclerView = view.findViewById(R.id.unread_inbox_recycler) as RecyclerView
-        recyclerView.layoutManager= LinearLayoutManager(activity!!,LinearLayout.VERTICAL,false) as RecyclerView.LayoutManager?
+        progressBar = view.findViewById(R.id.progressBar)
+        tv_no_data = view.findViewById(R.id.tv_no_data)
+        btn_compose = view.findViewById(R.id.btn_compose)
 
-        val report = InboxAdapter(activity!!, data) { postion, type ->
-            if (type == "viewandreply") {
-                viewAndReply(data[postion])
-            }
+         recyclerView = view.findViewById(R.id.unread_inbox_recycler) as RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
+
+        adapter = MessageAdapter(activity!!, data,frgementType) { obj ->
+                viewAndReply(obj)
         }
-        /*{ onItemClick(post,type)
-            openreportdialog(data[post])
-        }*/
-        recyclerView.adapter = report
-        report.notifyDataSetChanged()
+
+        recyclerView.adapter = adapter
+        adapter!!.notifyDataSetChanged()
+        getMessages()
         search_view!!.setOnClickListener {
             search_view!!.setIconified(false)
         }
+
         search_view!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
+
             override fun onQueryTextChange(query: String): Boolean {
-                report.getFilter().filter(query)
+                adapter!!.getFilter().filter(query)
                 return false
             }
         })
+
+        btn_compose.setOnClickListener{
+            newMessageDialog()
+        }
     }
 
-    fun viewAndReply(inbox:Inbox){
+    fun getMessages(){
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressBar.visibility = View.VISIBLE
+        recyclerView.visibility = View.GONE
 
-        val v:View = LayoutInflater.from(activity!!).inflate(R.layout.inbox_view_message,null)
+        val observer =getObserver()
+        val userId = SharedPrefs.getInstance()!!.getUser(activity!!).userId
+        var observable : Observable<ArrayList<Messages>>
+
+        if(frgementType==SPONSER_INBOX)
+         observable = MyApiRxClint.getInstance()!!.getService()!!.viewallmessagesupport(userId!!)
+        else{
+            observable = MyApiRxClint.getInstance()!!.getService()!!.viewallmessageItsupport(userId!!)
+        }
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
+    }
+
+    fun getObserver(): Observer<ArrayList<Messages>> {
+
+        return object: Observer<ArrayList<Messages>> {
+            override fun onComplete() {
+                progressBar.visibility = View.GONE
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+                disposable = d
+            }
+
+            override fun onNext(t: ArrayList<Messages>) {
+
+                t.forEach{obj->
+                    data.add(obj)
+                }
+                adapter!!.notifyDataSetChanged()
+                if(t.size==0){
+                    progressBar.visibility = View.GONE
+                    recyclerView.visibility = View.GONE
+                    tv_no_data.visibility=View.VISIBLE
+                }else{
+                    recyclerView.visibility= View.VISIBLE
+                }
+            }
+
+            override fun onError(e: Throwable) {
+                print("error")
+            }
+        }
+    }
+
+    fun viewAndReply(inbox: Messages) {
+
+        val v: View = LayoutInflater.from(activity!!).inflate(R.layout.dialog_inbox_view_message, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder((activity as Context?)!!)
         alertBox.setView(v)
         val dialog = alertBox.create()
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
 
         dialog!!.setCancelable(true);
-        val message : TextView = v.findViewById(R.id.message)
-        val usser_view : TextView = v.findViewById(R.id.usser_view)
-        val btn : Button = v.findViewById(R.id.btn_submit)
+        val message: TextView = v.findViewById(R.id.message)
+        val tv_sender_name: TextView = v.findViewById(R.id.tv_sender_name)
+        val tv_reply: TextView = v.findViewById(R.id.tv_reply)
+        val sc_reply_view: ScrollView = v.findViewById(R.id.sc_reply_view)
+        val btn_submit: Button = v.findViewById(R.id.btn_submit)
+        val rep_message: EditText = v.findViewById(R.id.rep_message)
 
-        message.text = inbox.Sender_Messege
-        usser_view.text = inbox.Sender_Name
+        message.text = inbox.Message
 
-        btn.setOnClickListener{
-            dialog.dismiss()
+
+        if(frgementType==IT_INBOX){
+            tv_sender_name.text = "Support:"
+            tv_reply.visibility = View.GONE
+            sc_reply_view.visibility = View.GONE
+        }else{
+            tv_sender_name.text = inbox.Sender_Name+":"
+        }
+        btn_submit.setOnClickListener {
+            if(rep_message.text.toString().trim()!=""){
+                replymessagesponsor(rep_message.text.toString())
+
+                dialog.dismiss()
+            }else
+                Apputils.showMsg(activity!!,"Message could not be empty!!")
         }
         dialog.show()
     }
+
+    fun newMessageDialog() {
+
+        val v: View = LayoutInflater.from(activity!!).inflate(R.layout.dialog_compose_new_message, null)
+        val alertBox = android.support.v7.app.AlertDialog.Builder((activity as Context?)!!)
+        alertBox.setView(v)
+        val dialog = alertBox.create()
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
+        dialog!!.setCancelable(true);
+
+        val btn_submit: Button = v.findViewById(R.id.btn_submit)
+        val rep_message: EditText = v.findViewById(R.id.rep_message)
+        val spinner_receiver: Spinner = v.findViewById(R.id.spinner_receiver)
+        var reciverId = 1;
+
+
+        val arrayAdapter = ArrayAdapter.createFromResource(activity!!, R.array.compose_sponsor_spinner, R.layout.support_simple_spinner_dropdown_item)
+        spinner_receiver.adapter = arrayAdapter
+        spinner_receiver.setSelection(1)
+        spinner_receiver!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                if(pos==1){
+                    reciverId = user.sponsorId!!
+                }
+                else
+                    reciverId=1
+            }
+        })
+
+        btn_submit.setOnClickListener {
+            if(rep_message.text.toString().trim()!=""){
+
+                val msg= Messages(null,null,user.username,user.userId,reciverId,rep_message.text.toString(),null,null)
+                newMessageSponser(msg)
+                dialog.dismiss()
+            }else
+                Apputils.showMsg(activity!!,"Message could not be empty!!")
+        }
+
+        dialog.show()
+    }
+
+    private fun newMessageSponser(msg: Messages) {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        ApiClint.getInstance()?.getService()?.newMessageSponser(msg)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                            Toast.makeText(activity!!, " Message sent ", Toast.LENGTH_SHORT).show()
+                            /* if (!data.isEmpty())
+                                 data.clear()
+                             getMessages()*/
+                        }
+
+                        if (code != 200) {
+                            Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    }
+                })
+    }
+
+
+    private fun replymessagesponsor(msg:String) {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        ApiClint.getInstance()?.getService()?.replymessagesponsor( sponserId!!,msg,userId!!,userName!!)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                            Toast.makeText(activity!!, " Message sent ", Toast.LENGTH_SHORT).show()
+                           /* if (!data.isEmpty())
+                                data.clear()
+                            getMessages()*/
+                        }
+
+                        if (code != 200) {
+                            Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    }
+                })
+    }
+
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Inbox")
-}
+        (activity as DrawerActivity).getSupportActionBar()!!.setIcon(R.drawable.ic_message)
+    }
 }

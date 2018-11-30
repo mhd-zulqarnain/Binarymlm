@@ -117,12 +117,17 @@ class TransactionFragment : Fragment() {
         if (frgement_type == "wallet_credits") {
             tv_header!!.text = " E-wallet Credits"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Credits")
+            (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
         } else if (frgement_type == "wallet_transactions") {
             tv_header!!.text = " E-wallet Transactions"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Transactions")
+            (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
+
         } else if (frgement_type == "wallet_debits") {
             tv_header!!.text = " E-wallet Debits"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Debits")
+            (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
+
         }
 
         if(frgement_type=="wallet_transactions"){

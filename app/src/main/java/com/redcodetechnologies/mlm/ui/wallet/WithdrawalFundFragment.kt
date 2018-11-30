@@ -13,6 +13,7 @@ class WithdrawalFundFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_withdrawalfund, container, false)
         (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Withdrawal Fund")
+        (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
         // initView(view)
         return view
 

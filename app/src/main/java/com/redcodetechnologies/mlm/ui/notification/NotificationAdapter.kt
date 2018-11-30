@@ -10,7 +10,7 @@ import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.MyNotification
 import com.redcodetechnologies.mlm.models.NotificationModal
 
-class NotificationAdapter (var ctx: Context, var list: ArrayList<MyNotification>) : RecyclerView.Adapter<NotificationAdapter.MyViewHolder>(){
+class NotificationAdapter (var ctx: Context, var list: ArrayList<MyNotification>,val onClick:(MyNotification)->Unit) : RecyclerView.Adapter<NotificationAdapter.MyViewHolder>(){
 
 
 
@@ -37,7 +37,7 @@ class NotificationAdapter (var ctx: Context, var list: ArrayList<MyNotification>
             tv_name = itemView.findViewById(R.id.tv_notific_name)
 
 
-            tv_name!!.text = notificationmodal.NotificationName
+            tv_name!!.text = notificationmodal.NotificationName+":"
             tv_desc!!.text = notificationmodal.NotificationDescription
 
 

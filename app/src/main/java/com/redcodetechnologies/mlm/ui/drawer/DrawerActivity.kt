@@ -332,19 +332,19 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     val gta: SentFragment = SentFragment()
 
                     if (childPosition == 0 && groupPosition == 6) {
-                        args.putString("Inbox", "Sponser")
+                        args.putString("Fragment", "Sponser_Inbox")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 0 && groupPosition == 7) {
-                        args.putString("Inbox", "IT")
+                        args.putString("Fragment", "IT_Inbox")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     } else if (childPosition == 1 && groupPosition == 6) {
-                        args.putString("Sent", "Sponser")
+                        args.putString("Fragment", "Sponser_Sent")
                         gta.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta).commit()
                     } else if (childPosition == 1 && groupPosition == 7) {
-                        args.putString("Sent", "IT")
+                        args.putString("Fragment", "IT_Sent")
                         gta.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gta).commit()
                     }

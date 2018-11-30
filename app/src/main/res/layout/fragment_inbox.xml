@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
@@ -12,47 +12,56 @@
         android:weightSum="5">
 
         <LinearLayout
-            android:weightSum="5"
-            android:orientation="horizontal"
-            android:layout_weight=".5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/colorRed">
+            android:layout_weight=".5"
+            android:orientation="horizontal"
+            android:weightSum="5">
 
             <android.support.v7.widget.SearchView
                 android:id="@+id/search_view"
-                android:theme="@style/SeachViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:clickable="true"
                 android:background="@drawable/border_theme_red"
+                android:clickable="true"
+                android:theme="@style/SeachViewStyle"
                 app:queryHint="Search..." />
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btn_compose"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:background="#bbf4c026"
+            android:drawableRight="@drawable/ic_add_black_24dp"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="Compose" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
             android:layout_weight=".1"
             android:gravity="center"
-            >
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <TextView
                 android:id="@+id/tv_unread_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Name"
+                android:fontFamily="@font/ralewaybold"
                 android:gravity="left"
                 android:paddingLeft="20dp"
-                android:fontFamily="@font/ralewaybold"
-                android:textSize="15sp"
+                android:text="Name"
                 android:textColor="#000"
-                />
-
+                android:textSize="15sp" />
 
 
             <TextView
@@ -61,12 +70,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/ralewaybold"
                 android:gravity="left"
                 android:text="Date"
-                android:fontFamily="@font/ralewaybold"
-                android:textSize="15sp"
                 android:textColor="#000"
-                />
+                android:textSize="15sp" />
 
 
             <TextView
@@ -75,12 +83,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/ralewaybold"
                 android:gravity="left"
                 android:text="Actions"
-                android:fontFamily="@font/ralewaybold"
-                android:textSize="15sp"
                 android:textColor="#000"
-                />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -88,17 +95,49 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="#AE050C" />
+            android:background="#3cae050c" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/unread_inbox_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4.3"
             android:layout_marginTop="5dp"
-            />
+            android:layout_weight="4.3" />
 
+        <LinearLayout
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="4.3"
+            android:gravity="center"
+            android:scrollbars="horizontal"
+            android:visibility="gone">
 
+            <ProgressBar
+                android:layout_width="35dp"
+                android:layout_height="35dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tv_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:scrollbars="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/oswald_regular"
+                android:gravity="center"
+                android:text="No message found!"
+                android:textColor="#cac4c4"
+                android:textSize="20sp" />
+        </LinearLayout>
     </LinearLayout>
 
 

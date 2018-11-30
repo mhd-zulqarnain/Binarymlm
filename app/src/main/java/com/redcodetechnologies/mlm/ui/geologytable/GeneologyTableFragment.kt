@@ -100,6 +100,7 @@ class GeneologyTableFragment : Fragment() {
             getMyTableCommsionList()
 
         }
+        (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
     }
 
     fun getPackageCommisionList() {

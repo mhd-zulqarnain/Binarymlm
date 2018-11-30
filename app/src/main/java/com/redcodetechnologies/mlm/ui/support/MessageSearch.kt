@@ -1,18 +1,19 @@
-package com.redcodetechnologies.mlm.utils
+package com.redcodetechnologies.mlm.ui.support
 
 
 import android.widget.Filter;
-import com.redcodetechnologies.mlm.ui.support.adapter.InboxAdapter
-import com.redcodetechnologies.mlm.models.Inbox
+import com.redcodetechnologies.mlm.ui.support.adapter.MessageAdapter
+import com.redcodetechnologies.mlm.models.Messages
 
 
-class InboxSearch(var filterList: java.util.ArrayList<Inbox>, var adapter: InboxAdapter): Filter() {
+class MessageSearch(var filterList: java.util.ArrayList<Messages>, var adapter: MessageAdapter): Filter() {
+
     override fun performFiltering(constraint: CharSequence?): Filter.FilterResults {
         var constraint = constraint
         val results = Filter.FilterResults()
         if (constraint != null && constraint.length > 0) {
             constraint = constraint.toString().toUpperCase()
-            val filtered = ArrayList<Inbox>()
+            val filtered = ArrayList<Messages>()
 
             for (i in 0 until filterList.size) {
                 //CHECK
@@ -34,7 +35,7 @@ class InboxSearch(var filterList: java.util.ArrayList<Inbox>, var adapter: Inbox
 
     override fun publishResults(constraint: CharSequence, results: Filter.FilterResults) {
 
-        adapter.datalist = results.values as ArrayList<Inbox>
+        adapter.datalist = results.values as ArrayList<Messages>
         adapter.notifyDataSetChanged()
     }
 }
