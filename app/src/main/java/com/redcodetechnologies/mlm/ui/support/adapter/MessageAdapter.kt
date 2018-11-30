@@ -19,9 +19,9 @@ import retrofit2.Callback
 import java.util.ArrayList
 
 
-class MessageAdapter (var ctx: Context, var datalist: ArrayList<Messages> , var type:String , private val onItemClick: (Messages) -> Unit): RecyclerView.Adapter<MessageAdapter.ViewHolder>(), Filterable {
+class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var type: String, private val onItemClick: (Messages) -> Unit) : RecyclerView.Adapter<MessageAdapter.ViewHolder>(), Filterable {
     var messageFilter: MessageSearch? = null
-    var face : Typeface? = null
+    var face: Typeface? = null
 
     override fun getFilter(): Filter {
         if (messageFilter == null)
@@ -34,8 +34,8 @@ class MessageAdapter (var ctx: Context, var datalist: ArrayList<Messages> , var 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.single_unread_msg_row,parent,false)
-        face = ResourcesCompat.getFont(this.ctx , R.font.ralewayregular);
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.single_unread_msg_row, parent, false)
+        face = ResourcesCompat.getFont(this.ctx, R.font.ralewayregular);
         ctx = parent.context
 
         return ViewHolder(v);
@@ -48,10 +48,8 @@ class MessageAdapter (var ctx: Context, var datalist: ArrayList<Messages> , var 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val message: Messages = datalist[position]
-        holder.Sender?.text = message.Sender_Name
-        holder.Date?.text = message.CreateDate!!.split('T')[0]
 
-        holder.bindView(datalist[position])
+        holder.bindView(datalist[position], type)
 
         holder.btn_dlt.setOnClickListener() {
             removeItem(message)
@@ -61,25 +59,44 @@ class MessageAdapter (var ctx: Context, var datalist: ArrayList<Messages> , var 
         }
 
     }
-        class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-            var Sender = itemView.findViewById(R.id.tv_User) as TextView
-            var Date= itemView.findViewById(R.id.tv_date) as TextView
-            var btn_reply= itemView.findViewById(R.id.btn_reply) as Button
-            var btn_dlt= itemView.findViewById(R.id.btn_dlt) as Button
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-            fun bindView(messages: Messages) {
-                if ( !messages.IsRead!!) {
-                    itemView.setBackgroundResource(R.drawable.unread_message_box);
-                }
+        var Sender = itemView.findViewById(R.id.tv_User) as TextView
+        var Date = itemView.findViewById(R.id.tv_date) as TextView
+        var btn_reply = itemView.findViewById(R.id.btn_reply) as Button
+        var btn_dlt = itemView.findViewById(R.id.btn_dlt) as Button
+
+        fun bindView(messages: Messages, type: String) {
+            if (!messages.IsRead!!) {
+                itemView.setBackgroundResource(R.drawable.unread_message_box);
             }
+            if (type == "IT_Sent" || type == "Sponser_Sent") {
+
+                when (type) {
+                    "Sponser_Sent" ->
+                        if (messages.SponserId == 1) {
+                            Sender.text = "Admin"
+                        } else {
+                            Sender.text = "Sponser"
+                        }
+                    "IT_Sent"->
+                        Sender.text = "Support"
+                }
+            } else
+                Sender.text = messages.Sender_Name
+
+            Date.text = messages.CreateDate!!.split('T')[0]
+
 
         }
+
+    }
 
     private fun removeItem(message: Messages) {
 
         val currPosition = datalist.indexOf(message)
-        removeMsg(message , currPosition)
+        removeMsg(message, currPosition)
 
     }
 
@@ -91,7 +108,7 @@ class MessageAdapter (var ctx: Context, var datalist: ArrayList<Messages> , var 
         }
 
 
-        ApiClint.getInstance()?.getService()?.deleteSponserinboxmsg( message.Id!!)
+        ApiClint.getInstance()?.getService()?.deleteSponserinboxmsg(message.Id!!)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         println("error")

@@ -38,6 +38,8 @@ class SentFragment : Fragment() {
     var userId:Int?=null
     var sponserId:Int?=null
     var userName:String?=null
+    lateinit var frgementType:String
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_sent, container, false)
@@ -46,6 +48,7 @@ class SentFragment : Fragment() {
     }
 
     private fun initView(view: View) {
+        frgementType = arguments?.getString("Fragment").toString();
 
         val user: NewUserRegistration = SharedPrefs.getInstance()!!.getUser(activity!!)
         userId = user.userId
@@ -59,7 +62,7 @@ class SentFragment : Fragment() {
         recyclerView = view.findViewById(R.id.sent_recycler) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
 
-        adapter = MessageAdapter(activity!!, data,"sent") { obj ->
+        adapter = MessageAdapter(activity!!, data,frgementType) { obj ->
             viewAndReply(obj)
         }
 
@@ -141,11 +144,10 @@ class SentFragment : Fragment() {
 
         dialog!!.setCancelable(true);
         val message: TextView = v.findViewById(R.id.message)
-        val tv_sender_name: TextView = v.findViewById(R.id.tv_sender_name)
+
         val btn_submit: Button = v.findViewById(R.id.btn_submit)
 
         message.text = sent.Message
-        tv_sender_name.text = sent.Sender_Name+":"
 
         btn_submit.setOnClickListener {
             dialog.dismiss()

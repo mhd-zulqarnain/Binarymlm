@@ -44,9 +44,12 @@ class InboxFragment : Fragment() {
     var sponserId:Int?=null
     var userName:String?=null
     lateinit var user:NewUserRegistration
+    lateinit var frgementType:String
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_inbox, container, false)
+        frgementType = arguments?.getString("Fragment").toString();
+
         initView(view)
         return view
     }
@@ -66,7 +69,7 @@ class InboxFragment : Fragment() {
          recyclerView = view.findViewById(R.id.unread_inbox_recycler) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
 
-        adapter = MessageAdapter(activity!!, data,"inbox") { obj ->
+        adapter = MessageAdapter(activity!!, data,frgementType) { obj ->
                 viewAndReply(obj)
         }
 
@@ -170,8 +173,6 @@ class InboxFragment : Fragment() {
         dialog.show()
     }
 
-
-
     fun newMessageDialog() {
 
         val v: View = LayoutInflater.from(activity!!).inflate(R.layout.dialog_compose_new_message, null)
@@ -196,6 +197,8 @@ class InboxFragment : Fragment() {
                 if(pos==1){
                     reciverId = user.sponsorId!!
                 }
+                else
+                    reciverId=1
             }
         })
 
