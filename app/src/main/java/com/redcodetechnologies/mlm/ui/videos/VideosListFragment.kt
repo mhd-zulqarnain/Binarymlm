@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.VideosModal
+import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import java.util.ArrayList
 
 class VideosListFragment : Fragment() {
@@ -33,7 +34,8 @@ class VideosListFragment : Fragment() {
         recyclerView!!.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(activity)
         recyclerView!!.setLayoutManager(linearLayoutManager)
-
+        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Vedios")
+        (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
     }
 
     private fun populateRecyclerView() {

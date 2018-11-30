@@ -138,6 +138,5 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
                 })
     }
 
-
 }
 

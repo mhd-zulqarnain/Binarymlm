@@ -6,5 +6,7 @@ data class MakeTableData(
         var totalAmountLeftUsers: String? = null,
         var totalAmountRightUsers: String? = null,
         var rightRemaingAmount: String? = null,
-        var leftRemaingAmount: String? = null
+        var leftRemaingAmount: String? = null,
+        var getalltotalearningamount: String? = null,
+        var usertablebalance: String? = null
 )

@@ -23,6 +23,7 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.util.ArrayList
 
 
 class SentFragment : Fragment() {
@@ -39,6 +40,9 @@ class SentFragment : Fragment() {
     var sponserId:Int?=null
     var userName:String?=null
     lateinit var frgementType:String
+
+    val SPONSER_SENT:String="Sponser_Sent"
+    val IT_SENT:String="IT_Sent"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -96,7 +100,13 @@ class SentFragment : Fragment() {
         val userId = SharedPrefs.getInstance()!!.getUser(activity!!).userId
 
 
-        val observable: Observable<java.util.ArrayList<Messages>> = MyApiRxClint.getInstance()!!.getService()!!.getsentmessagessponsorsupport(userId!!)
+        var observable : Observable<ArrayList<Messages>>
+
+        if(frgementType==SPONSER_SENT)
+            observable=  MyApiRxClint.getInstance()!!.getService()!!.getsentmessagessponsorsupport(userId!!)
+        else{
+            observable = MyApiRxClint.getInstance()!!.getService()!!.getsentmessagessponsorit(userId!!)
+        }
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

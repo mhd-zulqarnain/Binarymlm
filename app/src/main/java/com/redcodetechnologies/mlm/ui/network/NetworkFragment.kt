@@ -110,7 +110,7 @@ class NetworkFragment : Fragment() {
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
         tv_sponser = view.findViewById(R.id.tv_sponser)
 
-        getviewData()
+        getDownlineviewData()
 
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
         adapter = DownMemberAdapter(activity!!, list, frgement_type) { obj ->
@@ -183,10 +183,13 @@ class NetworkFragment : Fragment() {
             }
         })
         showViews()
-        if (frgement_type == "MakeTable")
+        if (frgement_type == "MakeTable") {
             getMakeTableLeft()
+            getMakeTableviewData()
+        }
         else {
             getAllDownlineMembersLeft()
+            getDownlineviewData()
         }
 
     }
@@ -227,7 +230,60 @@ class NetworkFragment : Fragment() {
         }
     }
 
-    fun getviewData() {
+    fun getDownlineviewData() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog!!.show()
+
+        ApiClint.getInstance()?.getService()?.getdownlineData("bearer " + token!!, id!!)
+                ?.enqueue(object : Callback<MakeTableData> {
+                    override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss();
+
+                    }
+
+                    override fun onResponse(call: Call<MakeTableData>?, response: retrofit2.Response<MakeTableData>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+
+                        if (code == 401) {
+                            Apputils.showMsg(activity!!, "Token Expired")
+                            tokenExpire();
+
+                        }
+                        if (code == 200) {
+                            print("success")
+                            var obj: MakeTableData = response.body()!!
+
+                            if (obj.leftRemaingAmount != null)
+                                tv_leftRemaingAmount!!.text = obj.leftRemaingAmount!!.split(".")[0];
+
+                            if (obj.rightRemaingAmount != null)
+                                tv_rightRemaingAmount!!.text = obj.rightRemaingAmount!!.split(".")[0]
+
+                            if (obj.totalLeftUsers != null)
+                                tv_totalLeftUsers!!.text = obj.totalLeftUsers!!.split(".")[0]
+
+                            if (obj.totalRightUsers != null)
+                                tv_totalRightUsers!!.text = obj.totalRightUsers!!.split(".")[0]
+                            if (obj.totalAmountLeftUsers != null)
+                                tv_totalAmountRightUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
+                            if (obj.totalAmountRightUsers != null)
+                                tv_totalAmountLeftUsers!!.text = obj.totalAmountRightUsers!!.split(".")[0]
+
+                        }
+                        progressdialog!!.hide();
+
+
+                    }
+                })
+    }
+
+    fun getMakeTableviewData() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
@@ -240,7 +296,6 @@ class NetworkFragment : Fragment() {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
                         println("error")
                         progressdialog!!.dismiss();
-
                     }
 
                     override fun onResponse(call: Call<MakeTableData>?, response: retrofit2.Response<MakeTableData>?) {
