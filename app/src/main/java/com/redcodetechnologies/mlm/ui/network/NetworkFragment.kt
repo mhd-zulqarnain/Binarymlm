@@ -269,7 +269,7 @@ class NetworkFragment : Fragment() {
                                 tv_totalAmountLeftUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
 
                         }
-                        progressdialog!!.hide();
+                        progressbar_net!!.visibility = View.GONE
 
 
                     }
@@ -282,13 +282,15 @@ class NetworkFragment : Fragment() {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
-        progressdialog!!.show()
+        progressbar_net!!.visibility = View.VISIBLE
+
 
         ApiClint.getInstance()?.getService()?.getMaketableData("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<MakeTableData> {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.dismiss();
+                        progressbar_net!!.visibility = View.GONE
+
                     }
 
                     override fun onResponse(call: Call<MakeTableData>?, response: retrofit2.Response<MakeTableData>?) {
