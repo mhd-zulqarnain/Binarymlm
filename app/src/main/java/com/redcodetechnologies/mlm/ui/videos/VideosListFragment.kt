@@ -34,7 +34,7 @@ class VideosListFragment : Fragment() {
         recyclerView!!.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(activity)
         recyclerView!!.setLayoutManager(linearLayoutManager)
-        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Vedios")
+        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Videos")
         (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
     }
 
