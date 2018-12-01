@@ -9,6 +9,11 @@ import android.widget.Toast
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
+import com.google.firebase.iid.FirebaseInstanceId
+import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.retrofit.ApiClint
+import retrofit2.Call
+import retrofit2.Callback
 import java.io.ByteArrayOutputStream
 
 
@@ -44,6 +49,28 @@ class Apputils {
             var imageBytes = Base64.decode(img, Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
             return decodedImage
+        }
+
+        fun updateFcm(ctx: Activity){
+            val id = SharedPrefs.getInstance()!!.getUser(ctx).userId
+            if(id==null)
+                return
+
+            if (!Apputils.isNetworkAvailable(ctx)) {
+                return
+            }
+
+            val fcm = FirebaseInstanceId.getInstance().getToken()
+            ApiClint.getInstance()?.getService()?.updateUserFcm(id,fcm!!)
+                    ?.enqueue(object : Callback<Response> {
+                        override fun onFailure(call: Call<Response>?, t: Throwable?) {}
+
+                        override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                            val msg = response!!.message()
+                            print(msg)
+                        }
+                    })
+
         }
     }
 

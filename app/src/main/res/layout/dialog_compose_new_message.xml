@@ -13,44 +13,51 @@
         android:background="@drawable/dialog_background"
         android:orientation="vertical">
 
-
-        <Spinner
-            android:id="@+id/spinner_receiver"
-            style="@style/Widget.AppCompat.Spinner.Underlined"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/ralewaybold"
+            android:text="New Message:"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
             android:layout_margin="10dp"
 
-            />
+            >
 
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="80dp">
-
-
-            <EditText
-                android:id="@+id/rep_message"
+            <Spinner
+                android:id="@+id/spinner_receiver"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/edittext_style1"
-                android:fontFamily="@font/ralewayregular"
-                android:hint="Message Body"
-                android:paddingBottom="20dp"
-                android:paddingLeft="5dp"
-                android:textColor="#000"
-                android:textColorHint="#8A8A8A"
-                android:textSize="18sp" />
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_height="match_parent" />
 
-        </ScrollView>
 
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/rep_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_style1"
+            android:fontFamily="@font/ralewayregular"
+            android:hint="Message Body"
+            android:paddingBottom="20dp"
+            android:paddingLeft="5dp"
+            android:textColor="#000"
+            android:textColorHint="#8A8A8A"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="8dp"

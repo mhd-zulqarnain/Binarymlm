@@ -76,6 +76,11 @@ interface RetrofiltService {
 
     @GET("maketabledetails/{userid}")
     @Headers("Content-Type:application/json")
+    fun getdownlineData(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<MakeTableData>
+
+
+    @GET("getuserdownlinmembers/{userid}")
+    @Headers("Content-Type:application/json")
     fun getMaketableData(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<MakeTableData>
 
 
@@ -252,5 +257,13 @@ interface RetrofiltService {
     @GET("viewallreadmessageitsupport/{userId}")
     @Headers("Content-Type:application/json")
     fun viewallmessageItsupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
+
+    @GET("getsentmessagessponsorit/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getsentmessagessponsorit(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
+
+    @POST("notificationsetup/{userid}/{fcm}")
+    @Headers("Content-Type:application/json")
+    fun updateUserFcm( @Path("userid") userid: Int, @Path("fcm") fcm: String): Call<Response>
 
 }

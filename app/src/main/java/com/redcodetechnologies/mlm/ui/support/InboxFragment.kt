@@ -207,10 +207,14 @@ class InboxFragment : Fragment() {
         var reciverId = 1;
 
 
+        if(frgementType==IT_INBOX){
+            reciverId = 0;
+            spinner_receiver.visibility = View.GONE
+        }
         val arrayAdapter = ArrayAdapter.createFromResource(activity!!, R.array.compose_sponsor_spinner, R.layout.support_simple_spinner_dropdown_item)
         spinner_receiver.adapter = arrayAdapter
         spinner_receiver.setSelection(1)
-        spinner_receiver!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+        spinner_receiver.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
                 if(pos==1){
