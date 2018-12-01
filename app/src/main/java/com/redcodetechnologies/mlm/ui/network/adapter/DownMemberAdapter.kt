@@ -67,6 +67,8 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgemen
             tv_sponser = itemView.findViewById(R.id.tv_sponser)
             tv_paid = itemView.findViewById(R.id.tv_paid)
 
+
+
             if(users.Username!=null)
             tv_name!!.text = users.Username
             if(users.Phone!=null)
