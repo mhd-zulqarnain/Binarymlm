@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="6dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="6dp"
+    >
 
     <EditText
         android:id="@+id/search_view"
@@ -52,14 +53,10 @@
             android:textSize="15sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/seller_table_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
 
         <View
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#50000000" />
 
@@ -67,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="6">
+            android:weightSum="5">
 
             <TextView
                 style="@style/CustomHeaderBlacktextStyle"
@@ -81,7 +78,7 @@
                 style="@style/CustomHeaderBlacktextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="Payment Method" />
 
@@ -97,7 +94,7 @@
                 style="@style/CustomHeaderBlacktextStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="Bank Name" />
 
@@ -112,11 +109,12 @@
 
         </LinearLayout>
         <View
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#50000000" />
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="5dp"
             android:id="@+id/recylcer_down_member"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -128,7 +126,6 @@
             android:layout_height="1dp"
             android:background="#50000000" />
 
-    </LinearLayout>
 
 
 
