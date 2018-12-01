@@ -12,6 +12,7 @@ import android.util.Base64
 import com.google.firebase.iid.FirebaseInstanceId
 import com.redcodetechnologies.mlm.models.Response
 import com.redcodetechnologies.mlm.models.profile.FcmModel
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import retrofit2.Call
 import retrofit2.Callback
@@ -53,7 +54,11 @@ class Apputils {
         }
 
         fun updateFcm(ctx: Activity){
-            val id = SharedPrefs.getInstance()!!.getUser(ctx).userId
+
+
+            var user = SharedPrefs.getInstance()!!.getUser(ctx)
+            var id = user.userId
+
             if(id==null)
                 return
 
@@ -71,13 +76,15 @@ class Apputils {
 
                         override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                             val msg = response!!.message()
+                            user.fcm = fcm
+                            SharedPrefs.getInstance()!!.setUser(ctx,user)
                             print(msg)
+
                         }
                     })
 
         }
     }
-
 
 
 

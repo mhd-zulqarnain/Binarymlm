@@ -39,25 +39,26 @@ class InboxFragment : Fragment() {
     var search_view: SearchView? = null
     //    var inboxAdapater: MessageAdapter? = null
     var data: ArrayList<Messages> = ArrayList()
-//    var inbox_recycler: RecyclerView? = null
+    //    var inbox_recycler: RecyclerView? = null
     var adapter: MessageAdapter? = null
     var disposable: Disposable? = null
     lateinit var progressBar: LinearLayout
     lateinit var tv_no_data: LinearLayout
     lateinit var btn_compose: Button
-    lateinit var recyclerView:RecyclerView
+    lateinit var recyclerView: RecyclerView
 
-    var userId:Int?=null
-    var sponserId:Int?=null
-    var userName:String?=null
+    var userId: Int? = null
+    var sponserId: Int? = null
+    var userName: String? = null
 
-    val SPONSER_INBOX:String="Sponser_Inbox"
-    val IT_INBOX:String="IT_Inbox"
-    val SELECT_SUPPORT_PHOTO:Int=32
-    var supportImage:String=""
+    val SPONSER_INBOX: String = "Sponser_Inbox"
+    val IT_INBOX: String = "IT_Inbox"
+    val SELECT_SUPPORT_PHOTO: Int = 32
+    var supportImage: String = ""
+    var img_it_support: TextView? = null
 
-    lateinit var user:NewUserRegistration
-    lateinit var frgementType:String
+    lateinit var user: NewUserRegistration
+    lateinit var frgementType: String
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_inbox, container, false)
@@ -69,7 +70,7 @@ class InboxFragment : Fragment() {
 
     private fun initView(view: View) {
 
-        user  = SharedPrefs.getInstance()!!.getUser(activity!!)
+        user = SharedPrefs.getInstance()!!.getUser(activity!!)
         userId = user.userId
         sponserId = user.sponsorId
         userName = user.username
@@ -79,11 +80,11 @@ class InboxFragment : Fragment() {
         tv_no_data = view.findViewById(R.id.tv_no_data)
         btn_compose = view.findViewById(R.id.btn_compose)
 
-         recyclerView = view.findViewById(R.id.unread_inbox_recycler) as RecyclerView
+        recyclerView = view.findViewById(R.id.unread_inbox_recycler) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
 
-        adapter = MessageAdapter(activity!!, data,frgementType) { obj ->
-                viewAndReply(obj)
+        adapter = MessageAdapter(activity!!, data, frgementType) { obj ->
+            viewAndReply(obj)
         }
 
         recyclerView.adapter = adapter
@@ -104,12 +105,12 @@ class InboxFragment : Fragment() {
             }
         })
 
-        btn_compose.setOnClickListener{
+        btn_compose.setOnClickListener {
             newMessageDialog()
         }
     }
 
-    fun getMessages(){
+    fun getMessages() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
             return
@@ -117,13 +118,13 @@ class InboxFragment : Fragment() {
         progressBar.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
 
-        val observer =getObserver()
+        val observer = getObserver()
         val userId = SharedPrefs.getInstance()!!.getUser(activity!!).userId
-        var observable : Observable<ArrayList<Messages>>
+        var observable: Observable<ArrayList<Messages>>
 
-        if(frgementType==SPONSER_INBOX)
-         observable = MyApiRxClint.getInstance()!!.getService()!!.viewallmessagesupport(userId!!)
-        else{
+        if (frgementType == SPONSER_INBOX)
+            observable = MyApiRxClint.getInstance()!!.getService()!!.viewallmessagesupport(userId!!)
+        else {
             observable = MyApiRxClint.getInstance()!!.getService()!!.viewallmessageItsupport(userId!!)
         }
         observable.subscribeOn(Schedulers.io())
@@ -133,7 +134,7 @@ class InboxFragment : Fragment() {
 
     fun getObserver(): Observer<ArrayList<Messages>> {
 
-        return object: Observer<ArrayList<Messages>> {
+        return object : Observer<ArrayList<Messages>> {
             override fun onComplete() {
                 progressBar.visibility = View.GONE
 
@@ -145,16 +146,16 @@ class InboxFragment : Fragment() {
 
             override fun onNext(t: ArrayList<Messages>) {
 
-                t.forEach{obj->
+                t.forEach { obj ->
                     data.add(obj)
                 }
                 adapter!!.notifyDataSetChanged()
-                if(t.size==0){
+                if (t.size == 0) {
                     progressBar.visibility = View.GONE
                     recyclerView.visibility = View.GONE
-                    tv_no_data.visibility=View.VISIBLE
-                }else{
-                    recyclerView.visibility= View.VISIBLE
+                    tv_no_data.visibility = View.VISIBLE
+                } else {
+                    recyclerView.visibility = View.VISIBLE
                 }
             }
 
@@ -183,21 +184,21 @@ class InboxFragment : Fragment() {
         message.text = inbox.Message
 
 
-        if(frgementType==IT_INBOX){
+        if (frgementType == IT_INBOX) {
             tv_sender_name.text = "Support:"
             tv_reply.visibility = View.GONE
             sc_reply_view.visibility = View.GONE
-        }else{
-            tv_sender_name.text = inbox.Sender_Name+":"
+        } else {
+            tv_sender_name.text = inbox.Sender_Name + ":"
         }
         btn_submit.setOnClickListener {
-            if(rep_message.text.toString().trim()!=""){
+            if (rep_message.text.toString().trim() != "") {
 
                 replymessagesponsor(rep_message.text.toString())
 
                 dialog.dismiss()
-            }else
-                Apputils.showMsg(activity!!,"Message could not be empty!!")
+            } else
+                Apputils.showMsg(activity!!, "Message could not be empty!!")
         }
         dialog.show()
     }
@@ -212,46 +213,60 @@ class InboxFragment : Fragment() {
         dialog!!.setCancelable(true);
 
         val btn_submit: Button = v.findViewById(R.id.btn_submit)
+        val btn_add_image: Button = v.findViewById(R.id.btn_add_image)
         val rep_message: EditText = v.findViewById(R.id.rep_message)
         val spinner_receiver: Spinner = v.findViewById(R.id.spinner_receiver)
+        var view_sponser: LinearLayout = v.findViewById(R.id.view_sponser)
+        var view_it: LinearLayout = v.findViewById(R.id.view_sponser)
+        img_it_support = v.findViewById(R.id.img_it_support)
+
         var reciverId = 1;
 
-
-        if(frgementType==IT_INBOX){
+        if (frgementType == IT_INBOX) {
             reciverId = 0;
-            spinner_receiver.visibility = View.GONE
+            view_it.visibility = View.VISIBLE
+        } else {
+            view_it.visibility = View.GONE
         }
+        btn_add_image.setOnClickListener {
+            pickImage(SELECT_SUPPORT_PHOTO)
+        }
+
         val arrayAdapter = ArrayAdapter.createFromResource(activity!!, R.array.compose_sponsor_spinner, R.layout.support_simple_spinner_dropdown_item)
         spinner_receiver.adapter = arrayAdapter
         spinner_receiver.setSelection(1)
         spinner_receiver.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                if(pos==1){
+                if (pos == 1) {
                     reciverId = user.sponsorId!!
-                }
-                else
-                    reciverId=1
+                } else
+                    reciverId = 1
             }
         })
 
         btn_submit.setOnClickListener {
-            if(rep_message.text.toString().trim()!=""){
+            if (rep_message.text.toString().trim() != "") {
+                if (frgementType == SPONSER_INBOX) {
+                    val msg = Messages(null, null, user.username, user.userId,
+                            reciverId, rep_message.text.toString())
 
-                val msg= Messages(null,null,user.username,user.userId,
-                        reciverId,rep_message.text.toString())
+                    newMessageSponser(msg)
+                } else if (frgementType == IT_INBOX) {
+                    val msg = Messages(null, null, user.username, user.userId,
+                            reciverId, rep_message.text.toString(), null, null, supportImage)
 
-                newMessageSponser(msg)
-
+                    newMessageItSupport(msg)
+                }
                 dialog.dismiss()
-            }else
-                Apputils.showMsg(activity!!,"Message could not be empty!!")
+            } else
+                Apputils.showMsg(activity!!, "Message could not be empty!!")
         }
 
         dialog.show()
     }
 
-    private fun replymessagesponsor(msg:String) {
+    private fun replymessagesponsor(msg: String) {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
@@ -259,7 +274,7 @@ class InboxFragment : Fragment() {
         }
 
 
-        ApiClint.getInstance()?.getService()?.replymessagesponsor( sponserId!!,msg,userId!!,userName!!)
+        ApiClint.getInstance()?.getService()?.replymessagesponsor(sponserId!!, msg, userId!!, userName!!)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         println("error")
@@ -322,6 +337,7 @@ class InboxFragment : Fragment() {
                     }
                 })
     }
+
     private fun newMessageItSupport(msg: Messages) {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
@@ -345,7 +361,7 @@ class InboxFragment : Fragment() {
                             Toast.makeText(activity!!, " Message sent ", Toast.LENGTH_SHORT).show()
                         }
 
-                        if (code != 200) {
+                            if (code != 200) {
                             Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
 
                         }
@@ -363,6 +379,7 @@ class InboxFragment : Fragment() {
         val imageBytes = outStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
+
     fun getRealPathFromURI(context: Context, contentUri: Uri): String {
         var cursor: Cursor? = null
         try {
@@ -377,6 +394,7 @@ class InboxFragment : Fragment() {
             }
         }
     }
+
     fun pickImage(code: Int) {
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.setType("image/*")
@@ -403,16 +421,10 @@ class InboxFragment : Fragment() {
             } catch (e: Exception) {
             }
 
-            when (requestCode) {
-                SELECT_SUPPORT_PHOTO ->
-                    try {
-                      /*  ed_upload_document!!.setText(filename)*/
-                        supportImage = imageTostring(bitmap)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+            img_it_support!!.setText(filename)
+            supportImage = imageTostring(bitmap)
 
-            }
+
         }
 
     }

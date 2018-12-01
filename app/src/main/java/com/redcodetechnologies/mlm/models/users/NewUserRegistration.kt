@@ -107,6 +107,9 @@ class NewUserRegistration {
     @SerializedName("IsBlock")
     @Expose
     var isBlock: Boolean? = null
+    @SerializedName("Fcm")
+    @Expose
+    var fcm: String? = null
 
     override fun toString(): String {
         var username = ""

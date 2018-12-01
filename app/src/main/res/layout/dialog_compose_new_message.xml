@@ -23,18 +23,47 @@
             android:textSize="20sp" />
 
         <LinearLayout
+            android:id="@+id/view_sponser"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_margin="10dp"
-
+            android:visibility="gone"
             >
 
             <Spinner
                 android:id="@+id/spinner_receiver"
-                android:layout_width="match_parent"
                 style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/view_it"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_add_image"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="Select Image"
+                android:background="#968d8d"
+                android:drawableRight="@drawable/ic_add_document"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/img_it_support"
+                android:text="asdasd"
+                android:layout_marginLeft="3dp"
+                android:textSize="10sp"
+                />
 
         </LinearLayout>
 

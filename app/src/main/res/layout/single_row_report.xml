@@ -4,13 +4,9 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:orientation="horizontal"
+    android:weightSum="6"
     android:textAlignment="center">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="6">
 
         <TextView
             android:id="@+id/tv_uname"
@@ -54,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal"
             android:text="View">
 
@@ -63,6 +59,6 @@
                 android:layout_height="20dp"
                 android:background="@drawable/eye" />
         </LinearLayout>
-    </LinearLayout>
+
 </LinearLayout>
 
