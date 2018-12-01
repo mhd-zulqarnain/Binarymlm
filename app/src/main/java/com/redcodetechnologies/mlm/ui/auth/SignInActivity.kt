@@ -69,6 +69,7 @@ class SignInActivity : AppCompatActivity() {
                     override fun success(obj: ApiToken) {
                         print("success")
                         var pref = SharedPrefs.getInstance()
+                        Apputils.updateFcm(this@SignInActivity)
                         pref!!.setToken(this@SignInActivity, obj)
                         getUserObject(ed_username!!.text.toString())
                     }

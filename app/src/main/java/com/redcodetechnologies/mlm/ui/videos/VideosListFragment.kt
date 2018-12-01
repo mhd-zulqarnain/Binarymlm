@@ -42,7 +42,6 @@ class VideosListFragment : Fragment() {
         val youtubeVideoModelArrayList = generateDummyVideoList()
         val adapter = VideosAdapter(activity!!, youtubeVideoModelArrayList)
         recyclerView!!.setAdapter(adapter)
-        //set click event
         recyclerView!!.addOnItemTouchListener(RecyclerViewOnClickListener(activity!!, object : RecyclerViewOnClickListener.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
                 //start youtube player activity by passing selected video id via intent
@@ -58,7 +57,7 @@ class VideosListFragment : Fragment() {
         val videoIDArray = getResources().getStringArray(R.array.video_id_array)
         val videoTitleArray = getResources().getStringArray(R.array.video_title_array)
         val videoDurationArray = getResources().getStringArray(R.array.video_duration_array)
-        //loop through all items and add them to arraylist
+
         for (i in videoIDArray.indices)
         {
             val youtubeVideoModel = VideosModal()

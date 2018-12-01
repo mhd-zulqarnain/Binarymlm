@@ -110,7 +110,6 @@ class NetworkFragment : Fragment() {
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
         tv_sponser = view.findViewById(R.id.tv_sponser)
 
-        getDownlineviewData()
 
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
         adapter = DownMemberAdapter(activity!!, list, frgement_type) { obj ->
@@ -271,9 +270,9 @@ class NetworkFragment : Fragment() {
                             if (obj.totalRightUsers != null)
                                 tv_totalRightUsers!!.text = obj.totalRightUsers!!.split(".")[0]
                             if (obj.totalAmountLeftUsers != null)
-                                tv_totalAmountRightUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
+                                tv_totalAmountRightUsers!!.text = obj.totalAmountRightUsers !!.split(".")[0]
                             if (obj.totalAmountRightUsers != null)
-                                tv_totalAmountLeftUsers!!.text = obj.totalAmountRightUsers!!.split(".")[0]
+                                tv_totalAmountLeftUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
 
                         }
                         progressdialog!!.hide();
@@ -323,9 +322,9 @@ class NetworkFragment : Fragment() {
                             if (obj.totalRightUsers != null)
                                 tv_totalRightUsers!!.text = obj.totalRightUsers!!.split(".")[0]
                             if (obj.totalAmountLeftUsers != null)
-                                tv_totalAmountRightUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
+                                tv_totalAmountRightUsers!!.text = obj.totalAmountRightUsers!!.split(".")[0]
                             if (obj.totalAmountRightUsers != null)
-                                tv_totalAmountLeftUsers!!.text = obj.totalAmountRightUsers!!.split(".")[0]
+                                tv_totalAmountLeftUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
 
                         }
                         progressdialog!!.hide();

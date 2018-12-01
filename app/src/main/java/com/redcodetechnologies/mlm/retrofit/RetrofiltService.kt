@@ -262,4 +262,8 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getsentmessagessponsorit(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
 
+    @POST("notificationsetup/{userid}/{fcm}")
+    @Headers("Content-Type:application/json")
+    fun updateUserFcm( @Path("userid") userid: Int, @Path("fcm") fcm: String): Call<Response>
+
 }

@@ -11,14 +11,6 @@ import com.google.android.youtube.player.YouTubePlayerView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.utils.Constants
 
-
-/**
- * Created by sonu on 10/11/17.
- *
- *
- * ### Here you need to extend the activity with YouTubeBaseActivity otherwise it will crash the app  ###
- */
-
 class YoutubePlayerActivity : YouTubeBaseActivity() {
     private var videoID: String? = null
     private var youTubePlayerView: YouTubePlayerView? = null
@@ -26,7 +18,6 @@ class YoutubePlayerActivity : YouTubeBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_youtube_player)
-        //get the video id
         videoID = intent.getStringExtra("video_id")
         youTubePlayerView = findViewById(R.id.youtube_player_view)
         initializeYoutubePlayer()
@@ -38,10 +29,8 @@ class YoutubePlayerActivity : YouTubeBaseActivity() {
 
             override fun onInitializationSuccess(provider: YouTubePlayer.Provider, youTubePlayer: YouTubePlayer,
                                                  wasRestored: Boolean) {
-
                 if (!wasRestored) {
                     youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT)
-
                     youTubePlayer.loadVideo(videoID)
 
                 }

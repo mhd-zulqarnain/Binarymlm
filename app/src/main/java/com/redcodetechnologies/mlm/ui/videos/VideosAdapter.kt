@@ -32,27 +32,19 @@ class VideosAdapter:RecyclerView.Adapter<YoutubeViewHolder> {
     override fun onBindViewHolder(holder: YoutubeViewHolder, position: Int) {
         val youtubeVideoModel = youtubeVideoModelArrayList.get(position)
         holder.videoTitle.setText(youtubeVideoModel.getTitle())
-        /* initialize the thumbnail image view , we need to pass Developer Key */
         holder.videoThumbnailImageView.initialize(Constants.DEVELOPER_KEY, object : YouTubeThumbnailView.OnInitializedListener {
             override fun onInitializationSuccess(youTubeThumbnailView: YouTubeThumbnailView, youTubeThumbnailLoader: YouTubeThumbnailLoader) {
-                //when initialization is sucess, set the video id to thumbnail to load
                 youTubeThumbnailLoader.setVideo(youtubeVideoModel.getVideoId())
                 youTubeThumbnailLoader.setOnThumbnailLoadedListener(object : YouTubeThumbnailLoader.OnThumbnailLoadedListener {
                     override fun onThumbnailLoaded(youTubeThumbnailView: YouTubeThumbnailView, s: String) {
-                        //when thumbnail loaded successfully release the thumbnail loader as we are showing thumbnail in adapter
                         youTubeThumbnailLoader.release()
                     }
 
-                    override fun onThumbnailError(youTubeThumbnailView: YouTubeThumbnailView, errorReason: YouTubeThumbnailLoader.ErrorReason) {
-                        //print or show error when thumbnail load failed
-                        Log.e(TAG, "Youtube Thumbnail Error")
-                    }
+                    override fun onThumbnailError(youTubeThumbnailView: YouTubeThumbnailView, errorReason: YouTubeThumbnailLoader.ErrorReason) {}
                 })
             }
 
             override fun onInitializationFailure(youTubeThumbnailView: YouTubeThumbnailView, youTubeInitializationResult: YouTubeInitializationResult) {
-                //print or show error when initialization failed
-                Log.e(TAG, "Youtube Initialization Failure")
             }
         })
     }
