@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory
 import android.util.Base64
 import com.google.firebase.iid.FirebaseInstanceId
 import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.models.profile.FcmModel
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,9 +62,12 @@ class Apputils {
             }
 
             val fcm = FirebaseInstanceId.getInstance().getToken()
-            ApiClint.getInstance()?.getService()?.updateUserFcm(id,fcm!!)
+            val obj = FcmModel(id,fcm!!)
+            ApiClint.getInstance()?.getService()?.updateUserFcm(obj)
                     ?.enqueue(object : Callback<Response> {
-                        override fun onFailure(call: Call<Response>?, t: Throwable?) {}
+                        override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                            println("error")
+                        }
 
                         override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                             val msg = response!!.message()

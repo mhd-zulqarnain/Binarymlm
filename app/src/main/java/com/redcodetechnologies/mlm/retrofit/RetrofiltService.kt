@@ -1,6 +1,7 @@
 package com.redcodetechnologies.mlm.retrofit
 
 import com.redcodetechnologies.mlm.models.*
+import com.redcodetechnologies.mlm.models.profile.FcmModel
 import com.redcodetechnologies.mlm.models.profile.ProfileSetup
 import com.redcodetechnologies.mlm.models.users.DropDownMembers
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
@@ -258,12 +259,16 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun viewallmessageItsupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
 
-    @GET("getsentmessagessponsorit/{userId}")
+    @GET("getsentmessagesitsupport/{userId}")
     @Headers("Content-Type:application/json")
-    fun getsentmessagessponsorit(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
+    fun getsentmessagesitsupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
 
-    @POST("notificationsetup/{userid}/{fcm}")
+    @POST("inboxitsupport")
     @Headers("Content-Type:application/json")
-    fun updateUserFcm( @Path("userid") userid: Int, @Path("fcm") fcm: String): Call<Response>
+    fun newMessageItSupport( @Body obj:Messages): Call<Response>
+
+    @POST("updateFcm")
+    @Headers("Content-Type:application/json")
+    fun updateUserFcm(@Body obj: FcmModel): Call<Response>
 
 }

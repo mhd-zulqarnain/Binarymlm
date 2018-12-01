@@ -7,6 +7,7 @@ data class Messages(var  Id :Int? = null,
                     var  SponserId :Int? = null,
                     var  Message :String? = null,
                     var  IsRead :Boolean? = null,
-                    var  CreateDate :String? = null
-)
+                    var  CreateDate :String? = null,
+                    var  MessageImage :String? = null
+                    )
 

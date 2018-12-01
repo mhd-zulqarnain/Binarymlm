@@ -105,7 +105,7 @@ class SentFragment : Fragment() {
         if(frgementType==SPONSER_SENT)
             observable=  MyApiRxClint.getInstance()!!.getService()!!.getsentmessagessponsorsupport(userId!!)
         else{
-            observable = MyApiRxClint.getInstance()!!.getService()!!.getsentmessagessponsorit(userId!!)
+            observable = MyApiRxClint.getInstance()!!.getService()!!.getsentmessagesitsupport(userId!!)
         }
 
         observable.subscribeOn(Schedulers.io())

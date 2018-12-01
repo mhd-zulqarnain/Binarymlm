@@ -68,8 +68,7 @@ class SignInActivity : AppCompatActivity() {
                 getuserData(object : ServiceListener<ApiToken> {
                     override fun success(obj: ApiToken) {
                         print("success")
-                        var pref = SharedPrefs.getInstance()
-                        Apputils.updateFcm(this@SignInActivity)
+                        val pref = SharedPrefs.getInstance()
                         pref!!.setToken(this@SignInActivity, obj)
                         getUserObject(ed_username!!.text.toString())
                     }
@@ -177,6 +176,7 @@ class SignInActivity : AppCompatActivity() {
                             print("success")
                             var obj: NewUserRegistration = response.body()!!
                             SharedPrefs.getInstance()!!.setUser(this@SignInActivity, obj)
+                            Apputils.updateFcm(this@SignInActivity)
                             if (obj.isSleepingPartner == true)
                                 sleepingPatnerActivity()
                             else if (obj.isSalesExecutive == true)

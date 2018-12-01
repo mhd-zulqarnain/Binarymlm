@@ -2,11 +2,17 @@ package com.redcodetechnologies.mlm.ui.support
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.database.Cursor
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
+import android.util.Base64
 import android.view.*
 import android.widget.*
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
@@ -26,6 +32,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
+import java.io.ByteArrayOutputStream
 import java.util.*
 
 class InboxFragment : Fragment() {
@@ -46,6 +53,8 @@ class InboxFragment : Fragment() {
 
     val SPONSER_INBOX:String="Sponser_Inbox"
     val IT_INBOX:String="IT_Inbox"
+    val SELECT_SUPPORT_PHOTO:Int=32
+    var supportImage:String=""
 
     lateinit var user:NewUserRegistration
     lateinit var frgementType:String
@@ -183,6 +192,7 @@ class InboxFragment : Fragment() {
         }
         btn_submit.setOnClickListener {
             if(rep_message.text.toString().trim()!=""){
+
                 replymessagesponsor(rep_message.text.toString())
 
                 dialog.dismiss()
@@ -228,8 +238,11 @@ class InboxFragment : Fragment() {
         btn_submit.setOnClickListener {
             if(rep_message.text.toString().trim()!=""){
 
-                val msg= Messages(null,null,user.username,user.userId,reciverId,rep_message.text.toString(),null,null)
+                val msg= Messages(null,null,user.username,user.userId,
+                        reciverId,rep_message.text.toString())
+
                 newMessageSponser(msg)
+
                 dialog.dismiss()
             }else
                 Apputils.showMsg(activity!!,"Message could not be empty!!")
@@ -237,6 +250,43 @@ class InboxFragment : Fragment() {
 
         dialog.show()
     }
+
+    private fun replymessagesponsor(msg:String) {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        ApiClint.getInstance()?.getService()?.replymessagesponsor( sponserId!!,msg,userId!!,userName!!)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                            Toast.makeText(activity!!, " Message sent ", Toast.LENGTH_SHORT).show()
+                            /* if (!data.isEmpty())
+                                 data.clear()
+                             getMessages()*/
+                        }
+
+                        if (code != 200) {
+                            Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    }
+                })
+    }
+
+    //<editor-fold desc="Compose new Messaage">
 
     private fun newMessageSponser(msg: Messages) {
 
@@ -272,9 +322,7 @@ class InboxFragment : Fragment() {
                     }
                 })
     }
-
-
-    private fun replymessagesponsor(msg:String) {
+    private fun newMessageItSupport(msg: Messages) {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
@@ -282,7 +330,7 @@ class InboxFragment : Fragment() {
         }
 
 
-        ApiClint.getInstance()?.getService()?.replymessagesponsor( sponserId!!,msg,userId!!,userName!!)
+        ApiClint.getInstance()?.getService()?.newMessageItSupport(msg)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         println("error")
@@ -295,9 +343,6 @@ class InboxFragment : Fragment() {
                         var code: Int = response!!.code()
                         if (code == 200) {
                             Toast.makeText(activity!!, " Message sent ", Toast.LENGTH_SHORT).show()
-                           /* if (!data.isEmpty())
-                                data.clear()
-                            getMessages()*/
                         }
 
                         if (code != 200) {
@@ -309,9 +354,67 @@ class InboxFragment : Fragment() {
                 })
     }
 
+    //</editor-fold>
+
+    //<editor-fold desc="support image handling">
+    private fun imageTostring(bitmap: Bitmap): String {
+        val outStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outStream)
+        val imageBytes = outStream.toByteArray()
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
+    }
+    fun getRealPathFromURI(context: Context, contentUri: Uri): String {
+        var cursor: Cursor? = null
+        try {
+            val proj = arrayOf<String>(MediaStore.Images.Media.DATA)
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null)
+            val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(column_index)
+        } finally {
+            if (cursor != null) {
+                cursor.close()
+            }
+        }
+    }
+    fun pickImage(code: Int) {
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.setType("image/*")
+        startActivityForResult(photoPickerIntent, code)
+    }
+    //</editor-fold>
+
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Inbox")
         (activity as DrawerActivity).getSupportActionBar()!!.setIcon(R.drawable.ic_message)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            val imageUri = data.data
+            var filename = "No Image found"
+
+            val bitmap = MediaStore.Images.Media.getBitmap(activity!!.getContentResolver(), imageUri);
+            try {
+                val arr = getRealPathFromURI(activity!!, imageUri).split("/")
+                filename = arr[arr.size - 1]
+            } catch (e: Exception) {
+            }
+
+            when (requestCode) {
+                SELECT_SUPPORT_PHOTO ->
+                    try {
+                      /*  ed_upload_document!!.setText(filename)*/
+                        supportImage = imageTostring(bitmap)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+            }
+        }
+
+    }
+
 }
