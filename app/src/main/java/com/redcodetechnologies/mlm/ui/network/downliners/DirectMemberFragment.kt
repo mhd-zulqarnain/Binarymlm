@@ -37,7 +37,6 @@ class DirectMemberFragment : Fragment() {
     val REQUSET_GALLERY_CODE: Int = 43
    // var search_view: SearchView? = null
     var frgement_type = "MakeTable"
-    var progressdialog: android.app.AlertDialog? = null
     var tv_leftRemaingAmount: TextView? = null;
     var tv_rightRemaingAmount: TextView? = null;
     var tv_totalLeftUsers: TextView? = null;
@@ -45,6 +44,7 @@ class DirectMemberFragment : Fragment() {
     var tv_totalAmountRightUsers: TextView? = null;
     var tv_totalAmountLeftUsers: TextView? = null;
     var tv_no_data: TextView? = null;
+    var progrees_direct : LinearLayout? = null
 
     lateinit var prefs: SharedPrefs
     var id: Int? = null
@@ -68,13 +68,8 @@ class DirectMemberFragment : Fragment() {
 
     private fun initView(view: View) {
 
-        progressdialog = SpotsDialog.Builder()
-                .setContext(activity!!)
-                .setMessage("Loading!!")
-                .setTheme(R.style.CustomProgess)
-                .build()
 
-
+        progrees_direct = view.findViewById(R.id.progressbar_direct)
         recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
         //search_view = view.findViewById(R.id.search_view)
         tv_no_data = view.findViewById(R.id.tv_no_data)
@@ -131,13 +126,14 @@ class DirectMemberFragment : Fragment() {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
-        progressdialog!!.show()
+
+        progrees_direct!!.visibility = View.VISIBLE
 
         ApiClint.getInstance()?.getService()?.getMaketableData("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<MakeTableData> {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.dismiss();
+                        progrees_direct!!.visibility = View.GONE
 
                     }
 
@@ -171,7 +167,7 @@ class DirectMemberFragment : Fragment() {
                                 tv_totalAmountLeftUsers!!.text = obj.totalAmountRightUsers!!.split(".")[0]
 
                         }
-                        progressdialog!!.hide();
+                        progrees_direct!!.visibility = View.GONE
 
 
                     }
@@ -185,12 +181,12 @@ class DirectMemberFragment : Fragment() {
             return
         }
         list.clear()
-        progressdialog!!.show()
+        progrees_direct!!.visibility = View.VISIBLE
         ApiClint.getInstance()?.getService()?.getUserReferedMembers("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.dismiss();
+                        progrees_direct!!.visibility = View.GONE
 
                     }
 
@@ -220,7 +216,7 @@ class DirectMemberFragment : Fragment() {
                                 recylcer_down_member!!.visibility = View.VISIBLE
                             }
                         }
-                        progressdialog!!.dismiss();
+                        progrees_direct!!.visibility = View.GONE
 
 
                     }

@@ -49,7 +49,6 @@ class NetworkFragment : Fragment() {
     var search_view: SearchView? = null
     var fragment_title: TextView? = null
     var frgement_type = "MakeTable"
-    var progressdialog: android.app.AlertDialog? = null
     var tv_leftRemaingAmount: TextView? = null;
     var tv_rightRemaingAmount: TextView? = null;
     var tv_totalLeftUsers: TextView? = null;
@@ -59,6 +58,7 @@ class NetworkFragment : Fragment() {
     var tv_sponser: TextView? = null;
     var tv_no_data: TextView? = null;
     var tv_total: TextView? = null;
+    var progressbar_net : LinearLayout? = null;
 
     lateinit var prefs: SharedPrefs
     var id: Int? = null
@@ -85,20 +85,13 @@ class NetworkFragment : Fragment() {
     }
 
     private fun initView(view: View?) {
-
-        progressdialog = SpotsDialog.Builder()
-                .setContext(activity!!)
-                .setMessage("Loading!!")
-                .setTheme(R.style.CustomProgess)
-                .build()
-
         layout_add_right = view!!.findViewById(R.id.layout_add_right)
         layout_add_left = view!!.findViewById(R.id.layout_add_left)
         add_right = view!!.findViewById(R.id.add_right)
         add_left = view!!.findViewById(R.id.add_left)
         recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
         search_view = view.findViewById(R.id.search_view)
-        fragment_title = view.findViewById(R.id.fragment_title)
+        fragment_title = view!!.findViewById(R.id.fragment_title)
         tv_no_data = view.findViewById(R.id.tv_no_data)
         tv_total = view.findViewById(R.id.tv_total)
 
@@ -109,7 +102,8 @@ class NetworkFragment : Fragment() {
         tv_totalAmountRightUsers = view.findViewById(R.id.tv_totalAmountRightUsers)
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
         tv_sponser = view.findViewById(R.id.tv_sponser)
-
+        progressbar_net = view.findViewById(R.id.progressbar_net)
+      
 
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
         adapter = DownMemberAdapter(activity!!, list, frgement_type) { obj ->
@@ -235,13 +229,13 @@ class NetworkFragment : Fragment() {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
-        progressdialog!!.show()
+        progressbar_net!!.visibility = View.VISIBLE
 
         ApiClint.getInstance()?.getService()?.getdownlineData("bearer " + token!!, id!!)
                 ?.enqueue(object : Callback<MakeTableData> {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
                         println("error")
-                        progressdialog!!.dismiss();
+                        progressbar_net!!.visibility = View.GONE
 
                     }
 
@@ -327,7 +321,7 @@ class NetworkFragment : Fragment() {
                                 tv_totalAmountLeftUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
 
                         }
-                        progressdialog!!.hide();
+                        progressbar_net!!.visibility = View.GONE
 
 
                     }
@@ -343,7 +337,7 @@ class NetworkFragment : Fragment() {
         }
         if (!list.isEmpty())
         list.clear()
-        progressdialog!!.show()
+        progressbar_net!!.visibility = View.VISIBLE
 
 
         val observer = getObserver()
@@ -362,7 +356,7 @@ class NetworkFragment : Fragment() {
         }
         if (!list.isEmpty())
         list.clear()
-        progressdialog!!.show()
+        progressbar_net!!.visibility = View.VISIBLE
 
         val observer = getObserver()
         val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, id!!)
@@ -381,7 +375,7 @@ class NetworkFragment : Fragment() {
         }
         if (!list.isEmpty())
         list.clear()
-        progressdialog!!.show()
+        progressbar_net!!.visibility = View.VISIBLE
 
         val observer = getObserver()
         val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getMakeTableRight("bearer " + token!!, id!!)
@@ -398,7 +392,7 @@ class NetworkFragment : Fragment() {
         }
         if (!list.isEmpty())
         list.clear()
-        progressdialog!!.show()
+        progressbar_net!!.visibility = View.VISIBLE
 
 
         val observer = getObserver()
@@ -415,7 +409,7 @@ class NetworkFragment : Fragment() {
 
         return object : Observer<ArrayList<Users>> {
             override fun onComplete() {
-                progressdialog!!.hide()
+                progressbar_net!!.visibility = View.GONE
 
 
             }
