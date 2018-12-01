@@ -10,13 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.utils.CustomNameSearch
 
 
-class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgement_type:String, private val onClick:(Users)->Unit) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
+class DownMemberAdapter(var ctx: Context, var type: String, var list: ArrayList<Users>, private val onClick:(Users)->Unit) : RecyclerView.Adapter<DownMemberAdapter.MyViewHolder>(), Filterable {
+    var typ=type
     var customFilter: CustomNameSearch? = null
 
        override fun getFilter(): Filter{
@@ -40,7 +42,7 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgemen
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: MyViewHolder, p1: Int) {
-        holder.bindView(list[p1])
+        holder.bindView(list[p1],typ)
         holder.itemView.setOnClickListener {
             onClick(list[p1])
         }
@@ -55,7 +57,7 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgemen
         var tv_paid: TextView? = null
         var card_members: CardView? = null
 
-        fun bindView(users: Users) {
+        fun bindView(users: Users , typ :String) {
 
 
 //            itemView.setClickable(true);
@@ -66,6 +68,14 @@ class DownMemberAdapter(var ctx: Context, var list: ArrayList<Users>,var frgemen
             tv_bank = itemView.findViewById(R.id.tv_bank)
             tv_sponser = itemView.findViewById(R.id.tv_sponser)
             tv_paid = itemView.findViewById(R.id.tv_paid)
+
+            if(typ=="MakeTable") {
+                tv_sponser!!.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
+                tv_name!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.35f)
+                tv_paid!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.35f)
+                tv_phone!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.9f)
+                tv_bank!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.35f)
+            }
 
             if(users.Username!=null)
             tv_name!!.text = users.Username

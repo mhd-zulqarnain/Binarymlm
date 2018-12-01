@@ -56,6 +56,10 @@ class NetworkFragment : Fragment() {
     var tv_totalAmountRightUsers: TextView? = null;
     var tv_totalAmountLeftUsers: TextView? = null;
     var tv_sponser: TextView? = null;
+    var tv_username : TextView? = null;
+    var tv_phone : TextView? = null;
+    var tv_paid_amount : TextView? = null;
+    var tv_bank_name : TextView? = null;
     var tv_no_data: TextView? = null;
     var tv_total: TextView? = null;
     var progressbar_net : LinearLayout? = null;
@@ -102,11 +106,15 @@ class NetworkFragment : Fragment() {
         tv_totalAmountRightUsers = view.findViewById(R.id.tv_totalAmountRightUsers)
         tv_totalAmountLeftUsers = view.findViewById(R.id.tv_totalAmountLeftUsers)
         tv_sponser = view.findViewById(R.id.tv_sponser)
+        tv_username = view.findViewById(R.id.tv_username)
+        tv_phone = view.findViewById(R.id.tv_phone)
+        tv_bank_name = view.findViewById(R.id.tv_bank_name)
+        tv_paid_amount = view.findViewById(R.id.tv_paid_amount)
         progressbar_net = view.findViewById(R.id.progressbar_net)
       
 
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
-        adapter = DownMemberAdapter(activity!!, list, frgement_type) { obj ->
+        adapter = DownMemberAdapter(activity!!, frgement_type , list) { obj ->
             if (frgement_type != "MakeTable") {
                 var intent = Intent(activity!!, MemberDetailActivity::class.java)
                 var json = Gson().toJson(obj)
@@ -191,7 +199,11 @@ class NetworkFragment : Fragment() {
         if (frgement_type == "MakeTable") {
             add_left!!.visibility = View.VISIBLE
             add_right!!.visibility = View.VISIBLE
-            tv_sponser!!.setTextColor(getResources().getColor(R.color.colorWhite));
+            tv_sponser!!.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
+            tv_username!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.35f)
+            tv_paid_amount!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.35f)
+            tv_phone!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.9f)
+            tv_bank_name!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.35f)
             fragment_title!!.text = "Add new Member"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Add new Member")
             (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
@@ -200,7 +212,6 @@ class NetworkFragment : Fragment() {
             add_left!!.visibility = View.GONE
             add_right!!.visibility = View.GONE
 
-            tv_sponser!!.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             fragment_title!!.text = "Down-line Members "
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Down-line Members")
             (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)

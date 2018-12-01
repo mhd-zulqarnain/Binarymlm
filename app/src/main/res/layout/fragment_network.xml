@@ -411,6 +411,7 @@
                     android:weightSum="6">
 
                     <TextView
+                        android:id="@+id/tv_username"
                         style="@style/CustomHeaderBlacktextStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -419,6 +420,7 @@
                         android:text="Userame" />
 
                     <TextView
+                        android:id="@+id/tv_phone"
                         style="@style/CustomHeaderBlacktextStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -427,6 +429,7 @@
                         android:text="Phone" />
 
                     <TextView
+                        android:id="@+id/tv_bank_name"
                         style="@style/CustomHeaderBlacktextStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -444,6 +447,7 @@
                         android:text="Sponser" />
 
                     <TextView
+                        android:id="@+id/tv_paid_amount"
                         style="@style/CustomHeaderBlacktextStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
