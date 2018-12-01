@@ -114,7 +114,7 @@ class NetworkFragment : Fragment() {
       
 
         recylcer_down_member!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
-        adapter = DownMemberAdapter(activity!!, list, frgement_type) { obj ->
+        adapter = DownMemberAdapter(activity!!, frgement_type , list) { obj ->
             if (frgement_type != "MakeTable") {
                 var intent = Intent(activity!!, MemberDetailActivity::class.java)
                 var json = Gson().toJson(obj)
