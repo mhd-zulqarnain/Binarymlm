@@ -23,12 +23,12 @@ class VideosModal {
         this.duration = duration
     }
 
-public override fun toString():String {
-    return ("YoutubeVideoModel{" +
-            "videoId='" + videoId + '\''.toString() +
-            ", title='" + title + '\''.toString() +
-            ", duration='" + duration + '\''.toString() +
-            '}'.toString())
-}
+    public override fun toString():String {
+        return ("YoutubeVideoModel{" +
+                "videoId='" + videoId + '\''.toString() +
+                ", title='" + title + '\''.toString() +
+                ", duration='" + duration + '\''.toString() +
+                '}'.toString())
+    }
 
 }
