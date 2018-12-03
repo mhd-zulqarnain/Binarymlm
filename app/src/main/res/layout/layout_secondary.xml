@@ -1,48 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_gravity="center"
     android:background="#b05363"
-    >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_show_ads"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Advertisements"
-        android:gravity="center|top"
-        android:textSize="21sp"
-        android:fontFamily="@font/ralewaybold"
-        android:textColor="@color/colorWhite"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:background="#f4b72227"
+        android:fontFamily="@font/ralewaybold"
+        android:gravity="center|top"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="View Advertisements"
+        android:textColor="@color/colorWhite"
+        android:textSize="21sp"
 
         />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recylcer_adds"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:layout_weight="4"
+        android:gravity="center"
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="12dp"
-            android:id="@+id/recylcer_adds"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:scrollbars="horizontal"
-            android:layout_weight="4" />
+        android:scrollbars="horizontal" />
 
     <LinearLayout
         android:id="@+id/progressbar_add"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
+
         <ProgressBar
             android:layout_width="50dp"
-            android:gravity="center"
             android:layout_height="50dp"
-            />
+            android:gravity="center" />
     </LinearLayout>
 
 </LinearLayout>

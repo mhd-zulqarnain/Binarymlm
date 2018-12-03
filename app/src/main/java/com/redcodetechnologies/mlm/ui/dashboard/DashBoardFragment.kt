@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.redcodetechnologies.mlm.R
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.widget.*
@@ -60,8 +62,8 @@ class DashBoardFragment : Fragment() {
     var GetPayoutHistorySum: TextView? = null
     var GetUserTotalMatchingCommission: TextView? = null
     var GetEWalletSummarySponsorBonus: TextView? = null
-    var GetTotalleftamount: TextView? = null
-    var GetTotalrightamount: TextView? = null
+    var GetAllTotalLeftUserPV: TextView? = null
+    var GetAllTotalRightUserPV: TextView? = null
     var GetTotalremainingleftamount: TextView? = null
     var GetTotalremainingrightamount: TextView? = null
 
@@ -70,10 +72,7 @@ class DashBoardFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         prefs = SharedPrefs.getInstance()!!
-
-
         initView(view)
-
         getviewData()
         return view
 
@@ -97,12 +96,12 @@ class DashBoardFragment : Fragment() {
         GetPayoutHistorySum = view.findViewById(R.id.GetPayoutHistorySum)
         GetUserTotalMatchingCommission = view.findViewById(R.id.GetUserTotalMatchingCommission)
         GetEWalletSummarySponsorBonus = view.findViewById(R.id.GetEWalletSummarySponsorBonus)
-        GetTotalleftamount = view.findViewById(R.id.GetTotalleftamount)
-        GetTotalrightamount = view.findViewById(R.id.GetTotalrightamount)
+        GetAllTotalRightUserPV = view.findViewById(R.id.GetAllTotalRightUserPV)
+        GetAllTotalLeftUserPV = view.findViewById(R.id.GetAllTotalLeftUserPV)
         GetTotalremainingleftamount = view.findViewById(R.id.GetTotalremainingleftamount)
         GetTotalremainingrightamount = view.findViewById(R.id.GetTotalremainingrightamount)
 
-        val manager = GridLayoutManager(activity!!, 2)
+        val manager =  LinearLayoutManager((activity as Context?)!!, LinearLayout.HORIZONTAL, false)
         recycler_adds!!.layoutManager = manager
         adapter = AdvertismentAdapter(activity!!, frgement_type, adsList){ads->
 
@@ -169,6 +168,7 @@ class DashBoardFragment : Fragment() {
         }
 
         progressbar_add!!.visibility = View.VISIBLE
+        recycler_adds!!.visibility = View.GONE
         val adsObserver = getadvertismentObserver()
         var adsObservable: Observable<ArrayList<Advertisement>> = MyApiRxClint.getInstance()?.getService()?.getCoinData()!!
         adsObservable.subscribeOn(Schedulers.io())
@@ -181,6 +181,8 @@ class DashBoardFragment : Fragment() {
             override fun onComplete() {
                 println("completed")
                 progressbar_add!!.visibility = View.GONE
+                recycler_adds!!.visibility = View.VISIBLE
+
 
             }
 
@@ -260,11 +262,11 @@ class DashBoardFragment : Fragment() {
                             if (obj.GetEWalletSummarySponsorBonus != null)
                                 GetEWalletSummarySponsorBonus!!.text = obj.GetEWalletSummarySponsorBonus!!.split(".")[0]
 
-                            if (obj.GetTotalleftamount != null)
-                                GetTotalleftamount!!.text = obj.GetTotalleftamount!!.split(".")[0]
+                            if (obj.GetAllTotalLeftUserPV != null)
+                                GetAllTotalLeftUserPV!!.text = obj.GetAllTotalLeftUserPV!!.split(".")[0]
 
-                            if (obj.GetTotalrightamount != null)
-                                GetTotalrightamount!!.text = obj.GetTotalrightamount!!.split(".")[0]
+                            if (obj.GetAllTotalRightUserPV != null)
+                                GetAllTotalRightUserPV!!.text = obj.GetAllTotalRightUserPV!!.split(".")[0]
 
                             if (obj.GetTotalremainingleftamount != null)
                                 GetTotalremainingleftamount!!.text = obj.GetTotalremainingleftamount!!.split(".")[0]
@@ -286,7 +288,6 @@ class DashBoardFragment : Fragment() {
         prefs.clearUser(activity!!)
         startActivity(Intent(activity!!, SignInActivity::class.java))
         activity!!.finish()
-
     }
 
     override fun onAttach(activity: Activity?) {

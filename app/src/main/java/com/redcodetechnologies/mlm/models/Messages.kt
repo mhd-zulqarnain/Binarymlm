@@ -9,5 +9,5 @@ data class Messages(var  Id :Int? = null,
                     var  IsRead :Boolean? = null,
                     var  CreateDate :String? = null,
                     var  MessageImage :String? = null
-                    )
+)
 
