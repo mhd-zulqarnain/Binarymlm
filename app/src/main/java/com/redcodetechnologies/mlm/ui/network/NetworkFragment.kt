@@ -15,7 +15,6 @@ import com.redcodetechnologies.mlm.*
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.ui.network.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.models.MakeTableData
-import com.redcodetechnologies.mlm.models.MyNotification
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
@@ -23,16 +22,13 @@ import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
 import com.redcodetechnologies.mlm.utils.SharedPrefs
-import dmax.dialog.SpotsDialog
 import io.reactivex.Observable
 import io.reactivex.Observer
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -94,7 +90,7 @@ class NetworkFragment : Fragment() {
         layout_add_left = view!!.findViewById(R.id.layout_add_left)
         add_right = view!!.findViewById(R.id.add_right)
         add_left = view!!.findViewById(R.id.add_left)
-        recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
+        recylcer_down_member = view.findViewById(R.id.recylcer_down_member) //RecyclerVIEW
         search_view = view.findViewById(R.id.search_view)
         fragment_title = view!!.findViewById(R.id.fragment_title)
         tv_no_data = view.findViewById(R.id.tv_no_data)

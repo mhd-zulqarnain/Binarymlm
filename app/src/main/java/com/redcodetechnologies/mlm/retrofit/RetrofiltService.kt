@@ -75,9 +75,15 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getMakeTableLeft(@Header("Authorization") auth: String, @Path("userid") userid: Int): Observable<ArrayList<Users>>
 
+
+
     @GET("maketabledetails/{userid}")
     @Headers("Content-Type:application/json")
     fun getdownlineData(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<MakeTableData>
+
+    @GET("viewusertrainingvideos/")
+    @Headers("Content-Type:application/json")
+    fun getVideosData(@Header("Authorization") auth: String ) : Observable<ArrayList<VideosModal>>
 
 
     @GET("getuserdownlinmembers/{userid}")
