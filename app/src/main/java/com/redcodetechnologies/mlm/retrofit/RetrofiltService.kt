@@ -86,6 +86,11 @@ interface RetrofiltService {
     fun getVideosData(@Header("Authorization") auth: String ) : Observable<ArrayList<VideosModal>>
 
 
+    @GET("getprofileimage/{userId}")
+    @Headers("Content-Type:application/json")
+    fun getDownlinersImage(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<Response>
+
+
     @GET("getuserdownlinmembers/{userid}")
     @Headers("Content-Type:application/json")
     fun getMaketableData(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<MakeTableData>

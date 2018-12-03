@@ -20,6 +20,7 @@ import com.redcodetechnologies.mlm.ui.network.adapter.DialogMemberAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
 import com.redcodetechnologies.mlm.utils.SharedPrefs
+import de.hdodenhof.circleimageview.CircleImageView
 import dmax.dialog.SpotsDialog
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -43,19 +44,29 @@ class MemberDetailActivity : AppCompatActivity() {
     var progressBar: LinearLayout? = null
     var layout_add_right: LinearLayout?=null
     var layout_add_left: LinearLayout?=null
-
+    var downliner_image: CircleImageView? = null
     var disposable: Disposable? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_member_detail)
+        downliner_image = findViewById(R.id.citizen_profile_cover)
+
+        if (prefs.getUser(this@MemberDetailActivity).userId != null) {
+            id = prefs.getUser(this@MemberDetailActivity).userId
+            token = prefs.getToken(this@MemberDetailActivity).accessToken!!
+
+
+        }
+
         var json = intent.getStringExtra("object")
         prefs = SharedPrefs.getInstance()!!
 
         if (json != null)
             user = Gson().fromJson(json, Users::class.java);
 
-        setContentView(R.layout.activity_member_detail)
+
         initView()
         btn_back.setOnClickListener {
             finish()
