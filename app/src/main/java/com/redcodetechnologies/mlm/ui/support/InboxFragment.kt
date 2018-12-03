@@ -194,7 +194,7 @@ class InboxFragment : Fragment() {
         btn_submit.setOnClickListener {
             if (rep_message.text.toString().trim() != "") {
 
-                replymessagesponsor(rep_message.text.toString())
+                replymessagesponsor(rep_message.text.toString(),inbox.UserId!!)
 
                 dialog.dismiss()
             } else
@@ -217,7 +217,7 @@ class InboxFragment : Fragment() {
         val rep_message: EditText = v.findViewById(R.id.rep_message)
         val spinner_receiver: Spinner = v.findViewById(R.id.spinner_receiver)
         var view_sponser: LinearLayout = v.findViewById(R.id.view_sponser)
-        var view_it: LinearLayout = v.findViewById(R.id.view_sponser)
+        var view_it: LinearLayout = v.findViewById(R.id.view_it)
         img_it_support = v.findViewById(R.id.img_it_support)
 
         var reciverId = 1;
@@ -225,8 +225,11 @@ class InboxFragment : Fragment() {
         if (frgementType == IT_INBOX) {
             reciverId = 0;
             view_it.visibility = View.VISIBLE
+            view_sponser.visibility = View.GONE
         } else {
             view_it.visibility = View.GONE
+            view_sponser.visibility = View.VISIBLE
+
         }
         btn_add_image.setOnClickListener {
             pickImage(SELECT_SUPPORT_PHOTO)
@@ -266,7 +269,7 @@ class InboxFragment : Fragment() {
         dialog.show()
     }
 
-    private fun replymessagesponsor(msg: String) {
+    private fun replymessagesponsor(msg: String,receiverId:Int) {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
@@ -274,7 +277,7 @@ class InboxFragment : Fragment() {
         }
 
 
-        ApiClint.getInstance()?.getService()?.replymessagesponsor(sponserId!!, msg, userId!!, userName!!)
+        ApiClint.getInstance()?.getService()?.replymessagesponsor(receiverId, msg, userId!!, userName!!)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         println("error")

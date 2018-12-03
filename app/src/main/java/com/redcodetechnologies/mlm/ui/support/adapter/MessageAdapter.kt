@@ -14,6 +14,7 @@ import com.redcodetechnologies.mlm.models.Response
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.ui.support.MessageSearch
+import com.redcodetechnologies.mlm.utils.SharedPrefs
 import retrofit2.Call
 import retrofit2.Callback
 import java.util.ArrayList
@@ -22,6 +23,7 @@ import java.util.ArrayList
 class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var type: String, private val onItemClick: (Messages) -> Unit) : RecyclerView.Adapter<MessageAdapter.ViewHolder>(), Filterable {
     var messageFilter: MessageSearch? = null
     var face: Typeface? = null
+    public var context: Context = ctx
 
     val SPONSER_INBOX:String="Sponser_Inbox"
     val IT_INBOX:String="IT_Inbox"
@@ -54,7 +56,7 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val message: Messages = datalist[position]
 
-        holder.bindView(datalist[position], type)
+        holder.bindView(datalist[position], type,ctx)
 
         holder.btn_dlt.setOnClickListener() {
             removeItem(message,type)
@@ -72,7 +74,9 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
         var btn_reply = itemView.findViewById(R.id.btn_reply) as Button
         var btn_dlt = itemView.findViewById(R.id.btn_dlt) as Button
 
-        fun bindView(messages: Messages, type: String) {
+        fun bindView(messages: Messages, type: String, ctx: Context) {
+
+            var sponserId = SharedPrefs.getInstance()!!.getUser(ctx).sponsorId
             if (!messages.IsRead!!) {
                 itemView.setBackgroundResource(R.drawable.unread_message_box);
             }
@@ -82,8 +86,10 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
                     "Sponser_Sent" ->
                         if (messages.SponserId == 1) {
                             Sender.text = "Admin"
-                        } else {
+                        } else if(messages.SponserId == sponserId) {
                             Sender.text = "Sponser"
+                        } else {
+                            Sender.text = "Downliner"
                         }
                     "IT_Sent"->
                         Sender.text = "Support"

@@ -63,6 +63,7 @@ class NetworkFragment : Fragment() {
     var tv_no_data: TextView? = null;
     var tv_total: TextView? = null;
     var progressbar_net : LinearLayout? = null;
+    var progressbar_list_data : LinearLayout? = null;
 
     lateinit var prefs: SharedPrefs
     var id: Int? = null
@@ -98,6 +99,7 @@ class NetworkFragment : Fragment() {
         fragment_title = view!!.findViewById(R.id.fragment_title)
         tv_no_data = view.findViewById(R.id.tv_no_data)
         tv_total = view.findViewById(R.id.tv_total)
+        progressbar_list_data = view.findViewById(R.id.progressbar_list_data)
 
         tv_leftRemaingAmount = view.findViewById(R.id.tv_leftRemaingAmount)
         tv_rightRemaingAmount = view.findViewById(R.id.tv_rightRemaingAmount)
@@ -350,9 +352,9 @@ class NetworkFragment : Fragment() {
         }
         if (!list.isEmpty())
         list.clear()
-        progressbar_net!!.visibility = View.VISIBLE
+        recylcer_down_member!!.visibility=View.GONE
 
-
+        progressbar_list_data!!.visibility=View.VISIBLE
         val observer = getObserver()
         val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token!!, id!!)
         observable.subscribeOn(Schedulers.io())
@@ -369,7 +371,8 @@ class NetworkFragment : Fragment() {
         }
         if (!list.isEmpty())
         list.clear()
-        progressbar_net!!.visibility = View.VISIBLE
+        progressbar_list_data!!.visibility=View.VISIBLE
+        recylcer_down_member!!.visibility=View.GONE
 
         val observer = getObserver()
         val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, id!!)
@@ -388,7 +391,8 @@ class NetworkFragment : Fragment() {
         }
         if (!list.isEmpty())
         list.clear()
-        progressbar_net!!.visibility = View.VISIBLE
+        progressbar_list_data!!.visibility=View.VISIBLE
+        recylcer_down_member!!.visibility=View.GONE
 
         val observer = getObserver()
         val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getMakeTableRight("bearer " + token!!, id!!)
@@ -405,8 +409,9 @@ class NetworkFragment : Fragment() {
         }
         if (!list.isEmpty())
         list.clear()
-        progressbar_net!!.visibility = View.VISIBLE
 
+        progressbar_list_data!!.visibility=View.VISIBLE
+        recylcer_down_member!!.visibility=View.GONE
 
         val observer = getObserver()
         val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getMakeTableLeft("bearer " + token!!, id!!)
@@ -419,11 +424,10 @@ class NetworkFragment : Fragment() {
 
 
     fun getObserver(): Observer<ArrayList<Users>> {
-
         return object : Observer<ArrayList<Users>> {
             override fun onComplete() {
-                progressbar_net!!.visibility = View.GONE
-
+                println("completed")
+                progressbar_list_data!!.visibility=View.GONE
 
             }
 

@@ -33,13 +33,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 val body = JSONObject(json).get("body").toString()*/
 
             val data = remoteMessage.data
+
             val notification = MyNotification()
+
             notification.NotificationDescription = data.get("descrption")
             notification.NotificationId = data.get("id")
             notification.UserId = data.get("uid")
             notification.NotificationName = data.get("name")
             notification.IsSaveByUser = data.get("issaved")
-
 
             var intent = Intent()
             val user = SharedPrefs.getInstance()!!.getUser(this@MyFirebaseMessagingService)
@@ -84,4 +85,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         }
     }
+
+    
 }

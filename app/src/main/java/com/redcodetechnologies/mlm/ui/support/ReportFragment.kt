@@ -70,7 +70,10 @@ class ReportFragment : Fragment() {
             token = prefs.getToken(activity!!).accessToken!!
         }
 
-        adapter = ReportAdapter(activity!!, list) { post ->
+     /*   list.add(Report("asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd"))
+        list.add(Report("asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd"))
+        list.add(Report("asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd"))
+      */  adapter = ReportAdapter(activity!!, list) { post ->
             openreportdialog(list[post])
         }
         recylcer_down_member!!.adapter = adapter
@@ -91,13 +94,25 @@ class ReportFragment : Fragment() {
                 filter(s.toString())
             }
         })
-
-        if (frgement_type == "ActivePayout")
+        var title = ""
+        if (frgement_type == "ActivePayout") {
             getactivepayout()
-        if (frgement_type == "PayoutHistory")
+            title = "Active Payout"
+        }
+        if (frgement_type == "PayoutHistory") {
             getpayouthistory()
-        if (frgement_type == "PayoutWithdrawalinProcess")
+
+            title = "Payment History"
+
+        }
+        if (frgement_type == "PayoutWithdrawalinProcess") {
             getpayoutwithdrawinprocess()
+            title = "Payment In Process"
+
+        }
+
+        (activity as DrawerActivity).getSupportActionBar()?.setTitle(title)
+        (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
 
         return view
     }
@@ -253,8 +268,7 @@ class ReportFragment : Fragment() {
 
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
-        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Report")
-        (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -262,6 +276,7 @@ class ReportFragment : Fragment() {
             println("data " + data.data)
         }
     }
+
     override fun onDestroyView() {
         if (disposable != null)
             disposable!!.dispose()

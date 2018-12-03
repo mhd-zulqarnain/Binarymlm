@@ -18,6 +18,9 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
         p0.btn_rd_view!!.setOnClickListener{
         onItemClick(p1)
         }
+        p0.btn_detail!!.setOnClickListener{
+        onItemClick(p1)
+        }
     }
 
     var customFilter: CustomNameSearch? = null
@@ -39,6 +42,7 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
         var tv_price: TextView? = null
         var tv_status: TextView? = null
         var btn_rd_view: LinearLayout? = null
+        var btn_detail: Button? = null
         fun bindView(report: Report) {
 
             tv_uname = itemView.findViewById(R.id.tv_uname)
@@ -46,6 +50,7 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
             tv_price = itemView.findViewById(R.id.tv_price)
             tv_status = itemView.findViewById(R.id.tv_status)
             btn_rd_view = itemView.findViewById(R.id.btn_rd_view)
+            btn_detail = itemView.findViewById(R.id.btn_detail)
 
             tv_uname!!.text = report.Username
             tv_payment_method!!.text = report.BankName

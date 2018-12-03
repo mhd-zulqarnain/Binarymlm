@@ -491,7 +491,7 @@
 
 
                 <TextView
-                    android:id="@+id/GetTotalleftamount"
+                    android:id="@+id/GetAllTotalLeftUserPV"
                     style="@style/CustomBlacktextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -531,7 +531,7 @@
                     android:text="Total Right Amount " />
 
                 <TextView
-                    android:id="@+id/GetTotalrightamount"
+                    android:id="@+id/GetAllTotalRightUserPV"
                     style="@style/CustomBlacktextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -297,5 +297,8 @@ interface RetrofiltService {
     fun getpayoutwithdrawinprocess(@Path("userid") userid: Int): Observable<ArrayList<Report>>
     //</editor-fold>
 
+    @GET("getalluserwithdrawfund/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getalluserwithdrawfund(@Path("userid") userid: Int): Call<Withdrawfund>
 
 }

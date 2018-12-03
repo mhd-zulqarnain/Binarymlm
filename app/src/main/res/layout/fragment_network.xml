@@ -485,6 +485,22 @@
                 android:layout_weight="4"
                 android:scrollbars="horizontal" />
 
+            <LinearLayout
+                android:id="@+id/progressbar_list_data"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:visibility="gone"
+                android:background="#ab121111"
+
+                >
+                <ProgressBar
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:layout_height="50dp"
+                    />
+            </LinearLayout>
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"

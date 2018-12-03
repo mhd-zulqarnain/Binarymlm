@@ -15,6 +15,9 @@ data class DasboardData(
         var GetTotalleftamount: String? = null,//balance
         var GetTotalrightamount: String? = null,//balance
         var GetTotalremainingleftamount: String? = null,//balance
-        var GetTotalremainingrightamount: String? = null//balance
+        var GetTotalremainingrightamount: String? = null,//balance
+
+        var GetAllTotalLeftUserPV: String? = null,//balance
+        var GetAllTotalRightUserPV: String? = null//balance
 
 )
