@@ -44,7 +44,7 @@ interface RetrofiltService {
 
     @GET("getuserunpaidmembersleftlist/{userId}")
     @Headers("Content-Type:application/json")
-    fun getUserUnpaidMembersLeft(@Path("userId")  userid: Int): Observable<ArrayList<UserTree>>
+    fun getUserUnpaidMembersLeft(@Path("userId") userid: Int): Observable<ArrayList<UserTree>>
 
     //<editor-fold desc="Make table ">
     @GET("getAllDownlineMembersRight/{userid}")
@@ -222,7 +222,7 @@ interface RetrofiltService {
     //<editor-fold desc="Notification ">
     @POST("notificationsetup/{userid}")
     @Headers("Content-Type:application/json")
-    fun saveNotification( @Path("userid") userid: Int,@Body obj: MyNotification): Call<Response>
+    fun saveNotification(@Path("userid") userid: Int, @Body obj: MyNotification): Call<Response>
 
     @GET("getnotificationlistbyuser/{userId}")
     @Headers("Content-Type:application/json")
@@ -230,21 +230,24 @@ interface RetrofiltService {
     //</editor-fold>
 
 
-
     //<editor-fold desc="sponser messages">
     @POST("deleteinboxmsg/{userid}")
     @Headers("Content-Type:application/json")
-    fun deleteSponserinboxmsg( @Path("userid") userid: Int): Call<Response>
+    fun deleteSponserinboxmsg(@Path("userid") userid: Int): Call<Response>
+
+    @POST("deletereadmessagesponsorsupport/{userid}")
+    @Headers("Content-Type:application/json")
+    fun deletereadmessagesponsorsupport(@Path("userid") userid: Int): Call<Response>
 
     @POST("inboxsponsersupport")
     @Headers("Content-Type:application/json")
-    fun newMessageSponser( @Body obj:Messages): Call<Response>
+    fun newMessageSponser(@Body obj: Messages): Call<Response>
 
     @POST("replymessagesponsorsupport/{u_id}/{msg}/{userId}/{username}")
     @Headers("Content-Type:application/json")
-    fun replymessagesponsor( @Path("u_id") sponsorId: Int, @Path("msg") msg: String,
-                             @Path("userId") userid: Int,
-                             @Path("username") username: String): Call<Response>
+    fun replymessagesponsor(@Path("u_id") sponsorId: Int, @Path("msg") msg: String,
+                            @Path("userId") userid: Int,
+                            @Path("username") username: String): Call<Response>
 
     @GET("viewallreadmessage/{userId}")
     @Headers("Content-Type:application/json")
@@ -254,6 +257,14 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getsentmessagessponsorsupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
     //</editor-fold>
+
+    @POST("deleteinboxmsgitsupport/{userid}")
+    @Headers("Content-Type:application/json")
+    fun deleteinboxmsgitsupport(@Path("userid") userid: Int): Call<Response>
+
+    @POST("deletereadmessageitsupport/{userid}")
+    @Headers("Content-Type:application/json")
+    fun deletereadmessageitsupport(@Path("userid") userid: Int): Call<Response>
 
     @GET("viewallreadmessageitsupport/{userId}")
     @Headers("Content-Type:application/json")
@@ -265,10 +276,26 @@ interface RetrofiltService {
 
     @POST("inboxitsupport")
     @Headers("Content-Type:application/json")
-    fun newMessageItSupport( @Body obj:Messages): Call<Response>
+    fun newMessageItSupport(@Body obj: Messages): Call<Response>
 
     @POST("updateFcm")
     @Headers("Content-Type:application/json")
     fun updateUserFcm(@Body obj: FcmModel): Call<Response>
+
+
+    //<editor-fold desc="Report">
+    @GET("getactivepayout/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getactivepayout(@Path("userid") userid: Int): Observable<ArrayList<Report>>
+
+    @GET("getpayouthistory/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getpayouthistory(@Path("userid") userid: Int): Observable<ArrayList<Report>>
+
+    @GET("getpayoutwithdrawinprocess/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getpayoutwithdrawinprocess(@Path("userid") userid: Int): Observable<ArrayList<Report>>
+    //</editor-fold>
+
 
 }

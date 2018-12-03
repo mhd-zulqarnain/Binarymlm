@@ -39,7 +39,7 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
         var tv_price: TextView? = null
         var tv_status: TextView? = null
         var btn_rd_view: LinearLayout? = null
-        fun bindView(users: Report) {
+        fun bindView(report: Report) {
 
             tv_uname = itemView.findViewById(R.id.tv_uname)
             tv_payment_method = itemView.findViewById(R.id.tv_payment_method)
@@ -47,11 +47,11 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
             tv_status = itemView.findViewById(R.id.tv_status)
             btn_rd_view = itemView.findViewById(R.id.btn_rd_view)
 
-            tv_uname!!.text = users.UserName
-            tv_payment_method!!.text = users.PaymentMethod
-            var an :String = users.AccountNumber!!.substring(0,7) +".."
+            tv_uname!!.text = report.Username
+            tv_payment_method!!.text = report.BankName
+            var an :String = report.AccountNumber!!.substring(0,7) +".."
             tv_payment_method!!.text = an
-            tv_status!!.text = users.BankName
+            tv_status!!.text = report.BankName
    }
     }
 

@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.ui.support.adapter.ReportAdapter
@@ -20,17 +19,23 @@ import com.redcodetechnologies.mlm.models.Report
 import java.util.*
 import android.text.Editable
 import android.text.TextWatcher
-
-
+import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
+import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.SharedPrefs
+import io.reactivex.Observable
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 
 class ReportFragment : Fragment() {
     var recylcer_down_member: RecyclerView? = null
 
-    var report: ReportAdapter? =null
+    var adapter: ReportAdapter? = null
 
     val REQUSET_GALLERY_CODE: Int = 43
-    var reportList: ArrayList<Report> = ArrayList()
+    var list: ArrayList<Report> = ArrayList()
     var dialog_title: TextView? = null
     var ed_name: EditText? = null
     var ed_uname: EditText? = null
@@ -38,34 +43,41 @@ class ReportFragment : Fragment() {
     var ed_phone: EditText? = null
     var ed_address: EditText? = null
     var ed_email: EditText? = null
-    var ed_account: EditText? = null
-    var ed_bank_name: EditText? = null
-    var ed_cnic: EditText? = null
     var search_view: EditText? = null
+    lateinit var progressBar: LinearLayout
+    lateinit var tv_no_data: LinearLayout
+
     var dialog: AlertDialog? = null
+    var frgement_type = ""
 
-
-
+    lateinit var prefs: SharedPrefs
+    var id: Int? = null
+    lateinit var token: String
+    var disposable: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_report, container, false)
+        val view = inflater.inflate(R.layout.fragment_report, container, false)
         recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
+        progressBar = view.findViewById(R.id.progressBar)
+        tv_no_data = view.findViewById(R.id.tv_no_data)
         recylcer_down_member!!.layoutManager = LinearLayoutManager((activity as Context?)!!, LinearLayout.VERTICAL, false)
 
-        reportList.add(Report("Ali","EasyPaisa","21212321321","Habib","12","0.5","12-10-2018","12-10-2018"))
-        reportList.add(Report("Zulqarnain","EasyPaisa","132231231","Metro","16","1","10-8-2018","12-10-2018"))
-        reportList.add(Report("Arif","JazzCash","546546545454","Alfalah","10","1.5","11-10-2018","12-10-2018"))
-
-
-
-        report = ReportAdapter(activity!!, reportList) { post ->
-            openreportdialog(reportList[post])
+        frgement_type = arguments?.getString("Fragment").toString();
+        prefs = SharedPrefs.getInstance()!!
+        if (prefs.getUser(activity!!).userId != null) {
+            id = prefs.getUser(activity!!).userId
+            token = prefs.getToken(activity!!).accessToken!!
         }
-        recylcer_down_member!!.adapter = report
+
+        adapter = ReportAdapter(activity!!, list) { post ->
+            openreportdialog(list[post])
+        }
+        recylcer_down_member!!.adapter = adapter
 
 
-        search_view  = view.findViewById(R.id.search_view)
+        search_view = view.findViewById(R.id.search_view)
+
         search_view!!.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
@@ -80,57 +92,157 @@ class ReportFragment : Fragment() {
             }
         })
 
+        if (frgement_type == "ActivePayout")
+            getactivepayout()
+        if (frgement_type == "PayoutHistory")
+            getpayouthistory()
+        if (frgement_type == "PayoutWithdrawalinProcess")
+            getpayoutwithdrawinprocess()
 
         return view
+    }
+
+    fun getactivepayout() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (!list.isEmpty())
+            list.clear()
+        progressBar!!.visibility = View.VISIBLE
+        recylcer_down_member!!.visibility = View.GONE
+
+
+        val observer = getObserver()
+        val observable: Observable<ArrayList<Report>> = MyApiRxClint.getInstance()!!.getService()!!.getactivepayout(id!!)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
+
+    }
+
+    fun getpayouthistory() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (!list.isEmpty())
+            list.clear()
+        progressBar!!.visibility = View.VISIBLE
+        recylcer_down_member!!.visibility = View.GONE
+
+        val observer = getObserver()
+        val observable: Observable<ArrayList<Report>> = MyApiRxClint.getInstance()!!.getService()!!.getpayouthistory(id!!)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
+
+    }
+
+    fun getpayoutwithdrawinprocess() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (!list.isEmpty())
+            list.clear()
+        progressBar!!.visibility = View.VISIBLE
+
+
+        val observer = getObserver()
+        val observable: Observable<ArrayList<Report>> = MyApiRxClint.getInstance()!!.getService()!!.getpayoutwithdrawinprocess(id!!)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
+
+    }
+
+    fun getObserver(): Observer<ArrayList<Report>> {
+
+        return object : Observer<ArrayList<Report>> {
+            override fun onComplete() {
+                progressBar.visibility = View.GONE
+
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+                disposable = d
+            }
+
+            override fun onNext(t: ArrayList<Report>) {
+
+                t.forEach { obj ->
+                    list.add(obj)
+
+                }
+                adapter!!.notifyDataSetChanged()
+
+                if (t.size == 0) {
+                    recylcer_down_member!!.visibility = View.GONE
+                    tv_no_data.visibility = View.VISIBLE
+                } else {
+                    tv_no_data.visibility = View.GONE
+                    recylcer_down_member!!.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onError(e: Throwable) {
+                print("error")
+            }
+        }
     }
 
     private fun filter(text: String) {
         val filteredList = ArrayList<Report>()
 
-        for (item in reportList) {
-            if (item.UserName!!.toLowerCase().contains(text.toLowerCase())) {
+        for (item in list) {
+            if (item.Username!!.toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item)
             }
         }
 
-        report!!.filterList(filteredList)
+        adapter!!.filterList(filteredList)
     }
+
     private fun openreportdialog(report: Report) {
-        val view: View = LayoutInflater.from((activity as Context?)!!).inflate(R.layout.report_dialog,null)
+        val view: View = LayoutInflater.from((activity as Context?)!!).inflate(R.layout.report_dialog, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder((activity as Context?)!!)
         alertBox.setView(view)
         dialog = alertBox.create()
         dialog!!.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
-            dialog!!.setCancelable(false);
-       val  dialog_title :TextView = view.findViewById(R.id.dialog_title)
+        dialog!!.setCancelable(false);
+        val dialog_title: TextView = view.findViewById(R.id.dialog_title)
 
-       val  et_rd_uname :TextView = view.findViewById(R.id.et_rd_uname)
-       val  et_rd_pm :TextView = view.findViewById(R.id.et_rd_pm)
-       val  et_rd_an :TextView = view.findViewById(R.id.et_rd_an)
-       val  et_rd_bn :TextView = view.findViewById(R.id.et_rd_bn)
-        val  et_rd_wc :TextView = view.findViewById(R.id.et_rd_wc)
-        val  et_rd_ard :TextView = view.findViewById(R.id.et_rd_ard)
-        val  et_rd_nap :TextView = view.findViewById(R.id.et_rd_nap)
-        val  et_rd_pd :TextView = view.findViewById(R.id.et_rd_pd)
-        val  btn_rd_ok :Button = view.findViewById(R.id.btn_rd_ok)
+        val et_rd_uname: TextView = view.findViewById(R.id.et_rd_uname)
+        val et_rd_pm: TextView = view.findViewById(R.id.et_rd_pm)
+        val et_rd_an: TextView = view.findViewById(R.id.et_rd_an)
+        val et_rd_bn: TextView = view.findViewById(R.id.et_rd_bn)
+        val et_rd_wc: TextView = view.findViewById(R.id.et_rd_wc)
+        val et_rd_ard: TextView = view.findViewById(R.id.et_rd_ard)
+        val et_rd_nap: TextView = view.findViewById(R.id.et_rd_nap)
+        val et_rd_pd: TextView = view.findViewById(R.id.et_rd_pd)
+        val btn_rd_ok: Button = view.findViewById(R.id.btn_rd_ok)
 
         dialog_title.text = arguments!!.getString("Fragment")
 
 
-        et_rd_uname.text = et_rd_uname.text.toString() + report.UserName
-        et_rd_pm.text = et_rd_pm.text.toString()+ report.PaymentMethod
-        et_rd_an.text =  et_rd_an.text.toString()+ report.AccountNumber
-        et_rd_bn.text =et_rd_bn.text.toString()+  report.BankName
-        et_rd_wc.text = et_rd_wc.text.toString()+ report.WithdrawalCharges
-        et_rd_ard.text = et_rd_ard.text.toString()+  report.ApprovedRequestDate
-        et_rd_nap.text =et_rd_nap.text.toString()+  report.NetAmountPayble
-        et_rd_pd.text =et_rd_pd.text.toString()+  report.PaidDate
+        et_rd_uname.text = et_rd_uname.text.toString() + report.Username
+        et_rd_an.text = et_rd_an.text.toString() + report.AccountNumber
+        et_rd_bn.text = et_rd_bn.text.toString() + report.BankName
+        et_rd_wc.text = et_rd_wc.text.toString() + report.WithdrawalFundCharge
+        et_rd_ard.text = et_rd_ard.text.toString() + report.ApprovedDate
+        et_rd_nap.text = et_rd_nap.text.toString() + report.AmountPayble
+        et_rd_pd.text = et_rd_pd.text.toString() + report.PaidDate
 
-        if(dialog_title.text!= "PayoutHistory")
-            et_rd_pd.visibility=View.GONE
+        if (dialog_title.text != "PayoutHistory")
+            et_rd_pd.visibility = View.GONE
 
-        btn_rd_ok.setOnClickListener{
+        btn_rd_ok.setOnClickListener {
             dialog!!.dismiss()
         }
 
@@ -138,7 +250,6 @@ class ReportFragment : Fragment() {
 
 
     }
-
 
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
@@ -150,6 +261,11 @@ class ReportFragment : Fragment() {
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {
             println("data " + data.data)
         }
+    }
+    override fun onDestroyView() {
+        if (disposable != null)
+            disposable!!.dispose()
+        super.onDestroyView()
     }
 
 }
