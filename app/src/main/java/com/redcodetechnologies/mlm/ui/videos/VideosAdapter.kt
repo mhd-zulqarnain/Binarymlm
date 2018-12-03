@@ -1,5 +1,6 @@
 package com.redcodetechnologies.mlm.ui.videos
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Build
 import android.support.annotation.RequiresApi
@@ -32,46 +33,49 @@ class VideosAdapter(var ctx: Context, var list: ArrayList<VideosModal>, private 
         return list.size
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: MyViewHolder, p1: Int) {
         holder.bindView(list[p1])
         holder.itemView.setOnClickListener {
             onClick(list[p1])
         }
     }
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private var youtubeVideoModelArrayList :  ArrayList<VideosModal>? = null
+        var videoThumbnailImageView : YouTubeThumbnailView? = null
+        var videoTitle : TextView? = null
 
-        var videoThumbnailImageView: YouTubeThumbnailView
-        var videoTitle:TextView
-
-        fun bindView(users: VideosModal , typ :String) {
+        fun bindView(video: VideosModal) {
             videoThumbnailImageView = itemView.findViewById(R.id.video_thumbnail_image_view)
             videoTitle = itemView.findViewById(R.id.video_title_label)
+            if(video.TrainingVideoName!=null)
+                videoTitle!!.text = video.TrainingVideoName
+                videoThumbnailImageView!!.initialize(Constants.DEVELOPER_KEY, object : YouTubeThumbnailView.OnInitializedListener {
+                    override fun onInitializationSuccess(youTubeThumbnailView: YouTubeThumbnailView, youTubeThumbnailLoader: YouTubeThumbnailLoader) {
+                        //when initialization is sucess, set the video id to thumbnail to load
+                        youTubeThumbnailLoader.setVideo(video.TrainingVideoURL)
+
+                        youTubeThumbnailLoader.setOnThumbnailLoadedListener(object : YouTubeThumbnailLoader.OnThumbnailLoadedListener {
+                            override fun onThumbnailLoaded(youTubeThumbnailView: YouTubeThumbnailView, s: String) {
+                                //when thumbnail loaded successfully release the thumbnail loader as we are showing thumbnail in adapter
+                                youTubeThumbnailLoader.release()
+                            }
+
+                            override fun onThumbnailError(youTubeThumbnailView: YouTubeThumbnailView, errorReason: YouTubeThumbnailLoader.ErrorReason) {
+                                //print or show error when thumbnail load failed
+                                Log.e(TAG, "Youtube Thumbnail Error")
+                            }
+                        })
+                    }
+
+                    override fun onInitializationFailure(youTubeThumbnailView: YouTubeThumbnailView, youTubeInitializationResult: YouTubeInitializationResult) {
+                        //print or show error when initialization failed
+                        Log.e(TAG, "Youtube Initialization Failure")
+
+                    }
+                })
         }
 
-        fun bindView(users: Users , typ :String) {
+    }
 
-
-//            itemView.setClickable(true);
-
-            tv_name = itemView.findViewById(R.id.tv_name)
-            tv_phone = itemView.findViewById(R.id.tv_phone)
-            card_members = itemView.findViewById(R.id.card_members)
-            tv_bank = itemView.findViewById(R.id.tv_bank)
-            tv_sponser = itemView.findViewById(R.id.tv_sponser)
-            tv_paid = itemView.findViewById(R.id.tv_paid)
-
-
-
-            if(users.Username!=null)
-                tv_name!!.text = users.Username
-            if(users.Phone!=null)
-                tv_phone!!.text = users.Phone
-            if(users.BankName!=null)
-                tv_bank!!.text = users.BankName!!
-            if(users.SponsorName!=null)
-                tv_sponser!!.text = users.SponsorName
-            if(users.PaidAmount!=null)
-                tv_paid!!.text = users.PaidAmount!!.split(".")[0]
-        }
 }
