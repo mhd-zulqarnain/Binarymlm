@@ -59,8 +59,8 @@ class SignInActivity : AppCompatActivity() {
             } else if (ed_password.text.toString().trim(' ').length < 1) {
                 ed_password.error = Html.fromHtml("<font color='#E0796C'>Password could not be empty</font>")
                 ed_password.requestFocus()
-            } else if (ed_password.text.toString().trim(' ').length < 8) {
-                ed_password.error = Html.fromHtml("<font color='#E0796C'>Password must contain 8 characters</font>")
+            } else if (ed_password.text.toString().trim(' ').length < 5) {
+                ed_password.error = Html.fromHtml("<font color='#E0796C'>Password must contain 6 characters</font>")
                 ed_password.requestFocus()
             } else {
 
