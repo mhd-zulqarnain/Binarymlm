@@ -1,10 +1,14 @@
 package com.redcodetechnologies.mlm.ui.network
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -12,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.Gson
 import com.redcodetechnologies.mlm.R
+import com.redcodetechnologies.mlm.models.Response
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
@@ -33,6 +38,8 @@ import retrofit2.Callback
 import java.util.ArrayList
 
 class MemberDetailActivity : AppCompatActivity() {
+    //getprofileimage/{userId}
+    var response: Response? = null
     var user: Users? = null;
     var id: Int? = null
     lateinit var token: String
@@ -42,23 +49,15 @@ class MemberDetailActivity : AppCompatActivity() {
     var adapter: DialogMemberAdapter? = null
     var tv_no_data: TextView? = null
     var progressBar: LinearLayout? = null
-    var layout_add_right: LinearLayout?=null
-    var layout_add_left: LinearLayout?=null
-    var downliner_image: CircleImageView? = null
+    var layout_add_right: LinearLayout? = null
+    var layout_add_left: LinearLayout? = null
     var disposable: Disposable? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_member_detail)
-        downliner_image = findViewById(R.id.citizen_profile_cover)
 
-        if (prefs.getUser(this@MemberDetailActivity).userId != null) {
-            id = prefs.getUser(this@MemberDetailActivity).userId
-            token = prefs.getToken(this@MemberDetailActivity).accessToken!!
-
-
-        }
 
         var json = intent.getStringExtra("object")
         prefs = SharedPrefs.getInstance()!!
@@ -75,6 +74,7 @@ class MemberDetailActivity : AppCompatActivity() {
             showSendDialog()
         }
     }
+
 
     private fun initView() {
 
@@ -94,135 +94,191 @@ class MemberDetailActivity : AppCompatActivity() {
         }
 
 
+            if (!Apputils.isNetworkAvailable(this!!)) {
+                Toast.makeText(this!!, " Network error ", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            ApiClint.getInstance()?.getService()?.getDownlinersImage("bearer " + token!!, id!!)
+                    ?.enqueue(object : Callback<Response> {
+
+                        override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                            println("error")
+
+                        }
+
+                        override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                            print("object success ")
+                            var code: Int = response!!.code()
+
+                            if (code == 401) {
+                                Apputils.showMsg(this@MemberDetailActivity, "Token Expired")
+                                tokenExpire();
+
+                            }
+                            if (code == 200) {
+                                print("success")
+                                var obj: Response = response.body()!!
+
+
+                                if (obj.message != null) {
+                                    var img = obj.message
+                                    if (img != "" && img != "null")
+                                        profile_image_downliner.setImageBitmap(stringtoImage(img.toString()))
+                                }
+
+                            }
+
+
+                        }
+
+
+                    })
+        }
+
+
+    fun stringtoImage(encodedString: String): Bitmap? {
+        try {
+            var encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            var bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
+            return bitmap;
+
+        } catch (e: Exception) {
+            return null
+        }
     }
 
-    private fun showSendDialog() {
-        val view: View = LayoutInflater.from(this).inflate(R.layout.dialog_member_tree, null)
-        val alertBox = AlertDialog.Builder(this)
-        alertBox.setView(view)
-        alertBox.setCancelable(true)
-        val dialog = alertBox.create()
-        tv_no_data = view.findViewById(R.id.tv_no_data)
-        progressBar = view.findViewById(R.id.progressBar)
+        private fun showSendDialog() {
+            val view: View = LayoutInflater.from(this).inflate(R.layout.dialog_member_tree, null)
+            val alertBox = AlertDialog.Builder(this)
+            alertBox.setView(view)
+            alertBox.setCancelable(true)
+            val dialog = alertBox.create()
+            tv_no_data = view.findViewById(R.id.tv_no_data)
+            progressBar = view.findViewById(R.id.progressBar)
 
-         layout_add_right = view.findViewById(R.id.layout_add_right)
-         layout_add_left = view.findViewById(R.id.layout_add_left)
-        val recylcer_dialog_member: RecyclerView = view.findViewById(R.id.recylcer_dialog_member)
+            layout_add_right = view.findViewById(R.id.layout_add_right)
+            layout_add_left = view.findViewById(R.id.layout_add_left)
+            val recylcer_dialog_member: RecyclerView = view.findViewById(R.id.recylcer_dialog_member)
 
-        recylcer_dialog_member.layoutManager = LinearLayoutManagerWrapper(this, LinearLayout.VERTICAL, false)
-        adapter = DialogMemberAdapter(this@MemberDetailActivity, userList)
-        recylcer_dialog_member.adapter = adapter
+            recylcer_dialog_member.layoutManager = LinearLayoutManagerWrapper(this, LinearLayout.VERTICAL, false)
+            adapter = DialogMemberAdapter(this@MemberDetailActivity, userList)
+            recylcer_dialog_member.adapter = adapter
 
-        getAllDownlineMembersLeft()
-        layout_add_left!!.setOnClickListener {
-            layout_add_right!!.setBackgroundResource(R.color.colorGray);
-            layout_add_left!!.setBackgroundResource(R.color.colorRed);
             getAllDownlineMembersLeft()
-        }
-        layout_add_right!!.setOnClickListener {
-            layout_add_left!!.setBackgroundResource(R.color.colorGray);
-            layout_add_right!!.setBackgroundResource(R.color.colorRed);
-            getAllDownlineMembersRight()
-        }
-
-        dialog.setOnDismissListener{
-            if(disposable!=null){
-                disposable!!.dispose()
+            layout_add_left!!.setOnClickListener {
+                layout_add_right!!.setBackgroundResource(R.color.colorGray);
+                layout_add_left!!.setBackgroundResource(R.color.colorRed);
+                getAllDownlineMembersLeft()
             }
+            layout_add_right!!.setOnClickListener {
+                layout_add_left!!.setBackgroundResource(R.color.colorGray);
+                layout_add_right!!.setBackgroundResource(R.color.colorRed);
+                getAllDownlineMembersRight()
+            }
+
+            dialog.setOnDismissListener {
+                if (disposable != null) {
+                    disposable!!.dispose()
+                }
+            }
+            dialog.show()
+
         }
-        dialog.show()
 
-    }
+        fun showPrgressbar() {
+            layout_add_right!!.setClickable(false);
+            layout_add_left!!.setClickable(false);
+            progressBar!!.visibility = View.VISIBLE
+            tv_no_data!!.visibility = View.GONE
+        }
 
-    fun showPrgressbar(){
-        layout_add_right!!.setClickable(false);
-        layout_add_left!!.setClickable(false);
-        progressBar!!.visibility= View.VISIBLE
-        tv_no_data!!.visibility= View.GONE
-    }
-    fun hideprogressbar(){
-        layout_add_right!!.setClickable(true);
-        layout_add_left!!.setClickable(true);
-        progressBar!!.visibility= View.GONE
+        fun hideprogressbar() {
+            layout_add_right!!.setClickable(true);
+            layout_add_left!!.setClickable(true);
+            progressBar!!.visibility = View.GONE
 //        tv_no_data!!.visibility= View.VISIBLE
-    }
-    //getDownLineRight
-    fun getAllDownlineMembersRight() {
-
-        if (!Apputils.isNetworkAvailable(this@MemberDetailActivity)) {
-            Toast.makeText(this@MemberDetailActivity, " Network error ", Toast.LENGTH_SHORT).show()
-            return
         }
-        userList.clear()
-        showPrgressbar()
 
-        val observer = getObserver()
-        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token!!, id!!)
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer)
+        //getDownLineRight
+        fun getAllDownlineMembersRight() {
 
-    }
+            if (!Apputils.isNetworkAvailable(this@MemberDetailActivity)) {
+                Toast.makeText(this@MemberDetailActivity, " Network error ", Toast.LENGTH_SHORT).show()
+                return
+            }
+            userList.clear()
+            showPrgressbar()
 
-    //getDownLineRight
-    fun getAllDownlineMembersLeft() {
+            val observer = getObserver()
+            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token!!, id!!)
+            observable.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer)
 
-        if (!Apputils.isNetworkAvailable(this@MemberDetailActivity)) {
-            Toast.makeText(this@MemberDetailActivity, " Network error ", Toast.LENGTH_SHORT).show()
-            return
         }
-        userList.clear()
-        showPrgressbar()
-        val observer = getObserver()
-        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, id!!)
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer)
 
+        //getDownLineRight
+        fun getAllDownlineMembersLeft() {
 
-    }
-
-    fun getObserver(): Observer<ArrayList<Users>> {
-
-        return object : Observer<ArrayList<Users>> {
-            override fun onComplete() {
-                hideprogressbar()
+            if (!Apputils.isNetworkAvailable(this@MemberDetailActivity)) {
+                Toast.makeText(this@MemberDetailActivity, " Network error ", Toast.LENGTH_SHORT).show()
+                return
             }
+            userList.clear()
+            showPrgressbar()
+            val observer = getObserver()
+            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, id!!)
+            observable.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer)
 
-            override fun onSubscribe(d: Disposable) {
-                disposable = d
-            }
 
-            override fun onNext(t: ArrayList<Users>) {
+        }
 
-                t.forEach { obj ->
-                    userList.add(obj)
+        fun getObserver(): Observer<ArrayList<Users>> {
 
+            return object : Observer<ArrayList<Users>> {
+                override fun onComplete() {
+                    hideprogressbar()
                 }
-                adapter!!.notifyDataSetChanged()
 
-                if(t.size==0){
-                    tv_no_data!!.visibility = View.VISIBLE
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
                 }
-                else
-                    tv_no_data!!.visibility = View.GONE
-            }
 
-            override fun onError(e: Throwable) {
-                print("error")
-                hideprogressbar()
+                override fun onNext(t: ArrayList<Users>) {
 
-                Apputils.showMsg(this@MemberDetailActivity, "Token Expired")
-                tokenExpire();
+                    t.forEach { obj ->
+                        userList.add(obj)
+
+                    }
+                    adapter!!.notifyDataSetChanged()
+
+                    if (t.size == 0) {
+                        tv_no_data!!.visibility = View.VISIBLE
+                    } else
+                        tv_no_data!!.visibility = View.GONE
+                }
+
+                override fun onError(e: Throwable) {
+                    print("error")
+                    hideprogressbar()
+
+                    Apputils.showMsg(this@MemberDetailActivity, "Token Expired")
+                    tokenExpire();
+                }
             }
         }
-    }
+
+
+
+
 
     fun tokenExpire() {
         prefs.clearToken(this@MemberDetailActivity)
         prefs.clearUser(this@MemberDetailActivity)
         startActivity(Intent(this@MemberDetailActivity, SignInActivity::class.java))
-       finish()
+        finish()
     }
-
 }
