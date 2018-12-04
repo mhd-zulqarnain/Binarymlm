@@ -22,6 +22,7 @@ import android.widget.*
 import android.widget.ExpandableListView.OnGroupExpandListener
 import com.google.gson.Gson
 import com.redcodetechnologies.mlm.R
+import com.redcodetechnologies.mlm.models.Messages
 import com.redcodetechnologies.mlm.models.MyNotification
 import com.redcodetechnologies.mlm.models.Response
 import com.redcodetechnologies.mlm.retrofit.ApiClint
@@ -61,7 +62,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     var nav_view: NavigationView? = null
     var lastExpandedPosition = -1
     var category: String = "Sales"
+    var type: String? = null
     var notification: String = ""
+    var message: String = ""
     var mPref: SharedPrefs? = null
     lateinit var headerView: View
 
@@ -84,15 +87,21 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp)
         nav_view = findViewById(R.id.nav_view) as NavigationView
         nav_view!!.setNavigationItemSelectedListener(this)
-        if (intent.getStringExtra("Category") != null) {
+
+        if (intent.getStringExtra("type") != null) {
+            message = intent.getStringExtra("notification")
+            showMessageNotificationDialog();
+
+        } else if (intent.getStringExtra("Category") != null) {
+            category = intent.getStringExtra("Category");
             category = intent.getStringExtra("Category");
             if (intent.getStringExtra("notification") != null) {
                 notification = intent.getStringExtra("notification")
-
                 showNotificationDialog();
             }
         }
         headerView = nav_view!!.getHeaderView(0)
+
         if (category == "Sales") {
             enableExpandableList()
             supportFragmentManager.beginTransaction().add(R.id.main_layout, DashBoardFragment()).commit()
@@ -143,16 +152,41 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         btn_save.setOnClickListener {
             //save.
-            saveNotification(obj,object: ServiceListener<String>{
+            saveNotification(obj, object : ServiceListener<String> {
                 override fun success(obj: String) {
-                  Apputils.showMsg(this@DrawerActivity,"Notication saved")
+                    Apputils.showMsg(this@DrawerActivity, "Notication saved")
                     dialog.dismiss()
                 }
+
                 override fun fail(error: ServiceError) {
                     dialog.dismiss()
                 }
             })
         }
+        btn_dismiss.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+
+    }
+
+    private fun showMessageNotificationDialog() {
+
+        val view: View = LayoutInflater.from(this@DrawerActivity).inflate(R.layout.dialog_notification_msg, null)
+        val alertBox = android.support.v7.app.AlertDialog.Builder(this@DrawerActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(false)
+        val dialog = alertBox.create()
+        //dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        val tvtitle: TextView = view.findViewById(R.id.tv_title)
+        val tvdescription: TextView = view.findViewById(R.id.tv_des)
+
+        var obj = Gson().fromJson<Messages>(message, Messages::class.java)
+
+        tvtitle.setText(obj.Sender_Name)
+        tvdescription.setText(obj.Message)
+        val btn_dismiss: Button = view.findViewById(R.id.btn_dismiss)
+
         btn_dismiss.setOnClickListener {
             dialog.dismiss()
         }
@@ -232,14 +266,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, NoficationListFragment()).commit()
                     return true
-                }
-                else if (id == 8L) {
+                } else if (id == 8L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
                     return true
-                }
-
-                else   // for child parents
+                } else   // for child parents
                     return false
             }
         })
@@ -336,9 +367,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, gt).commit()
                     }
 
-                }
-
-                else if (groupPosition == 6 || groupPosition == 7) {
+                } else if (groupPosition == 6 || groupPosition == 7) {
                     val gt: InboxFragment = InboxFragment()
                     val gta: SentFragment = SentFragment()
 
@@ -459,14 +488,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, NoficationListFragment()).commit()
                     return true
-                }
-
-                else if (id == 8L) {
+                } else if (id == 8L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
                     return true
-                }
-                else   // for child parents
+                } else   // for child parents
                     return false
             }
         })
@@ -590,7 +616,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
     //</editor-fold>
 
-    fun saveNotification(obj: MyNotification,service: ServiceListener<String>) {
+    fun saveNotification(obj: MyNotification, service: ServiceListener<String>) {
 
         if (!Apputils.isNetworkAvailable(this@DrawerActivity)) {
             service.success("network error")

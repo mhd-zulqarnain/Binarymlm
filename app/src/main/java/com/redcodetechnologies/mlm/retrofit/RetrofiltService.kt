@@ -7,6 +7,7 @@ import com.redcodetechnologies.mlm.models.users.DropDownMembers
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.models.users.UserTree
 import com.redcodetechnologies.mlm.models.users.Users
+import com.redcodetechnologies.mlm.models.wallet.EWalletWithdrawalFundModel
 import com.redcodetechnologies.mlm.models.wallet.TransactionModal
 import com.redcodetechnologies.mlm.models.wallet.WalletSummery
 import com.redcodetechnologies.mlm.models.wallet.WithdrawalRequestModal
@@ -313,5 +314,9 @@ interface RetrofiltService {
     @GET("getalluserwithdrawfund/{userid}")
     @Headers("Content-Type:application/json")
     fun getalluserwithdrawfund(@Path("userid") userid: Int): Call<Withdrawfund>
+
+    @POST("ewalletwithdrawalfund/{userId}")
+    @Headers("Content-Type:application/json")
+    fun submitwithdrawalfundRequest(@Path("userId") userid: Int,@Body obj: EWalletWithdrawalFundModel): Call<Response>
 
 }
