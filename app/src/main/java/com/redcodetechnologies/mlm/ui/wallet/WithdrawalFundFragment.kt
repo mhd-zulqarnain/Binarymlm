@@ -73,9 +73,9 @@ class WithdrawalFundFragment : Fragment() {
 
 
         btn_submit_request.setOnClickListener {
-            var packageCurrentAmount = tv_current_pkg.text.toString().toInt()
+            var packageCurrentAmount = tv_total_pkg_commision.text.toString().toInt()
             var packageAmountForWithdrawal = tv_pkg_amount_withdrawal.text.toString().toInt()
-            if (packageCurrentAmount >= packageAmountForWithdrawal) {
+            if (packageCurrentAmount >= packageAmountForWithdrawal && ed_amount_withdrawn.text.toString().trim()!="") {
                 submitWithDrawalRequest(object : ServiceListener<String> {
                     override fun success(obj: String) {
                         Apputils.showMsg(activity!!, msg = obj)
@@ -156,7 +156,10 @@ class WithdrawalFundFragment : Fragment() {
                             var obj: Withdrawfund = response.body()!!;
 
                             if (obj.GetUserPackageCommissionAmount != "")
-                                tv_current_pkg.text = obj.GetUserPackageCommissionAmount.split(".")[0]
+                                tv_total_pkg_commision.text = obj.GetUserPackageCommissionAmount.split(".")[0]
+
+                            if (obj.PackageName != "")
+                                tv_current_pkg.text = obj.PackageName
 
                             if (obj.GetUserPackageAmountLimitForWithdrawal != "")
                                 tv_pkg_amount_withdrawal.text = obj.GetUserPackageAmountLimitForWithdrawal.split(".")[0]
