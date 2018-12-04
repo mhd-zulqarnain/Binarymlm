@@ -3,6 +3,7 @@ package com.redcodetechnologies.mlm.ui.support.adapter
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -70,17 +71,34 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        var messagelabel = itemView.findViewById(R.id.message_label) as LinearLayout
         var Sender = itemView.findViewById(R.id.tv_User) as TextView
         var Date = itemView.findViewById(R.id.tv_date) as TextView
         var btn_reply = itemView.findViewById(R.id.btn_reply) as Button
         var btn_dlt = itemView.findViewById(R.id.btn_dlt) as Button
 
+
+
         fun bindView(messages: Messages, type: String, ctx: Context) {
 
             val sponserId = SharedPrefs.getInstance()!!.getUser(ctx).sponsorId
-            if (!messages.IsRead!!) {
-                itemView.setBackgroundColor(Color.GRAY);
+
+
+
+            if (messages.IsRead == false) {
+                messagelabel.setBackgroundColor(Color.parseColor("#C9CBCF"));
+                btn_reply.setBackgroundResource(R.drawable.button_circle_green)
+                        Sender.setTextSize(14f)
+
+
             }
+
+            if (messages.IsRead == true) {
+                messagelabel.setBackgroundColor(Color.WHITE);
+                btn_reply.setBackgroundResource(R.drawable.button_circle_blue)
+                Sender.setTextSize(12f)
+            }
+
             if (type == "IT_Sent" || type == "Sponser_Sent") {
 
                 when (type) {

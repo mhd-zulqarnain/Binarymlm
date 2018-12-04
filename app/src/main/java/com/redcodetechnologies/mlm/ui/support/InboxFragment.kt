@@ -122,9 +122,9 @@ class InboxFragment : Fragment() {
         val userId = SharedPrefs.getInstance()!!.getUser(activity!!).userId
         var observable: Observable<ArrayList<Messages>>
 
-        if (frgementType == SPONSER_INBOX)
+        if (frgementType == SPONSER_INBOX) {
             observable = MyApiRxClint.getInstance()!!.getService()!!.viewallmessagesupport(userId!!)
-        else {
+        } else {
             observable = MyApiRxClint.getInstance()!!.getService()!!.viewallmessageItsupport(userId!!)
         }
         observable.subscribeOn(Schedulers.io())
@@ -182,6 +182,23 @@ class InboxFragment : Fragment() {
         val rep_message: EditText = v.findViewById(R.id.rep_message)
 
         message.text = inbox.Message
+        if(inbox.IsRead == false)
+            updateMessageStatus(inbox.Id!!)
+        inbox.IsRead = true
+
+        var index = -1;
+
+        for (i in 0 until data.size) {
+
+            if (data[i].Id == inbox.Id) {
+                index = i
+            }
+        }
+        if (index != -1) {
+            data.set(index, inbox)
+            adapter!!.notifyItemChanged(index)
+        }
+
 
 
         if (frgementType == IT_INBOX) {
@@ -200,7 +217,9 @@ class InboxFragment : Fragment() {
             } else
                 Apputils.showMsg(activity!!, "Message could not be empty!!")
         }
+
         dialog.show()
+
     }
 
     fun newMessageDialog() {
@@ -405,6 +424,28 @@ class InboxFragment : Fragment() {
     }
     //</editor-fold>
 
+    private fun updateMessageStatus(id : Int) {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        ApiClint.getInstance()?.getService()?.updateMessageStatus(id!!)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+
+                    }
+                })
+    }
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Inbox")

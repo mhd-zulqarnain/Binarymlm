@@ -245,6 +245,10 @@ interface RetrofiltService {
 
 
     //<editor-fold desc="sponser messages">
+    @POST("updatemessagestatus/{Id}")
+    @Headers("Content-Type:application/json")
+    fun updateMessageStatus(@Path("Id") userid: Int): Call<Response>
+
     @POST("deleteinboxmsg/{userid}")
     @Headers("Content-Type:application/json")
     fun deleteSponserinboxmsg(@Path("userid") userid: Int): Call<Response>
