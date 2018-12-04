@@ -194,7 +194,7 @@ class InboxFragment : Fragment() {
         btn_submit.setOnClickListener {
             if (rep_message.text.toString().trim() != "") {
 
-                replymessagesponsor(rep_message.text.toString(),inbox.UserId!!)
+                replymessagesponsor(rep_message.text.toString(), inbox.UserId!!)
 
                 dialog.dismiss()
             } else
@@ -216,8 +216,8 @@ class InboxFragment : Fragment() {
         val btn_add_image: Button = v.findViewById(R.id.btn_add_image)
         val rep_message: EditText = v.findViewById(R.id.rep_message)
         val spinner_receiver: Spinner = v.findViewById(R.id.spinner_receiver)
-        var view_sponser: LinearLayout = v.findViewById(R.id.view_sponser)
-        var view_it: LinearLayout = v.findViewById(R.id.view_it)
+        val view_sponser: LinearLayout = v.findViewById(R.id.view_sponser)
+        val view_it: LinearLayout = v.findViewById(R.id.view_it)
         img_it_support = v.findViewById(R.id.img_it_support)
 
         var reciverId = 1;
@@ -269,7 +269,7 @@ class InboxFragment : Fragment() {
         dialog.show()
     }
 
-    private fun replymessagesponsor(msg: String,receiverId:Int) {
+    private fun replymessagesponsor(msg: String, receiverId: Int) {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
@@ -364,7 +364,7 @@ class InboxFragment : Fragment() {
                             Toast.makeText(activity!!, " Message sent ", Toast.LENGTH_SHORT).show()
                         }
 
-                            if (code != 200) {
+                        if (code != 200) {
                             Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
 
                         }

@@ -1,6 +1,7 @@
 package com.redcodetechnologies.mlm.ui.support.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
@@ -76,9 +77,9 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
 
         fun bindView(messages: Messages, type: String, ctx: Context) {
 
-            var sponserId = SharedPrefs.getInstance()!!.getUser(ctx).sponsorId
+            val sponserId = SharedPrefs.getInstance()!!.getUser(ctx).sponsorId
             if (!messages.IsRead!!) {
-                itemView.setBackgroundResource(R.drawable.unread_message_box);
+                itemView.setBackgroundColor(Color.GRAY);
             }
             if (type == "IT_Sent" || type == "Sponser_Sent") {
 
@@ -98,7 +99,6 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
                 Sender.text = messages.Sender_Name
 
             Date.text = messages.CreateDate!!.split('T')[0]
-
 
         }
 

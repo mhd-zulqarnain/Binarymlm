@@ -49,6 +49,7 @@
         android:textSize="17sp"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
+        android:maxLength="10"
         android:paddingBottom="5dp"
         android:singleLine="true"
         android:maxLines="1"
@@ -124,12 +125,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.4"
-                android:text="Your current package amount"
+                android:text="Your current package "
                 android:textSize="13sp"
                 android:fontFamily="@font/ralewayregular"
                 />
             <TextView
-                android:id="@+id/tv_current_pkg_amount"
+                android:id="@+id/tv_current_pkg"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
@@ -169,12 +170,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.4"
-                android:text="Package amount limit for withdrawal"
+                android:text="YOur total Package Commision"
                 android:textSize="13sp"
                 android:fontFamily="@font/ralewayregular"
                 />
             <TextView
-                android:id="@+id/tv_pkg_amount_limit"
+                android:id="@+id/tv_total_pkg_commision"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
@@ -216,8 +217,55 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.4"
-                android:text="E-wallet amount already in payout process"
+                android:text="Package amount limit for withdrawal"
+                android:textSize="11sp"
+                android:fontFamily="@font/ralewayregular"
+                />
+            <TextView
+                android:id="@+id/tv_pkg_amount_withdrawal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:text="0 PKR"
                 android:textSize="13sp"
+                android:textColor="#666666"
+                android:fontFamily="@font/ralewayregular"
+                android:paddingLeft="10dp"
+                />
+
+
+
+        </LinearLayout>
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#50000000" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.3"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4"
+                android:text="E-wallet amount already in payout process"
+                android:textSize="11sp"
                 android:fontFamily="@font/ralewayregular"
                 />
             <TextView
@@ -424,6 +472,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_submit_request"
         android:layout_weight="1.8"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
