@@ -38,6 +38,11 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getdashboardData(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<DasboardData>
 
+    @GET("getprofileimage/{userid}")
+    @Headers("Content-Type:application/json")
+    fun getDownlinersImage(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<Response>
+
+
     @GET("getAds")
     @Headers("Content-Type:application/json")
     fun getCoinData(): Observable<ArrayList<Advertisement>>
@@ -85,6 +90,8 @@ interface RetrofiltService {
     @GET("viewusertrainingvideos/")
     @Headers("Content-Type:application/json")
     fun getVideosData(@Header("Authorization") auth: String ) : Observable<ArrayList<VideosModal>>
+
+
 
 
     @GET("getuserdownlinmembers/{userid}")
