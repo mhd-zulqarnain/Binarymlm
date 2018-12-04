@@ -90,7 +90,6 @@ class WithdrawalFundFragment : Fragment() {
         }
     }
 
-
     fun submitWithDrawalRequest(serviceListener: ServiceListener<String>) {
 
         val user = SharedPrefs.getInstance()!!.getUser(activity!!)
