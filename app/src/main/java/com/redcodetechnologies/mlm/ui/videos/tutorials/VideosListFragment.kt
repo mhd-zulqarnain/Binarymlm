@@ -1,27 +1,19 @@
-package com.redcodetechnologies.mlm.ui.videos
+package com.redcodetechnologies.mlm.ui.videos.tutorials
 
 import io.reactivex.Observable
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.telecom.Call
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.google.gson.Gson
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.VideosModal
-import com.redcodetechnologies.mlm.models.users.Users
-import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
-import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
-import com.redcodetechnologies.mlm.ui.network.MemberDetailActivity
-import com.redcodetechnologies.mlm.ui.network.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
 import io.reactivex.Observer
@@ -30,7 +22,6 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_videos_list.*
 import java.util.*
-import javax.security.auth.callback.Callback
 
 class VideosListFragment : Fragment() {
     var adapter: VideosAdapter? = null
@@ -41,6 +32,9 @@ class VideosListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                savedInstanceState: Bundle?): View? {
         var view : View =inflater.inflate(R.layout.fragment_videos_list, container, false)
+
+        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Tutorials")
+        (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
 
         initView(view)
         return view
@@ -89,7 +83,6 @@ class VideosListFragment : Fragment() {
 
     }
 
-
     fun getObserver(): Observer<ArrayList<VideosModal>> {
 
         return object : Observer<ArrayList<VideosModal>> {
@@ -120,14 +113,9 @@ class VideosListFragment : Fragment() {
 
             override fun onError(e: Throwable) {
                 print("error")
-                Apputils.showMsg(activity!!, "Token Expired")
-                tokenExpire();
             }
         }
     }
-
-    //token expire
-
 
     override fun onDestroyView() {
         if (disposable != null)
@@ -135,9 +123,4 @@ class VideosListFragment : Fragment() {
         super.onDestroyView()
     }
 
-    fun tokenExpire() {
-        startActivity(Intent(activity!!, SignInActivity::class.java))
-        activity!!.finish()
-
-    }
 }

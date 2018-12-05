@@ -111,8 +111,8 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             icon.setImageResource(R.drawable.icon_dashboard);
             group.setVisibility(View.INVISIBLE);
         }
-        if (headerTitle == "Videos") {
-            icon.setImageResource(R.drawable.icon_videos);
+        if (headerTitle == "Tutorials") {
+            icon.setImageResource(R.drawable.ic_tutorial);
             group.setVisibility(View.INVISIBLE);
         }
         if (headerTitle == "Network") {
@@ -129,6 +129,10 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             icon.setImageResource(R.drawable.e_wallet);
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
+        }
+        if (headerTitle == "Video Packs") {
+            icon.setImageResource(R.drawable.icon_videos);
+            group.setVisibility(View.INVISIBLE);
         }
         if (headerTitle == "Notication List") {
             icon.setImageResource(R.drawable.notification_bell);
