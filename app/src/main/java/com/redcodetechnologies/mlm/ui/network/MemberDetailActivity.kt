@@ -211,7 +211,7 @@ class MemberDetailActivity : AppCompatActivity() {
             showPrgressbar()
 
             val observer = getObserver()
-            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token!!, id!!)
+            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token!!, user!!.UserId!!.toInt())
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer)
@@ -228,7 +228,7 @@ class MemberDetailActivity : AppCompatActivity() {
             userList.clear()
             showPrgressbar()
             val observer = getObserver()
-            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, id!!)
+            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, user!!.UserId!!.toInt())
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer)
@@ -270,9 +270,6 @@ class MemberDetailActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-
 
 
     fun tokenExpire() {

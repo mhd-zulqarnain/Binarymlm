@@ -111,7 +111,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             icon.setImageResource(R.drawable.icon_dashboard);
             group.setVisibility(View.INVISIBLE);
         }
-        if (headerTitle == "Tutorials") {
+        if (headerTitle == "Training Videos") {
             icon.setImageResource(R.drawable.ic_tutorial);
             group.setVisibility(View.INVISIBLE);
         }
@@ -120,7 +120,7 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);
         }
-        if (headerTitle == "Genealogy Table") {
+        if (headerTitle == "Commision Table") {
             icon.setImageResource(R.drawable.genealogy_table);
             group.setVisibility(View.VISIBLE);
             group.setImageResource(isExpanded ? R.drawable.ic_expand_more_black_24dp : R.drawable.ic_expand_less_black_24dp);

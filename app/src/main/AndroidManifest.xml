@@ -47,6 +47,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.videos.tutorials.YoutubePlayerActivity"></activity>
+        <activity android:name=".ui.videos.vediopack.VideoDetailActivity"
+            android:configChanges="orientation|screenSize"/>
 
         <service android:name=".utils.MyFirebaseMessagingService">
             <intent-filter>

@@ -323,4 +323,17 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun submitwithdrawalfundRequest(@Path("userId") userid: Int,@Body obj: EWalletWithdrawalFundModel): Call<Response>
 
+
+
+    @GET("getvideocategories")
+    @Headers("Content-Type:application/json")
+    fun getvideocategories(@Header("Authorization") auth: String ) : Observable<ArrayList<VedioCategory>>
+
+    @GET("videolist/{userpackageid}/{cat_id}")
+    @Headers("Content-Type:application/json")
+    fun getvideolist(@Header("Authorization") auth: String ,@Path("userpackageid") userpackageid: String,
+                     @Path("cat_id") cat_id: Int) : Observable<ArrayList<PackVideo>>
+
+
+
 }

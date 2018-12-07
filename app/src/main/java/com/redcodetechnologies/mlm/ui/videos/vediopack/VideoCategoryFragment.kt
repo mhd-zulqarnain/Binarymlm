@@ -1,17 +1,20 @@
 package com.redcodetechnologies.mlm.ui.videos.vediopack
 
-import io.reactivex.Observable
 import android.content.Intent
+import io.reactivex.Observable
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import android.widget.VideoView
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.VideosModal
+import com.redcodetechnologies.mlm.models.VedioCategory
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.utils.Apputils
@@ -20,21 +23,20 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_videos_list.*
 import java.util.*
 
-class VideoPackFragment : Fragment() {
-    var adapter: VideoPackAdapter? = null
-    var list: ArrayList<VideosModal> = ArrayList()
-    private var recyclerView : RecyclerView? = null
+class VideoCategoryFragment : Fragment() {
+    var adapter: VideoCategoryAdapter? = null
+    var list: ArrayList<VedioCategory> = ArrayList()
+    private var recyclerView: RecyclerView? = null
     var disposable: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                               savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View? {
 
-        val view : View =inflater.inflate(R.layout.fragment_videos_list, container, false)
+        val view: View = inflater.inflate(R.layout.fragement_vedio_category, container, false)
 
-        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Tutorials")
+        (activity as DrawerActivity).getSupportActionBar()?.setTitle("Videos pack")
         (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
 
         initView(view)
@@ -43,21 +45,19 @@ class VideoPackFragment : Fragment() {
     }
 
 
-
     private fun initView(view: View) {
-        recyclerView = view.findViewById(R.id.recylcer_videos)
+        recyclerView = view.findViewById(R.id.recylcer_videos_pkg)
         recyclerView!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
-        adapter = VideoPackAdapter(activity!!, list) { obj ->
-
-
+        adapter = VideoCategoryAdapter(activity!!, list) { obj ->
+            val intent = Intent(activity!!,VideoDetailActivity::class.java)
+            intent.putExtra("categoryId",obj.Id)
+            startActivity(intent)
         }
 
         recyclerView!!.adapter = adapter
         recyclerView!!.setItemAnimator(null);
-
         makeVideos()
     }
-
 
     fun makeVideos() {
 
@@ -70,38 +70,33 @@ class VideoPackFragment : Fragment() {
 
 
         val observer = getObserver()
-        val observable: Observable<ArrayList<VideosModal>> = MyApiRxClint.getInstance()!!.getService()!!.getVideosData("bearer ")
+        val observable: Observable<ArrayList<VedioCategory>> = MyApiRxClint.getInstance()!!.getService()!!.getvideocategories("bearer ")
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer)
 
     }
 
-    fun getObserver(): Observer<ArrayList<VideosModal>> {
+    fun getObserver(): Observer<ArrayList<VedioCategory>> {
 
-        return object : Observer<ArrayList<VideosModal>> {
-            override fun onComplete() {
-
-
-            }
+        return object : Observer<ArrayList<VedioCategory>> {
+            override fun onComplete() {}
 
             override fun onSubscribe(d: Disposable) {
                 disposable = d
             }
 
-            override fun onNext(t: ArrayList<VideosModal>) {
-
+            override fun onNext(t: ArrayList<VedioCategory>) {
                 t.forEach { obj ->
                     list.add(obj)
 
                 }
                 adapter!!.notifyDataSetChanged()
-                adapter!!.notifyDataSetChanged()
 
                 if (t.size == 0) {
-                    recylcer_videos!!.visibility = View.GONE
+                    recyclerView!!.visibility = View.GONE
                 } else {
-                    recylcer_videos!!.visibility = View.VISIBLE
+                    recyclerView!!.visibility = View.VISIBLE
                 }
             }
 
