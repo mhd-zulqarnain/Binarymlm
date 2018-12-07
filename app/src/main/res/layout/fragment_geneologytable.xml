@@ -113,8 +113,8 @@
             android:text="Action"
             style="@style/CustomBlacktextStyle"
             android:textSize="10sp"
+            android:gravity="center"
             android:id="@+id/tv_tran_action"
-            android:layout_gravity="center_vertical"
             />
 
     </LinearLayout>

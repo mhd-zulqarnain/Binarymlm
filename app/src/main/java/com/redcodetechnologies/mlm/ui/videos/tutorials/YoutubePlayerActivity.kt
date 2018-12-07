@@ -1,4 +1,4 @@
-package com.redcodetechnologies.mlm.ui.videos
+package com.redcodetechnologies.mlm.ui.videos.tutorials
 
 
 import android.os.Bundle

@@ -34,12 +34,14 @@ import com.redcodetechnologies.mlm.ui.geologytable.GeneologyTableFragment
 import com.redcodetechnologies.mlm.ui.network.NetworkFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DirectMemberFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DownlinerStatusFragment
+import com.redcodetechnologies.mlm.ui.network.downliners.UpgradePackageFragment
 import com.redcodetechnologies.mlm.ui.notification.NoficationListFragment
 import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
 import com.redcodetechnologies.mlm.ui.profile.ProfileActivity
 import com.redcodetechnologies.mlm.ui.support.ReportFragment
-import com.redcodetechnologies.mlm.ui.videos.VideosListFragment
+import com.redcodetechnologies.mlm.ui.videos.tutorials.VideosListFragment
+import com.redcodetechnologies.mlm.ui.videos.vediopack.VideoCategoryFragment
 import com.redcodetechnologies.mlm.ui.wallet.EWalletSummaryFragment
 import com.redcodetechnologies.mlm.ui.wallet.TransactionFragment
 import com.redcodetechnologies.mlm.ui.wallet.WithdrawalFundFragment
@@ -268,6 +270,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     return true
                 } else if (id == 8L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideoCategoryFragment()).commit()
+                    return true
+                }
+                else if (id == 9L) {
+                    drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
                     return true
                 } else   // for child parents
@@ -302,6 +309,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         args.putString("Fragment", "Paid-unPaid Downliners")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, DownlinerStatusFragment()).commit()
+                    }
+                    else if (childPosition == 4) {
+                        args.putString("Fragment", "upgrade ")
+                        gt.arguments = args
+                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, UpgradePackageFragment()).commit()
                     }
                 } else if (groupPosition == 2) {
 
@@ -401,13 +413,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Adding child data
         listDataHeader.add("Dashboard")
         listDataHeader.add("Network")
-        listDataHeader.add("Genealogy Table")
+        listDataHeader.add("Commision Table")
         listDataHeader.add("E-Wallet")
         listDataHeader.add("Notication List")
         listDataHeader.add("Reports")
         listDataHeader.add("Sponsor Support")
         listDataHeader.add("IT Support")
-        listDataHeader.add("Videos")
+        listDataHeader.add("Video Packs")
+        listDataHeader.add("Training Videos")
 
         // Adding child data
 
@@ -416,6 +429,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         network.add("Down-line Members")
         network.add("Direct Members")
         network.add("Paid-unPaid Downliners")
+        network.add("Upgrage Package")
 
         val gtable = ArrayList<String>()
         gtable.add("My Package Commision List")
@@ -492,6 +506,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
                     return true
+                }else if (id == 9L) {
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
+                    return true
                 } else   // for child parents
                     return false
             }
@@ -535,7 +553,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
                     } else if (childPosition == 5) {
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
+                        //supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
                     }
                 } else if (groupPosition == 4) {
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, WithdrawalFundFragment()).commit()
@@ -579,9 +597,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     private fun prepareListDataSleeping(listDataHeader: MutableList<String>, listDataChild: MutableMap<String, List<String>>) {
         // Adding child data
         listDataHeader.add("Dashboard")
-        listDataHeader.add("Genealogy Table")
+        listDataHeader.add("Commision Table")
         listDataHeader.add("E-Wallet")
         listDataHeader.add("Notication List")
+        listDataHeader.add("Video Packs")
         listDataHeader.add("Reports")
         listDataHeader.add("IT Support")
 

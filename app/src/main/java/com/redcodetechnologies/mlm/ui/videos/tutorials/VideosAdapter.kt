@@ -1,23 +1,18 @@
-package com.redcodetechnologies.mlm.ui.videos
+package com.redcodetechnologies.mlm.ui.videos.tutorials
 
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.os.Build
-import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filterable
 import android.widget.TextView
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubeThumbnailLoader
 import com.google.android.youtube.player.YouTubeThumbnailView
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.VideosModal
-import com.redcodetechnologies.mlm.models.users.Users
-import com.redcodetechnologies.mlm.ui.network.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.utils.Constants
 
 class VideosAdapter(var ctx: Context, var list: ArrayList<VideosModal>, private val onClick:(VideosModal)->Unit) : RecyclerView.Adapter<VideosAdapter.MyViewHolder>() {

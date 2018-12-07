@@ -70,15 +70,16 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="25dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1.2"
             android:fontFamily="@font/ralewaybold"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="right"
             android:id="@+id/btn_ok"
             android:clickable="true"
             android:textColor="#fcfffc"
+            android:gravity="center"
             android:background="@drawable/button_circle_blue"
             android:textSize="13sp"
-            android:text="Done"
+            android:text="Apply"
             />
 
 

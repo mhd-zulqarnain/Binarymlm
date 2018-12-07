@@ -1,4 +1,4 @@
-package com.redcodetechnologies.mlm.ui.videos
+package com.redcodetechnologies.mlm.ui.videos.tutorials
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
