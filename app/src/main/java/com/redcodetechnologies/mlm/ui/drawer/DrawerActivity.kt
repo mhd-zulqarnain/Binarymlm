@@ -502,11 +502,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, NoficationListFragment()).commit()
                     return true
-                } else if (id == 8L) {
+                } else if (id == 7L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
-                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideoCategoryFragment()).commit()
                     return true
-                }else if (id == 9L) {
+                }else if (id == 8L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
                     return true
@@ -600,9 +600,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataHeader.add("Commision Table")
         listDataHeader.add("E-Wallet")
         listDataHeader.add("Notication List")
-        listDataHeader.add("Video Packs")
         listDataHeader.add("Reports")
         listDataHeader.add("IT Support")
+
 
         // Adding child data
         val gtable = ArrayList<String>()

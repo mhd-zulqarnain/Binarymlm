@@ -23,8 +23,19 @@ data class Packages (var UserPackageId :String?=null,
                      var IsInCurrentUse :String?=null,
 
                      var PurchaseDate :String?=null,
+                     var BankSlipImage :String?=null,
 
-                     var LastCommisionDate :String?=null
+                     var LastCommisionDate :String?=null,
+
+                     var IsBuyFromEWallet :Boolean?=null,
+
+                     var IsBuyFromBankAcnt :Boolean?=null,
+
+                     var IsRequestedForBuy :Boolean?=null,
+
+                     var IsApprovedForBuy :Boolean?=null,
+
+                     var IsRejectedForBuy :Boolean?=null
 
                      )
 

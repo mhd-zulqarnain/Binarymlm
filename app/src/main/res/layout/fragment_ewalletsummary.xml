@@ -53,8 +53,8 @@
 
             <TextView
 
-                style="@style/WalletContentStyle"
                 android:id="@+id/tv_bonus_summery_bonus"
+                style="@style/WalletContentStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -134,7 +134,7 @@
                 android:text="Bonus" />
 
             <TextView
-android:id="@+id/tv_bonus_ty_bonus"
+                android:id="@+id/tv_bonus_ty_bonus"
                 style="@style/WalletContentStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

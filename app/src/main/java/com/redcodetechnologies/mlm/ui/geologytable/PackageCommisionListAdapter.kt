@@ -1,6 +1,7 @@
 package com.redcodetechnologies.mlm.ui.geologytable
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,12 @@ import android.view.ViewGroup
 import android.widget.*
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.wallet.TransactionModal
+import com.redcodetechnologies.mlm.utils.SharedPrefs
 
 
-class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: ArrayList<TransactionModal>, val onClick:(TransactionModal)->Unit) : RecyclerView.Adapter<PackageCommisionListAdapter.MyViewHolder>() {
+class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: ArrayList<TransactionModal>, val onClick: (TransactionModal) -> Unit) : RecyclerView.Adapter<PackageCommisionListAdapter.MyViewHolder>() {
 
-    var typ=type
+    var typ = type
 
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {
@@ -25,20 +27,26 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
     }
 
     override fun onBindViewHolder(p0: MyViewHolder, p1: Int) {
-        p0.bindView(list[p1],typ)
-        p0.btn_ok!!.setOnClickListener{
+        p0.bindView(list[p1], typ, ctx)
+        p0.btn_ok!!.setOnClickListener {
             //action perform
         }
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        val MY_PKG_COMMISTION_LIST = "MyPackageCommisionList"
+        val MY_DIRECT_COMMISTION_LIST = "MyDirectCommisionList"
+        val MY_TABLE_COMMISTION_LIST = "MyTableCommisionList"
+
         var tv_source: TextView? = null
         var tv_name: TextView? = null
         var tv_amount: TextView? = null
         var tv_date: TextView? = null
         var btn_ok: Button? = null
-        fun bindView(packagecommisionlist : TransactionModal, typ :String) {
+        fun bindView(packagecommisionlist: TransactionModal, typ: String, ctx: Context) {
+
+            var isWithdrawalOn = SharedPrefs.getInstance()!!.getUser(ctx).isWithdrawalOpen
 
             tv_source = itemView.findViewById(R.id.tran_source)
             tv_name = itemView.findViewById(R.id.tran_name)
@@ -46,7 +54,7 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
             tv_date = itemView.findViewById(R.id.tran_date)
             btn_ok = itemView.findViewById(R.id.btn_ok)
 
-            if(typ=="MyPackageCommisionList") {
+            if (typ == "MyPackageCommisionList") {
                 btn_ok!!.visibility = View.GONE
                 tv_source!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
                 tv_name!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
@@ -54,14 +62,49 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
                 tv_date!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
                 btn_ok!!.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
             }
+
+            if (typ == MY_DIRECT_COMMISTION_LIST || typ == MY_TABLE_COMMISTION_LIST) {
+                tv_amount!!.text = packagecommisionlist.Amount
+                tv_source!!.text = packagecommisionlist.TransactionSource
+
+                if (packagecommisionlist.IsWithdrawlRequestByUser == "false") {
+                    tv_name!!.text = "You can send request"
+                    btn_ok!!.visibility = View.VISIBLE
+                    tv_name!!.setTextColor(Color.parseColor("#FFA10A1C"));
+
+                } else {
+                    tv_date!!.setTextColor(Color.parseColor("#FF307B44"));
+                    tv_name!!.text = "Request Sended"
+                    btn_ok!!.visibility = View.GONE
+
+                }
+
+                if (packagecommisionlist.IsWithdrawlPaidByAdmin == "false") {
+                    tv_date!!.setTextColor(Color.parseColor("#FFA10A1C"));
+                    tv_date!!.text = "Payment Pending"
+                } else {
+                    tv_date!!.text = "Paid"
+                    tv_date!!.setTextColor(Color.parseColor("#FF307B44"));
+
+                }
+
+                if (isWithdrawalOn!!) {
+                    btn_ok!!.visibility = View.VISIBLE
+                } else {
+                    btn_ok!!.visibility = View.GONE
+                }
+
+
+            } else {
                 tv_source!!.text = packagecommisionlist.TransactionSource
                 tv_name!!.text = packagecommisionlist.TransactionName
                 tv_amount!!.text = packagecommisionlist.Amount
                 tv_date!!.text = packagecommisionlist.TransactionDate
+                //  tv_price!!.text = order.BitPrice!
 
-
-            //  tv_price!!.text = order.BitPrice!
-
+            }
         }
+
+
     }
 }

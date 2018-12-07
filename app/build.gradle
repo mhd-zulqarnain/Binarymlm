@@ -70,6 +70,7 @@ dependencies {
     implementation 'com.github.rtoshiro.fullscreenvideoview:fullscreenvideoview:1.1.2'
     //Youtube Android Player API Jar dependency
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.2'
 }
 
 apply plugin: 'com.google.gms.google-services'
