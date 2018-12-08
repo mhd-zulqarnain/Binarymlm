@@ -1,4 +1,4 @@
-package com.redcodetechnologies.mlm.ui.network.downliners
+package com.redcodetechnologies.mlm.ui.network
 
 
 import android.app.Activity
@@ -10,8 +10,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.app.Fragment
-import android.support.v4.view.PagerTabStrip
-import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
 import android.util.Base64
 import android.view.LayoutInflater
@@ -22,11 +20,8 @@ import android.widget.*
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Packages
 import com.redcodetechnologies.mlm.models.Response
-import com.redcodetechnologies.mlm.models.users.DropDownMembers
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
-import com.redcodetechnologies.mlm.ui.network.adapter.DownlinerAdapter
-import com.redcodetechnologies.mlm.ui.network.adapter.DownlinerSpinnerAdapter
 import com.redcodetechnologies.mlm.ui.network.adapter.PackageAdapter
 import com.redcodetechnologies.mlm.ui.network.adapter.PackageSpinnerAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
