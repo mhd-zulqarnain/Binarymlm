@@ -2,6 +2,7 @@ package com.redcodetechnologies.mlm.models.wallet
 
 data class TransactionModal(
         var TransactionSource: String? = null,
+        var TransactionId: Int? = null,
 
         var TransactionName: String? = null,
 

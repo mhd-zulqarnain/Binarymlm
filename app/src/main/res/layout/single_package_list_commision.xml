@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="7"
+        android:gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         >
@@ -70,15 +71,16 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="25dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1.2"
             android:fontFamily="@font/ralewaybold"
-            android:layout_gravity="center_vertical"
             android:id="@+id/btn_ok"
             android:clickable="true"
             android:textColor="#fcfffc"
+            android:gravity="center"
             android:background="@drawable/button_circle_blue"
-            android:textSize="13sp"
-            android:text="Done"
+            android:textSize="8sp"
+            android:text="Request"
+            android:layout_gravity="center_vertical"
             />
 
 

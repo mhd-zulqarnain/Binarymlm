@@ -10,6 +10,7 @@ import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.MakeTableData
 import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.SharedPrefs
@@ -82,6 +83,9 @@ class UserCategoryActivity : AppCompatActivity() {
                         }
                         progressdialog!!.dismiss()
                         if (code == 200) {
+                            var obj:NewUserRegistration = prefs.getUser(this@UserCategoryActivity)
+                            obj.isSalesExecutive = true
+                            prefs.setUser(this@UserCategoryActivity,obj)
                             var i :Intent  = Intent(this@UserCategoryActivity, DrawerActivity::class.java)
                             i.putExtra("Category","Sales")
                             startActivity(i)
@@ -120,6 +124,10 @@ class UserCategoryActivity : AppCompatActivity() {
 
                         if (code == 200) {
                             var i :Intent  = Intent(this@UserCategoryActivity, DrawerActivity::class.java)
+                            var obj:NewUserRegistration = prefs.getUser(this@UserCategoryActivity)
+                            obj.isSleepingPartner = true
+                            prefs.setUser(this@UserCategoryActivity,obj)
+
                             i.putExtra("Category","Sleeping")
                             startActivity(i)
                             finish()

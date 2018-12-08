@@ -64,14 +64,38 @@ class AddMemberActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_member)
         var toolbar: Toolbar = findViewById(R.id.toolbar_top)
-        spinner_country = findViewById(R.id.spinner_country)
-        spinner_downliner = findViewById(R.id.spinner_downliner)
+        prefs = SharedPrefs.getInstance()!!
+        if (prefs.getUser(this@AddMemberActivity).userId != null) {
+            token = prefs.getToken(this@AddMemberActivity).accessToken!!
+            id = prefs.getUser(this@AddMemberActivity).userId!!
+        }
+
 
         if (intent.getStringExtra("type") == null) {
             type = "right"
         } else
             type = intent.getStringExtra("type")
         initView()
+
+
+    }
+
+    fun initView() {
+
+        spinner_country = findViewById(R.id.spinner_country)
+        spinner_downliner = findViewById(R.id.spinner_downliner)
+
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this@AddMemberActivity)
+                .setMessage("Loading please wait!!")
+                .setTheme(R.style.CustomProgess)
+                .build()
+
+        var arrayAdapter = ArrayAdapter.createFromResource(this, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
+        spinner_country!!.adapter = arrayAdapter
+        spinner_country!!.setTitle("Select Country");
+        spinner_country!!.setPositiveButton("Close");
+        spinner_country!!.setSelection(166)
 
         ed_name!!.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -93,21 +117,18 @@ class AddMemberActivity : AppCompatActivity() {
         })
         if (type == "right") {
             dialog_title!!.setText("Add Right Member")
-        } else
+            checkIfNewMemeberRight(id!!)
+        } else {
             dialog_title!!.setText("Add Left Member")
+            checkIfNewMemeberLeft(id!!)
+
+        }
         btn_add_image.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             startActivityForResult(intent, REQUSET_GALLERY_CODE)
         }
-        /*  spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-              override fun onNothingSelected(p0: AdapterView<*>?) {
-                  layout_package.visibility = View.GONE
-              }
 
-              override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-              }
-          })*/
         btn_back.setOnClickListener {
             finish()
         }
@@ -115,24 +136,7 @@ class AddMemberActivity : AppCompatActivity() {
         btn_ok.setOnClickListener {
             validation()
         }
-    }
 
-    fun initView() {
-        progressdialog = SpotsDialog.Builder()
-                .setContext(this@AddMemberActivity)
-                .setMessage("Loading please wait!!")
-                .setTheme(R.style.CustomProgess)
-                .build()
-        prefs = SharedPrefs.getInstance()!!
-        if (prefs.getUser(this@AddMemberActivity).userId != null) {
-            token = prefs.getToken(this@AddMemberActivity).accessToken!!
-            id = prefs.getUser(this@AddMemberActivity).userId!!
-        }
-        var arrayAdapter = ArrayAdapter.createFromResource(this, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
-        spinner_country!!.adapter = arrayAdapter
-        spinner_country!!.setTitle("Select Country");
-        spinner_country!!.setPositiveButton("Close");
-        spinner_country!!.setSelection(166)
 
         ed_phone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -273,9 +277,14 @@ class AddMemberActivity : AppCompatActivity() {
                     var obj: DropDownMembers = spinner_downliner!!.getSelectedItem() as DropDownMembers
                     downlineMemberId = obj.UserId
                     downlineMemberName = obj.Username!!
+                    if (type == "right") {
+                        checkIfNewMemeberRightChild(downlineMemberId!!)
+                    } else {
+                        checkIfNewMemeberLeftChild(downlineMemberId!!)
+                    }
                 } else {
                     downlineMemberId = null
-                    downlineMemberName="none"
+                    downlineMemberName = "none"
                 }
             }
         })
@@ -355,7 +364,7 @@ class AddMemberActivity : AppCompatActivity() {
         if (spinner_country!!.getSelectedItemPosition() != 0) {
             countryIndex = spinner_country!!.getSelectedItemPosition() - 1
         }
-        var mobile ="+92" + ed_phone.text.toString()
+        var mobile = "+92" + ed_phone.text.toString()
         userModel.name = ed_name.text.toString()
         userModel.username = ed_uname.text.toString()
         userModel.password = ed_pass.text.toString()
@@ -364,13 +373,14 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.phone = mobile
         userModel.email = ed_email.text.toString()
         userModel.accountNumber = ""
-        userModel.downlineMemberId = if(downlineMemberId==null) null else downlineMemberId.toString()!!
+        userModel.downlineMemberId = if (downlineMemberId == null) null else downlineMemberId.toString()!!
         userModel.documentImage = userdocumentImage!! //from spinner
 
         confirmationDialog()
 
     }
 
+    //<editor-fold desc="Adding memeber functions">
     private fun addLeftMember() {
         var token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
         if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
@@ -391,8 +401,8 @@ class AddMemberActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
                         var code: Int = response!!.code()
-                        var status=response.body()!!.success
-                        var msg=response.body()!!.message
+                        var status = response.body()!!.success
+                        var msg = response.body()!!.message
                         if (code == 200) {
                         } else {
                             progressdialog!!.dismiss()
@@ -400,11 +410,11 @@ class AddMemberActivity : AppCompatActivity() {
                         }
 
                         progressdialog!!.dismiss()
-                        if(status!!){
-                             finish()
+                        if (status!!) {
+                            finish()
                         }
 
-                        Apputils.showMsg(this@AddMemberActivity,msg!!)
+                        Apputils.showMsg(this@AddMemberActivity, msg!!)
                     }
                 })
     }
@@ -415,7 +425,10 @@ class AddMemberActivity : AppCompatActivity() {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
+
+
         progressdialog!!.show()
+
         progressdialog!!.setCancelable(false)
 
         ApiClint.getInstance()?.getService()?.addRightMember("bearer " + token!!, id!!, userModel)
@@ -429,8 +442,8 @@ class AddMemberActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
                         var code: Int = response!!.code()
-                        var status=response.body()!!.success
-                        var msg=response.body()!!.message
+                        var status = response.body()!!.success
+                        var msg = response.body()!!.message
                         if (code == 200) {
                         } else {
                             progressdialog!!.dismiss()
@@ -438,11 +451,232 @@ class AddMemberActivity : AppCompatActivity() {
                         }
 
                         progressdialog!!.dismiss()
-                        if(status!!){
+                        if (status!!) {
                             finish()
                         }
 
-                        Apputils.showMsg(this@AddMemberActivity,msg!!)
+                        Apputils.showMsg(this@AddMemberActivity, msg!!)
+
+                    }
+                })
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Check if downline is eligible">
+    private fun checkIfNewMemeberRightChild(userId: Int) {
+        var token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
+        if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this@AddMemberActivity)
+                .setMessage("Validating")
+                .setTheme(R.style.CustomProgess)
+                .build()
+
+        progressdialog!!.show()
+        progressdialog!!.setCancelable(false)
+
+        ApiClint.getInstance()?.getService()?.checkIfNewMemeberRightChild(userId)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        val obj: Response = response.body()!!
+                        var msg = obj.message
+                        var status = obj.success
+
+                        if (code == 200) {
+                        } else {
+                            progressdialog!!.dismiss()
+                            print("error")
+                        }
+
+                        progressdialog!!.dismiss()
+                        if (status!!) {
+                            alert_text.visibility = View.GONE
+                            btn_ok.isEnabled = true
+
+                        } else {
+                            btn_ok.isEnabled = false
+                            alert_text.visibility = View.VISIBLE
+                            val mmsg = "Already exists on $msg of this person"
+                            alert_text.text = "($mmsg)"
+                            Apputils.showMsg(this@AddMemberActivity, mmsg!!)
+
+                        }
+
+
+                    }
+                })
+    }
+
+    private fun checkIfNewMemeberLeftChild(userId: Int) {
+        var token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
+        if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this@AddMemberActivity)
+                .setMessage("Validating")
+                .setTheme(R.style.CustomProgess)
+                .build()
+
+        progressdialog!!.show()
+        progressdialog!!.setCancelable(false)
+
+        ApiClint.getInstance()?.getService()?.checkIfNewMemeberLeftChild(userId)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        val obj: Response = response.body()!!
+                        var msg = obj.message
+                        var status = obj.success
+
+                        if (code == 200) {
+                        } else {
+                            progressdialog!!.dismiss()
+                            print("error")
+                        }
+
+                        progressdialog!!.dismiss()
+                        if (status!!) {
+                            alert_text.visibility = View.GONE
+                            btn_ok.isEnabled = true
+
+                        } else {
+                            alert_text.visibility = View.VISIBLE
+                            btn_ok.isEnabled = false
+                            val mmsg = "Already exists on $msg of this person"
+                            alert_text.text = "($mmsg)"
+                            Apputils.showMsg(this@AddMemberActivity, mmsg!!)
+
+                        }
+
+
+                    }
+                })
+    }
+    //</editor-fold>
+
+    private fun checkIfNewMemeberRight(userId: Int) {
+        var token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
+        if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this@AddMemberActivity)
+                .setMessage("Validating")
+                .setTheme(R.style.CustomProgess)
+                .build()
+
+        progressdialog!!.show()
+        progressdialog!!.setCancelable(false)
+
+        ApiClint.getInstance()?.getService()?.checkIfNewMemeberRight(userId)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        val obj: Response = response.body()!!
+                        var msg = obj.message
+                        var status = obj.success
+
+                        if (code == 200) {
+                        } else {
+                            progressdialog!!.dismiss()
+                            print("error")
+                        }
+                        progressdialog!!.dismiss()
+                        if (status!!) {
+                            alert_text.visibility = View.GONE
+                            btn_ok.isEnabled = true
+
+                        } else {
+                            btn_ok.isEnabled = false
+                            alert_text.visibility = View.VISIBLE
+
+
+                            val mmsg = "Account not verfied"
+                            alert_text.text = "($mmsg)"
+                            Apputils.showMsg(this@AddMemberActivity, mmsg!!)
+                        }
+
+                    }
+                })
+    }
+
+    private fun checkIfNewMemeberLeft(userId: Int) {
+        var token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
+        if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
+            Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this@AddMemberActivity)
+                .setMessage("Validating")
+                .setTheme(R.style.CustomProgess)
+                .build()
+
+        progressdialog!!.show()
+        progressdialog!!.setCancelable(false)
+
+        ApiClint.getInstance()?.getService()?.checkIfNewMemeberLeft(userId)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        val obj: Response = response.body()!!
+                        var msg = obj.message
+                        var status = obj.success
+
+                        if (code == 200) {
+                        } else {
+                            progressdialog!!.dismiss()
+                            print("error")
+                        }
+
+                        progressdialog!!.dismiss()
+                        if (status!!) {
+                            alert_text.visibility = View.GONE
+                            btn_ok.isEnabled = true
+
+                        } else {
+                            btn_ok.isEnabled = false
+                            alert_text.visibility = View.VISIBLE
+
+                            val mmsg = "Account not verfied"
+                            alert_text.text = "($mmsg)"
+                            Apputils.showMsg(this@AddMemberActivity, mmsg!!)
+                        }
 
                     }
                 })
@@ -455,13 +689,13 @@ class AddMemberActivity : AppCompatActivity() {
         alertBox.setCancelable(true)
         val dialog = alertBox.create()
 
-        val btn_confirm= view.findViewById<Button>(R.id.btn_confirm)
-        val btn_cancel= view.findViewById<Button>(R.id.btn_cancel)
-        val tv_name= view.findViewById<TextView>(R.id.tv_name)
-        val tv_uname= view.findViewById<TextView>(R.id.tv_uname)
-        val tv_email= view.findViewById<TextView>(R.id.tv_email)
-        val tv_mbl= view.findViewById<TextView>(R.id.tv_mbl)
-        val tv_downliner= view.findViewById<TextView>(R.id.tv_downliner)
+        val btn_confirm = view.findViewById<Button>(R.id.btn_confirm)
+        val btn_cancel = view.findViewById<Button>(R.id.btn_cancel)
+        val tv_name = view.findViewById<TextView>(R.id.tv_name)
+        val tv_uname = view.findViewById<TextView>(R.id.tv_uname)
+        val tv_email = view.findViewById<TextView>(R.id.tv_email)
+        val tv_mbl = view.findViewById<TextView>(R.id.tv_mbl)
+        val tv_downliner = view.findViewById<TextView>(R.id.tv_downliner)
 
         tv_name.setText(userModel.name.toString())
         tv_uname.setText(userModel.username.toString())
@@ -469,7 +703,7 @@ class AddMemberActivity : AppCompatActivity() {
         tv_mbl.setText(userModel.phone.toString())
         tv_downliner.setText(downlineMemberName)
 
-        btn_confirm.setOnClickListener{
+        btn_confirm.setOnClickListener {
             if (type == "right") {
                 addRightMember()
             } else {
@@ -478,7 +712,7 @@ class AddMemberActivity : AppCompatActivity() {
             dialog.dismiss()
 
         }
-        btn_cancel.setOnClickListener{
+        btn_cancel.setOnClickListener {
             dialog.dismiss()
         }
         dialog.show()

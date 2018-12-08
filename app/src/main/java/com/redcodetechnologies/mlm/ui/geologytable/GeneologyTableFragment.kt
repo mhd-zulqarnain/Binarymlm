@@ -11,7 +11,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.redcodetechnologies.mlm.R
+import com.redcodetechnologies.mlm.models.Response
 import com.redcodetechnologies.mlm.models.wallet.TransactionModal
+import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.utils.Apputils
@@ -21,6 +23,8 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import retrofit2.Call
+import retrofit2.Callback
 import java.util.ArrayList
 
 class GeneologyTableFragment : Fragment() {
@@ -40,14 +44,18 @@ class GeneologyTableFragment : Fragment() {
     lateinit var progressBar: LinearLayout
 
     var pref = SharedPrefs.getInstance();
-    var id:Int ?=null
+    var id: Int? = null
     var comissionDisposable: Disposable? = null
+
+    val MY_PKG_COMMISTION_LIST = "MyPackageCommisionList"
+    val MY_DIRECT_COMMISTION_LIST = "MyDirectCommisionList"
+    val MY_TABLE_COMMISTION_LIST = "MyTableCommisionList"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_geneologytable, container, false)
         frgement_type = arguments?.getString("Fragment").toString();
-        id= pref!!.getUser(activity!!).userId
+        id = pref!!.getUser(activity!!).userId
         initView(view)
         return view
     }
@@ -68,9 +76,13 @@ class GeneologyTableFragment : Fragment() {
         recylcer_down!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = PackageCommisionListAdapter(activity!!, frgement_type, commitionlist) { obj ->
             //perform action
+            if (frgement_type == "MyDirectCommisionList")
+                senddirectsalecommissionrequest(obj.TransactionId!!)
+            else
+                sendmatchingtablecommissionrequest(obj.TransactionId!!)
         }
 
-        if(!pref!!.getUser(activity!!).isVerify!!){
+        if (!pref!!.getUser(activity!!).isVerify!!) {
             txt_warning.visibility = View.VISIBLE
         }
         recylcer_down!!.adapter = adapter
@@ -86,6 +98,8 @@ class GeneologyTableFragment : Fragment() {
             tv_date.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
             tv_action.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
             tv_header.text = " My Package Commision List"
+            tv_date.setText("Transaction Date")
+            tv_name.setText("Transaction Name")
             getPackageCommisionList()
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Package Commision List")
         } else if (frgement_type == "MyDirectCommisionList") {
@@ -93,10 +107,15 @@ class GeneologyTableFragment : Fragment() {
             tv_header.text = " My Direct Commision List"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Direct Commision List")
             getMyDirectCommsionList()
+            tv_date.setText("Payment Status")
+            tv_name.setText("Request Status")
+
         } else {
             tv_action.visibility = View.VISIBLE
             tv_header.text = " My Table Commision List"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Table Commision List")
+            tv_date.setText("Transaction Date")
+            tv_name.setText("Transaction Name")
             getMyTableCommsionList()
 
         }
@@ -107,6 +126,10 @@ class GeneologyTableFragment : Fragment() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
             return
+        }
+
+        if (commitionlist.isEmpty()) {
+            commitionlist.clear()
         }
 
         progressBar!!.visibility = View.VISIBLE
@@ -123,6 +146,9 @@ class GeneologyTableFragment : Fragment() {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
             return
         }
+        if (commitionlist.isEmpty()) {
+            commitionlist.clear()
+        }
 
         progressBar!!.visibility = View.VISIBLE
         val commisionObserver = getCommisionObserver()
@@ -137,6 +163,9 @@ class GeneologyTableFragment : Fragment() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
             return
+        }
+        if (commitionlist.isEmpty()) {
+            commitionlist.clear()
         }
 
         progressBar!!.visibility = View.VISIBLE
@@ -163,11 +192,11 @@ class GeneologyTableFragment : Fragment() {
                     commitionlist.add(transaction)
                 }
                 adapter!!.notifyDataSetChanged()
-               if(t.size==0){
-                   progressBar.visibility = View.GONE
-                   recylcer_down!!.visibility = View.GONE
-                   tv_no_data.visibility=View.VISIBLE
-               }
+                if (t.size == 0) {
+                    progressBar.visibility = View.GONE
+                    recylcer_down!!.visibility = View.GONE
+                    tv_no_data.visibility = View.VISIBLE
+                }
             }
 
             override fun onError(e: Throwable) {
@@ -177,10 +206,77 @@ class GeneologyTableFragment : Fragment() {
         }
     }
 
+    private fun sendmatchingtablecommissionrequest(id: Int) {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        ApiClint.getInstance()?.getService()?.sendmatchingtablecommissionrequest(id)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                            getMyTableCommsionList()
+                            Toast.makeText(activity!!, " Request sent ", Toast.LENGTH_SHORT).show()
+                        }
+
+                        if (code != 200) {
+                            Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    }
+                })
+    }
+
+    private fun senddirectsalecommissionrequest(id: Int) {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
+        ApiClint.getInstance()?.getService()?.senddirectsalecommissionrequest(id)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                            Toast.makeText(activity!!, " Request sent  ", Toast.LENGTH_SHORT).show()
+                        }
+
+                        if (code != 200) {
+                            Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    }
+                })
+    }
+
+
     override fun onDestroyView() {
         if (comissionDisposable != null)
             comissionDisposable!!.dispose()
         super.onDestroyView()
     }
+
 
 }

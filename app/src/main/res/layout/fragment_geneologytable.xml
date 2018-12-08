@@ -35,7 +35,6 @@
             android:textColor="@color/colorRed"
             android:text="You are not eligible "
             android:drawableLeft="@drawable/ic_error_outline_black_24dp"
-
             />
 
         <TextView
@@ -78,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="Transaction Name"
+            android:text="Request Status"
             style="@style/CustomBlacktextStyle"
             android:textSize="10sp"
             android:id="@+id/tv_tran_name"
@@ -100,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="Transaction Date"
+            android:text="Payment Status"
             style="@style/CustomBlacktextStyle"
             android:textSize="10sp"
             android:id="@+id/tv_tran_date"
@@ -113,8 +112,8 @@
             android:text="Action"
             style="@style/CustomBlacktextStyle"
             android:textSize="10sp"
+            android:gravity="center"
             android:id="@+id/tv_tran_action"
-            android:layout_gravity="center_vertical"
             />
 
     </LinearLayout>

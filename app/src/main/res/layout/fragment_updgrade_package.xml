@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <TextView
+            style="@style/CustomHeaderBlacktextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Packages:"
+            android:layout_marginLeft="6dp"
+            android:textSize="15sp"
+            />
+
+        <Spinner
+            android:id="@+id/spinner_package"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <RadioGroup
+                android:id="@+id/transaction_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/wallet_radio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ewallet" />
+
+                <RadioButton
+                    android:id="@+id/bank_radio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Bank" />
+
+            </RadioGroup>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_margin="12dp"
+                android:gravity="center"
+                android:id="@+id/view_bank_script"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:background="@color/colorRed"
+                    android:id="@+id/bank_addition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp"
+                    android:text="Upload Bank Slip"
+                    android:textColor="#ffff"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/des_bank_slip"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="4dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_package"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="#50000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    android:background="#686161"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#fff"
+                        android:text="Percent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#fff"
+
+                        android:text="Price" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#fff"
+
+                        android:text="Validity" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#fff"
+
+                        android:gravity="center"
+                        android:text="Min Withdrawal" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <TextView
+                        style="@style/CustomHeaderBlacktextStyle"
+                        android:layout_width="0dp"
+                        android:id="@+id/pkg_percent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="15%" />
+
+                    <TextView
+                        android:id="@+id/pkg_price"
+                        style="@style/CustomHeaderBlacktextStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="1000 PKR" />
+
+                    <TextView
+                        android:id="@+id/pkg_validity"
+                        style="@style/CustomHeaderBlacktextStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="12 Months" />
+
+                    <TextView
+                        android:id="@+id/pkg_wallet"
+                        style="@style/CustomHeaderBlacktextStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="1000 PKR" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="#d6802424"
+                android:text="Save"
+                android:textColor="#fff" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:orientation="vertical"
+                android:weightSum="6">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    android:background="#9b8e8e"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#fff"
+                        android:text="Name" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#fff"
+
+                        android:text="Price" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#fff"
+                        android:text="Approval" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#fff"
+                        android:gravity="center"
+                        android:text="Date" />
+
+                </LinearLayout>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recylcer_pkg_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6" />
+
+                <LinearLayout
+                    android:id="@+id/progressbar_list_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6"
+                    android:background="#ab121111"
+                    android:gravity="center"
+                    android:visibility="gone"
+
+                    >
+
+                    <ProgressBar
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
