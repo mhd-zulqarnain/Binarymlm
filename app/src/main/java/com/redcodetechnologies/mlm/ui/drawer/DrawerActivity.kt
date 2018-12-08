@@ -34,7 +34,7 @@ import com.redcodetechnologies.mlm.ui.geologytable.GeneologyTableFragment
 import com.redcodetechnologies.mlm.ui.network.NetworkFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DirectMemberFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DownlinerStatusFragment
-import com.redcodetechnologies.mlm.ui.network.downliners.UpgradePackageFragment
+import com.redcodetechnologies.mlm.ui.network.UpgradePackageFragment
 import com.redcodetechnologies.mlm.ui.notification.NoficationListFragment
 import com.redcodetechnologies.mlm.ui.support.InboxFragment
 import com.redcodetechnologies.mlm.ui.support.SentFragment
