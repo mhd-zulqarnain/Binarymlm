@@ -154,7 +154,10 @@ class UpgradePackageFragment : Fragment() {
 
     private fun getPackages() {
 
-
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         ApiClint.getInstance()?.getService()?.getpackages()
                 ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {
@@ -227,7 +230,10 @@ class UpgradePackageFragment : Fragment() {
 
 
     private fun getusercurrentpackageslist() {
-
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
         progressdialog!!.show()
 
         ApiClint.getInstance()?.getService()?.getusercurrentpackageslist(id!!)

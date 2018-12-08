@@ -7,5 +7,6 @@ data class PackVideo (
         var  VideoPackName: String? = null,
         var  VideoPackDesc: String? = null,
         var  VideoPackVideos: String? = null,
+        var  VideoPackImage : String? = null,
         var  CreateDate: String? = null)
 //viewusertrainingvideos

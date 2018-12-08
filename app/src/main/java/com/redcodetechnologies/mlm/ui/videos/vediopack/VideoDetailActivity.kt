@@ -23,9 +23,7 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray
 import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.BandwidthMeter
-import com.google.android.exoplayer2.upstream.DataSource
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
+import com.google.android.exoplayer2.upstream.*
 import com.google.android.exoplayer2.util.Util
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.PackVideo
@@ -33,6 +31,7 @@ import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
 import com.redcodetechnologies.mlm.utils.SharedPrefs
+import dmax.dialog.SpotsDialog
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -50,6 +49,7 @@ class VideoDetailActivity : AppCompatActivity() {
     var pckgId: Int? = null
     var catId: Int? = null
     private var player: SimpleExoPlayer? = null
+    lateinit var progressdialog: android.app.AlertDialog
 
     val VEDIO_BASE_URL = "http://www.sleepingpartnermanagementportalrct.com/VideosPack/"
 
@@ -68,6 +68,7 @@ class VideoDetailActivity : AppCompatActivity() {
     private var trackSelector: DefaultTrackSelector? = null
     private var lastSeenTrackGroupArray: TrackGroupArray? = null
     private lateinit var mediaDataSourceFactory: DataSource.Factory
+    private lateinit var view_no_data: LinearLayout
     private val bandwidthMeter: BandwidthMeter = DefaultBandwidthMeter()
 
     private var playWhenReady: Boolean = false
@@ -88,63 +89,65 @@ class VideoDetailActivity : AppCompatActivity() {
             pckgId = prefs.getUser(this).userPackage
         }
 
-        if (savedInstanceState != null) {
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this@VideoDetailActivity)
+                .setMessage("Loading Video please wait!!")
+                .setTheme(R.style.CustomProgess)
+                .build()
 
+        if (savedInstanceState != null) {
             with(savedInstanceState) {
                 playWhenReady = getBoolean(KEY_PLAY_WHEN_READY)
                 currentWindow = getInt(KEY_WINDOW)
                 playbackPosition = getLong(KEY_POSITION)
             }
         }
+        btn_back.setOnClickListener {
+            finish()
+        }
 
         initView()
-        /*fullscreenVideoView.videoUrl("http://www.sleepingpartnermanagementportalrct.com/VideosPack/awvptfay.h1c.mp4")
-                .enableAutoStart()*/
-        val videoPath = "https://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
-        val uri = Uri.parse(videoPath)
-        //fullscreenVideoView.setVideoURI(uri);
+
+
+
+        shouldAutoPlay = true
+        mediaDataSourceFactory = DefaultDataSourceFactory(this, Util.getUserAgent(this, "mediaPlayerSample"),
+                bandwidthMeter as TransferListener<in DataSource>)
+
     }
 
     private fun initView() {
+
         recyclerView = findViewById(R.id.recylcer_videos_pkg)
+        view_no_data = findViewById(R.id.view_no_data)
         recyclerView!!.layoutManager = LinearLayoutManagerWrapper(this@VideoDetailActivity, LinearLayout.VERTICAL, false)
         adapter = VideoDetailAdapter(this@VideoDetailActivity, list) { obj ->
-            //fullscreenVideoView.reset()
             showVedioDialog(obj.VideoPackVideos!!)
         }
 
         recyclerView!!.adapter = adapter
         recyclerView!!.setItemAnimator(null);
 
-        makeVideos()
+        getVedios()
     }
 
     private fun showVedioDialog(url: String) {
 
-        val uri = Uri.parse("http://www.sleepingpartnermanagementportalrct.com/VideosPack/" + url)
-        //  fullscreenVideoView.setVideoURI(uri);
+        val videourl ="http://www.sleepingpartnermanagementportalrct.com/VideosPack/$url"
+        val mediaSource = ExtractorMediaSource.Factory(mediaDataSourceFactory)
+                .createMediaSource(Uri.parse(videourl))
 
-        /* fullscreenVideoView.videoUrl("http://www.sleepingpartnermanagementportalrct.com/VideosPack/"+url)
-                 .enableAutoStart()*/
+        val haveStartPosition = currentWindow != C.INDEX_UNSET
+        if (haveStartPosition) {
+            player!!.seekTo(currentWindow, playbackPosition)
+        }
 
-        /* val view: View = LayoutInflater.from(this).inflate(R.layout.dialog_vedio_view, null)
-         val alertBox = AlertDialog.Builder(this)
-         alertBox.setView(view)
-         alertBox.setCancelable(true)
-         val dialog = alertBox.create()
-         val ve_vedio: FullscreenVideoView = view.findViewById(R.id.fullscreenVideoView)
-         dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
-         val baseUrl = "http://www.sleepingpartnermanagementportalrct.com/VideosPack/"+url
-         val uri = Uri.parse(baseUrl)
-
-         ve_vedio.videoUrl(baseUrl)
-
-
-         dialog.show()*/
+        player!!.prepare(mediaSource, !haveStartPosition, false)
+        updateButtonVisibilities()
 
     }
 
-    fun makeVideos() {
+    fun getVedios() {
 
         if (!Apputils.isNetworkAvailable(this)) {
             Toast.makeText(this, " Network error ", Toast.LENGTH_SHORT).show()
@@ -153,7 +156,7 @@ class VideoDetailActivity : AppCompatActivity() {
         if (!list.isEmpty())
             list.clear()
 
-
+        progressdialog.show()
         val observer = getObserver()
         val observable: Observable<ArrayList<PackVideo>> = MyApiRxClint.getInstance()!!.getService()!!.getvideolist("bearer ", pckgId.toString()!!, catId!!)
         observable.subscribeOn(Schedulers.io())
@@ -166,6 +169,7 @@ class VideoDetailActivity : AppCompatActivity() {
 
         return object : Observer<ArrayList<PackVideo>> {
             override fun onComplete() {
+                progressdialog.dismiss()
 
 
             }
@@ -175,28 +179,56 @@ class VideoDetailActivity : AppCompatActivity() {
             }
 
             override fun onNext(t: ArrayList<PackVideo>) {
-                //if(t[0].VideoPackVideos!=null)
-                // fullscreenVideoView.videoUrl("http://www.sleepingpartnermanagementportalrct.com/VideosPack/"+t[0].VideoPackVideos)
+
+                if(t.size!=0)
+                if(t[0].VideoPackVideos!=null){
+                    val url = t[0].VideoPackVideos
+                    val videourl ="http://www.sleepingpartnermanagementportalrct.com/VideosPack/$url"
+
+                  //  val url = VEDIO_BASE_URL+t[0].VideoPackVideos
+                    var uri = Uri.parse(videourl)
+                    val mediaSource = ExtractorMediaSource.Factory(mediaDataSourceFactory)
+                            .createMediaSource(uri)
+
+                    val haveStartPosition = currentWindow != C.INDEX_UNSET
+                    if (haveStartPosition) {
+                        player!!.seekTo(currentWindow, playbackPosition)
+                    }
+
+                    player!!.prepare(mediaSource, !haveStartPosition, false)
+                    updateButtonVisibilities()
+
+                }
 
                 t.forEach { obj ->
+
                     list.add(obj)
 
                 }
+
                 adapter!!.notifyDataSetChanged()
 
                 if (t.size == 0) {
                     recyclerView!!.visibility = View.GONE
+                    player_view!!.visibility = View.GONE
+                    view_no_data.visibility = View.VISIBLE
+
                 } else {
                     recyclerView!!.visibility = View.VISIBLE
+                    view_no_data.visibility = View.GONE
+                    player_view!!.visibility = View.VISIBLE
                 }
             }
 
             override fun onError(e: Throwable) {
                 print("error")
+                progressdialog.dismiss()
+
             }
         }
     }
 
+    //<editor-fold desc="ExoPlayer Settings">
     private fun initializePlayer() {
 
         playerView.requestFocus()
@@ -215,19 +247,13 @@ class VideoDetailActivity : AppCompatActivity() {
             playWhenReady = shouldAutoPlay
         }
 
-        // Use Hls, Dash or other smooth streaming media source if you want to test the track quality selection.
-        /*val mediaSource: MediaSource = HlsMediaSource(Uri.parse("https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"),
-                mediaDataSourceFactory, mainHandler, null)*/
 
-        val mediaSource = ExtractorMediaSource.Factory(mediaDataSourceFactory)
-                .createMediaSource(Uri.parse("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"))
 
-        val haveStartPosition = currentWindow != C.INDEX_UNSET
+      val haveStartPosition = currentWindow != C.INDEX_UNSET
         if (haveStartPosition) {
             player!!.seekTo(currentWindow, playbackPosition)
         }
 
-        player!!.prepare(mediaSource, !haveStartPosition, false)
         updateButtonVisibilities()
 
         //  ivHideControllerButton.setOnClickListener { playerView.hideController() }
@@ -323,5 +349,6 @@ class VideoDetailActivity : AppCompatActivity() {
         }
 
     }
+    //</editor-fold>
 
 }

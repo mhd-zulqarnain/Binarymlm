@@ -114,6 +114,29 @@ interface RetrofiltService {
     @POST("addrightmembers/{userid}")
     @Headers("Content-Type:application/json")
     fun addRightMember(@Header("Authorization") auth: String, @Path("userid") userid: Int, @Body obj: UserTree): Call<Response>
+
+
+    @GET("checkifnewmemeberrightchild/{userid}")
+    @Headers("Content-Type:application/json")
+    fun checkIfNewMemeberRightChild(@Path("userid") userid: Int): Call<Response>
+
+     @GET("checkIfnewmemeberleftchild/{userid}")
+    @Headers("Content-Type:application/json")
+    fun checkIfNewMemeberLeftChild(@Path("userid") userid: Int): Call<Response>
+
+
+    @GET("checkifnewmemeberright/{userid}")
+    @Headers("Content-Type:application/json")
+    fun checkIfNewMemeberRight(@Path("userid") userid: Int): Call<Response>
+
+    @GET("checkifnewmemeberleft/{userid}")
+    @Headers("Content-Type:application/json")
+    fun checkIfNewMemeberLeft(@Path("userid") userid: Int): Call<Response>
+
+
+
+
+
     //</editor-fold>
 
     //<editor-fold desc="Transaction">

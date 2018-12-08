@@ -19,6 +19,7 @@ import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
+import dmax.dialog.SpotsDialog
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -30,9 +31,16 @@ class VideoCategoryFragment : Fragment() {
     var list: ArrayList<VedioCategory> = ArrayList()
     private var recyclerView: RecyclerView? = null
     var disposable: Disposable? = null
+    var progressdialog: android.app.AlertDialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        progressdialog = SpotsDialog.Builder()
+                .setContext(activity!!)
+                .setMessage("Loading categories please wait!!")
+                .setTheme(R.style.CustomProgess)
+                .build()
 
         val view: View = inflater.inflate(R.layout.fragement_vedio_category, container, false)
 
@@ -43,7 +51,6 @@ class VideoCategoryFragment : Fragment() {
         return view
 
     }
-
 
     private fun initView(view: View) {
         recyclerView = view.findViewById(R.id.recylcer_videos_pkg)
@@ -56,10 +63,10 @@ class VideoCategoryFragment : Fragment() {
 
         recyclerView!!.adapter = adapter
         recyclerView!!.setItemAnimator(null);
-        makeVideos()
+        getVedios()
     }
 
-    fun makeVideos() {
+    fun getVedios() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
@@ -68,7 +75,7 @@ class VideoCategoryFragment : Fragment() {
         if (!list.isEmpty())
             list.clear()
 
-
+        progressdialog!!.show()
         val observer = getObserver()
         val observable: Observable<ArrayList<VedioCategory>> = MyApiRxClint.getInstance()!!.getService()!!.getvideocategories("bearer ")
         observable.subscribeOn(Schedulers.io())
@@ -80,7 +87,10 @@ class VideoCategoryFragment : Fragment() {
     fun getObserver(): Observer<ArrayList<VedioCategory>> {
 
         return object : Observer<ArrayList<VedioCategory>> {
-            override fun onComplete() {}
+            override fun onComplete() {
+                progressdialog!!.hide()
+
+            }
 
             override fun onSubscribe(d: Disposable) {
                 disposable = d
@@ -98,10 +108,14 @@ class VideoCategoryFragment : Fragment() {
                 } else {
                     recyclerView!!.visibility = View.VISIBLE
                 }
+
+
             }
 
             override fun onError(e: Throwable) {
                 print("error")
+                progressdialog!!.hide()
+
             }
         }
     }
