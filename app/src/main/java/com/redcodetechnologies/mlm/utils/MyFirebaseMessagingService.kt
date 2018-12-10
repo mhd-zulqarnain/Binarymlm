@@ -79,6 +79,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.sleepinglogo)
                 .setContentTitle(notification.NotificationName)
+                .setColor(getResources().getColor(R.color.colorWhite))
                 .setContentText(notification.NotificationDescription).setAutoCancel(true).setContentIntent(pendingIntent)
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

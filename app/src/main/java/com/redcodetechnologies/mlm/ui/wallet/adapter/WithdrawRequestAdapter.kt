@@ -13,7 +13,7 @@ import com.redcodetechnologies.mlm.models.wallet.WithdrawalRequestModal
 class WithdrawRequestAdapter(var ctx: Context, var list: ArrayList<WithdrawalRequestModal>) : RecyclerView.Adapter<WithdrawRequestAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {
-        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_row_wallet, parent, false))
+        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_row_withdraw, parent, false))
         return v
     }
 
@@ -27,25 +27,24 @@ class WithdrawRequestAdapter(var ctx: Context, var list: ArrayList<WithdrawalReq
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var tv_source: TextView? = null
-        var tv_name: TextView? = null
-        var tv_amount: TextView? = null
-        var tv_date: TextView? = null
-        fun bindView(model : WithdrawalRequestModal) {
+        var tv_wd_username: TextView? = null
+        var tv_wd_payment_method: TextView? = null
+        var tv_wd_amount_payable: TextView? = null
+        var tv_wd_charges: TextView? = null
+        var tv_wd_date: TextView? = null
 
-            tv_source = itemView.findViewById(R.id.tv_walt_source)
-            tv_name = itemView.findViewById(R.id.tv_walt_name)
-            tv_amount = itemView.findViewById(R.id.tv_walt_amount)
-            tv_date = itemView.findViewById(R.id.tv_walt_date)
+        fun bindView(model: WithdrawalRequestModal) {
+            tv_wd_username = itemView.findViewById(R.id.wd_username)
+            tv_wd_payment_method = itemView.findViewById(R.id.wd_pay_method)
+            tv_wd_amount_payable = itemView.findViewById(R.id.wd_amount_pay)
+            tv_wd_charges = itemView.findViewById(R.id.wd_charges)
+            tv_wd_date = itemView.findViewById(R.id.wd_date)
 
-
-            tv_source!!.text = "test source"
-            tv_name!!.text ="test name"
-            tv_amount!!.text ="1000"
-            tv_date!!.text = "10-3-2123"
-
-
-            //  tv_price!!.text = order.BitPrice
+            tv_wd_username!!.text = model.Username
+            tv_wd_payment_method!!.text = model.WithdrawalFundMethod
+            tv_wd_amount_payable!!.text = model.AmountPayble!!.split(".")[0]
+            tv_wd_charges!!.text = model.WithdrawalFundCharge!!.split(".")[0]
+            tv_wd_date!!.text = model.RequestedDate!!.split("T")[0]
 
         }
     }

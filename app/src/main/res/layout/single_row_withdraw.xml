@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Rejected Date"
+        android:text="Requested Date"
         android:textColor="#494A4B"
         android:fontFamily="@font/ralewayregular"
         android:textSize="12sp"

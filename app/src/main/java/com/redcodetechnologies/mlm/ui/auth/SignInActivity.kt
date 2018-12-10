@@ -42,7 +42,7 @@ class SignInActivity : AppCompatActivity() {
         content.setSpan(UnderlineSpan(), 0, 20, 0)
         progressdialog = SpotsDialog.Builder()
                 .setContext(this@SignInActivity)
-                .setMessage("Authenticating please wait!!")
+                .setMessage("Authenticating Please Wait")
                 .setTheme(R.style.CustomProgess)
                 .build()
 
@@ -63,18 +63,21 @@ class SignInActivity : AppCompatActivity() {
                 ed_password.error = Html.fromHtml("<font color='#E0796C'>Password must contain 6 characters</font>")
                 ed_password.requestFocus()
             } else {
-
-
+                progressdialog!!.show()
                 getuserData(object : ServiceListener<ApiToken> {
                     override fun success(obj: ApiToken) {
                         print("success")
                         val pref = SharedPrefs.getInstance()
                         pref!!.setToken(this@SignInActivity, obj)
                         getUserObject(ed_username!!.text.toString())
+                        progressdialog!!.hide()
+
                     }
 
                     override fun fail(error: ServiceError) {
                         Apputils.showMsg(this@SignInActivity, "Wrong password or username")
+                        progressdialog!!.hide()
+
                     }
                 })
 
@@ -161,6 +164,12 @@ class SignInActivity : AppCompatActivity() {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
+        progressdialog = SpotsDialog.Builder()
+                .setContext(this@SignInActivity)
+                .setMessage("Authenticating !!")
+                .setTheme(R.style.CustomProgess)
+                .build()
+
         progressdialog!!.show()
         ApiClint.getInstance()?.getService()?.getNewRegistoredUser("bearer " + token!!, username)
                 ?.enqueue(object : Callback<NewUserRegistration> {

@@ -76,7 +76,7 @@ class GeneologyTableFragment : Fragment() {
         recylcer_down!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = PackageCommisionListAdapter(activity!!, frgement_type, commitionlist) { obj ->
             //perform action
-            if (frgement_type == "MyDirectCommisionList")
+            if (frgement_type == MY_DIRECT_COMMISTION_LIST || frgement_type == MY_TABLE_COMMISTION_LIST)
                 senddirectsalecommissionrequest(obj.TransactionId!!)
             else
                 sendmatchingtablecommissionrequest(obj.TransactionId!!)
@@ -90,7 +90,7 @@ class GeneologyTableFragment : Fragment() {
     }
 
     fun showViews() {
-        if (frgement_type == "MyPackageCommisionList") {
+        if (frgement_type == MY_PKG_COMMISTION_LIST) {
             tv_action.visibility = View.GONE
             tv_name.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
             tv_source.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
@@ -102,21 +102,21 @@ class GeneologyTableFragment : Fragment() {
             tv_name.setText("Transaction Name")
             getPackageCommisionList()
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Package Commision List")
-        } else if (frgement_type == "MyDirectCommisionList") {
+        } else if (frgement_type == MY_DIRECT_COMMISTION_LIST || frgement_type == MY_TABLE_COMMISTION_LIST) {
             tv_action.visibility = View.VISIBLE
-            tv_header.text = " My Direct Commision List"
+
+
+            if (frgement_type == MY_TABLE_COMMISTION_LIST) {
+                tv_header.text = " My Table Commision List"
+                getMyTableCommsionList()
+            } else {
+                tv_header.text = " My Direct Commision List"
+                getMyDirectCommsionList()
+
+            }
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Direct Commision List")
-            getMyDirectCommsionList()
             tv_date.setText("Payment Status")
             tv_name.setText("Request Status")
-
-        } else {
-            tv_action.visibility = View.VISIBLE
-            tv_header.text = " My Table Commision List"
-            (activity as DrawerActivity).getSupportActionBar()?.setTitle("Table Commision List")
-            tv_date.setText("Transaction Date")
-            tv_name.setText("Transaction Name")
-            getMyTableCommsionList()
 
         }
         (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)

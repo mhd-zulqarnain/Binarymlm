@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
         val config = EasySplashScreen(this@SplashActivity)
                 .withFullScreen()
                 .withTargetActivity(SignInActivity::class.java)
-                .withSplashTimeOut(3000)
+                .withSplashTimeOut(2000)
                 .withLogo(R.drawable.sleepinglogo)
 
         val view = config.create()

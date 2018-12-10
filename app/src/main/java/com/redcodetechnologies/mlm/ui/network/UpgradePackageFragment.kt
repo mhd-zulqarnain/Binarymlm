@@ -215,8 +215,12 @@ class UpgradePackageFragment : Fragment() {
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
                         var code: Int = response!!.code()
+                        var res:Response = response.body()!!
                         if (code == 200) {
                             Toast.makeText(activity!!, response.body()!!.message, Toast.LENGTH_SHORT).show()
+                            if(res.message=="Package save successfully"){
+                                getusercurrentpackageslist()
+                            }
                         }
 
                         if (code != 200) {
@@ -235,6 +239,11 @@ class UpgradePackageFragment : Fragment() {
             return
         }
         progressdialog!!.show()
+
+        if(!listPackageItem.isEmpty()){
+            listPackageItem.clear()
+        }
+
 
         ApiClint.getInstance()?.getService()?.getusercurrentpackageslist(id!!)
                 ?.enqueue(object : Callback<java.util.ArrayList<Packages>> {

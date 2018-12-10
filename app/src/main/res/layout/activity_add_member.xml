@@ -50,17 +50,6 @@
                 android:layout_gravity="left"
                 android:text="Add Left Member" />
 
-            <TextView
-                android:id="@+id/alert_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="6dp"
-                android:textColor="@color/colorRed"
-                android:textStyle="bold"
-                android:textSize="10sp"
-                />
-
         </LinearLayout>
 
 
@@ -225,6 +214,22 @@
                 android:background="@color/colorRed"
                 android:text="Save" />
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/alert_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="6dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:padding="3dp"
+            android:text="warning "
+            android:drawableRight="@drawable/ic_warning_white"
+            android:background="@color/colorRed"
+            android:textSize="15sp"
+            />
 
     </LinearLayout>
 

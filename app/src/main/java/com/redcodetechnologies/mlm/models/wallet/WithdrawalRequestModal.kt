@@ -1,8 +1,9 @@
 package com.redcodetechnologies.mlm.models.wallet
 
-data class WithdrawalRequestModal (var wd_username: String? = null,
-                                   var wd_paymen_method: String? = null,
-                                   var wd_payable:String? = null,
-                                   var wd_charges:String? = null,
+data class WithdrawalRequestModal (var WithdrawalFundMethod: String? = null,
+                                   var AmountPayble: String? = null,
+                                   var WithdrawalFundCharge: String? = null,
+                                   var RequestedDate:String? = null,
+                                   var Username:String? = null,
                                    var wd_requested_date:String? = null
                                    )

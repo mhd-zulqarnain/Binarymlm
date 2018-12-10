@@ -38,6 +38,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_vedio_detail.*
 
+
 import java.util.*
 
 class VideoDetailActivity : AppCompatActivity() {
@@ -48,10 +49,11 @@ class VideoDetailActivity : AppCompatActivity() {
     var prefs = SharedPrefs.getInstance()!!
     var pckgId: Int? = null
     var catId: Int? = null
+    var catName: String = ""
     private var player: SimpleExoPlayer? = null
     lateinit var progressdialog: android.app.AlertDialog
 
-    val VEDIO_BASE_URL = "http://www.sleepingpartnermanagementportalrct.com/VideosPack/"
+    val VEDIO_BASE_URL = "https://www.sleepingpartnermanagementportalrct.com/VideosPack/"
 
 
     //vedio player
@@ -83,7 +85,9 @@ class VideoDetailActivity : AppCompatActivity() {
 
         this.getSupportActionBar()?.setTitle("Training Videos")
         this.getSupportActionBar()?.setIcon(0)
+        catName = intent.getStringExtra("categoryName")
         catId = intent.getStringExtra("categoryId").toInt()
+
 
         if (prefs.getUser(this).userId != null) {
             pckgId = prefs.getUser(this).userPackage
@@ -109,7 +113,6 @@ class VideoDetailActivity : AppCompatActivity() {
         initView()
 
 
-
         shouldAutoPlay = true
         mediaDataSourceFactory = DefaultDataSourceFactory(this, Util.getUserAgent(this, "mediaPlayerSample"),
                 bandwidthMeter as TransferListener<in DataSource>)
@@ -122,6 +125,7 @@ class VideoDetailActivity : AppCompatActivity() {
         view_no_data = findViewById(R.id.view_no_data)
         recyclerView!!.layoutManager = LinearLayoutManagerWrapper(this@VideoDetailActivity, LinearLayout.VERTICAL, false)
         adapter = VideoDetailAdapter(this@VideoDetailActivity, list) { obj ->
+            tv_description.text = obj.VideoPackName+":"+obj.VideoPackDesc
             showVedioDialog(obj.VideoPackVideos!!)
         }
 
@@ -133,7 +137,7 @@ class VideoDetailActivity : AppCompatActivity() {
 
     private fun showVedioDialog(url: String) {
 
-        val videourl ="http://www.sleepingpartnermanagementportalrct.com/VideosPack/$url"
+        val videourl ="https://www.sleepingpartnermanagementportalrct.com/VideosPack/$url"
         val mediaSource = ExtractorMediaSource.Factory(mediaDataSourceFactory)
                 .createMediaSource(Uri.parse(videourl))
 
@@ -157,6 +161,9 @@ class VideoDetailActivity : AppCompatActivity() {
             list.clear()
 
         progressdialog.show()
+        player_view.visibility = View.GONE
+        tv_description.visibility = View.GONE
+        tv_category.visibility = View.GONE
         val observer = getObserver()
         val observable: Observable<ArrayList<PackVideo>> = MyApiRxClint.getInstance()!!.getService()!!.getvideolist("bearer ", pckgId.toString()!!, catId!!)
         observable.subscribeOn(Schedulers.io())
@@ -182,8 +189,12 @@ class VideoDetailActivity : AppCompatActivity() {
 
                 if(t.size!=0)
                 if(t[0].VideoPackVideos!=null){
+
+                    tv_category.text = catName
+                    tv_description.text = t[0].VideoPackName+":"+t[0].VideoPackDesc
                     val url = t[0].VideoPackVideos
-                    val videourl ="http://www.sleepingpartnermanagementportalrct.com/VideosPack/$url"
+//                    val videourl ="https://www.sleepingpartnermanagementportalrct.com/VideosPack/qpm4hync.0i0.mp4"
+                    val videourl ="https://www.sleepingpartnermanagementportalrct.com/VideosPack/$url"
 
                   //  val url = VEDIO_BASE_URL+t[0].VideoPackVideos
                     var uri = Uri.parse(videourl)
@@ -212,11 +223,15 @@ class VideoDetailActivity : AppCompatActivity() {
                     recyclerView!!.visibility = View.GONE
                     player_view!!.visibility = View.GONE
                     view_no_data.visibility = View.VISIBLE
+                    tv_description.visibility = View.GONE
+                    tv_category.visibility = View.GONE
 
                 } else {
                     recyclerView!!.visibility = View.VISIBLE
                     view_no_data.visibility = View.GONE
                     player_view!!.visibility = View.VISIBLE
+                    tv_description.visibility = View.VISIBLE
+                    tv_category.visibility = View.VISIBLE
                 }
             }
 

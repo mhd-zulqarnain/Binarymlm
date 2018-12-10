@@ -19,7 +19,7 @@ class VideoCategoryAdapter(var ctx: Context, var list: ArrayList<VedioCategory>,
 
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyViewHolder {
-        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_videos_pack, parent, false))
+        var v = MyViewHolder(LayoutInflater.from(ctx).inflate(R.layout.single_videos_category, parent, false))
         return v
     }
 

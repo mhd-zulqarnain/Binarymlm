@@ -35,7 +35,7 @@
             android:layout_weight="1.5"
             android:gravity="center"
             android:text="Transaction Name"
-            android:textColor="#494A4B"
+
             android:fontFamily="@font/ralewayregular"
             android:textSize="12sp"
             android:id="@+id/tran_name"

@@ -502,11 +502,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, NoficationListFragment()).commit()
                     return true
-                } else if (id == 7L) {
+                } else if (id == 6L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideoCategoryFragment()).commit()
                     return true
-                }else if (id == 8L) {
+                }else if (id == 7L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
                     return true
@@ -602,6 +602,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         listDataHeader.add("Notication List")
         listDataHeader.add("Reports")
         listDataHeader.add("IT Support")
+        listDataHeader.add("Video Packs")
+        listDataHeader.add("Training Videos")
 
 
         // Adding child data

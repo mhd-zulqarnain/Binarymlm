@@ -60,6 +60,8 @@ class AddMemberActivity : AppCompatActivity() {
     var downlineMemberId: Int? = null
     var downlineMemberName = "none"
 
+    var isVerified = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_member)
@@ -277,11 +279,12 @@ class AddMemberActivity : AppCompatActivity() {
                     var obj: DropDownMembers = spinner_downliner!!.getSelectedItem() as DropDownMembers
                     downlineMemberId = obj.UserId
                     downlineMemberName = obj.Username!!
-                    if (type == "right") {
-                        checkIfNewMemeberRightChild(downlineMemberId!!)
-                    } else {
-                        checkIfNewMemeberLeftChild(downlineMemberId!!)
-                    }
+                    if (isVerified)
+                        if (type == "right") {
+                            checkIfNewMemeberRightChild(downlineMemberId!!)
+                        } else {
+                            checkIfNewMemeberLeftChild(downlineMemberId!!)
+                        }
                 } else {
                     downlineMemberId = null
                     downlineMemberName = "none"
@@ -615,10 +618,9 @@ class AddMemberActivity : AppCompatActivity() {
                             btn_ok.isEnabled = true
 
                         } else {
+                            isVerified = false
                             btn_ok.isEnabled = false
                             alert_text.visibility = View.VISIBLE
-
-
                             val mmsg = "Account not verfied"
                             alert_text.text = "($mmsg)"
                             Apputils.showMsg(this@AddMemberActivity, mmsg!!)
@@ -670,6 +672,7 @@ class AddMemberActivity : AppCompatActivity() {
                             btn_ok.isEnabled = true
 
                         } else {
+                            isVerified = false
                             btn_ok.isEnabled = false
                             alert_text.visibility = View.VISIBLE
 

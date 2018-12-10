@@ -29,7 +29,7 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
     override fun onBindViewHolder(p0: MyViewHolder, p1: Int) {
         p0.bindView(list[p1], typ, ctx)
         p0.btn_ok!!.setOnClickListener {
-            //action perform
+            onClick(list[p1])
         }
     }
 
@@ -63,44 +63,44 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
                 btn_ok!!.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
             }
 
+            if (isWithdrawalOn!!) {
+                btn_ok!!.visibility = View.VISIBLE
+            } else {
+                btn_ok!!.visibility = View.INVISIBLE
+            }
+            
             if (typ == MY_DIRECT_COMMISTION_LIST || typ == MY_TABLE_COMMISTION_LIST) {
-                tv_amount!!.text = packagecommisionlist.Amount
+                tv_amount!!.text = packagecommisionlist.Amount!!.split(".")[0]+" PKR"
                 tv_source!!.text = packagecommisionlist.TransactionSource
 
                 if (packagecommisionlist.IsWithdrawlRequestByUser == "false") {
                     tv_name!!.text = "You can send request"
+                    if (isWithdrawalOn!!)
                     btn_ok!!.visibility = View.VISIBLE
                     tv_name!!.setTextColor(Color.parseColor("#FFA10A1C"));
 
                 } else {
                     tv_date!!.setTextColor(Color.parseColor("#FF307B44"));
                     tv_name!!.text = "Request Sended"
-                    btn_ok!!.visibility = View.GONE
-
+                    btn_ok!!.visibility = View.INVISIBLE
                 }
 
                 if (packagecommisionlist.IsWithdrawlPaidByAdmin == "false") {
                     tv_date!!.setTextColor(Color.parseColor("#FFA10A1C"));
                     tv_date!!.text = "Payment Pending"
+                    if(packagecommisionlist.IsWithdrawlRequestByUser == "false"){
+                        tv_date!!.text = "Not Requested"
+                    }
                 } else {
                     tv_date!!.text = "Paid"
                     tv_date!!.setTextColor(Color.parseColor("#FF307B44"));
-
                 }
-
-                if (isWithdrawalOn!!) {
-                    btn_ok!!.visibility = View.VISIBLE
-                } else {
-                    btn_ok!!.visibility = View.GONE
-                }
-
 
             } else {
                 tv_source!!.text = packagecommisionlist.TransactionSource
                 tv_name!!.text = packagecommisionlist.TransactionName
-                tv_amount!!.text = packagecommisionlist.Amount
-                tv_date!!.text = packagecommisionlist.TransactionDate
-                //  tv_price!!.text = order.BitPrice!
+                tv_amount!!.text = packagecommisionlist.Amount!!.split(".")[0]+" PKR"
+                tv_date!!.text = packagecommisionlist.TransactionDate!!.split("T")[0]
 
             }
         }

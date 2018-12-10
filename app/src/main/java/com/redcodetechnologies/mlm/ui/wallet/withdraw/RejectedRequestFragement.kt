@@ -12,10 +12,8 @@ import android.widget.LinearLayout
 import android.widget.Toast
 
 import com.redcodetechnologies.mlm.R
-import com.redcodetechnologies.mlm.models.wallet.EWalletWithdrawalFundModel
 import com.redcodetechnologies.mlm.models.wallet.WithdrawalRequestModal
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
-import com.redcodetechnologies.mlm.ui.wallet.adapter.WithdrawAdapter
 import com.redcodetechnologies.mlm.ui.wallet.adapter.WithdrawRequestAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.SharedPrefs

@@ -58,6 +58,7 @@ class VideoCategoryFragment : Fragment() {
         adapter = VideoCategoryAdapter(activity!!, list) { obj ->
             val intent = Intent(activity!!,VideoDetailActivity::class.java)
             intent.putExtra("categoryId",obj.Id)
+            intent.putExtra("categoryName",obj.Category_Name)
             startActivity(intent)
         }
 

@@ -42,14 +42,13 @@ class PackageAdapter(var ctx: Context, var list: ArrayList<Packages>) : Recycler
             pkg_date = itemView.findViewById(R.id.pkg_date)
             pkg_name!!.text = pkg.PackageName
             pkg_price!!.text = pkg.PackagePrice
-            pkg_date!!.text = pkg.PurchaseDate
+            pkg_date!!.text = pkg.PurchaseDate!!.split("T")[0]
 
-            pkg_approval!!.text = if (pkg.IsApprovedForBuy!!) "Approved" else "Rejected"
-
-//            tv_name!!.text = downlinermodal.Name
-//            tv_sponsor!!.text = downlinermodal.SponsorName
-//            tv_amount!!.text = downlinermodal.PaidAmount
-
+            var msg = "Approved"
+            if (pkg.IsApprovedForBuy!!) msg = "Approved"
+            if (pkg.IsRejectedForBuy!!) msg = "Rejected"
+            if (pkg.IsRequestedForBuy!!) msg = "Requested"
+            pkg_approval!!.text = msg
 
         }
     }

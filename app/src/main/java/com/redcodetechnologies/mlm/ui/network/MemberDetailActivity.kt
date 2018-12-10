@@ -21,6 +21,7 @@ import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
+import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.ui.network.adapter.DialogMemberAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
@@ -61,6 +62,7 @@ class MemberDetailActivity : AppCompatActivity() {
 
         var json = intent.getStringExtra("object")
         prefs = SharedPrefs.getInstance()!!
+        this.getSupportActionBar()?.setTitle("Details")
 
         if (json != null)
             user = Gson().fromJson(json, Users::class.java);
@@ -71,7 +73,7 @@ class MemberDetailActivity : AppCompatActivity() {
             finish()
         }
         view_show_tree.setOnClickListener {
-            showSendDialog()
+            showMembertreeDialog()
         }
     }
 
@@ -87,10 +89,11 @@ class MemberDetailActivity : AppCompatActivity() {
         if (user != null) {
             id = user!!.UserId!!.toInt()
             token = prefs.getToken(this@MemberDetailActivity).accessToken!!
-            tv_username.text = user!!.Username
+            tv_username.text = user!!.Username!!.toUpperCase()
             tv_phone.setText("Phone:" + user!!.Phone)
+            if(user!!.BankName!=null)
             tv_BankName.setText("Bank: " + user!!.BankName)
-            tv_SponsorName.setText("Sponser: " + user!!.SponsorName)
+            tv_SponsorName.setText("Sponser: " + user!!.SponsorName!!.toUpperCase())
         }
 
 
@@ -148,7 +151,7 @@ class MemberDetailActivity : AppCompatActivity() {
         }
     }
 
-        private fun showSendDialog() {
+        private fun showMembertreeDialog() {
             val view: View = LayoutInflater.from(this).inflate(R.layout.dialog_member_tree, null)
             val alertBox = AlertDialog.Builder(this)
             alertBox.setView(view)
