@@ -10,27 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="22"
+        android:weightSum="25"
         >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.8"
+        android:layout_weight="1"
         android:background="@color/colorRed"
-        android:text="    E-Wallet Withdrawal Fund"
+        android:text="   E-Wallet Withdrawal Fund"
         android:textColor="@color/colorWhite"
         android:fontFamily="@font/ralewaybold"
-        android:textSize="17sp"
+        android:textSize="15sp"
+
         android:id="@+id/tv_walt_header"
         android:gravity="center_vertical"
         />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="Amount to be withdraw *(PKR)"
-        android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:fontFamily="@font/ralewayregular"
@@ -39,10 +40,10 @@
     <EditText
         android:id="@+id/ed_amount_withdrawn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:fontFamily="@font/ralewayregular"
         android:textColor="#000"
-        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/edittext_style1"
@@ -61,7 +62,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -79,6 +79,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.4"
                 android:text="Particulars"
+                android:gravity="center_vertical"
                 android:textSize="17sp"
                 android:textColor="#666666"
                 android:fontFamily="@font/ralewaybold"
@@ -88,6 +89,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
                 android:text="Amount"
+                android:gravity="center"
                 android:textSize="17sp"
                 android:textColor="#666666"
                 android:fontFamily="@font/ralewaybold"
@@ -103,12 +105,11 @@
             android:background="#50000000" />
 
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:layout_marginTop="10dp"
+      
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -120,6 +121,8 @@
             android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="2"
+            android:gravity="center_vertical"
+
             >
             <TextView
                 android:layout_width="0dp"
@@ -154,7 +157,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:layout_marginTop="10dp"
+      
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -164,6 +167,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            android:gravity="center_vertical"
+
             android:orientation="horizontal"
             >
             <TextView
@@ -190,7 +195,7 @@
 
         </LinearLayout>
         <View
-            android:layout_marginTop="10dp"
+          
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="#50000000" />
@@ -200,11 +205,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2.3"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:weightSum="2"
+
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -212,6 +217,7 @@
             android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="2"
+            android:gravity="center_vertical"
             >
             <TextView
                 android:layout_width="0dp"
@@ -219,6 +225,8 @@
                 android:layout_weight="1.4"
                 android:text="Package amount limit for withdrawal"
                 android:textSize="11sp"
+                android:gravity="center_vertical"
+
                 android:fontFamily="@font/ralewayregular"
                 />
             <TextView
@@ -228,6 +236,8 @@
                 android:layout_weight="0.6"
                 android:text="0 PKR"
                 android:textSize="13sp"
+                android:gravity="center_vertical"
+
                 android:textColor="#666666"
                 android:fontFamily="@font/ralewayregular"
                 android:paddingLeft="10dp"
@@ -237,7 +247,7 @@
 
         </LinearLayout>
         <View
-            android:layout_marginTop="10dp"
+          
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="#50000000" />
@@ -247,7 +257,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2.3"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -259,6 +268,7 @@
             android:layout_weight="2"
             android:orientation="horizontal"
             android:weightSum="2"
+            android:gravity="center_vertical"
             >
             <TextView
                 android:layout_width="0dp"
@@ -266,6 +276,8 @@
                 android:layout_weight="1.4"
                 android:text="E-wallet amount already in payout process"
                 android:textSize="11sp"
+                android:gravity="center_vertical"
+
                 android:fontFamily="@font/ralewayregular"
                 />
             <TextView
@@ -275,6 +287,8 @@
                 android:layout_weight="0.6"
                 android:text="0 PKR"
                 android:textSize="13sp"
+                android:gravity="center_vertical"
+
                 android:textColor="#666666"
                 android:fontFamily="@font/ralewayregular"
                 android:paddingLeft="10dp"
@@ -284,7 +298,7 @@
 
         </LinearLayout>
         <View
-            android:layout_marginTop="10dp"
+          
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="#50000000" />
@@ -294,7 +308,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:layout_marginTop="10dp"
+      
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -304,6 +318,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             >
             <TextView
@@ -330,7 +345,7 @@
 
         </LinearLayout>
         <View
-            android:layout_marginTop="10dp"
+          
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="#50000000" />
@@ -340,7 +355,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:layout_marginTop="10dp"
+
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -350,6 +365,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             >
             <TextView
@@ -376,7 +392,7 @@
 
         </LinearLayout>
         <View
-            android:layout_marginTop="10dp"
+          
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="#50000000" />
@@ -386,7 +402,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:layout_marginTop="10dp"
+      
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -396,6 +412,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             >
             <TextView
@@ -422,7 +439,7 @@
 
         </LinearLayout>
         <View
-            android:layout_marginTop="10dp"
+          
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="#50000000" />
@@ -432,7 +449,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:layout_marginTop="10dp"
+      
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -442,6 +459,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             >
             <TextView
@@ -473,18 +491,17 @@
 
     <Button
         android:id="@+id/btn_submit_request"
-        android:layout_weight="1.8"
+        android:layout_weight="2"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:background="@color/colorRed"
         android:text="Submit withdrawal request"
-        android:fontFamily="@font/ralewaybold"
         android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:padding="10dp"
         android:textSize="15sp"
-        android:layout_marginTop="20dp"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
+
         />
     </LinearLayout>
 

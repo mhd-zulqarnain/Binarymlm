@@ -276,6 +276,8 @@ class NetworkFragment : Fragment() {
                                 tv_totalAmountRightUsers!!.text = obj.totalAmountRightUsers !!.split(".")[0]
                             if (obj.totalAmountRightUsers != null)
                                 tv_totalAmountLeftUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
+                            if (obj.usertablebalance != null)
+                                fragment_title!!.text ="Down-line Members List "+obj.usertablebalance!!.split(".")[0]
 
                         }
                         progressbar_net!!.visibility = View.GONE
@@ -418,7 +420,6 @@ class NetworkFragment : Fragment() {
     }
     //</editor-fold>
 
-
     fun getObserver(): Observer<ArrayList<Users>> {
         return object : Observer<ArrayList<Users>> {
             override fun onComplete() {
@@ -451,7 +452,7 @@ class NetworkFragment : Fragment() {
                 } else {
                     tv_no_data!!.visibility = View.GONE
                     recylcer_down_member!!.visibility = View.VISIBLE
-                    tv_total!!.text = "Total: $total"
+                    tv_total!!.text = "Total: "+total.toString().split(".")[0]+"PKR"
                 }
             }
 

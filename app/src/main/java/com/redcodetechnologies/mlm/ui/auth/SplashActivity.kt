@@ -1,26 +1,24 @@
 package com.redcodetechnologies.mlm.ui.auth
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import com.redcodetechnologies.mlm.R
-import gr.net.maroulis.library.EasySplashScreen
-
 class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+         Handler().postDelayed(object: Runnable {
+             override fun run() {
+                 startActivity( Intent(this@SplashActivity, SignInActivity::class.java))
+                 finish(); }
 
-        val config = EasySplashScreen(this@SplashActivity)
-                .withFullScreen()
-                .withTargetActivity(SignInActivity::class.java)
-                .withSplashTimeOut(2000)
-                .withLogo(R.drawable.sleepinglogo)
-
-        val view = config.create()
-        setContentView(view)
-
+        }, 1000);
 
     }
+
+
 }

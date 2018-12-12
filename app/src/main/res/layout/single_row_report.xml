@@ -27,7 +27,7 @@
             android:text="Payment Method" />
 
         <TextView
-            android:id="@+id/tv_price"
+            android:id="@+id/tv_acc"
             style="@style/CustomHeaderBlacktextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:text="Price" />
 
         <TextView
-            android:id="@+id/tv_status"
+            android:id="@+id/tv_bnk"
             style="@style/CustomHeaderBlacktextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -253,6 +253,7 @@ class ReportFragment : Fragment() {
         et_rd_ard.text = et_rd_ard.text.toString() + report.ApprovedDate
         et_rd_nap.text = et_rd_nap.text.toString() + report.AmountPayble
         et_rd_pd.text = et_rd_pd.text.toString() + report.PaidDate
+        et_rd_pm.text = et_rd_pm.text.toString() + report.WithdrawalFundMethod
 
         if (dialog_title.text != "PayoutHistory")
             et_rd_pd.visibility = View.GONE

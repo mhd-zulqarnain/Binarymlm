@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 
 import com.redcodetechnologies.mlm.R
@@ -36,6 +37,7 @@ class PendingWDRequestFragment : Fragment() {
     var progressdialog: android.app.AlertDialog? = null
     var recylcer_wd: RecyclerView? = null
     var adapter: WithdrawRequestAdapter? = null
+    lateinit var tv_req_type: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_withdrawlayout, container, false)
@@ -61,6 +63,8 @@ class PendingWDRequestFragment : Fragment() {
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = WithdrawRequestAdapter(activity!!, wdList)
         recylcer_wd!!.adapter = adapter
+        tv_req_type = view!!.findViewById(R.id.tv_req_type)
+        tv_req_type.setText("Requested Date:")
 
         getPendingWithdrawalList()
     }

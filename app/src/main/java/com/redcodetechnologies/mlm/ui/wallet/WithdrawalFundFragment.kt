@@ -73,8 +73,8 @@ class WithdrawalFundFragment : Fragment() {
 
 
         btn_submit_request.setOnClickListener {
-            var packageCurrentAmount = tv_total_pkg_commision.text.toString().toInt()
-            var packageAmountForWithdrawal = tv_pkg_amount_withdrawal.text.toString().toInt()
+            var packageCurrentAmount = tv_total_pkg_commision.text.toString().split(" ")[0].toInt()
+            var packageAmountForWithdrawal = tv_pkg_amount_withdrawal.text.toString().split(" ")[0].toInt().toInt()
             if (packageCurrentAmount >= packageAmountForWithdrawal && ed_amount_withdrawn.text.toString().trim()!="") {
                 submitWithDrawalRequest(object : ServiceListener<String> {
                     override fun success(obj: String) {
@@ -155,19 +155,19 @@ class WithdrawalFundFragment : Fragment() {
                             var obj: Withdrawfund = response.body()!!;
 
                             if (obj.GetUserPackageCommissionAmount != "")
-                                tv_total_pkg_commision.text = obj.GetUserPackageCommissionAmount.split(".")[0]
+                                tv_total_pkg_commision.text = obj.GetUserPackageCommissionAmount.split(".")[0]+" PKR"
 
                             if (obj.PackageName != "")
                                 tv_current_pkg.text = obj.PackageName
 
                             if (obj.GetUserPackageAmountLimitForWithdrawal != "")
-                                tv_pkg_amount_withdrawal.text = obj.GetUserPackageAmountLimitForWithdrawal.split(".")[0]
+                                tv_pkg_amount_withdrawal.text = obj.GetUserPackageAmountLimitForWithdrawal.split(".")[0]+" PKR"
 
                             if (obj.GetUserEWalletAmountInProcess != "")
-                                tv_amount_already_payout.text = obj.GetUserEWalletAmountInProcess + "%"
+                                tv_amount_already_payout.text = obj.GetUserEWalletAmountInProcess.split(".")[0] + "PKR"
 
                             if (obj.PayoutChargesPercent != "")
-                                tv_processing_charges.text = obj.PayoutChargesPercent.split(".")[0] + "PKR"
+                                tv_processing_charges.text = obj.PayoutChargesPercent.split(".")[0] + "%"
 
                             if (obj.MinimumPayout != "")
                                 tv_min_withdraw.text = obj.MinimumPayout.split(".")[0] + "PKR"

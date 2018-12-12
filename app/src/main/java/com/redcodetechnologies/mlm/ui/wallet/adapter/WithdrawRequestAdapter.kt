@@ -44,7 +44,16 @@ class WithdrawRequestAdapter(var ctx: Context, var list: ArrayList<WithdrawalReq
             tv_wd_payment_method!!.text = model.WithdrawalFundMethod
             tv_wd_amount_payable!!.text = model.AmountPayble!!.split(".")[0]
             tv_wd_charges!!.text = model.WithdrawalFundCharge!!.split(".")[0]
-            tv_wd_date!!.text = model.RequestedDate!!.split("T")[0]
+
+            var date =""
+            if(model.RequestedDate!=null) date = model.RequestedDate!!
+            if(model.ApprovedDate!=null) date = model.ApprovedDate!!
+            if(model.PaidDate!=null) date = model.PaidDate!!
+            if(model.RejectedDate!=null) date = model.RejectedDate!!
+
+
+            if(date!="")
+            tv_wd_date!!.text =date.split("T")[0]
 
         }
     }

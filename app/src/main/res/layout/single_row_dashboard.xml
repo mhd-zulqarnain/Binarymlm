@@ -19,9 +19,10 @@
             android:id="@+id/first_image"
             android:layout_width="200dp"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             android:src="@drawable/money_bag"
             />
+
     </LinearLayout>
 
 

@@ -91,8 +91,8 @@ class EWalletSummaryFragment() : Fragment() {
                         if (code == 200 && response.body() != null) {
                             var obj: WalletSummery = response.body()!!
 
-                            tv_bonus_summery_bonus.setText(obj.bonus.split(".")[0])
-                            tv_bonus_summery_balance.setText(obj.witdraw.split(".")[0])
+                            tv_bonus_summery_bonus.setText(obj.bonus.split(".")[0]+" PKR")
+                            tv_bonus_summery_balance.setText(obj.witdraw.split(".")[0]+" PKR")
                         }
                     }
                 })
@@ -121,8 +121,8 @@ class EWalletSummaryFragment() : Fragment() {
                         if (code == 200 && response.body() != null) {
                             var obj: WalletSummery = response.body()!!
 
-                            tv_bonus_ty_bonus.setText(obj.bonus.split(".")[0])
-                            tv_bonus_ty_balance.setText(obj.witdraw.split(".")[0])
+                            tv_bonus_ty_bonus.setText(obj.bonus.split(".")[0]+" PKR")
+                            tv_bonus_ty_balance.setText(obj.witdraw.split(".")[0]+" PKR")
                         }
                     }
                 })
@@ -150,8 +150,8 @@ class EWalletSummaryFragment() : Fragment() {
                         if (code == 200 && response.body() != null) {
                             var obj: WalletSummery = response.body()!!
 
-                            tv_bonus_tm_bonus.setText(obj.bonus.split(".")[0])
-                            tv_bonus_tm_balance.setText(obj.witdraw.split(".")[0])
+                            tv_bonus_tm_bonus.setText(obj.bonus.split(".")[0]+" PKR")
+                            tv_bonus_tm_balance.setText(obj.witdraw.split(".")[0]+" PKR")
                         }
                         progressdialog!!.dismiss()
 

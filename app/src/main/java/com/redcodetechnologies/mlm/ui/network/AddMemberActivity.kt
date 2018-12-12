@@ -364,9 +364,9 @@ class AddMemberActivity : AppCompatActivity() {
         }
 
         var countryIndex = 0;
-        if (spinner_country!!.getSelectedItemPosition() != 0) {
-            countryIndex = spinner_country!!.getSelectedItemPosition() - 1
-        }
+
+        countryIndex = spinner_country!!.getSelectedItemPosition() + 1
+
         var mobile = "+92" + ed_phone.text.toString()
         userModel.name = ed_name.text.toString()
         userModel.username = ed_uname.text.toString()
@@ -376,7 +376,7 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.phone = mobile
         userModel.email = ed_email.text.toString()
         userModel.accountNumber = ""
-        userModel.downlineMemberId = if (downlineMemberId == null) null else downlineMemberId.toString()!!
+        userModel.downlineMemberId = if (downlineMemberId == null) null else downlineMemberId.toString()
         userModel.documentImage = userdocumentImage!! //from spinner
 
         confirmationDialog()

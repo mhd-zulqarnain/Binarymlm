@@ -27,15 +27,6 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class PaidMemberRightFragment : Fragment() {
 
     var disposable: Disposable? = null
@@ -73,10 +64,10 @@ class PaidMemberRightFragment : Fragment() {
         return view
     }
 
-    private fun initView(view: View?) {
-        tv_no_data = view!!.findViewById(R.id.tv_no_data)
-        tv_total = view!!.findViewById(R.id.tv_total)
-        recylcer_wd = view!!.findViewById(R.id.recylcer_down_member)
+    private fun initView(view: View) {
+        tv_no_data = view.findViewById(R.id.tv_no_data)
+        tv_total = view.findViewById(R.id.tv_total)
+        recylcer_wd = view.findViewById(R.id.recylcer_down_member)
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = StatusAdapter(activity!!, wdList)
 

@@ -41,7 +41,7 @@ class PackageAdapter(var ctx: Context, var list: ArrayList<Packages>) : Recycler
             pkg_approval = itemView.findViewById(R.id.pkg_approval)
             pkg_date = itemView.findViewById(R.id.pkg_date)
             pkg_name!!.text = pkg.PackageName
-            pkg_price!!.text = pkg.PackagePrice
+            pkg_price!!.text = pkg.PackagePrice!!.split(".")[0]+" PKR"
             pkg_date!!.text = pkg.PurchaseDate!!.split("T")[0]
 
             var msg = "Approved"

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 
 import com.redcodetechnologies.mlm.R
@@ -33,6 +34,7 @@ class ApprovedPaidFragment : Fragment() {
     var id: Int? = null
     lateinit var token: String
     lateinit var tv_no_data: LinearLayout
+    lateinit var tv_req_type: TextView
     var progressdialog: android.app.AlertDialog? = null
     var recylcer_wd: RecyclerView? = null
     var adapter: WithdrawRequestAdapter? = null
@@ -57,10 +59,12 @@ class ApprovedPaidFragment : Fragment() {
 
     private fun initView(view: View?) {
         tv_no_data = view!!.findViewById(R.id.tv_no_data)
+        tv_req_type = view!!.findViewById(R.id.tv_req_type)
         recylcer_wd = view!!.findViewById(R.id.recylcer_wd_request)
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = WithdrawRequestAdapter(activity!!, wdList)
         recylcer_wd!!.adapter = adapter
+        tv_req_type.setText("Paid Date")
 
         getApprovedPaid()
     }
