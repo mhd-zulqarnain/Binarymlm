@@ -9,6 +9,7 @@ import com.redcodetechnologies.mlm.R
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.support.v7.widget.CardView
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
@@ -104,7 +105,7 @@ class DashBoardFragment : Fragment() {
         val manager =  LinearLayoutManager((activity as Context?)!!, LinearLayout.HORIZONTAL, false)
         recycler_adds!!.layoutManager = manager
         adapter = AdvertismentAdapter(activity!!, frgement_type, adsList){ads->
-
+            viewAdsDialog(Apputils.decodeFromBase64(ads.AdvertisementImage!!))
         }
         if (prefs.getUser(activity!!).userId != null) {
             id = prefs.getUser(activity!!).userId
@@ -160,6 +161,25 @@ class DashBoardFragment : Fragment() {
     }
 
     //<editor-fold desc="Advertisment control">
+
+    private fun viewAdsDialog(bitmap: Bitmap) {
+        val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialog_view_ads, null)
+        val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
+        alertBox.setView(view)
+        alertBox.setCancelable(true)
+        val dialog = alertBox.create()
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        val img_ads: ImageView = view.findViewById(R.id.img_ads)
+        val img_close: ImageView = view.findViewById(R.id.img_close)
+        img_ads.setImageBitmap(bitmap)
+        img_close.setOnClickListener{
+            dialog.dismiss()
+        }
+        dialog.show()
+
+    }
+
     private fun getads() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
