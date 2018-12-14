@@ -93,7 +93,12 @@ class ProfileActivity : AppCompatActivity() {
             id = prefs.getUser(this@ProfileActivity).userId
             token = prefs.getToken(this@ProfileActivity).accessToken!!
 
-            if (prefs.getUser(this@ProfileActivity).isBlock!!) {
+            val isVerified = prefs.getUser(this@ProfileActivity).isVerify!!
+            val isBlock = prefs.getUser(this@ProfileActivity).isBlock!!
+
+            if (isBlock && isVerified) {
+                showVerifiedDialog()
+            } else if (isBlock) {
                 showWarningDialog()
             }
         }
@@ -114,7 +119,6 @@ class ProfileActivity : AppCompatActivity() {
         email = findViewById(R.id.ed_email)
         bankname = findViewById(R.id.ed_bankname)
         accountnumber = findViewById(R.id.ed_accountnumber)
-
         updateprofile = findViewById(R.id.btn_updateprofile)
         name = findViewById(R.id.ed_name)
         username = findViewById(R.id.ed_username)
@@ -211,10 +215,10 @@ class ProfileActivity : AppCompatActivity() {
         spinner_country!!.setSelection(166)
 
         if (obj.upperId != null) {
-            val u_email =if(obj.email.toString()=="null") "" else obj.email.toString()
-            val u_address =if(obj.address.toString()=="null") "" else obj.address.toString()
-            val u_bank =if(obj.bankName.toString()=="null") "" else obj.bankName.toString()
-            val u_account =if(obj.accountNumber.toString()=="null") "" else obj.accountNumber.toString()
+            val u_email = if (obj.email.toString() == "null") "" else obj.email.toString()
+            val u_address = if (obj.address.toString() == "null") "" else obj.address.toString()
+            val u_bank = if (obj.bankName.toString() == "null") "" else obj.bankName.toString()
+            val u_account = if (obj.accountNumber.toString() == "null") "" else obj.accountNumber.toString()
 
             ed_password!!.setText(obj.password.toString())
             bankname!!.setText(u_bank)
@@ -234,6 +238,24 @@ class ProfileActivity : AppCompatActivity() {
 
     fun showWarningDialog() {
         val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dialog_warning, null)
+        val alertBox = AlertDialog.Builder(this@ProfileActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(false)
+        val dialog = alertBox.create()
+
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
+
+        val btn_ok: Button = view.findViewById(R.id.btn_ok)
+        btn_ok.setOnClickListener {
+            dialog.dismiss()
+            finish()
+        }
+        dialog.show()
+
+    }
+
+    fun showVerifiedDialog() {
+        val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dialog_verfied, null)
         val alertBox = AlertDialog.Builder(this@ProfileActivity)
         alertBox.setView(view)
         alertBox.setCancelable(false)
@@ -320,11 +342,11 @@ class ProfileActivity : AppCompatActivity() {
                 Apputils.showMsg(this@ProfileActivity, "Please update profile picture")
                 return
             }
-            if (nicImg == ""||nicImg=="null") {
+            if (nicImg == "" || nicImg == "null") {
                 Apputils.showMsg(this@ProfileActivity, "Please Upload Front Side of NIC")
                 return
             }
-            if (nicImg1 == "" || nicImg1=="null") {
+            if (nicImg1 == "" || nicImg1 == "null") {
                 Apputils.showMsg(this@ProfileActivity, "Please Upload Back Side of NIC")
                 return
             }
@@ -399,7 +421,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     fun updatePref() {
-        var mbl = "+92" + phone!!.text.toString()
+        val mbl = "+92" + phone!!.text.toString()
         obj.name = profileSetup.Name
         obj.country = profileSetup.Country!!.toInt()
         obj.documentImage = profileSetup.DocumentImage
@@ -412,7 +434,7 @@ class ProfileActivity : AppCompatActivity() {
         obj.profileImage = profileImg
         obj.nicImage = profileSetup.NICImage
         obj.nicImage1 = profileSetup.NICImage1
-        obj.isBlock=true
+        obj.isBlock = true
         pref!!.setUser(this@ProfileActivity, obj)
     }
 

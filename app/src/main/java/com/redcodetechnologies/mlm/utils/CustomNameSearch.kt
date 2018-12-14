@@ -14,8 +14,8 @@ class CustomNameSearch(var filterList: ArrayList<Users>, var adapter: DownMember
             val filtered = ArrayList<Users>()
 
             for (i in 0 until filterList.size) {
-                if (filterList!!.get(i).Username?.toUpperCase()!!.contains(constraint)) {
-                    filtered.add(filterList!!.get(i))
+                if (filterList.get(i).Username?.toUpperCase()!!.contains(constraint)) {
+                    filtered.add(filterList.get(i))
                 }
             }
             results.count = filtered.size

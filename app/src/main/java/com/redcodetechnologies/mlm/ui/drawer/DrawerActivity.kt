@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Base64
 import android.view.LayoutInflater
@@ -25,6 +26,7 @@ import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Messages
 import com.redcodetechnologies.mlm.models.MyNotification
 import com.redcodetechnologies.mlm.models.Response
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.drawer.adapter.ExpandListAdapter
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
@@ -119,6 +121,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     fun makeView() {
 
+        var tv_status = headerView.findViewById<TextView>(R.id.tv_status)
 
         val obj = mPref!!.getUser(this@DrawerActivity);
         if (obj.username != null)
@@ -130,9 +133,29 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         if (obj.phone != null)
             headerView.findViewById<TextView>(R.id.tv_package_type).setText(obj.phone.toString());
         if (obj.profileImage != null) {
-            var img = obj.profileImage
+            val img = obj.profileImage
             if (img != "" && img != "null")
                 headerView.findViewById<CircleImageView>(R.id.profile_image_citizen).setImageBitmap(stringtoImage(img.toString()))
+        }
+
+        if (obj.isVerify!!) {
+            tv_status.setText("Verified")
+        } else {
+            if (!obj.isUserActive!! && !obj.isNewRequest!!) {
+                showWarningDialog()
+                tv_status.setText("Rejected")
+                val img = this@DrawerActivity.getResources().getDrawable(R.drawable.ic_pending)
+                tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, img, null)
+            } else if (obj.isUserActive!!) {
+                val img = this@DrawerActivity.resources.getDrawable(R.drawable.ic_active)
+                tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, img, null)
+                tv_status.setText("Active")
+            } else {
+                showWarningDialog()
+                val img = this@DrawerActivity.getResources().getDrawable(R.drawable.ic_pending)
+                tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, img, null)
+                tv_status.setText("Pending")
+            }
         }
     }
 
@@ -191,6 +214,32 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         btn_dismiss.setOnClickListener {
             dialog.dismiss()
+        }
+        dialog.show()
+
+    }
+
+    fun showWarningDialog() {
+        val view: View = LayoutInflater.from(this@DrawerActivity).inflate(R.layout.dialog_warning, null)
+        val alertBox = AlertDialog.Builder(this@DrawerActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(false)
+        val dialog = alertBox.create()
+
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
+        val obj = mPref!!.getUser(this@DrawerActivity);
+
+        val btn_ok: Button = view.findViewById(R.id.btn_ok)
+        val tv_warn: TextView = view.findViewById(R.id.tv_warn)
+        if (!obj.isUserActive!! && !obj.isNewRequest!!)
+            tv_warn.setText("Your account has been rejected!!")
+
+        btn_ok.setOnClickListener {
+            dialog.dismiss()
+            mPref!!.clearToken(this@DrawerActivity)
+            mPref!!.clearUser(this@DrawerActivity)
+            startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
+            finish()
         }
         dialog.show()
 
@@ -272,8 +321,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideoCategoryFragment()).commit()
                     return true
-                }
-                else if (id == 9L) {
+                } else if (id == 9L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
                     return true
@@ -309,8 +357,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         args.putString("Fragment", "Paid-unPaid Downliners")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, DownlinerStatusFragment()).commit()
-                    }
-                    else if (childPosition == 4) {
+                    } else if (childPosition == 4) {
                         args.putString("Fragment", "upgrade ")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, UpgradePackageFragment()).commit()
@@ -506,7 +553,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideoCategoryFragment()).commit()
                     return true
-                }else if (id == 7L) {
+                } else if (id == 7L) {
                     drawer_layout.closeDrawer(GravityCompat.START)
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, VideosListFragment()).commit()
                     return true
@@ -637,6 +684,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
     //</editor-fold>
 
+
     fun saveNotification(obj: MyNotification, service: ServiceListener<String>) {
 
         if (!Apputils.isNetworkAvailable(this@DrawerActivity)) {
@@ -676,6 +724,38 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
 
+    private fun getUserObject() {
+        val token = SharedPrefs.getInstance()!!.getToken(this@DrawerActivity).accessToken
+        val username = SharedPrefs.getInstance()!!.getUser(this@DrawerActivity).username
+        if (!Apputils.isNetworkAvailable(this@DrawerActivity)) {
+            Toast.makeText(this@DrawerActivity, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        ApiClint.getInstance()?.getService()?.getNewRegistoredUser("bearer " + token!!, username!!)
+                ?.enqueue(object : Callback<NewUserRegistration> {
+                    override fun onFailure(call: Call<NewUserRegistration>?, t: Throwable?) {
+                        println("error")
+
+
+                    }
+
+                    override fun onResponse(call: Call<NewUserRegistration>?, response: retrofit2.Response<NewUserRegistration>?) {
+                        print("object success ")
+                        var code: Int = response!!.code()
+                        if (code == 200) {
+                            print("success")
+                            var obj: NewUserRegistration = response.body()!!
+                            SharedPrefs.getInstance()!!.setUser(this@DrawerActivity, obj)
+                            makeView()
+                        } else {
+                            print("error")
+                        }
+
+                    }
+                })
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
         fragment!!.onActivityResult(requestCode, resultCode, data)
@@ -693,5 +773,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        getUserObject()
+    }
 
 }

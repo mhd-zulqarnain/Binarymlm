@@ -41,7 +41,7 @@ class WithdrawalFundFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_withdrawalfund, container, false)
+        val view = inflater.inflate(R.layout.fragment_withdrawalfund, container, false)
         (activity as DrawerActivity).getSupportActionBar()?.setTitle("Wallet Withdrawal Fund")
         (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
 
@@ -67,15 +67,12 @@ class WithdrawalFundFragment : Fragment() {
         tv_prefered_pay_method = view.findViewById(R.id.tv_prefered_pay_method)
         btn_submit_request = view.findViewById(R.id.btn_submit_request)
         ed_amount_withdrawn = view.findViewById(R.id.ed_amount_withdrawn)
-
         getalluserwithdrawfundDetails()
         btn_submit_request.isEnabled = false
-
-
         btn_submit_request.setOnClickListener {
             var packageCurrentAmount = tv_total_pkg_commision.text.toString().split(" ")[0].toInt()
             var packageAmountForWithdrawal = tv_pkg_amount_withdrawal.text.toString().split(" ")[0].toInt().toInt()
-            if (packageCurrentAmount >= packageAmountForWithdrawal && ed_amount_withdrawn.text.toString().trim()!="") {
+            if (packageCurrentAmount >= packageAmountForWithdrawal && ed_amount_withdrawn.text.toString().trim() != "") {
                 submitWithDrawalRequest(object : ServiceListener<String> {
                     override fun success(obj: String) {
                         Apputils.showMsg(activity!!, msg = obj)
@@ -83,11 +80,12 @@ class WithdrawalFundFragment : Fragment() {
 
                     override fun fail(error: ServiceError) {}
                 })
-            }else{
+            } else {
                 Apputils.showMsg(activity!!, "Warning!your amount is less then withdrawal limit")
 
             }
         }
+
     }
 
     fun submitWithDrawalRequest(serviceListener: ServiceListener<String>) {
@@ -155,13 +153,13 @@ class WithdrawalFundFragment : Fragment() {
                             var obj: Withdrawfund = response.body()!!;
 
                             if (obj.GetUserPackageCommissionAmount != "")
-                                tv_total_pkg_commision.text = obj.GetUserPackageCommissionAmount.split(".")[0]+" PKR"
+                                tv_total_pkg_commision.text = obj.GetUserPackageCommissionAmount.split(".")[0] + " PKR"
 
                             if (obj.PackageName != "")
                                 tv_current_pkg.text = obj.PackageName
 
                             if (obj.GetUserPackageAmountLimitForWithdrawal != "")
-                                tv_pkg_amount_withdrawal.text = obj.GetUserPackageAmountLimitForWithdrawal.split(".")[0]+" PKR"
+                                tv_pkg_amount_withdrawal.text = obj.GetUserPackageAmountLimitForWithdrawal.split(".")[0] + " PKR"
 
                             if (obj.GetUserEWalletAmountInProcess != "")
                                 tv_amount_already_payout.text = obj.GetUserEWalletAmountInProcess.split(".")[0] + "PKR"

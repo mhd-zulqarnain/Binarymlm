@@ -52,6 +52,7 @@ class UpgradePackageFragment : Fragment() {
     lateinit var pkg_wallet: TextView;
     lateinit var btn_save: Button;
     lateinit var des_bank_slip: TextView;
+    lateinit var tv_balance: TextView;
     lateinit var view_bank_script: LinearLayout;
     val SELECT_SUPPORT_PHOTO: Int = 32
 
@@ -99,6 +100,7 @@ class UpgradePackageFragment : Fragment() {
         spinner_package = view.findViewById(R.id.spinner_package)
         btn_save = view.findViewById(R.id.btn_save)
         recylcer_pkg_list = view.findViewById(R.id.recylcer_pkg_list)
+        tv_balance = view.findViewById(R.id.tv_balance)
 
         packageListAdapter = PackageAdapter(activity!!, listPackageItem)
         recylcer_pkg_list!!.layoutManager = LinearLayoutManagerWrapper(activity!!, LinearLayout.VERTICAL, false)
@@ -111,6 +113,7 @@ class UpgradePackageFragment : Fragment() {
         des_bank_slip = view.findViewById(R.id.des_bank_slip)
         view_bank_script = view.findViewById(R.id.view_bank_script)
 
+        geteWalletBalance()
         setSpinnerPackages()
         getPackages()
         getusercurrentpackageslist()
@@ -144,7 +147,7 @@ class UpgradePackageFragment : Fragment() {
                 pkg_percent.text = obj.PackagePercent + "%"
                 pkg_price.text = obj.PackagePrice!!.split(".")[0] + " PKR"
                 pkg_validity.text = obj.PackageValidity
-                pkg_wallet.text = obj.PackageMaxWithdrawalAmount!!.split(".")[0]
+                pkg_wallet.text = obj.PackageMaxWithdrawalAmount!!.split(".")[0]+ " PKR"
                 packageId = obj.PackageId!!.toInt()
             }
         })
@@ -266,6 +269,32 @@ class UpgradePackageFragment : Fragment() {
                         packageListAdapter!!.notifyDataSetChanged()
                         progressdialog!!.dismiss();
 
+
+                    }
+                })
+    }
+
+    private fun geteWalletBalance() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        progressdialog!!.show()
+
+
+
+        ApiClint.getInstance()?.getService()?.eWalletSummary(id!!)
+                ?.enqueue(object : Callback<Response> {
+                    override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                        println("error")
+                        progressdialog!!.dismiss();
+                    }
+
+                    override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                        print("object success ")
+                        val balance: String = response!!.message()!!
+                        tv_balance.setText("Ewallet Balance:($balance)")
 
                     }
                 })

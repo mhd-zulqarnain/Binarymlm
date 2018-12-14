@@ -60,11 +60,11 @@ class UserCategoryActivity : AppCompatActivity() {
 
     fun salesExecutive(){
         if (!Apputils.isNetworkAvailable(this@UserCategoryActivity)) {
-            Toast.makeText(this@UserCategoryActivity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@UserCategoryActivity, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
         progressdialog!!.show()
-        ApiClint.getInstance()?.getService()?.approvesaleexecutive("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.approvesaleexecutive("bearer " + token, id!!)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         println("error")
@@ -101,11 +101,11 @@ class UserCategoryActivity : AppCompatActivity() {
 
     fun sleepingPatener(){
         if (!Apputils.isNetworkAvailable(this@UserCategoryActivity)) {
-            Toast.makeText(this@UserCategoryActivity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@UserCategoryActivity, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
         progressdialog!!.show()
-        ApiClint.getInstance()?.getService()?.approvesleepingpartner("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.approvesleepingpartner("bearer " + token, id!!)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         println("error")
@@ -151,14 +151,14 @@ class UserCategoryActivity : AppCompatActivity() {
 
     override fun onStart() {
         prefs = SharedPrefs.getInstance()!!
-        var obj = prefs!!.getUser(this@UserCategoryActivity);
+        val obj = prefs.getUser(this@UserCategoryActivity);
         if(obj.isSleepingPartner == true ){
-            var i :Intent  = Intent(this@UserCategoryActivity, DrawerActivity::class.java)
+            val i :Intent  = Intent(this@UserCategoryActivity, DrawerActivity::class.java)
             i.putExtra("Category","Sleeping")
             startActivity(i)
             finish()
         }else if(obj.isSalesExecutive == true){
-            var i :Intent  = Intent(this@UserCategoryActivity, DrawerActivity::class.java)
+            val i :Intent  = Intent(this@UserCategoryActivity, DrawerActivity::class.java)
             i.putExtra("Category","Sales")
             startActivity(i)
             finish()

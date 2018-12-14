@@ -420,6 +420,7 @@ class NetworkFragment : Fragment() {
     }
     //</editor-fold>
 
+
     fun getObserver(): Observer<ArrayList<Users>> {
         return object : Observer<ArrayList<Users>> {
             override fun onComplete() {
@@ -462,6 +463,7 @@ class NetworkFragment : Fragment() {
                 tokenExpire();
             }
         }
+
     }
 
     //token expire

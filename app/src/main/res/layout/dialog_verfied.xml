@@ -15,16 +15,14 @@
                 android:background="#fff"
                 >
                <ImageView
-                   android:layout_width="80dp"
-                   android:layout_height="80dp"
-                   android:src="@drawable/ic_error_outline_black_24dp"/>
+                   android:layout_width="60dp"
+                   android:layout_height="60dp"
+                   android:src="@drawable/ic_verified_user"/>
                 <TextView
-                    android:id="@+id/tv_warn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="We are reviewing your account!!"
+                    android:text="Your account is verified!!"
                     android:textSize="22sp"
-                    android:layout_marginTop="12dp"
                     android:gravity="center"
                     android:fontFamily="@font/ralewayregular"
                     />
@@ -32,12 +30,12 @@
                 <Button
                     android:id="@+id/btn_ok"
                     android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#c59f1818"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:background="@color/colorRed"
                     android:text="Ok"
                     android:textColor="#fff"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     />
             </LinearLayout>
 

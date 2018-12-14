@@ -175,7 +175,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.4"
-                android:text="YOur total Package Commision"
+                android:text="Your total Package Commision"
                 android:textSize="13sp"
                 android:fontFamily="@font/ralewayregular"
                 />

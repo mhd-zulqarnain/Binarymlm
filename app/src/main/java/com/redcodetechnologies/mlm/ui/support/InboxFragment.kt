@@ -260,10 +260,7 @@ class InboxFragment : Fragment() {
         spinner_receiver.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                if (pos == 1) {
                     reciverId = user.sponsorId!!
-                } else
-                    reciverId = 1
             }
         })
 
@@ -446,6 +443,7 @@ class InboxFragment : Fragment() {
                     }
                 })
     }
+
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Inbox")

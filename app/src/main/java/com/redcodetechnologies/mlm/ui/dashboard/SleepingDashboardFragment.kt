@@ -1,6 +1,7 @@
 package com.redcodetechnologies.mlm.ui.dashboard
 
 import android.app.Activity
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.CardView
@@ -15,6 +16,8 @@ import android.widget.*
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Advertisement
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
+import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.dashboard.adapter.AdvertismentAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
@@ -24,6 +27,8 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import retrofit2.Call
+import retrofit2.Callback
 
 class SleepingDashboardFragment : Fragment() {
     var tv: CardView?=null
@@ -43,7 +48,7 @@ class SleepingDashboardFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view  =inflater.inflate(R.layout.fragment_sleeping_dashboard, container, false)
+        val view  =inflater.inflate(R.layout.fragment_sleeping_dashboard, container, false)
         tv = view.findViewById(R.id.dashboardbalance) as CardView;
         recycler_adds = view.findViewById(R.id.recylcer_adds)
         ads_view = view.findViewById(R.id.ads_view)
@@ -57,6 +62,7 @@ class SleepingDashboardFragment : Fragment() {
 
         progressBar = view.findViewById(R.id.progressBar)
         adapter=AdvertismentAdapter(activity!!, "", adsList){ads->
+            viewAdsDialog(Apputils.decodeFromBase64(ads.AdvertisementImage!!))
 
         }
         val manager = LinearLayoutManager(activity!!, LinearLayout.HORIZONTAL, false)
@@ -74,6 +80,23 @@ class SleepingDashboardFragment : Fragment() {
         return view
     }
 
+    private fun viewAdsDialog(bitmap: Bitmap) {
+        val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialog_view_ads, null)
+        val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
+        alertBox.setView(view)
+        alertBox.setCancelable(true)
+        val dialog = alertBox.create()
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        val img_ads: ImageView = view.findViewById(R.id.img_ads)
+        val img_close: ImageView = view.findViewById(R.id.img_close)
+        img_ads.setImageBitmap(bitmap)
+        img_close.setOnClickListener{
+            dialog.dismiss()
+        }
+        dialog.show()
+
+    }
 
     private fun showBalanaceDialog(view: View) {
 
@@ -127,7 +150,7 @@ class SleepingDashboardFragment : Fragment() {
         progressBar!!.visibility = View.VISIBLE
         ads_view!!.visibility = View.GONE
         val adsObserver = getadvertismentObserver()
-        var adsObservable: Observable<ArrayList<Advertisement>> = MyApiRxClint.getInstance()?.getService()?.getCoinData()!!
+        val adsObservable: Observable<ArrayList<Advertisement>> = MyApiRxClint.getInstance()?.getService()?.getCoinData()!!
         adsObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(adsObserver)
@@ -173,5 +196,6 @@ class SleepingDashboardFragment : Fragment() {
         adsdisposable?.dispose()
         super.onDestroyView()
     }
+
 
 }

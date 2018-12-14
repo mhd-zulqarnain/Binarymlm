@@ -17,14 +17,19 @@ import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.widget.*
 import com.redcodetechnologies.mlm.models.Advertisement
+import com.redcodetechnologies.mlm.models.ApiToken
 import com.redcodetechnologies.mlm.models.DasboardData
 import com.redcodetechnologies.mlm.models.MakeTableData
+import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
+import com.redcodetechnologies.mlm.ui.auth.UserCategoryActivity
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.ui.dashboard.adapter.AdvertismentAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.ServiceError
+import com.redcodetechnologies.mlm.utils.ServiceListener
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import dmax.dialog.SpotsDialog
 import retrofit2.Call
@@ -34,6 +39,7 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers;
+import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
 class DashBoardFragment : Fragment() {
@@ -114,13 +120,13 @@ class DashBoardFragment : Fragment() {
         recycler_adds!!.adapter = adapter
         balance_card!!.setOnClickListener {
             if (click) {
-                showBalanaceDialog(view)
+                showBalanaceDialog()
             }
         }
        getads()
     }
 
-    private fun showBalanaceDialog(view: View) {
+    private fun showBalanaceDialog() {
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialogue_forget_password, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
         alertBox.setView(view)
@@ -310,6 +316,8 @@ class DashBoardFragment : Fragment() {
         activity!!.finish()
     }
 
+
+
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Dashboard")
@@ -321,5 +329,7 @@ class DashBoardFragment : Fragment() {
         adsdisposable?.dispose()
         super.onDestroyView()
     }
+
+
 
 }

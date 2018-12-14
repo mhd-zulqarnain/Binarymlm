@@ -181,6 +181,10 @@ interface RetrofiltService {
     @GET("ewalletsummary/summarymonthly/{userId}/")
     @Headers("Content-Type:application/json")
     fun getSummerythismonth(@Path("userId") userId: String): Call<WalletSummery>
+
+    @GET("eWalletSummary/{userId}/")
+    @Headers("Content-Type:application/json")
+    fun eWalletSummary(@Path("userId") userId: Int): Call<Response>
     //</editor-fold>
 
     //<editor-fold desc="Wallet request">
