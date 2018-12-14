@@ -6,6 +6,7 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -133,6 +134,14 @@ class ProfileActivity : AppCompatActivity() {
         pref = SharedPrefs.getInstance()
         obj = pref!!.getUser(this@ProfileActivity)
 
+        if(obj.isVerify!!){
+            txt_verify.setText("Account verified")
+            txt_verify.setBackgroundColor(Color.GREEN)
+
+        }
+        else
+            txt_verify.setText("Please verfiy your account")
+
         if (obj.userId != null) {
             profileImg = obj.profileImage.toString()
             nicImg = obj.nicImage.toString()
@@ -207,7 +216,7 @@ class ProfileActivity : AppCompatActivity() {
             profileImageDialoge()
         }
 
-        var arrayAdapter = ArrayAdapter.createFromResource(this@ProfileActivity, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
+        val arrayAdapter = ArrayAdapter.createFromResource(this@ProfileActivity, R.array.country_arrays, R.layout.support_simple_spinner_dropdown_item)
 
         spinner_country!!.adapter = arrayAdapter
         spinner_country!!.setTitle("Select Country");
@@ -352,9 +361,7 @@ class ProfileActivity : AppCompatActivity() {
             }
 
             var countryIndex = 0;
-            if (spinner_country!!.getSelectedItemPosition() != 0) {
-                countryIndex = spinner_country!!.getSelectedItemPosition() - 1
-            }
+                countryIndex = spinner_country!!.getSelectedItemPosition() + 1
 
             var mbl = "+92" + phone!!.text.toString()
             profileSetup.Name = name!!.text.toString()

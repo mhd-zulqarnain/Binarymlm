@@ -121,7 +121,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     fun makeView() {
 
-        var tv_status = headerView.findViewById<TextView>(R.id.tv_status)
+        val tv_status = headerView.findViewById<TextView>(R.id.tv_status)
 
         val obj = mPref!!.getUser(this@DrawerActivity);
         if (obj.username != null)
@@ -139,21 +139,20 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
 
         if (obj.isVerify!!) {
+            val img = this@DrawerActivity.getResources().getDrawable(R.drawable.ic_verified_users)
+            tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, img, null)
             tv_status.setText("Verified")
         } else {
+            val img = this@DrawerActivity.getResources().getDrawable(R.drawable.ic_pending)
+            tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, img, null)
+
             if (!obj.isUserActive!! && !obj.isNewRequest!!) {
                 showWarningDialog()
                 tv_status.setText("Rejected")
-                val img = this@DrawerActivity.getResources().getDrawable(R.drawable.ic_pending)
-                tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, img, null)
             } else if (obj.isUserActive!!) {
-                val img = this@DrawerActivity.resources.getDrawable(R.drawable.ic_active)
-                tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, img, null)
-                tv_status.setText("Active")
+                tv_status.setText("Not Verified ")
             } else {
                 showWarningDialog()
-                val img = this@DrawerActivity.getResources().getDrawable(R.drawable.ic_pending)
-                tv_status.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, img, null)
                 tv_status.setText("Pending")
             }
         }
@@ -244,7 +243,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         dialog.show()
 
     }
-
 
     //<editor-fold desc="Menu control">
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -683,7 +681,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     }
     //</editor-fold>
-
 
     fun saveNotification(obj: MyNotification, service: ServiceListener<String>) {
 

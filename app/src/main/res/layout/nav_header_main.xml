@@ -36,9 +36,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_gravity="center"
             android:fontFamily="@font/oswald_bold"
             android:drawableRight="@drawable/ic_verified_users"
             android:text="status"
+            android:layout_marginTop="3dp"
             android:textSize="12sp"
             />
 

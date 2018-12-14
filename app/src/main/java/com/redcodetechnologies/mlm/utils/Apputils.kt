@@ -8,6 +8,8 @@ import android.text.TextUtils
 import android.widget.Toast
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.util.Base64
 import com.google.firebase.iid.FirebaseInstanceId
 import com.redcodetechnologies.mlm.models.Response
@@ -17,11 +19,28 @@ import com.redcodetechnologies.mlm.retrofit.ApiClint
 import retrofit2.Call
 import retrofit2.Callback
 import java.io.ByteArrayOutputStream
+import android.view.ViewGroup
+import android.view.LayoutInflater
+
+
 
 
 class Apputils {
     companion object {
         fun showMsg(ctx: Activity, msg: String) {
+            /*val inflater = ctx.getLayoutInflater()
+            val toast = Toast.makeText(ctx, msg, Toast.LENGTH_LONG)
+            val view = toast.getView()
+
+//Gets the actual oval background of the Toast then sets the colour filter
+            view.getBackground().setColorFilter(ctx.resources.getColor(), PorterDuff.Mode.SRC_IN)
+
+//Gets the TextView from the Toast so it can be editted
+            val text = view.findViewById(android.R.id.message)
+            text.setTextColor(Color.WHITE)
+
+            toast.show()
+            */
             Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show()
         }
 

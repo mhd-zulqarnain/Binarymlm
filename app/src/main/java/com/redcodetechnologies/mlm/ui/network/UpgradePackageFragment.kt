@@ -235,7 +235,6 @@ class UpgradePackageFragment : Fragment() {
                 })
     }
 
-
     private fun getusercurrentpackageslist() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
@@ -293,8 +292,8 @@ class UpgradePackageFragment : Fragment() {
 
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
-                        val balance: String = response!!.message()!!
-                        tv_balance.setText("Ewallet Balance:($balance)")
+                        val balance: String = response!!.body()!!.message!!
+                        tv_balance.setText("Ewallet Balance:($balance PKR)")
 
                     }
                 })
