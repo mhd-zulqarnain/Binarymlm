@@ -267,10 +267,6 @@ class ReportFragment : Fragment() {
 
     }
 
-    override fun onAttach(activity: Activity?) {
-        super.onAttach(activity)
-
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUSET_GALLERY_CODE && resultCode == Activity.RESULT_OK && data != null) {

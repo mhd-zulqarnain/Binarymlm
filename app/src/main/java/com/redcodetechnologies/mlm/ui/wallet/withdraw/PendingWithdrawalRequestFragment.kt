@@ -57,13 +57,13 @@ class PendingWDRequestFragment : Fragment() {
         return view
     }
 
-    private fun initView(view: View?) {
-        tv_no_data = view!!.findViewById(R.id.tv_no_data)
-        recylcer_wd = view!!.findViewById(R.id.recylcer_wd_request)
+    private fun initView(view: View) {
+        tv_no_data = view.findViewById(R.id.tv_no_data)
+        recylcer_wd = view.findViewById(R.id.recylcer_wd_request)
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = WithdrawRequestAdapter(activity!!, wdList)
         recylcer_wd!!.adapter = adapter
-        tv_req_type = view!!.findViewById(R.id.tv_req_type)
+        tv_req_type = view.findViewById(R.id.tv_req_type)
         tv_req_type.setText("Requested Date:")
 
         getPendingWithdrawalList()
@@ -72,7 +72,7 @@ class PendingWDRequestFragment : Fragment() {
     fun getPendingWithdrawalList() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         progressdialog!!.show()

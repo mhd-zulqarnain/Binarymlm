@@ -90,7 +90,7 @@ class SentFragment : Fragment() {
 
     fun getMessages(){
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         progressBar.visibility = View.VISIBLE

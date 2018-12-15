@@ -294,23 +294,10 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     private fun updateButtonVisibilities() {
-        // ivSettings.visibility = View.GONE
         if (player == null) {
             return
         }
 
-        val mappedTrackInfo = trackSelector!!.currentMappedTrackInfo ?: return
-
-        /*for (i in 0 until mappedTrackInfo.rendererCount) {
-            val trackGroups = mappedTrackInfo.getTrackGroups(i)
-            if (trackGroups.length != 0) {
-                if (player!!.getRendererType(i) == C.TRACK_TYPE_VIDEO) {
-                    *//*ivSettings.visibility = View.VISIBLE
-                    ivSettings.setOnClickListener(this)
-                    ivSettings.tag = i*//*
-                }
-            }
-        }*/
     }
 
     public override fun onStart() {

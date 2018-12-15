@@ -143,7 +143,7 @@ class SleepingDashboardFragment : Fragment() {
     private fun getads() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
 
@@ -172,7 +172,7 @@ class SleepingDashboardFragment : Fragment() {
 
             override fun onError(e: Throwable) {
                 progressBar!!.visibility = View.VISIBLE
-                Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+                Apputils.showMsg(activity!!, "Network error")
 
             }
 

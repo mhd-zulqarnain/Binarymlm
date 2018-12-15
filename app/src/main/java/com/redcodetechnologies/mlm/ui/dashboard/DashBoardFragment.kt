@@ -189,7 +189,7 @@ class DashBoardFragment : Fragment() {
     private fun getads() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
 
@@ -219,7 +219,7 @@ class DashBoardFragment : Fragment() {
 
             override fun onError(e: Throwable) {
                 progressbar_dash!!.visibility = View.VISIBLE
-                Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+                Apputils.showMsg(activity!!, "Network error")
 
             }
 

@@ -144,7 +144,7 @@ class TransactionFragment : Fragment() {
     //<editor-fold desc="Transactions">
     fun getOverAllTransactionList() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
 
@@ -160,7 +160,7 @@ class TransactionFragment : Fragment() {
     fun getThisMonthTransactionList() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         progressBar!!.visibility = View.VISIBLE
@@ -177,7 +177,7 @@ class TransactionFragment : Fragment() {
     //<editor-fold desc="E wallet debit">
     fun getOverAllEWalletDebittList() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
 
@@ -193,7 +193,7 @@ class TransactionFragment : Fragment() {
     fun getThisMonthEWalletDebitList() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         progressBar!!.visibility = View.VISIBLE
@@ -208,7 +208,7 @@ class TransactionFragment : Fragment() {
     //<editor-fold desc="E wallet Credit">
     fun getOverAllEWalletCreditList() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
 
@@ -224,7 +224,7 @@ class TransactionFragment : Fragment() {
     fun getThisMonthEWalletCreditList() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         progressBar!!.visibility = View.VISIBLE

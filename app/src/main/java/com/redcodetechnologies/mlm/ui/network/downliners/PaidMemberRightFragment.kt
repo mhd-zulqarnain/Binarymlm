@@ -94,7 +94,7 @@ class PaidMemberRightFragment : Fragment() {
     fun getUsersData() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         progressdialog!!.show()

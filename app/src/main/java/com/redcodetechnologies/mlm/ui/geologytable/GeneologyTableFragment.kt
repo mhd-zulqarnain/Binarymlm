@@ -124,7 +124,7 @@ class GeneologyTableFragment : Fragment() {
 
     fun getPackageCommisionList() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
 
@@ -143,7 +143,7 @@ class GeneologyTableFragment : Fragment() {
 
     fun getMyDirectCommsionList() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         if (commitionlist.isEmpty()) {
@@ -161,7 +161,7 @@ class GeneologyTableFragment : Fragment() {
 
     fun getMyTableCommsionList() {
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         if (commitionlist.isEmpty()) {

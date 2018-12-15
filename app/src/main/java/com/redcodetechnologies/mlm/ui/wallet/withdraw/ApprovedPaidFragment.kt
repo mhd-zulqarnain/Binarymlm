@@ -59,8 +59,8 @@ class ApprovedPaidFragment : Fragment() {
 
     private fun initView(view: View?) {
         tv_no_data = view!!.findViewById(R.id.tv_no_data)
-        tv_req_type = view!!.findViewById(R.id.tv_req_type)
-        recylcer_wd = view!!.findViewById(R.id.recylcer_wd_request)
+        tv_req_type = view.findViewById(R.id.tv_req_type)
+        recylcer_wd = view.findViewById(R.id.recylcer_wd_request)
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = WithdrawRequestAdapter(activity!!, wdList)
         recylcer_wd!!.adapter = adapter
@@ -72,7 +72,7 @@ class ApprovedPaidFragment : Fragment() {
     fun getApprovedPaid() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, "Network error", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         val thisMonthtransaction = getThisMonthObserver()

@@ -137,7 +137,7 @@ class WithdrawalFundFragment : Fragment() {
             return
         }
         progressdialog.show()
-        ApiClint.getInstance()?.getService()?.getalluserwithdrawfund(id!!)
+        ApiClint.getInstance()?.getService()?.getalluserwithdrawfund(id)
                 ?.enqueue(object : Callback<Withdrawfund> {
                     override fun onFailure(call: Call<Withdrawfund>?, t: Throwable?) {
                         println("error")

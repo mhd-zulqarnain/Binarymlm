@@ -9,21 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import android.support.v7.widget.SearchView
-import com.google.gson.Gson
-import com.redcodetechnologies.mlm.*
+import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.utils.Apputils
-import com.redcodetechnologies.mlm.ui.network.adapter.DownMemberAdapter
 import com.redcodetechnologies.mlm.models.MakeTableData
 import com.redcodetechnologies.mlm.models.users.Users
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.ui.auth.SignInActivity
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
-import com.redcodetechnologies.mlm.ui.network.MemberDetailActivity
 import com.redcodetechnologies.mlm.ui.network.adapter.DirectMemberAdapter
 import com.redcodetechnologies.mlm.utils.LinearLayoutManagerWrapper
 import com.redcodetechnologies.mlm.utils.SharedPrefs
-import dmax.dialog.SpotsDialog
 import retrofit2.Call
 import retrofit2.Callback
 import java.util.*
@@ -123,13 +118,13 @@ class DirectMemberFragment : Fragment() {
     fun getviewData() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
 
         progrees_direct!!.visibility = View.VISIBLE
 
-        ApiClint.getInstance()?.getService()?.getMaketableData("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.getMaketableData("bearer " + token, id!!)
                 ?.enqueue(object : Callback<MakeTableData> {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
                         println("error")
@@ -177,7 +172,7 @@ class DirectMemberFragment : Fragment() {
     fun getUserReferedMembers() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
-            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            Apputils.showMsg(activity!!, "Network error")
             return
         }
         list.clear()
