@@ -65,7 +65,6 @@ class AddMemberActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_member)
-        var toolbar: Toolbar = findViewById(R.id.toolbar_top)
         prefs = SharedPrefs.getInstance()!!
         if (prefs.getUser(this@AddMemberActivity).userId != null) {
             token = prefs.getToken(this@AddMemberActivity).accessToken!!
@@ -246,7 +245,7 @@ class AddMemberActivity : AppCompatActivity() {
 
         } else {
             //getDownLineLeft
-            ApiClint.getInstance()?.getService()?.getdropDownMembersLeft("bearer " + token!!, id!!)
+            ApiClint.getInstance()?.getService()?.getdropDownMembersLeft("bearer " + token, id!!)
                     ?.enqueue(object : Callback<java.util.ArrayList<DropDownMembers>> {
                         override fun onFailure(call: Call<java.util.ArrayList<DropDownMembers>>?, t: Throwable?) {
                             println("error")

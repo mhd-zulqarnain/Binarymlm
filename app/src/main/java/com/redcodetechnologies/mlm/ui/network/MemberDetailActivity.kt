@@ -97,12 +97,12 @@ class MemberDetailActivity : AppCompatActivity() {
         }
 
 
-            if (!Apputils.isNetworkAvailable(this!!)) {
-                Toast.makeText(this!!, " Network error ", Toast.LENGTH_SHORT).show()
+            if (!Apputils.isNetworkAvailable(this)) {
+                Toast.makeText(this, " Network error ", Toast.LENGTH_SHORT).show()
                 return
             }
 
-            ApiClint.getInstance()?.getService()?.getDownlinersImage("bearer " + token!!, id!!)
+            ApiClint.getInstance()?.getService()?.getDownlinersImage("bearer " + token, id!!)
                     ?.enqueue(object : Callback<Response> {
 
                         override fun onFailure(call: Call<Response>?, t: Throwable?) {
@@ -231,7 +231,7 @@ class MemberDetailActivity : AppCompatActivity() {
             userList.clear()
             showPrgressbar()
             val observer = getObserver()
-            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, user!!.UserId!!.toInt())
+            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token, user!!.UserId!!.toInt())
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer)

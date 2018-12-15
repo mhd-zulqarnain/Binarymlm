@@ -178,7 +178,7 @@ class UpgradePackageFragment : Fragment() {
                         var code: Int = response!!.code()
 
                         if (code == 200) {
-                            response?.body()?.forEach { pkg ->
+                            response.body()?.forEach { pkg ->
                                 listPackages.add(pkg)
                             }
                             if (response.body()!!.size == 0) {

@@ -132,7 +132,7 @@ class GeneologyTableFragment : Fragment() {
             commitionlist.clear()
         }
 
-        progressBar!!.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         val commisionObserver = getCommisionObserver()
         val transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMyPackageComission(id!!)
         transactionObservable.subscribeOn(Schedulers.io())
@@ -150,7 +150,7 @@ class GeneologyTableFragment : Fragment() {
             commitionlist.clear()
         }
 
-        progressBar!!.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         val commisionObserver = getCommisionObserver()
         val transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMyDirectCommsionList(id!!)
         transactionObservable.subscribeOn(Schedulers.io())
@@ -168,7 +168,7 @@ class GeneologyTableFragment : Fragment() {
             commitionlist.clear()
         }
 
-        progressBar!!.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         val commisionObserver = getCommisionObserver()
         val transactionObservable: Observable<ArrayList<TransactionModal>> = MyApiRxClint.getInstance()!!.getService()!!.getMyTableCommsionList(id!!)
         transactionObservable.subscribeOn(Schedulers.io())
@@ -180,7 +180,7 @@ class GeneologyTableFragment : Fragment() {
     fun getCommisionObserver(): Observer<ArrayList<TransactionModal>> {
         return object : Observer<ArrayList<TransactionModal>> {
             override fun onComplete() {
-                progressBar!!.visibility = View.GONE
+                progressBar.visibility = View.GONE
             }
 
             override fun onSubscribe(d: Disposable) {

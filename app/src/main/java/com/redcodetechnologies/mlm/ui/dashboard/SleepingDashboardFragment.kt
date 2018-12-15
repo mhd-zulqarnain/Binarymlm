@@ -72,7 +72,7 @@ class SleepingDashboardFragment : Fragment() {
         tv!!.setOnClickListener{
             if(click){
                 if(GetEWalletSummarySponsorBonus!!.visibility!=View.VISIBLE)
-                showBalanaceDialog(view)
+                showBalanaceDialog()
             }
         }
 
@@ -98,7 +98,7 @@ class SleepingDashboardFragment : Fragment() {
 
     }
 
-    private fun showBalanaceDialog(view: View) {
+    private fun showBalanaceDialog() {
 
         val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialogue_forget_password, null)
         val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
@@ -178,7 +178,7 @@ class SleepingDashboardFragment : Fragment() {
 
             override fun onNext(response: ArrayList<Advertisement>) {
 
-                response?.forEach { ads ->
+                response.forEach { ads ->
                     adsList.add(ads)
                 }
                 adapter!!.notifyDataSetChanged()

@@ -225,7 +225,7 @@ class DashBoardFragment : Fragment() {
 
             override fun onNext(response: ArrayList<Advertisement>) {
 
-                response?.forEach { ads ->
+                response.forEach { ads ->
                     adsList.add(ads)
                 }
                 adapter!!.notifyDataSetChanged()
@@ -241,7 +241,7 @@ class DashBoardFragment : Fragment() {
             Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
             return
         }
-        ApiClint.getInstance()?.getService()?.getdashboardData("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.getdashboardData("bearer " + token, id!!)
                 ?.enqueue(object : Callback<DasboardData> {
                     override fun onFailure(call: Call<DasboardData>?, t: Throwable?) {
                         println("error")
@@ -251,7 +251,7 @@ class DashBoardFragment : Fragment() {
 
                     override fun onResponse(call: Call<DasboardData>?, response: retrofit2.Response<DasboardData>?) {
                         print("object success ")
-                        var code: Int = response!!.code()
+                        val code: Int = response!!.code()
 
                         if (code == 401) {
                             Apputils.showMsg(activity!!, "Token Expired")
@@ -260,7 +260,7 @@ class DashBoardFragment : Fragment() {
                         }
                         if (code == 200) {
                             print("success")
-                            var obj: DasboardData = response.body()!!
+                            val obj: DasboardData = response.body()!!
 
                             if (obj.totaldirectcommission != null)
                                 totaldirectcommission!!.text = obj.totaldirectcommission!!.split(".")[0];
@@ -315,7 +315,6 @@ class DashBoardFragment : Fragment() {
         startActivity(Intent(activity!!, SignInActivity::class.java))
         activity!!.finish()
     }
-
 
 
     override fun onAttach(activity: Activity?) {

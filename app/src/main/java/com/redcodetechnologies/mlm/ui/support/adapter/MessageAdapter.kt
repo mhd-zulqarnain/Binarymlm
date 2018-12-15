@@ -156,8 +156,6 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
                         var code: Int = response!!.code()
-                        var status = response.body()!!.success
-                        var msg = response.body()!!.message
                         if (code == 200) {
                             datalist.removeAt(currPosition)
                             notifyItemRemoved(currPosition)

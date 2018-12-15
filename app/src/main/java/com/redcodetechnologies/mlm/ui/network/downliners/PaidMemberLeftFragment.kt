@@ -74,10 +74,10 @@ class PaidMemberLeftFragment : Fragment() {
         return view
     }
 
-    private fun initView(view: View?) {
-        tv_no_data = view!!.findViewById(R.id.tv_no_data)
-        tv_total = view!!.findViewById(R.id.tv_total)
-        recylcer_wd = view!!.findViewById(R.id.recylcer_down_member)
+    private fun initView(view: View) {
+        tv_no_data = view.findViewById(R.id.tv_no_data)
+        tv_total = view.findViewById(R.id.tv_total)
+        recylcer_wd = view.findViewById(R.id.recylcer_down_member)
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = StatusAdapter(activity!!, wdList)
         recylcer_wd!!.adapter = adapter

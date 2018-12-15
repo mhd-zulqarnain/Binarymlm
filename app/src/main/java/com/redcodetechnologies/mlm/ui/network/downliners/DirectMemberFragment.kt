@@ -177,7 +177,7 @@ class DirectMemberFragment : Fragment() {
         }
         list.clear()
         progrees_direct!!.visibility = View.VISIBLE
-        ApiClint.getInstance()?.getService()?.getUserReferedMembers("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.getUserReferedMembers("bearer " + token, id!!)
                 ?.enqueue(object : Callback<ArrayList<Users>> {
                     override fun onFailure(call: Call<ArrayList<Users>>?, t: Throwable?) {
                         println("error")

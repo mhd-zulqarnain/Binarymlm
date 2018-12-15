@@ -85,14 +85,14 @@ class NetworkFragment : Fragment() {
 
     }
 
-    private fun initView(view: View?) {
-        layout_add_right = view!!.findViewById(R.id.layout_add_right)
-        layout_add_left = view!!.findViewById(R.id.layout_add_left)
-        add_right = view!!.findViewById(R.id.add_right)
-        add_left = view!!.findViewById(R.id.add_left)
+    private fun initView(view: View) {
+        layout_add_right = view.findViewById(R.id.layout_add_right)
+        layout_add_left = view.findViewById(R.id.layout_add_left)
+        add_right = view.findViewById(R.id.add_right)
+        add_left = view.findViewById(R.id.add_left)
         recylcer_down_member = view.findViewById(R.id.recylcer_down_member) //RecyclerVIEW
         search_view = view.findViewById(R.id.search_view)
-        fragment_title = view!!.findViewById(R.id.fragment_title)
+        fragment_title = view.findViewById(R.id.fragment_title)
         tv_no_data = view.findViewById(R.id.tv_no_data)
         tv_total = view.findViewById(R.id.tv_total)
         progressbar_list_data = view.findViewById(R.id.progressbar_list_data)

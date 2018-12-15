@@ -75,7 +75,7 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
 
                 if (packagecommisionlist.IsWithdrawlRequestByUser == "false") {
                     tv_name!!.text = "You can send request"
-                    if (isWithdrawalOn!!)
+                    if (isWithdrawalOn)
                     btn_ok!!.visibility = View.VISIBLE
                     tv_name!!.setTextColor(Color.parseColor("#FFA10A1C"));
 
