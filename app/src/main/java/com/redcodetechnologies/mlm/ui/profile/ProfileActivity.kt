@@ -96,11 +96,16 @@ class ProfileActivity : AppCompatActivity() {
 
             val isVerified = prefs.getUser(this@ProfileActivity).isVerify!!
             val isBlock = prefs.getUser(this@ProfileActivity).isBlock!!
+            val isNewRequest = prefs.getUser(this@ProfileActivity).isNewRequest!!
+
 
             if (isBlock && isVerified) {
                 showVerifiedDialog()
             } else if (isBlock) {
-                showWarningDialog()
+                showWarningDialog("")
+            }
+            if(isNewRequest){
+                showWarningDialog("Your account is not active")
             }
         }
 
@@ -245,7 +250,7 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-    fun showWarningDialog() {
+    fun showWarningDialog(msg:String) {
         val view: View = LayoutInflater.from(this@ProfileActivity).inflate(R.layout.dialog_warning, null)
         val alertBox = AlertDialog.Builder(this@ProfileActivity)
         alertBox.setView(view)
@@ -255,6 +260,10 @@ class ProfileActivity : AppCompatActivity() {
         dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
 
         val btn_ok: Button = view.findViewById(R.id.btn_ok)
+        val tv_warn: TextView = view.findViewById(R.id.tv_warn)
+        if(msg!=""){
+            tv_warn.setText(msg)
+        }
         btn_ok.setOnClickListener {
             dialog.dismiss()
             finish()

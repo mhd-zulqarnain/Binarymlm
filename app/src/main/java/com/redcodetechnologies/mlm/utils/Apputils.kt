@@ -34,7 +34,7 @@ class Apputils {
             val view = inflater.inflate(R.layout.custom_toast_layout, null)
             val tv= view.findViewById<TextView>(R.id.message)
             tv.setText(msg)
-            toast.setGravity(Gravity.CENTER, 0, 0);
+        //    toast.setGravity(Gravity.CENTER, 0, 0);
             toast.view = view
             toast.show()
         }
@@ -56,7 +56,6 @@ class Apputils {
             }
             return netInfo != null && netInfo.isConnectedOrConnecting
         }
-
 
         fun decodeFromBase64(img: String): Bitmap {
             var imageBytes = Base64.decode(img, Base64.DEFAULT)

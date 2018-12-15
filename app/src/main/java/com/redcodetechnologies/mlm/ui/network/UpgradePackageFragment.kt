@@ -81,6 +81,7 @@ class UpgradePackageFragment : Fragment() {
         }
         (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Upgrade Package")
 
+
         initView(view)
         return view
     }
@@ -113,30 +114,34 @@ class UpgradePackageFragment : Fragment() {
         des_bank_slip = view.findViewById(R.id.des_bank_slip)
         view_bank_script = view.findViewById(R.id.view_bank_script)
 
-        geteWalletBalance()
-        setSpinnerPackages()
-        getPackages()
-        getusercurrentpackageslist()
+        val isNewRequest = prefs.getUser(activity!!).isNewRequest!!
 
-        btn_save.setOnClickListener {
-            ewalletupgradeinvestment()
-        }
-        bank_addition.setOnClickListener {
-            pickImage(SELECT_SUPPORT_PHOTO)
-        }
-        transaction_options.setOnCheckedChangeListener(
-                RadioGroup.OnCheckedChangeListener { group, checkId ->
-                    if (wallet_radio.isChecked) {
-                        view_bank_script.visibility = View.GONE
-                        isBank = false
-                    }
-                    if (bank_radio.isChecked) {
-                        view_bank_script.visibility = View.VISIBLE
-                        isBank = true
+            geteWalletBalance()
+            setSpinnerPackages()
+            getPackages()
+            getusercurrentpackageslist()
 
-                    }
-                })
+            btn_save.setOnClickListener {
+                if (isNewRequest) {
+                    Apputils.showMsg(activity!!, "Account is not active")
+                } else
+                    ewalletupgradeinvestment()
+            }
+            bank_addition.setOnClickListener {
+                pickImage(SELECT_SUPPORT_PHOTO)
+            }
+            transaction_options.setOnCheckedChangeListener(
+                    RadioGroup.OnCheckedChangeListener { group, checkId ->
+                        if (wallet_radio.isChecked) {
+                            view_bank_script.visibility = View.GONE
+                            isBank = false
+                        }
+                        if (bank_radio.isChecked) {
+                            view_bank_script.visibility = View.VISIBLE
+                            isBank = true
 
+                        }
+                    })
     }
 
     fun setSpinnerPackages() {
@@ -147,7 +152,7 @@ class UpgradePackageFragment : Fragment() {
                 pkg_percent.text = obj.PackagePercent + "%"
                 pkg_price.text = obj.PackagePrice!!.split(".")[0] + " PKR"
                 pkg_validity.text = obj.PackageValidity
-                pkg_wallet.text = obj.PackageMaxWithdrawalAmount!!.split(".")[0]+ " PKR"
+                pkg_wallet.text = obj.PackageMaxWithdrawalAmount!!.split(".")[0] + " PKR"
                 packageId = obj.PackageId!!.toInt()
             }
         })
@@ -218,10 +223,10 @@ class UpgradePackageFragment : Fragment() {
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
                         var code: Int = response!!.code()
-                        var res:Response = response.body()!!
+                        var res: Response = response.body()!!
                         if (code == 200) {
                             Toast.makeText(activity!!, response.body()!!.message, Toast.LENGTH_SHORT).show()
-                            if(res.message=="Package save successfully"){
+                            if (res.message == "Package save successfully") {
                                 getusercurrentpackageslist()
                             }
                         }
@@ -242,7 +247,7 @@ class UpgradePackageFragment : Fragment() {
         }
         progressdialog!!.show()
 
-        if(!listPackageItem.isEmpty()){
+        if (!listPackageItem.isEmpty()) {
             listPackageItem.clear()
         }
 

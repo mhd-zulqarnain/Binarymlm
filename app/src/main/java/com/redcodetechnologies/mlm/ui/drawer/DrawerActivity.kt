@@ -152,7 +152,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             } else if (obj.isUserActive!!) {
                 tv_status.setText("Not Verified ")
             } else {
-                showWarningDialog()
+                //showWarningDialog()
                 tv_status.setText("Pending")
             }
         }

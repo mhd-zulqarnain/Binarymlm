@@ -1,9 +1,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/relativeLayout1"
-    android:background="@android:color/white">
+    android:background="@drawable/custom_toast_background"
+
+    >
 
     <TextView
 
@@ -13,9 +15,8 @@
         android:layout_width="wrap_content"
         android:text="Toast message "
         android:gravity="center"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:padding="4dp"
-        android:background="@drawable/custom_toast_background"
         android:fontFamily="@font/ralewayregular"
         android:textColor="@android:color/white">
     </TextView>

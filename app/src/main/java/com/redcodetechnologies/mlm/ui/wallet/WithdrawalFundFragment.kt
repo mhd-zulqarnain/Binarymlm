@@ -57,6 +57,7 @@ class WithdrawalFundFragment : Fragment() {
     }
 
     private fun initView(view: View) {
+        val isNewRequest = SharedPrefs.getInstance()!!.getUser(activity!!).isNewRequest!!
 
         tv_current_pkg = view.findViewById(R.id.tv_current_pkg)
         tv_total_pkg_commision = view.findViewById(R.id.tv_total_pkg_commision)
@@ -70,19 +71,25 @@ class WithdrawalFundFragment : Fragment() {
         getalluserwithdrawfundDetails()
         btn_submit_request.isEnabled = false
         btn_submit_request.setOnClickListener {
-            var packageCurrentAmount = tv_total_pkg_commision.text.toString().split(" ")[0].toInt()
-            var packageAmountForWithdrawal = tv_pkg_amount_withdrawal.text.toString().split(" ")[0].toInt().toInt()
-            if (packageCurrentAmount >= packageAmountForWithdrawal && ed_amount_withdrawn.text.toString().trim() != "") {
-                submitWithDrawalRequest(object : ServiceListener<String> {
-                    override fun success(obj: String) {
-                        Apputils.showMsg(activity!!, msg = obj)
-                    }
 
-                    override fun fail(error: ServiceError) {}
-                })
+            if (isNewRequest) {
+                Apputils.showMsg(activity!!, "Account is not active")
+
             } else {
-                Apputils.showMsg(activity!!, "Warning!your amount is less then withdrawal limit")
+                val packageCurrentAmount = tv_total_pkg_commision.text.toString().split(" ")[0].toInt()
+                val packageAmountForWithdrawal = tv_pkg_amount_withdrawal.text.toString().split(" ")[0].toInt().toInt()
+                if (packageCurrentAmount >= packageAmountForWithdrawal && ed_amount_withdrawn.text.toString().trim() != "") {
+                    submitWithDrawalRequest(object : ServiceListener<String> {
+                        override fun success(obj: String) {
+                            Apputils.showMsg(activity!!, msg = obj)
+                        }
 
+                        override fun fail(error: ServiceError) {}
+                    })
+                } else {
+                    Apputils.showMsg(activity!!, "Warning!your amount is less then withdrawal limit")
+
+                }
             }
         }
 

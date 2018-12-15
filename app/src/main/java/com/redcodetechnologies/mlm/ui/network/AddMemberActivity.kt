@@ -77,9 +77,14 @@ class AddMemberActivity : AppCompatActivity() {
             type = "right"
         } else
             type = intent.getStringExtra("type")
+
+        val isNewRequest = prefs.getUser(this@AddMemberActivity).isNewRequest!!
+
+        if (isNewRequest)
+            alert_text.setText("Account is not active")
+
+
         initView()
-
-
     }
 
     fun initView() {
@@ -134,9 +139,13 @@ class AddMemberActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             finish()
         }
+        val isNewRequest = prefs.getUser(this@AddMemberActivity).isNewRequest!!
 
         btn_ok.setOnClickListener {
-            validation()
+            if (isNewRequest) {
+                Apputils.showMsg(this@AddMemberActivity, "Account is not active")
+            } else
+                validation()
         }
 
 
@@ -153,6 +162,7 @@ class AddMemberActivity : AppCompatActivity() {
         })
         getdownliner()
         getPackages()
+
     }
 
     //<editor-fold desc="Spinner package and downliner">
@@ -295,26 +305,6 @@ class AddMemberActivity : AppCompatActivity() {
         spinner_downliner!!.adapter = downlinerAdapter;
     }
 
-    /* fun setpackagepinner() {
-
-         packageAdapter = PackageSpinnerAdapter(this@AddMemberActivity, listPackages)
-         spinner_package!!.adapter = packageAdapter;
-
-         spinner_package!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-             override fun onNothingSelected(p0: AdapterView<*>?) {}
-             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                 if (pos != 0) {
-                     var obj: Packages = spinner_package!!.getSelectedItem() as Packages
-                     package_price = obj.PackagePrice
-                     userPackage = obj.PackageId
-                 }else{
-                     package_price = null
-                     userPackage = null
-                 }
-             }
-         })
-
-     }*/
     //</editor-fold>
 
     fun tokenExpire() {
@@ -385,7 +375,7 @@ class AddMemberActivity : AppCompatActivity() {
 
     //<editor-fold desc="Adding memeber functions">
     private fun addLeftMember() {
-        var token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
+        val token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
         if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
             return
@@ -403,9 +393,9 @@ class AddMemberActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
-                        var code: Int = response!!.code()
-                        var status = response.body()!!.success
-                        var msg = response.body()!!.message
+                        val code: Int = response!!.code()
+                        val status = response.body()!!.success
+                        val msg = response.body()!!.message
                         if (code == 200) {
                         } else {
                             progressdialog!!.dismiss()
@@ -423,7 +413,7 @@ class AddMemberActivity : AppCompatActivity() {
     }
 
     private fun addRightMember() {
-        var token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
+        val token = SharedPrefs.getInstance()!!.getToken(this@AddMemberActivity).accessToken
         if (!Apputils.isNetworkAvailable(this@AddMemberActivity)) {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
             return
