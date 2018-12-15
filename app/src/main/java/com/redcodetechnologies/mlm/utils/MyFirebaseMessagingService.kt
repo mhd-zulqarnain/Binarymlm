@@ -77,9 +77,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val channelId = "Default"
         val builder = NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.sleepinglogo)
+                .setSmallIcon(R.drawable.ic_notify_name)
                 .setContentTitle(notification.NotificationName)
-                .setColor(getResources().getColor(R.color.colorWhite))
+                .setColor(0x008000)
                 .setContentText(notification.NotificationDescription).setAutoCancel(true).setContentIntent(pendingIntent)
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -131,7 +131,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val channelId = "Default"
         val builder = NotificationCompat.Builder(this, channelId)
-                .setSmallIcon(R.drawable.sleepinglogo)
+                .setSmallIcon(R.drawable.ic_notify_name)
                 .setContentTitle("New Message")
                 .setContentText(notification.Message).setAutoCancel(true).setContentIntent(pendingIntent)
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

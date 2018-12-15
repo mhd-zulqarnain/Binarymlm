@@ -83,7 +83,6 @@ class AddMemberActivity : AppCompatActivity() {
         if (isNewRequest)
             alert_text.setText("Account is not active")
 
-
         initView()
     }
 

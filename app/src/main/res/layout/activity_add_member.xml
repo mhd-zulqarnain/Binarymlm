@@ -226,6 +226,7 @@
             android:textStyle="bold"
             android:padding="3dp"
             android:text="warning "
+            android:visibility="gone"
             android:drawableRight="@drawable/ic_warning_white"
             android:background="@color/colorRed"
             android:textSize="15sp"
