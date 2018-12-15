@@ -80,6 +80,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         mPref = SharedPrefs.getInstance()
         setSupportActionBar(toolbar)
         initView()
+
     }
 
     fun initView() {
@@ -115,7 +116,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
         getSupportActionBar()!!.setTitle("Dashboard")
 
-        makeView()
+        getUserObject()
         askPermission(Manifest.permission.CAMERA, 1)
     }
 
@@ -770,9 +771,5 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        getUserObject()
-    }
 
 }

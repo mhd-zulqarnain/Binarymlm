@@ -42,6 +42,7 @@ import io.reactivex.schedulers.Schedulers;
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
+@Suppress("DEPRECATION")
 class DashBoardFragment : Fragment() {
     var frgement_type = "MyPackageCommisionList"
     var balance_card: CardView? = null
@@ -77,7 +78,7 @@ class DashBoardFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         prefs = SharedPrefs.getInstance()!!
         initView(view)
         getviewData()
@@ -132,18 +133,18 @@ class DashBoardFragment : Fragment() {
         alertBox.setView(view)
         alertBox.setCancelable(true)
         val dialog = alertBox.create()
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        var tvtitle: TextView = view.findViewById(R.id.tvtitle)
-        var tvdescription: TextView = view.findViewById(R.id.tvdescription)
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
+        val tvtitle: TextView = view.findViewById(R.id.tvtitle)
+        val tvdescription: TextView = view.findViewById(R.id.tvdescription)
         tvtitle.text = "Enter Password"
         tvdescription.layoutParams = LinearLayout.LayoutParams(10, 10, 1.75f)
         tvdescription.text = ""
 
-        var ed_email_address: EditText = view.findViewById(R.id.ed_email)
+        val ed_email_address: EditText = view.findViewById(R.id.ed_email)
         ed_email_address.visibility = View.GONE
-        var pass: EditText = view.findViewById(R.id.ed_pass)
+        val pass: EditText = view.findViewById(R.id.ed_pass)
         pass.visibility = View.VISIBLE
-        var button_submit: Button = view.findViewById(R.id.btn_submit)
+        val button_submit: Button = view.findViewById(R.id.btn_submit)
 
         button_submit.setOnClickListener {
             if (pass.text.toString().trim(' ').length < 1) {

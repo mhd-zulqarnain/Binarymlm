@@ -38,6 +38,7 @@ import retrofit2.Callback
 import java.io.ByteArrayOutputStream
 
 
+@Suppress("DEPRECATION")
 class ProfileActivity : AppCompatActivity() {
 
 

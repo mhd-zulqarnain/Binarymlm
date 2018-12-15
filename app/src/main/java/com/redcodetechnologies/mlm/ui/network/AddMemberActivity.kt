@@ -37,6 +37,7 @@ import java.io.InputStream
 import java.util.*
 import kotlin.collections.ArrayList
 
+@Suppress("DEPRECATION")
 class AddMemberActivity : AppCompatActivity() {
     val REQUSET_GALLERY_CODE: Int = 43
     lateinit var type: String;
@@ -55,8 +56,6 @@ class AddMemberActivity : AppCompatActivity() {
     lateinit var token: String
 
     var userdocumentImage: String? = null
-    var package_price: String? = null
-    var userPackage: String? = null
     var downlineMemberId: Int? = null
     var downlineMemberName = "none"
 
@@ -602,6 +601,7 @@ class AddMemberActivity : AppCompatActivity() {
                         }
                         progressdialog!!.dismiss()
                         if (status!!) {
+
                             alert_text.visibility = View.GONE
                             btn_ok.isEnabled = true
 
