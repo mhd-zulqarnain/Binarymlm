@@ -32,7 +32,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:clickable="true"
-
                 android:foreground="@drawable/custom_ripple_view"
                 android:padding="10dp">
 
@@ -40,18 +39,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:weightSum="3.5"
+                    >
 
                     <ImageView
                         android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:padding="10dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
                         android:src="@drawable/left_arrow" />
 
                     <TextView
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
                         android:gravity="center"
                         android:text="Left Amount Remaing" />
 
@@ -59,7 +62,8 @@
                         android:id="@+id/tv_leftRemaingAmount"
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:text="0 PKR"
                         android:textStyle="bold" />
 
@@ -70,7 +74,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-
                 android:clickable="true"
                 android:foreground="@drawable/custom_ripple_view"
                 android:padding="10dp"
@@ -81,18 +84,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:weightSum="3.5"
+
+                    >
 
                     <ImageView
                         android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:padding="10dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
                         android:src="@drawable/right_arrow" />
 
                     <TextView
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Right Remaining Amount" />
@@ -101,7 +109,8 @@
                         android:id="@+id/tv_rightRemaingAmount"
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:text="0"
                         android:textStyle="bold" />
 
@@ -123,18 +132,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:weightSum="3.5"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:padding="10dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
                         android:src="@drawable/multiple_users_silhouette" />
 
                     <TextView
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Total Left Users" />
@@ -143,7 +155,8 @@
                         android:id="@+id/tv_totalLeftUsers"
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:text="0"
                         android:textStyle="bold" />
 
@@ -174,27 +187,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:weightSum="3.5"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:padding="10dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
                         android:src="@drawable/multiple_users_silhouette" />
 
                     <TextView
 
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
                         android:layout_gravity="center"
+                        android:gravity="center"
                         android:text="Total Right Users" />
 
                     <TextView
                         android:id="@+id/tv_totalRightUsers"
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:text="0 "
                         android:textStyle="bold" />
 
@@ -216,19 +234,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:weightSum="3.5"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:padding="10dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
                         android:src="@drawable/money_bag" />
 
                     <TextView
 
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Total Amount Right Users" />
@@ -237,7 +258,8 @@
                         android:id="@+id/tv_totalAmountRightUsers"
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:text="0"
                         android:textStyle="bold" />
 
@@ -249,8 +271,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:clickable="true"
-
-
                 android:foreground="@drawable/custom_ripple_view"
                 android:padding="10dp"
 
@@ -260,18 +280,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                        android:weightSum="3.5"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:padding="10dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
                         android:src="@drawable/money_bag" />
 
                     <TextView
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5"
                         android:gravity="center"
                         android:text="Total Amount Left Users" />
 
@@ -279,7 +302,8 @@
                         android:id="@+id/tv_totalAmountLeftUsers"
                         style="@style/CustomBlacktextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:text="0"
                         android:textStyle="bold" />
 
@@ -517,19 +541,20 @@
 
         </LinearLayout>
     </LinearLayout>
+
         <LinearLayout
             android:id="@+id/progressbar_net"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:background="#d4121111"
+            android:gravity="center"
 
             >
+
             <ProgressBar
                 android:layout_width="50dp"
-                android:gravity="center"
                 android:layout_height="50dp"
-                />
+                android:gravity="center" />
         </LinearLayout>
     </FrameLayout>
 

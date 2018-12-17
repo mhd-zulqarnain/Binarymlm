@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.users.Users
@@ -55,7 +54,7 @@ class UnPaidMemberLeftFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_un_paid_member_left, container, false)
+        val view = inflater.inflate(R.layout.fragment_paid_unpaid_member, container, false)
 
 
         prefs = SharedPrefs.getInstance()!!
@@ -73,10 +72,10 @@ class UnPaidMemberLeftFragment : Fragment() {
         return view
     }
 
-    private fun initView(view: View?) {
-        tv_no_data = view!!.findViewById(R.id.tv_no_data)
-        tv_total = view!!.findViewById(R.id.tv_total)
-        recylcer_wd = view!!.findViewById(R.id.recylcer_down_member)
+    private fun initView(view: View) {
+        tv_no_data = view.findViewById(R.id.tv_no_data)
+        tv_total = view.findViewById(R.id.tv_total)
+        recylcer_wd = view.findViewById(R.id.recylcer_down_member)
         recylcer_wd!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = StatusAdapter(activity!!, wdList)
         recylcer_wd!!.adapter = adapter
@@ -135,7 +134,8 @@ class UnPaidMemberLeftFragment : Fragment() {
                     tv_total.setText("0 PKR (0 PKR Total)")
                 } else {
                     tv_no_data.visibility = View.GONE
-                    tv_total.setText("$total PKR ($total PKR Total)")
+                    tv_total.setText("$total PKR ")
+
                 }
             }
 

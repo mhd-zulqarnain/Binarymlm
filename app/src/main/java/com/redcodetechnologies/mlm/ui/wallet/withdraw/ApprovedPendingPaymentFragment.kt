@@ -93,7 +93,7 @@ class ApprovedPendingPaymentFragment : Fragment() {
             }
 
             override fun onNext(t: ArrayList<WithdrawalRequestModal>) {
-                t?.forEach { tranactions ->
+                t.forEach { tranactions ->
                     wdList.add(tranactions)
                 }
                 adapter!!.notifyDataSetChanged()

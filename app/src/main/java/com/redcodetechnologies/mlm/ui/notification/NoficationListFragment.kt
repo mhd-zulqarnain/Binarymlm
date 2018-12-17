@@ -41,7 +41,7 @@ class NoficationListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.fragment_notification_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_notification_list, container, false)
 
         frgement_type = arguments?.getString("Fragment").toString();
 

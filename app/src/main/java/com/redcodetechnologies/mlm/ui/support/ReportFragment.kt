@@ -45,6 +45,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.Exception
 
 
 class ReportFragment : Fragment() {
@@ -137,10 +138,10 @@ class ReportFragment : Fragment() {
 
         btn_gen_Pdf.setOnClickListener {
 
-            if (list.size!=0)
-            generatePdf()
+            if (list.size != 0)
+                generatePdf()
             else
-                Apputils.showMsg(activity!!,"No Data to form the report")
+                Apputils.showMsg(activity!!, "No Data to form the report")
         }
         return view
     }
@@ -273,12 +274,13 @@ class ReportFragment : Fragment() {
         et_rd_uname.text = et_rd_uname.text.toString() + report.Username
         et_rd_an.text = et_rd_an.text.toString() + report.AccountNumber
         et_rd_bn.text = et_rd_bn.text.toString() + report.BankName
-        et_rd_wc.text = et_rd_wc.text.toString() + report.WithdrawalFundCharge!!.split(".")[0]+" PKR"
-        et_rd_ard.text = et_rd_ard.text.toString() + report.ApprovedDate
-        if(report.AmountPayble!=null)
-        et_rd_nap.text = et_rd_nap.text.toString() + report.AmountPayble!!.split(".")[0]+" PKR"
-        if(report.PaidDate!=null)
-        et_rd_pd.text = et_rd_pd.text.toString() + report.PaidDate!!.split("T")[0]
+        et_rd_wc.text = et_rd_wc.text.toString() + report.WithdrawalFundCharge!!.split(".")[0] + " PKR"
+        if (report.ApprovedDate != null)
+            et_rd_ard.text = et_rd_ard.text.toString() + report.ApprovedDate!!.split("T")[0]
+        if (report.AmountPayble != null)
+            et_rd_nap.text = et_rd_nap.text.toString() + report.AmountPayble!!.split(".")[0] + " PKR"
+        if (report.PaidDate != null)
+            et_rd_pd.text = et_rd_pd.text.toString() + report.PaidDate!!.split("T")[0]
 
         et_rd_pm.text = et_rd_pm.text.toString() + report.WithdrawalFundMethod
 
@@ -347,13 +349,24 @@ class ReportFragment : Fragment() {
         doc.add(table)
         doc.close()
         print("generated $filepath")
-        Apputils.showMsg(activity!!,"Report generated successfully")
+        Apputils.showMsg(activity!!, "Report generated successfully")
 
+//        val pdfIntent = Intent(Intent.ACTION_VIEW);
+//        pdfIntent.setDataAndType(Uri.parse(filepath), "application/pdf");
+//        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//
+//        try {
+//            startActivity(pdfIntent);
+//        } catch ( e:Exception) {
+//
+//            Apputils.showMsg(activity!!, "Can't read pdf file")
+//        }
         makeNotification(filepath,"report$random.pdf")
     }
-    fun makeNotification(path:String,fileName:String){
 
-        var data:Uri
+    fun makeNotification(path: String, fileName: String) {
+
+        var data: Uri
         val file = File(path)
         val intent = Intent(Intent.ACTION_VIEW)
         if (Build.VERSION.SDK_INT < 24) {
@@ -364,15 +377,15 @@ class ReportFragment : Fragment() {
         intent.setDataAndType(data, "application/pdf")
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-      /*  val pendingIntent = PendingIntent.getActivity(activity!!, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-        val builder = NotificationCompat.Builder(activity!!)
-                 builder.setSmallIcon(R.drawable.ic_notify_name)
-                .setContentTitle("Report Generated")
-                .setContentText(fileName).setAutoCancel(true).setContentIntent(pendingIntent)
+        /*  val pendingIntent = PendingIntent.getActivity(activity!!, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+          val builder = NotificationCompat.Builder(activity!!)
+                   builder.setSmallIcon(R.drawable.ic_notify_name)
+                  .setContentTitle("Report Generated")
+                  .setContentText(fileName).setAutoCancel(true).setContentIntent(pendingIntent)
 
-        val manager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.notify(1, builder.build());
-*/
+          val manager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+          manager.notify(1, builder.build());
+  */
         val pendingIntent = PendingIntent.getActivity(activity!!, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val channelId = "Default"
         val builder = NotificationCompat.Builder(activity!!, channelId)

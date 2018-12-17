@@ -23,7 +23,7 @@ class DownlinerStatusFragment : Fragment() {
         strip.setPadding(-200,0,0,0)
         val adapter = DownlinerAdapter(activity!!.supportFragmentManager)
         viewPager.adapter = adapter
-        (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Paid UnPaid Downliners")
+        (activity as DrawerActivity).getSupportActionBar()!!.setTitle("Downliners Status")
         return view
     }
 
