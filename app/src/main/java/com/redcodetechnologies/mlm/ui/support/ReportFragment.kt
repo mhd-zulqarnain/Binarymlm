@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
@@ -19,6 +20,13 @@ import com.redcodetechnologies.mlm.models.Report
 import java.util.*
 import android.text.Editable
 import android.text.TextWatcher
+import com.itextpdf.text.BaseColor
+import com.itextpdf.text.Document
+import com.itextpdf.text.Element
+import com.itextpdf.text.Paragraph
+import com.itextpdf.text.pdf.PdfPCell
+import com.itextpdf.text.pdf.PdfPTable
+import com.itextpdf.text.pdf.PdfWriter
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.SharedPrefs
@@ -27,6 +35,7 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.io.FileOutputStream
 
 
 class ReportFragment : Fragment() {
@@ -46,6 +55,7 @@ class ReportFragment : Fragment() {
     var search_view: EditText? = null
     lateinit var progressBar: LinearLayout
     lateinit var tv_no_data: LinearLayout
+    lateinit var btn_gen_Pdf: Button
 
     var dialog: AlertDialog? = null
     var frgement_type = ""
@@ -61,6 +71,7 @@ class ReportFragment : Fragment() {
         recylcer_down_member = view.findViewById(R.id.recylcer_down_member)
         progressBar = view.findViewById(R.id.progressBar)
         tv_no_data = view.findViewById(R.id.tv_no_data)
+        btn_gen_Pdf = view.findViewById(R.id.btn_gen_Pdf)
         recylcer_down_member!!.layoutManager = LinearLayoutManager((activity as Context?)!!, LinearLayout.VERTICAL, false)
 
         frgement_type = arguments?.getString("Fragment").toString();
@@ -70,10 +81,10 @@ class ReportFragment : Fragment() {
             token = prefs.getToken(activity!!).accessToken!!
         }
 
-     /*   list.add(Report("asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd"))
-        list.add(Report("asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd"))
-        list.add(Report("asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd"))
-      */  adapter = ReportAdapter(activity!!, list) { post ->
+        /*   list.add(Report("asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd"))
+           list.add(Report("asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd"))
+           list.add(Report("asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd","asdfasd"))
+         */  adapter = ReportAdapter(activity!!, list) { post ->
             openreportdialog(list[post])
         }
         recylcer_down_member!!.adapter = adapter
@@ -114,6 +125,14 @@ class ReportFragment : Fragment() {
         (activity as DrawerActivity).getSupportActionBar()?.setTitle(title)
         (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
 
+
+        btn_gen_Pdf.setOnClickListener {
+
+            if (list.size!=0)
+            generatePdf()
+            else
+                Apputils.showMsg(activity!!,"No Data to form the report")
+        }
         return view
     }
 
@@ -278,6 +297,50 @@ class ReportFragment : Fragment() {
         if (disposable != null)
             disposable!!.dispose()
         super.onDestroyView()
+    }
+
+    fun generatePdf() {
+        val doc = Document()
+        val random = Random().nextInt(100)
+        val filepath = Environment.getExternalStorageDirectory().path + "/report$random.pdf"
+        PdfWriter.getInstance(doc, FileOutputStream(filepath))
+        doc.open()
+
+        val table = PdfPTable(7);
+
+        table.setWidthPercentage(100F);
+        table.setSpacingBefore(0f);
+        table.setSpacingAfter(0f);
+
+        val cell = PdfPCell()
+        cell.setColspan(7);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setPadding(5.0f);
+        table.addCell(cell);
+
+        table.addCell("User Name ");
+        table.addCell("Payment Method");
+        table.addCell("Account Number");
+        table.addCell("Bank Name");
+        table.addCell("Net Amount Payble");
+        table.addCell("Withdrawal Charges");
+        table.addCell("Approved Request Date");
+
+        list.forEach { obj ->
+            table.addCell(obj.Username);
+            table.addCell(obj.WithdrawalFundMethod);
+            table.addCell(obj.AccountNumber);
+            table.addCell(obj.BankName);
+            table.addCell(obj.AmountPayble);
+            table.addCell(obj.WithdrawalFundCharge);
+            table.addCell(obj.ApprovedDate)
+        }
+
+        doc.add(table)
+        doc.close()
+        print("generated $filepath")
+        Apputils.showMsg(activity!!,"Report generated successfully")
+
     }
 
 }

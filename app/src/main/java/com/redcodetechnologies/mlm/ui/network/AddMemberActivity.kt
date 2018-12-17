@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
@@ -15,6 +16,9 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import com.itextpdf.text.Document
+import com.itextpdf.text.Paragraph
+import com.itextpdf.text.pdf.PdfWriter
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Packages
 import com.redcodetechnologies.mlm.models.Response
@@ -31,9 +35,7 @@ import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_add_member.*
 import retrofit2.Call
 import retrofit2.Callback
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.InputStream
+import java.io.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -730,5 +732,6 @@ class AddMemberActivity : AppCompatActivity() {
         val imageBytes = outStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
+
 
 }

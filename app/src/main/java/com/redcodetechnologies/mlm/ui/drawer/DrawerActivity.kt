@@ -118,6 +118,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         getUserObject()
         askPermission(Manifest.permission.CAMERA, 1)
+        askPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 4)
     }
 
     fun makeView() {
@@ -707,8 +708,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     fun stringtoImage(encodedString: String): Bitmap? {
         try {
-            var encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            var bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
+            val encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            val bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
             return bitmap;
 
         } catch (e: Exception) {

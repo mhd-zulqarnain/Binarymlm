@@ -25,6 +25,17 @@
     android:fontFamily="@font/ralewayregular"
     />
 
+
+    <Button
+        android:id="@+id/btn_gen_Pdf"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:background="@color/colorRed"
+        android:text="PDF"
+        android:textColor="#fff"
+        android:onClick="generatePdf"
+        android:layout_margin="5dp"
+        />
     <LinearLayout
         android:id="@+id/seller_table_spinner"
         android:layout_width="match_parent"
@@ -40,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center"
             android:weightSum="6">
 
             <TextView
