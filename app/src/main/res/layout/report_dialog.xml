@@ -67,7 +67,7 @@
         android:textSize="20sp"
 
         android:layout_margin="5dp"
-        android:text="Withdrawal Charges: " />
+        android:text=" Charges: " />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
         android:textSize="20sp"
         android:id="@+id/et_rd_ard"
         android:gravity="center"
-        android:text="Approved Request Date: " />
+        android:text="Requested Date: " />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
         android:textSize="20sp"
         android:id="@+id/et_rd_nap"
         android:layout_margin="5dp"
-        android:text="Net Amount Payble: " />
+        android:text="Amount Payble: " />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
