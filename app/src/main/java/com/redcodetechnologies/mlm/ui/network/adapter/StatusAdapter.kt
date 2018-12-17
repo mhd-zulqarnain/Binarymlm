@@ -50,7 +50,7 @@ class StatusAdapter(var ctx: Context, var list: ArrayList<Users>) : RecyclerView
 
 
             tv_username!!.text = model.Username
-            tv_amount!!.text = model.PaidAmount
+            tv_amount!!.text = model.PaidAmount!!.split(".")[0]+" PKR"
             tv_sponername!!.text = model.SponsorName
 
             //  tv_price!!.text = order.BitPrice

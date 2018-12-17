@@ -11,14 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.users.Users
-import com.redcodetechnologies.mlm.models.wallet.WithdrawalRequestModal
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.ui.network.adapter.StatusAdapter
-import com.redcodetechnologies.mlm.ui.wallet.adapter.WithdrawRequestAdapter
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import dmax.dialog.SpotsDialog
@@ -29,15 +25,6 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class PaidMemberLeftFragment : Fragment() {
 
     var disposable: Disposable? = null
@@ -51,14 +38,13 @@ class PaidMemberLeftFragment : Fragment() {
     var adapter: StatusAdapter? = null
     lateinit var tv_total: TextView
     var total: Double = 0.0
-
+    private var isViewShown = false
     var search_view: SearchView? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_paid_unpaid_member, container, false)
 
-
+        if (!isViewShown) {
         prefs = SharedPrefs.getInstance()!!
         if (prefs.getUser(activity!!).userId != null) {
             id = prefs.getUser(activity!!).userId
@@ -70,7 +56,7 @@ class PaidMemberLeftFragment : Fragment() {
                 .setTheme(R.style.CustomProgess)
                 .build()
         initView(view)
-
+        }
         return view
     }
 
@@ -105,20 +91,25 @@ class PaidMemberLeftFragment : Fragment() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Apputils.showMsg(activity!!, "Network error")
+            return
+        }
 
             progressdialog!!.show()
-
+            if(!wdList.isEmpty()){
+                wdList.clear()
+            }
             val dataOberver = getDataOberver()
             val thismothObservable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getuserpaidmembersleftlist(id!!)
             thismothObservable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(dataOberver)
-        }
 
     }
 
     fun getDataOberver(): Observer<ArrayList<Users>> {
         return object : Observer<ArrayList<Users>> {
+            var total: Double = 0.0
+
             override fun onComplete() {
                 progressdialog!!.hide()
             }
@@ -148,4 +139,13 @@ class PaidMemberLeftFragment : Fragment() {
         }
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (getView() != null) {
+            isViewShown = true;
+            getUsersData()
+        } else {
+            isViewShown = false;
+        }
+    }
 }

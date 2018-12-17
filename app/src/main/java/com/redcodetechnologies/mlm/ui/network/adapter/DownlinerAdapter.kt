@@ -20,10 +20,10 @@ class DownlinerAdapter internal constructor(fm: FragmentManager) : FragmentState
         var fragment: Fragment? = null
 
         when (position) {
-            0 -> fragment = PaidMemberLeftFragment()
-            1 -> fragment = UnPaidMemberLeftFragment()
-            2 -> fragment = PaidMemberRightFragment()
-            3 -> fragment = UnPaidMemberRightFragment()
+            0 -> return PaidMemberLeftFragment()
+            1 -> return  UnPaidMemberLeftFragment()
+            2 -> return PaidMemberRightFragment()
+            3 -> return UnPaidMemberRightFragment()
         }
 
         return fragment

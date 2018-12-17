@@ -26,15 +26,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class UnPaidMemberRightFragment : Fragment() {
 
 
@@ -51,25 +43,26 @@ class UnPaidMemberRightFragment : Fragment() {
     var total: Double = 0.0
 
     var search_view: SearchView? = null
+    private var isViewShown = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_paid_unpaid_member, container, false)
 
-
-        prefs = SharedPrefs.getInstance()!!
-        if (prefs.getUser(activity!!).userId != null) {
-            id = prefs.getUser(activity!!).userId
-            token = prefs.getToken(activity!!).accessToken!!
+        if (!isViewShown) {
+            prefs = SharedPrefs.getInstance()!!
+            if (prefs.getUser(activity!!).userId != null) {
+                id = prefs.getUser(activity!!).userId
+                token = prefs.getToken(activity!!).accessToken!!
+            }
+            progressdialog = SpotsDialog.Builder()
+                    .setContext(activity!!)
+                    .setMessage("Loading!!")
+                    .setTheme(R.style.CustomProgess)
+                    .build()
+            initView(view)
         }
-        progressdialog = SpotsDialog.Builder()
-                .setContext(activity!!)
-                .setMessage("Loading!!")
-                .setTheme(R.style.CustomProgess)
-                .build()
-        initView(view)
-
         return view
     }
 
@@ -107,7 +100,9 @@ class UnPaidMemberRightFragment : Fragment() {
             return
         }
         progressdialog!!.show()
-
+        if(!wdList.isEmpty()){
+            wdList.clear()
+        }
         val dataOberver = getDataOberver()
         val thismothObservable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getuserunpaidmembersrightlist(id!!)
         thismothObservable.subscribeOn(Schedulers.io())
@@ -117,6 +112,8 @@ class UnPaidMemberRightFragment : Fragment() {
 
     fun getDataOberver(): Observer<ArrayList<Users>> {
         return object : Observer<ArrayList<Users>> {
+            var total: Double = 0.0
+
             override fun onComplete() {
                 progressdialog!!.hide()
             }
@@ -146,7 +143,15 @@ class UnPaidMemberRightFragment : Fragment() {
         }
     }
 
-
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (getView() != null) {
+            isViewShown = true;
+            getUsersData()
+        } else {
+            isViewShown = false;
+        }
+    }
 
 
 }
