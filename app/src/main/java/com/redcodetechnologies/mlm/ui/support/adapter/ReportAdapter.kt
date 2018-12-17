@@ -54,8 +54,8 @@ class ReportAdapter(var ctx: Context, var datalist: ArrayList<Report>, private v
 
             tv_uname!!.text = report.Username
             tv_payment_method!!.text = report.WithdrawalFundMethod
-            var an :String = report.AccountNumber!!.substring(0,7) +".."
-            tv_acc!!.text = an
+//            var an :String = report.AccountNumber!!.substring(0,7) +".."
+            tv_acc!!.text = report.AccountNumber
             tv_bnk!!.text = report.BankName
    }
     }

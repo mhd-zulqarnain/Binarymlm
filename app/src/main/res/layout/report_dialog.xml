@@ -20,7 +20,7 @@
         style="@style/CustomHeadingtextStyle"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
-        android:textSize="30sp"
+        android:textSize="25sp"
         />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
@@ -29,7 +29,7 @@
         android:layout_margin="5dp"
         android:id="@+id/et_rd_uname"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="User Name: " />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
@@ -38,7 +38,7 @@
         android:id="@+id/et_rd_pm"
         android:layout_margin="5dp"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:text="Payment Method: " />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
@@ -47,15 +47,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:gravity="center"
-        android:textSize="20sp"
-        android:text="Account Number: " />
+        android:textSize="18sp"
+        android:text="Account #: " />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/et_rd_bn"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_margin="5dp"
         android:text="Bank Name: " />
     <TextView
@@ -64,47 +64,47 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/et_rd_wc"
-        android:textSize="20sp"
+        android:textSize="18sp"
 
         android:layout_margin="5dp"
-        android:text=" Charges: " />
+        android:text="Charges: " />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:id="@+id/et_rd_ard"
         android:gravity="center"
-        android:text="Requested Date: " />
+        android:text="Approved Date: " />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:id="@+id/et_rd_nap"
         android:layout_margin="5dp"
-        android:text="Amount Payble: " />
+        android:text="Payble: " />
     <TextView
         style="@style/CustomHeaderBlacktextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/et_rd_pd"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_margin="5dp"
         android:text="Paid Date: " />
     <Button
         android:id="@+id/btn_rd_ok"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="35dp"
-        android:text="Ok"
+        android:text="OK"
         android:layout_marginLeft="5dp"
-        android:background="@color/colorRed"
+        android:background="#cf942323"
         android:layout_gravity="center"
         style="@style/CustomWhitetextStyle"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:layout_marginTop="15dp"
         />
 </LinearLayout></LinearLayout>

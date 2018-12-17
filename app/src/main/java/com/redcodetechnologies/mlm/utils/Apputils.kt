@@ -21,8 +21,8 @@ import android.widget.TextView
 import com.redcodetechnologies.mlm.R
 import android.view.Gravity
 import android.view.LayoutInflater
-
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class Apputils {
@@ -93,6 +93,15 @@ class Apputils {
                         }
                     })
 
+        }
+
+        fun getDate(time:String):String{
+
+            val date = Date()
+            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+
+
+            return  ""
         }
     }
 
