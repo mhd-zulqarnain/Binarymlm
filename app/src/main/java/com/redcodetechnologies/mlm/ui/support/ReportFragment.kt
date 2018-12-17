@@ -1,11 +1,18 @@
 package com.redcodetechnologies.mlm.ui.support
 
 import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.support.v4.app.Fragment
+import android.support.v4.app.NotificationCompat
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -20,6 +27,7 @@ import com.redcodetechnologies.mlm.models.Report
 import java.util.*
 import android.text.Editable
 import android.text.TextWatcher
+import android.webkit.MimeTypeMap
 import com.itextpdf.text.BaseColor
 import com.itextpdf.text.Document
 import com.itextpdf.text.Element
@@ -35,6 +43,7 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.io.File
 import java.io.FileOutputStream
 
 
@@ -172,7 +181,6 @@ class ReportFragment : Fragment() {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer)
-
     }
 
     fun getpayoutwithdrawinprocess() {
@@ -199,7 +207,6 @@ class ReportFragment : Fragment() {
         return object : Observer<ArrayList<Report>> {
             override fun onComplete() {
                 progressBar.visibility = View.GONE
-
 
             }
 
@@ -263,15 +270,16 @@ class ReportFragment : Fragment() {
         val btn_rd_ok: Button = view.findViewById(R.id.btn_rd_ok)
 
         dialog_title.text = arguments!!.getString("Fragment")
-
-
         et_rd_uname.text = et_rd_uname.text.toString() + report.Username
         et_rd_an.text = et_rd_an.text.toString() + report.AccountNumber
         et_rd_bn.text = et_rd_bn.text.toString() + report.BankName
-        et_rd_wc.text = et_rd_wc.text.toString() + report.WithdrawalFundCharge
+        et_rd_wc.text = et_rd_wc.text.toString() + report.WithdrawalFundCharge!!.split(".")[0]+" PKR"
         et_rd_ard.text = et_rd_ard.text.toString() + report.ApprovedDate
-        et_rd_nap.text = et_rd_nap.text.toString() + report.AmountPayble
-        et_rd_pd.text = et_rd_pd.text.toString() + report.PaidDate
+        if(report.AmountPayble!=null)
+        et_rd_nap.text = et_rd_nap.text.toString() + report.AmountPayble!!.split(".")[0]+" PKR"
+        if(report.PaidDate!=null)
+        et_rd_pd.text = et_rd_pd.text.toString() + report.PaidDate!!.split("T")[0]
+
         et_rd_pm.text = et_rd_pm.text.toString() + report.WithdrawalFundMethod
 
         if (dialog_title.text != "PayoutHistory")
@@ -282,7 +290,6 @@ class ReportFragment : Fragment() {
         }
 
         dialog!!.show()
-
 
     }
 
@@ -299,6 +306,7 @@ class ReportFragment : Fragment() {
         super.onDestroyView()
     }
 
+    //<editor-fold desc="Pdf Report generation ">
     fun generatePdf() {
         val doc = Document()
         val random = Random().nextInt(100)
@@ -341,6 +349,46 @@ class ReportFragment : Fragment() {
         print("generated $filepath")
         Apputils.showMsg(activity!!,"Report generated successfully")
 
+        makeNotification(filepath,"report$random.pdf")
     }
+    fun makeNotification(path:String,fileName:String){
+
+        var data:Uri
+        val file = File(path)
+        val intent = Intent(Intent.ACTION_VIEW)
+        if (Build.VERSION.SDK_INT < 24) {
+            data = Uri.fromFile(file)
+        } else {
+            data = Uri.parse(file.getPath())
+        }
+        intent.setDataAndType(data, "application/pdf")
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+      /*  val pendingIntent = PendingIntent.getActivity(activity!!, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val builder = NotificationCompat.Builder(activity!!)
+                 builder.setSmallIcon(R.drawable.ic_notify_name)
+                .setContentTitle("Report Generated")
+                .setContentText(fileName).setAutoCancel(true).setContentIntent(pendingIntent)
+
+        val manager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.notify(1, builder.build());
+*/
+        val pendingIntent = PendingIntent.getActivity(activity!!, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val channelId = "Default"
+        val builder = NotificationCompat.Builder(activity!!, channelId)
+                .setSmallIcon(R.drawable.ic_notify_name)
+                .setContentTitle("Report Generated")
+                .setColor(0x008000)
+                .setContentText(fileName).setAutoCancel(true).setContentIntent(pendingIntent)
+        val manager = activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT)
+            manager.createNotificationChannel(channel)
+        }
+        manager.notify(0, builder.build())
+
+
+    }
+    //</editor-fold>
 
 }

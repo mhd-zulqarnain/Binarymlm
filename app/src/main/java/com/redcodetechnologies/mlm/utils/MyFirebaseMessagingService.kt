@@ -73,7 +73,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val obj = Gson().toJson(notification)
         intent.putExtra("notification", obj)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val channelId = "Default"
         val builder = NotificationCompat.Builder(this, channelId)
@@ -86,7 +85,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val channel = NotificationChannel(channelId, "Default channel", NotificationManager.IMPORTANCE_DEFAULT)
             manager.createNotificationChannel(channel)
         }
-
         manager.notify(0, builder.build())
     }
 
@@ -142,6 +140,5 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         manager.notify(0, builder.build())
     }
-
 
 }
