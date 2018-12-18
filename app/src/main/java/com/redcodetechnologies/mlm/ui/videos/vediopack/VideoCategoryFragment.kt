@@ -89,7 +89,7 @@ class VideoCategoryFragment : Fragment() {
 
         return object : Observer<ArrayList<VedioCategory>> {
             override fun onComplete() {
-                progressdialog!!.hide()
+                progressdialog!!.dismiss()
 
             }
 
@@ -115,7 +115,7 @@ class VideoCategoryFragment : Fragment() {
 
             override fun onError(e: Throwable) {
                 print("error")
-                progressdialog!!.hide()
+                progressdialog!!.dismiss()
 
             }
         }

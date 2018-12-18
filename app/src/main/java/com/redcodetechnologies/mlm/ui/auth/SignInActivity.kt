@@ -70,13 +70,13 @@ class SignInActivity : AppCompatActivity() {
                         val pref = SharedPrefs.getInstance()
                         pref!!.setToken(this@SignInActivity, obj)
                         getUserObject(ed_username!!.text.toString())
-                        progressdialog!!.hide()
+                        progressdialog!!.dismiss()
 
                     }
 
                     override fun fail(error: ServiceError) {
                         Apputils.showMsg(this@SignInActivity, "Wrong password or username")
-                        progressdialog!!.hide()
+                        progressdialog!!.dismiss()
 
                     }
                 })

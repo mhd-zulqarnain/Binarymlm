@@ -112,7 +112,7 @@ class UnPaidMemberLeftFragment : Fragment() {
             var total: Double = 0.0
 
             override fun onComplete() {
-                progressdialog!!.hide()
+                progressdialog!!.dismiss()
             }
 
             override fun onSubscribe(d: Disposable) {

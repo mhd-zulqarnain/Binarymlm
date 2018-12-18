@@ -38,9 +38,10 @@ class ApprovedPendingPaymentFragment : Fragment() {
     var progressdialog: android.app.AlertDialog? = null
     var recylcer_wd: RecyclerView? = null
     var adapter: WithdrawRequestAdapter? = null
-
+    private var isViewShown = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_withdrawlayout, container, false)
+        if (!isViewShown) {
 
         prefs = SharedPrefs.getInstance()!!
         if (prefs.getUser(activity!!).userId != null) {
@@ -53,6 +54,7 @@ class ApprovedPendingPaymentFragment : Fragment() {
                 .setTheme(R.style.CustomProgess)
                 .build()
         initView(view)
+        }
 
         return view
     }
@@ -76,6 +78,12 @@ class ApprovedPendingPaymentFragment : Fragment() {
             Apputils.showMsg(activity!!, "Network error")
             return
         }
+        progressdialog!!.show()
+
+        if(!wdList.isEmpty()){
+            wdList.clear()
+        }
+
         val thisMonthtransaction = getThisMonthObserver()
         val thismothObservable: Observable<ArrayList<WithdrawalRequestModal>> = MyApiRxClint.getInstance()!!.getService()!!.getApprovedPendingWdRequest(id!!)
         thismothObservable.subscribeOn(Schedulers.io())
@@ -85,7 +93,7 @@ class ApprovedPendingPaymentFragment : Fragment() {
     fun getThisMonthObserver(): Observer<ArrayList<WithdrawalRequestModal>> {
         return object : Observer<ArrayList<WithdrawalRequestModal>> {
             override fun onComplete() {
-                progressdialog!!.hide()
+                progressdialog!!.dismiss()
             }
 
             override fun onSubscribe(d: Disposable) {
@@ -108,6 +116,15 @@ class ApprovedPendingPaymentFragment : Fragment() {
             override fun onError(e: Throwable) {
                 println("error")
             }
+        }
+    }
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (getView() != null) {
+            isViewShown = true;
+            getApprovedPendingWdRequest()
+        } else {
+            isViewShown = false;
         }
     }
 

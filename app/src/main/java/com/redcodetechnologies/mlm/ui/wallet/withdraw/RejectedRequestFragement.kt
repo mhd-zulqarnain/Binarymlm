@@ -37,25 +37,27 @@ class RejectedRequestFragement : Fragment() {
     var progressdialog: android.app.AlertDialog? = null
     var recylcer_wd: RecyclerView? = null
     var adapter: WithdrawRequestAdapter? = null
+    private var isViewShown = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_withdrawlayout, container, false)
 
         prefs = SharedPrefs.getInstance()!!
-        if (prefs.getUser(activity!!).userId != null) {
-            id = prefs.getUser(activity!!).userId
-            token = prefs.getToken(activity!!).accessToken!!
-        }
-        progressdialog = SpotsDialog.Builder()
-                .setContext(activity!!)
-                .setMessage("Loading!!")
-                .setTheme(R.style.CustomProgess)
-                .build()
-        initView(view)
 
+        if (!isViewShown) {
+            if (prefs.getUser(activity!!).userId != null) {
+                id = prefs.getUser(activity!!).userId
+                token = prefs.getToken(activity!!).accessToken!!
+            }
+            progressdialog = SpotsDialog.Builder()
+                    .setContext(activity!!)
+                    .setMessage("Loading!!")
+                    .setTheme(R.style.CustomProgess)
+                    .build()
+            initView(view)
+        }
         return view
     }
-
     private fun initView(view: View?) {
         tv_no_data = view!!.findViewById(R.id.tv_no_data)
         tv_req_type = view.findViewById(R.id.tv_req_type)
@@ -67,24 +69,27 @@ class RejectedRequestFragement : Fragment() {
         tv_req_type.setText("Rejected Date")
         getRejectedRequest()
     }
-
     fun getRejectedRequest() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Apputils.showMsg(activity!!, "Network error")
             return
         }
+        progressdialog!!.show()
+        if(!wdList.isEmpty()){
+            wdList.clear()
+        }
+
         val thisMonthtransaction = getThisMonthObserver()
         val thismothObservable: Observable<ArrayList<WithdrawalRequestModal>> = MyApiRxClint.getInstance()!!.getService()!!.getRejectedRequest(id!!)
         thismothObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(thisMonthtransaction)
     }
-
     fun getThisMonthObserver(): Observer<ArrayList<WithdrawalRequestModal>> {
         return object : Observer<ArrayList<WithdrawalRequestModal>> {
             override fun onComplete() {
-                progressdialog!!.hide()
+                progressdialog!!.dismiss()
             }
 
             override fun onSubscribe(d: Disposable) {
@@ -107,6 +112,16 @@ class RejectedRequestFragement : Fragment() {
             override fun onError(e: Throwable) {
                 println("error")
             }
+        }
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (getView() != null) {
+            isViewShown = true;
+            getRejectedRequest()
+        } else {
+            isViewShown = false;
         }
     }
 

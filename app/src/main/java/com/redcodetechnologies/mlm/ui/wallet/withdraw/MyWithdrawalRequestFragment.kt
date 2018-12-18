@@ -1,5 +1,6 @@
 package com.redcodetechnologies.mlm.ui.wallet.withdraw
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.PagerTabStrip
@@ -20,6 +21,7 @@ class MyWithdrawalRequestFragment : Fragment() {
         (activity as DrawerActivity).getSupportActionBar()?.setTitle("Withdrawal Request")
         val viewPager = view.findViewById<ViewPager>(R.id.viewPagerwd)
         val strip = view.findViewById<PagerTabStrip>(R.id.pager_headerwd)
+        strip.setTabIndicatorColor(Color.GREEN);
         strip.setPadding(-200,0,0,0)
         val adapter = ViewPagerAdapterWD(activity!!.supportFragmentManager)
         viewPager.adapter = adapter
