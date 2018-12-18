@@ -38,22 +38,24 @@ class PendingWDRequestFragment : Fragment() {
     var recylcer_wd: RecyclerView? = null
     var adapter: WithdrawRequestAdapter? = null
     lateinit var tv_req_type: TextView
-
+    private var isViewShown = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_withdrawlayout, container, false)
 
-        prefs = SharedPrefs.getInstance()!!
-        if (prefs.getUser(activity!!).userId != null) {
-            id = prefs.getUser(activity!!).userId
-            token = prefs.getToken(activity!!).accessToken!!
-        }
-        progressdialog = SpotsDialog.Builder()
-                .setContext(activity!!)
-                .setMessage("Loading!!")
-                .setTheme(R.style.CustomProgess)
-                .build()
-        initView(view)
+        if (!isViewShown) {
 
+            prefs = SharedPrefs.getInstance()!!
+            if (prefs.getUser(activity!!).userId != null) {
+                id = prefs.getUser(activity!!).userId
+                token = prefs.getToken(activity!!).accessToken!!
+            }
+            progressdialog = SpotsDialog.Builder()
+                    .setContext(activity!!)
+                    .setMessage("Loading!!")
+                    .setTheme(R.style.CustomProgess)
+                    .build()
+            initView(view)
+        }
         return view
     }
 
@@ -76,6 +78,10 @@ class PendingWDRequestFragment : Fragment() {
             return
         }
         progressdialog!!.show()
+        if(!wdList.isEmpty()){
+            wdList.clear()
+        }
+
         val thisMonthtransaction = getThisMonthObserver()
         val thismothObservable: Observable<ArrayList<WithdrawalRequestModal>> = MyApiRxClint.getInstance()!!.getService()!!.getPendingWdRequest(id!!)
         thismothObservable.subscribeOn(Schedulers.io())
@@ -86,7 +92,7 @@ class PendingWDRequestFragment : Fragment() {
     fun getThisMonthObserver(): Observer<ArrayList<WithdrawalRequestModal>> {
         return object : Observer<ArrayList<WithdrawalRequestModal>> {
             override fun onComplete() {
-                progressdialog!!.hide()
+                progressdialog!!.dismiss()
             }
 
             override fun onSubscribe(d: Disposable) {
@@ -98,11 +104,10 @@ class PendingWDRequestFragment : Fragment() {
                     wdList.add(tranactions)
                 }
                 adapter!!.notifyDataSetChanged()
-                if(t.size==0){
-                    tv_no_data.visibility=View.VISIBLE
-                }
-                else
-                    tv_no_data.visibility=View.GONE
+                if (t.size == 0) {
+                    tv_no_data.visibility = View.VISIBLE
+                } else
+                    tv_no_data.visibility = View.GONE
 
             }
 
@@ -111,6 +116,14 @@ class PendingWDRequestFragment : Fragment() {
             }
         }
     }
-
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (getView() != null) {
+            isViewShown = true;
+            getPendingWithdrawalList()
+        } else {
+            isViewShown = false;
+        }
+    }
 
 }

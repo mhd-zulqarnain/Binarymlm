@@ -1,86 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
     android:orientation="vertical"
-    android:layout_margin="12dp"
+
     >
 
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="4.8"
-    android:layout_marginBottom="5dp"
-    >
-
-    <TextView
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".8"
-        android:gravity="center"
-        android:text="User Name"
-        android:textColor="#494A4B"
-        android:fontFamily="@font/ralewayregular"
-        android:textSize="12sp"
-        android:id="@+id/wd_username"
-        />
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:weightSum="4.8">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="Payment Method"
-        android:textColor="#494A4B"
-        android:fontFamily="@font/ralewayregular"
-        android:textSize="12sp"
-        android:id="@+id/wd_pay_method"
-        />
+        <TextView
+            android:id="@+id/wd_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:fontFamily="@font/ralewayregular"
+            android:gravity="center"
+            android:text="User Name"
+            android:textColor="#494A4B"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="Amount Payable"
-        android:textColor="#494A4B"
-        android:fontFamily="@font/ralewayregular"
-        android:textSize="12sp"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/wd_amount_pay"
-        />
+        <TextView
+            android:id="@+id/wd_pay_method"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewayregular"
+            android:gravity="center"
+            android:text="Payment Method"
+            android:textColor="#494A4B"
+            android:textSize="10sp" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="Withdrawal Charges"
-        android:textColor="#494A4B"
-        android:fontFamily="@font/ralewayregular"
-        android:textSize="12sp"
-        android:id="@+id/wd_charges"
-        />
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="Requested Date"
-        android:textColor="#494A4B"
-        android:fontFamily="@font/ralewayregular"
-        android:textSize="12sp"
-        android:id="@+id/wd_date"
-        />
+        <TextView
+            android:id="@+id/wd_amount_pay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewayregular"
+            android:gravity="center"
+            android:text="Amount Payable"
+            android:textColor="#494A4B"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/wd_charges"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewayregular"
+            android:gravity="center"
+            android:text="Withdrawal Charges"
+            android:textColor="#494A4B"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/wd_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/ralewayregular"
+            android:gravity="center"
+            android:text="Requested Date"
+            android:textColor="#494A4B"
+            android:textSize="10sp" />
+
+    </LinearLayout>
 
 
-</LinearLayout>
-
-<View
-android:layout_width="wrap_content"
-android:layout_height="1dp"
-android:background="#494A4B" />
-</LinearLayout>
+</android.support.v7.widget.CardView>

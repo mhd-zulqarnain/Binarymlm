@@ -221,6 +221,8 @@ class NetworkFragment : Fragment() {
             fragment_title!!.text = "Direct Members"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Direct Members")
             (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
+            recylcer_down_member!!.layoutParams = LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,0,5.0f)
+
 
 
         }
