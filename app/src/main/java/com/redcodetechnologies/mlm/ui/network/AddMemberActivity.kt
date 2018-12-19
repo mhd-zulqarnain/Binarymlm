@@ -1,8 +1,11 @@
 package com.redcodetechnologies.mlm.ui.network
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -716,10 +719,17 @@ class AddMemberActivity : AppCompatActivity() {
             println("data " + data.data)
             val imageUri = data.data
             if (data.data != null) {
-                val f = File(imageUri.getPath())
-                val imageName = f.getPath().split(":")[1]
-                btn_add_image.setText(imageName)
-                userdocumentImage = imageTostring(MediaStore.Images.Media.getBitmap(baseContext.getContentResolver(), data.data))
+
+                try {
+                    userdocumentImage = imageTostring(MediaStore.Images.Media.getBitmap(baseContext.getContentResolver(), data.data))
+                    val arr = getRealPathFromURI(this@AddMemberActivity, imageUri).split("/")
+                    val imageName = arr[arr.size - 1]
+                    btn_add_image.setText(imageName)
+                    btn_add_image.setText(imageName)
+
+                } catch (e: Exception) {
+                    btn_add_image.setText("image selected")
+                }
             }
 
 
@@ -732,6 +742,19 @@ class AddMemberActivity : AppCompatActivity() {
         val imageBytes = outStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
-
+    fun getRealPathFromURI(context: Context, contentUri: Uri): String {
+        var cursor: Cursor? = null
+        try {
+            val proj = arrayOf<String>(MediaStore.Images.Media.DATA)
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null)
+            val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(column_index)
+        } finally {
+            if (cursor != null) {
+                cursor.close()
+            }
+        }
+    }
 
 }

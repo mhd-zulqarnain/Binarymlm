@@ -47,10 +47,10 @@ class SignInActivity : AppCompatActivity() {
                 .build()
 
         tv_forgetpassword.setText(content)
-        var token = FirebaseInstanceId.getInstance().getToken()
+        val token = FirebaseInstanceId.getInstance().getToken()
         println(token)
 
-        btn_submit.setOnClickListener(View.OnClickListener {
+        btn_submit.setOnClickListener {
 
 
             if (ed_username.text.toString().trim(' ').length < 1) {
@@ -83,14 +83,14 @@ class SignInActivity : AppCompatActivity() {
 
             }
 
-        })
+        }
 
-        tv_forgetpassword.setOnClickListener(View.OnClickListener {
+        tv_forgetpassword.setOnClickListener {
 
             Log.wtf("", "forget Password")
             showSendDialog()
 
-        })
+        }
 
     }
 
@@ -103,8 +103,8 @@ class SignInActivity : AppCompatActivity() {
 
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
-        var ed_email_address: EditText = view.findViewById(R.id.ed_email)
-        var button_submit: Button = view.findViewById(R.id.btn_submit)
+        val ed_email_address: EditText = view.findViewById(R.id.ed_email)
+        val button_submit: Button = view.findViewById(R.id.btn_submit)
 
         button_submit.setOnClickListener {
             if (ed_email_address.text.toString().trim(' ').length < 1) {
@@ -145,7 +145,7 @@ class SignInActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<ApiToken>?, response: retrofit2.Response<ApiToken>?) {
                         print("object success ")
-                        var code: Int = response!!.code()
+                        val code: Int = response!!.code()
                         if (code == 200) {
                             serviceListener.success(response.body()!!)
                             print("success")
@@ -158,7 +158,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun getUserObject(username: String) {
-        var token = SharedPrefs.getInstance()!!.getToken(this@SignInActivity).accessToken
+        val token = SharedPrefs.getInstance()!!.getToken(this@SignInActivity).accessToken
 
         if (!Apputils.isNetworkAvailable(this@SignInActivity)) {
             Toast.makeText(baseContext, " Network error ", Toast.LENGTH_SHORT).show()
@@ -180,10 +180,10 @@ class SignInActivity : AppCompatActivity() {
                     }
                     override fun onResponse(call: Call<NewUserRegistration>?, response: retrofit2.Response<NewUserRegistration>?) {
                         print("object success ")
-                        var code: Int = response!!.code()
+                        val code: Int = response!!.code()
                         if (code == 200) {
                             print("success")
-                            var obj: NewUserRegistration = response.body()!!
+                            val obj: NewUserRegistration = response.body()!!
                             SharedPrefs.getInstance()!!.setUser(this@SignInActivity, obj)
                             Apputils.updateFcm(this@SignInActivity)
                             if (obj.isSleepingPartner == true)
@@ -192,7 +192,7 @@ class SignInActivity : AppCompatActivity() {
                                 salesExecutiveActivity()
                             else {
                                 progressdialog!!.dismiss()
-                                var i: Intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+                                val i: Intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
                                 startActivity(i)
                                 finish()
                             }
@@ -220,7 +220,7 @@ class SignInActivity : AppCompatActivity() {
                         progressdialog!!.dismiss()
                     }
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
-                        var code: Int = response!!.code()
+                        val code: Int = response!!.code()
                         if (code == 200) {
                             print("success")
                             serviceListener.success(response.body()!!)
@@ -234,7 +234,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun salesExecutiveActivity() {
-        var i: Intent = Intent(this@SignInActivity, DrawerActivity::class.java)
+        val i: Intent = Intent(this@SignInActivity, DrawerActivity::class.java)
         i.putExtra("Category", "Sales")
         progressdialog!!.dismiss()
         startActivity(i)
@@ -242,7 +242,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     fun sleepingPatnerActivity() {
-        var i: Intent = Intent(this@SignInActivity, DrawerActivity::class.java)
+        val i: Intent = Intent(this@SignInActivity, DrawerActivity::class.java)
         i.putExtra("Category", "Sleeping")
         progressdialog!!.dismiss()
         startActivity(i)
@@ -251,8 +251,8 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        var pref = SharedPrefs.getInstance()
-        var obj = pref!!.getUser(this@SignInActivity)
+        val pref = SharedPrefs.getInstance()
+        val obj = pref!!.getUser(this@SignInActivity)
         if (obj.userCode != null) {
 
             if (obj.isSleepingPartner == true)
@@ -260,7 +260,7 @@ class SignInActivity : AppCompatActivity() {
             else if (obj.isSalesExecutive == true)
                 salesExecutiveActivity()
             else {
-                var i: Intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
+                val i: Intent = Intent(this@SignInActivity, UserCategoryActivity::class.java)
                 startActivity(i)
                 finish()
             }

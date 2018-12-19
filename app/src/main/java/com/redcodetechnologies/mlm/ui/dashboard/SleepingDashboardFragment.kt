@@ -16,6 +16,7 @@ import android.widget.*
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.Advertisement
+import com.redcodetechnologies.mlm.models.DasboardData
 import com.redcodetechnologies.mlm.models.users.NewUserRegistration
 import com.redcodetechnologies.mlm.retrofit.ApiClint
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
@@ -38,7 +39,6 @@ class SleepingDashboardFragment : Fragment() {
     var ads_view: LinearLayout? = null
     lateinit var prefs: SharedPrefs
     var recycler_adds: RecyclerView? = null
-    var GetEWalletSummarySponsorBonus: TextView? = null
 
     var adsList: ArrayList<Advertisement> = ArrayList()
     var adapter: AdvertismentAdapter? = null
@@ -46,9 +46,26 @@ class SleepingDashboardFragment : Fragment() {
     var id: Int? = null
     var token: String?=null
 
+    lateinit var totaldirectcommission:TextView;
+    lateinit var GetPayoutHistorySum:TextView;
+    lateinit var GetEwalletCredit:TextView;
+    lateinit var GetPaymentsInProcessSum:TextView;
+    lateinit var GetEWalletSummarySponsorBonus:TextView;
+    lateinit var GetEWalletDebitSum:TextView;
+    lateinit var progressbar_dash:LinearLayout;
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         val view  =inflater.inflate(R.layout.fragment_sleeping_dashboard, container, false)
+        totaldirectcommission = view.findViewById(R.id.totaldirectcommission)
+        GetEwalletCredit = view.findViewById(R.id.GetEwalletCredit)
+        GetEWalletDebitSum = view.findViewById(R.id.GetEWalletDebitSum)
+        GetPaymentsInProcessSum = view.findViewById(R.id.GetPaymentsInProcessSum)
+        GetPayoutHistorySum = view.findViewById(R.id.GetPayoutHistorySum)
+        GetEWalletSummarySponsorBonus = view.findViewById(R.id.GetEWalletSummarySponsorBonus)
+        progressbar_dash = view.findViewById(R.id.progressbar_dash)
+
         tv = view.findViewById(R.id.dashboardbalance) as CardView;
         recycler_adds = view.findViewById(R.id.recylcer_adds)
         ads_view = view.findViewById(R.id.ads_view)
@@ -71,12 +88,12 @@ class SleepingDashboardFragment : Fragment() {
 
         tv!!.setOnClickListener{
             if(click){
-                if(GetEWalletSummarySponsorBonus!!.visibility!=View.VISIBLE)
+                if(GetEWalletSummarySponsorBonus.visibility!=View.VISIBLE)
                 showBalanaceDialog()
             }
         }
-
         getads()
+        getviewData()
         return view
     }
 
@@ -137,6 +154,62 @@ class SleepingDashboardFragment : Fragment() {
 
         dialog.show()
 
+    }
+
+    fun getviewData() {
+
+        if (!Apputils.isNetworkAvailable(activity!!)) {
+            Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        ApiClint.getInstance()?.getService()?.getdashboardData("bearer " + token, id!!)
+                ?.enqueue(object : Callback<DasboardData> {
+                    override fun onFailure(call: Call<DasboardData>?, t: Throwable?) {
+                        println("error")
+                        progressbar_dash.visibility = View.GONE
+
+                    }
+
+                    override fun onResponse(call: Call<DasboardData>?, response: retrofit2.Response<DasboardData>?) {
+                        print("object success ")
+                        val code: Int = response!!.code()
+
+                        if (code == 401) {
+                            Apputils.showMsg(activity!!, "Token Expired")
+                            //tokenExpire();
+
+                        }
+                        if (code == 200) {
+                            print("success")
+                            val obj: DasboardData = response.body()!!
+
+                            if (obj.totaldirectcommission != null)
+                                totaldirectcommission.text = obj.totaldirectcommission!!.split(".")[0]+" PKR";
+
+                            if (obj.GetEwalletCredit != null)
+                                GetEwalletCredit.text = obj.GetEwalletCredit!!.split(".")[0]+" PKR"
+
+                            if (obj.GetEWalletDebitSum != null)
+                                GetEWalletDebitSum.text = obj.GetEWalletDebitSum!!.split(".")[0]+" PKR"
+
+                            if (obj.GetPaymentsInProcessSum != null)
+                                GetPaymentsInProcessSum.text = obj.GetPaymentsInProcessSum!!.split(".")[0]+" PKR"
+
+
+                            if (obj.GetPayoutHistorySum != null)
+                                GetPayoutHistorySum.text = obj.GetPayoutHistorySum!!.split(".")[0]+" PKR"
+
+
+                            if (obj.GetEWalletSummarySponsorBonus != null)
+                                GetEWalletSummarySponsorBonus.text = obj.GetEWalletSummarySponsorBonus!!.split(".")[0]+" PKR"
+
+
+                        }
+                        progressbar_dash.visibility = View.GONE
+
+
+                    }
+                })
     }
 
     //<editor-fold desc="Advertisment control">

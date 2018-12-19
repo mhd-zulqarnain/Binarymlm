@@ -550,6 +550,7 @@
             android:layout_height="match_parent"
             android:background="#d4121111"
             android:gravity="center"
+            android:visibility="gone"
 
             >
 

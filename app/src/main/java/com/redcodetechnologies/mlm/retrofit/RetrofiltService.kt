@@ -82,16 +82,13 @@ interface RetrofiltService {
     fun getMakeTableLeft(@Header("Authorization") auth: String, @Path("userid") userid: Int): Observable<ArrayList<Users>>
 
 
-
     @GET("maketabledetails/{userid}")
     @Headers("Content-Type:application/json")
     fun getdownlineData(@Header("Authorization") auth: String, @Path("userid") userid: Int): Call<MakeTableData>
 
     @GET("viewusertrainingvideos/")
     @Headers("Content-Type:application/json")
-    fun getVideosData(@Header("Authorization") auth: String ) : Observable<ArrayList<VideosModal>>
-
-
+    fun getVideosData(@Header("Authorization") auth: String): Observable<ArrayList<VideosModal>>
 
 
     @GET("getuserdownlinmembers/{userid}")
@@ -120,7 +117,7 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun checkIfNewMemeberRightChild(@Path("userid") userid: Int): Call<Response>
 
-     @GET("checkIfnewmemeberleftchild/{userid}")
+    @GET("checkIfnewmemeberleftchild/{userid}")
     @Headers("Content-Type:application/json")
     fun checkIfNewMemeberLeftChild(@Path("userid") userid: Int): Call<Response>
 
@@ -132,9 +129,6 @@ interface RetrofiltService {
     @GET("checkifnewmemeberleft/{userid}")
     @Headers("Content-Type:application/json")
     fun checkIfNewMemeberLeft(@Path("userid") userid: Int): Call<Response>
-
-
-
 
 
     //</editor-fold>
@@ -348,39 +342,35 @@ interface RetrofiltService {
 
     @POST("ewalletwithdrawalfund/{userId}")
     @Headers("Content-Type:application/json")
-    fun submitwithdrawalfundRequest(@Path("userId") userid: Int,@Body obj: EWalletWithdrawalFundModel): Call<Response>
-
+    fun submitwithdrawalfundRequest(@Path("userId") userid: Int, @Body obj: EWalletWithdrawalFundModel): Call<Response>
 
 
     @GET("getvideocategories")
     @Headers("Content-Type:application/json")
-    fun getvideocategories(@Header("Authorization") auth: String ) : Observable<ArrayList<VedioCategory>>
+    fun getvideocategories(@Header("Authorization") auth: String): Observable<ArrayList<VedioCategory>>
 
     @GET("videolist/{userpackageid}/{cat_id}")
     @Headers("Content-Type:application/json")
-    fun getvideolist(@Header("Authorization") auth: String ,@Path("userpackageid") userpackageid: String,
-                     @Path("cat_id") cat_id: Int) : Observable<ArrayList<PackVideo>>
+    fun getvideolist(@Header("Authorization") auth: String, @Path("userpackageid") userpackageid: String,
+                     @Path("cat_id") cat_id: Int): Observable<ArrayList<PackVideo>>
 
 
     @POST("sendmatchingtablecommissionrequest/{id}")
     @Headers("Content-Type:application/json")
-    fun sendmatchingtablecommissionrequest( @Path("id") id: Int): Call<Response>
+    fun sendmatchingtablecommissionrequest(@Path("id") id: Int): Call<Response>
 
 
     @POST("sendmatchingtablecommissionrequest/{id}")
     @Headers("Content-Type:application/json")
-    fun senddirectsalecommissionrequest( @Path("id") id: Int): Call<Response>
+    fun senddirectsalecommissionrequest(@Path("id") id: Int): Call<Response>
 
- @POST("ewalletupgradeinvestment/{uid}")
+    @POST("ewalletupgradeinvestment/{uid}")
     @Headers("Content-Type:application/json")
-    fun ewalletupgradeinvestment( @Path("uid") uid: Int,@Body obj: Packages): Call<Response>
+    fun ewalletupgradeinvestment(@Path("uid") uid: Int, @Body obj: Packages): Call<Response>
 
     @GET("getusercurrentpackageslist/{uid}")
     @Headers("Content-Type:application/json")
-    fun getusercurrentpackageslist(@Path("uid") cat_id: Int) : Call<ArrayList<Packages>>
-
-
-
+    fun getusercurrentpackageslist(@Path("uid") cat_id: Int): Call<ArrayList<Packages>>
 
 
 }

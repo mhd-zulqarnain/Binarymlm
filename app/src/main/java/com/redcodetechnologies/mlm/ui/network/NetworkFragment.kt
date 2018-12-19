@@ -221,7 +221,7 @@ class NetworkFragment : Fragment() {
             fragment_title!!.text = "Direct Members"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Direct Members")
             (activity as DrawerActivity).getSupportActionBar()?.setIcon(0)
-            recylcer_down_member!!.layoutParams = LinearLayout.LayoutParams( LinearLayout.LayoutParams.MATCH_PARENT,0,5.0f)
+
 
 
 
@@ -242,7 +242,7 @@ class NetworkFragment : Fragment() {
         }
         progressbar_net!!.visibility = View.VISIBLE
 
-        ApiClint.getInstance()?.getService()?.getdownlineData("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.getdownlineData("bearer " + token, id!!)
                 ?.enqueue(object : Callback<MakeTableData> {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
                         println("error")
@@ -252,7 +252,7 @@ class NetworkFragment : Fragment() {
 
                     override fun onResponse(call: Call<MakeTableData>?, response: retrofit2.Response<MakeTableData>?) {
                         print("object success ")
-                        var code: Int = response!!.code()
+                        val code: Int = response!!.code()
 
                         if (code == 401) {
                             Apputils.showMsg(activity!!, "Token Expired")
@@ -261,25 +261,25 @@ class NetworkFragment : Fragment() {
                         }
                         if (code == 200) {
                             print("success")
-                            var obj: MakeTableData = response.body()!!
+                            val obj: MakeTableData = response.body()!!
 
                             if (obj.leftRemaingAmount != null)
-                                tv_leftRemaingAmount!!.text = obj.leftRemaingAmount!!.split(".")[0];
+                                tv_leftRemaingAmount!!.text = obj.leftRemaingAmount!!.split(".")[0]+" PKR";
 
                             if (obj.rightRemaingAmount != null)
-                                tv_rightRemaingAmount!!.text = obj.rightRemaingAmount!!.split(".")[0]
+                                tv_rightRemaingAmount!!.text = obj.rightRemaingAmount!!.split(".")[0]+" PKR"
 
                             if (obj.totalLeftUsers != null)
-                                tv_totalLeftUsers!!.text = obj.totalLeftUsers!!.split(".")[0]
+                                tv_totalLeftUsers!!.text = obj.totalLeftUsers!!.split(".")[0]+" PKR"
 
                             if (obj.totalRightUsers != null)
                                 tv_totalRightUsers!!.text = obj.totalRightUsers!!.split(".")[0]
                             if (obj.totalAmountLeftUsers != null)
-                                tv_totalAmountRightUsers!!.text = obj.totalAmountRightUsers !!.split(".")[0]
+                                tv_totalAmountRightUsers!!.text = obj.totalAmountRightUsers !!.split(".")[0]+" PKR"
                             if (obj.totalAmountRightUsers != null)
-                                tv_totalAmountLeftUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
+                                tv_totalAmountLeftUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]+" PKR"
                             if (obj.usertablebalance != null)
-                                fragment_title!!.text ="Down-line Members List "+obj.usertablebalance!!.split(".")[0]
+                                fragment_title!!.text ="Down-line Members List "+obj.usertablebalance!!.split(".")[0]+" PKR"
 
                         }
                         progressbar_net!!.visibility = View.GONE
@@ -298,7 +298,7 @@ class NetworkFragment : Fragment() {
         progressbar_net!!.visibility = View.VISIBLE
 
 
-        ApiClint.getInstance()?.getService()?.getMaketableData("bearer " + token!!, id!!)
+        ApiClint.getInstance()?.getService()?.getMaketableData("bearer " + token, id!!)
                 ?.enqueue(object : Callback<MakeTableData> {
                     override fun onFailure(call: Call<MakeTableData>?, t: Throwable?) {
                         println("error")
@@ -308,7 +308,7 @@ class NetworkFragment : Fragment() {
 
                     override fun onResponse(call: Call<MakeTableData>?, response: retrofit2.Response<MakeTableData>?) {
                         print("object success ")
-                        var code: Int = response!!.code()
+                        val code: Int = response!!.code()
 
                         if (code == 401) {
                             Apputils.showMsg(activity!!, "Token Expired")
@@ -317,13 +317,13 @@ class NetworkFragment : Fragment() {
                         }
                         if (code == 200) {
                             print("success")
-                            var obj: MakeTableData = response.body()!!
+                            val obj: MakeTableData = response.body()!!
 
                             if (obj.leftRemaingAmount != null)
-                                tv_leftRemaingAmount!!.text = obj.leftRemaingAmount!!.split(".")[0];
+                                tv_leftRemaingAmount!!.text = obj.leftRemaingAmount!!.split(".")[0]+" PKR";
 
                             if (obj.rightRemaingAmount != null)
-                                tv_rightRemaingAmount!!.text = obj.rightRemaingAmount!!.split(".")[0]
+                                tv_rightRemaingAmount!!.text = obj.rightRemaingAmount!!.split(".")[0]+" PKR"
 
                             if (obj.totalLeftUsers != null)
                                 tv_totalLeftUsers!!.text = obj.totalLeftUsers!!.split(".")[0]
@@ -331,9 +331,9 @@ class NetworkFragment : Fragment() {
                             if (obj.totalRightUsers != null)
                                 tv_totalRightUsers!!.text = obj.totalRightUsers!!.split(".")[0]
                             if (obj.totalAmountLeftUsers != null)
-                                tv_totalAmountRightUsers!!.text = obj.totalAmountRightUsers!!.split(".")[0]
+                                tv_totalAmountRightUsers!!.text = obj.totalAmountRightUsers!!.split(".")[0]+" PKR"
                             if (obj.totalAmountRightUsers != null)
-                                tv_totalAmountLeftUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]
+                                tv_totalAmountLeftUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]+" PKR"
 
                         }
                         progressbar_net!!.visibility = View.GONE
@@ -356,7 +356,7 @@ class NetworkFragment : Fragment() {
 
         progressbar_list_data!!.visibility=View.VISIBLE
         val observer = getObserver()
-        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token!!, id!!)
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token, id!!)
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer)
@@ -375,7 +375,7 @@ class NetworkFragment : Fragment() {
         recylcer_down_member!!.visibility=View.GONE
 
         val observer = getObserver()
-        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token!!, id!!)
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersLeft("bearer " + token, id!!)
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer)
@@ -395,7 +395,7 @@ class NetworkFragment : Fragment() {
         recylcer_down_member!!.visibility=View.GONE
 
         val observer = getObserver()
-        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getMakeTableRight("bearer " + token!!, id!!)
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getMakeTableRight("bearer " + token, id!!)
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer)
@@ -414,7 +414,7 @@ class NetworkFragment : Fragment() {
         recylcer_down_member!!.visibility=View.GONE
 
         val observer = getObserver()
-        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getMakeTableLeft("bearer " + token!!, id!!)
+        val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getMakeTableLeft("bearer " + token, id!!)
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer)

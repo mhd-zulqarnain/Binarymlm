@@ -320,6 +320,7 @@
             android:fontFamily="@font/ralewayregular"
             android:gravity="center_vertical"
             android:text="Reffered Member"
+            android:layout_marginLeft="8dp"
             android:textColor="@color/colorRed"
             android:textSize="14sp" />
 
@@ -347,6 +348,7 @@
             android:layout_height="0dp"
             android:layout_weight="5.1"
             android:orientation="vertical"
+            android:layout_margin="5dp"
             android:weightSum="6">
 
             <LinearLayout
@@ -413,7 +415,7 @@
                 android:id="@+id/recylcer_down_member"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5"
+                android:layout_weight="7"
                 android:layout_margin="2dp"
 
                 android:scrollbars="horizontal" />

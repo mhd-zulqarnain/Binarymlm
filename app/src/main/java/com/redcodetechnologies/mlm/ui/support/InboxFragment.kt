@@ -256,7 +256,7 @@ class InboxFragment : Fragment() {
 
         val arrayAdapter = ArrayAdapter.createFromResource(activity!!, R.array.compose_sponsor_spinner, R.layout.support_simple_spinner_dropdown_item)
         spinner_receiver.adapter = arrayAdapter
-        spinner_receiver.setSelection(1)
+        spinner_receiver.setSelection(0)
         spinner_receiver.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
@@ -461,6 +461,7 @@ class InboxFragment : Fragment() {
                 val arr = getRealPathFromURI(activity!!, imageUri).split("/")
                 filename = arr[arr.size - 1]
             } catch (e: Exception) {
+
             }
 
             img_it_support!!.setText(filename)
