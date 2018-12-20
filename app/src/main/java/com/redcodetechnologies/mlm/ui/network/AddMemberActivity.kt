@@ -52,7 +52,6 @@ class AddMemberActivity : AppCompatActivity() {
     var listPackages: ArrayList<Packages> = ArrayList()
     var userModel: UserTree = UserTree()
     var downlinerAdapter: DownlinerSpinnerAdapter? = null;
-    var packageAdapter: PackageSpinnerAdapter? = null;
 
     var id: Int? = null
     lateinit var prefs: SharedPrefs
@@ -133,7 +132,7 @@ class AddMemberActivity : AppCompatActivity() {
 
         }
         btn_add_image.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, REQUSET_GALLERY_CODE)
         }
@@ -335,12 +334,12 @@ class AddMemberActivity : AppCompatActivity() {
             return
         }
 
-        if (userdocumentImage == null) {
+       /* if (userdocumentImage == null) {
             btn_add_image.error = Html.fromHtml("<font color='white'>Please Upload document image!</font>")
             btn_add_image.requestFocus()
             return
         }
-
+*/
         /*if (package_price == null || userPackage == null) {
             Apputils.showMsg(this@AddMemberActivity, "Please select package")
             return
@@ -369,7 +368,7 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.email = ed_email.text.toString()
         userModel.accountNumber = ""
         userModel.downlineMemberId = if (downlineMemberId == null) null else downlineMemberId.toString()
-        userModel.documentImage = userdocumentImage!! //from spinner
+        userModel.documentImage = if(userdocumentImage==null) null else userdocumentImage //from spinner
 
         confirmationDialog()
 

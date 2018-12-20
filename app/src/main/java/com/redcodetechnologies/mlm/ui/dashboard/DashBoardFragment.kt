@@ -112,7 +112,9 @@ class DashBoardFragment : Fragment() {
         val manager =  LinearLayoutManager((activity as Context?)!!, LinearLayout.HORIZONTAL, false)
         recycler_adds!!.layoutManager = manager
         adapter = AdvertismentAdapter(activity!!, frgement_type, adsList){ads->
-            viewAdsDialog(Apputils.decodeFromBase64(ads.AdvertisementImage!!))
+            var img = Apputils.decodeFromBase64(ads.AdvertisementImage!!)
+            if(img!=null)
+            viewAdsDialog(img)
         }
         if (prefs.getUser(activity!!).userId != null) {
             id = prefs.getUser(activity!!).userId

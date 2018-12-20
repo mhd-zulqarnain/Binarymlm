@@ -392,7 +392,6 @@ class ProfileActivity : AppCompatActivity() {
             print(profileSetup)
             updateProfile()
 
-            Toast.makeText(this@ProfileActivity, "Privacy has been Updated!", Toast.LENGTH_LONG).show()
         }
 
     }

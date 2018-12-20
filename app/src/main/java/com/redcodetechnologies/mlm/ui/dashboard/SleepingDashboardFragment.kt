@@ -79,7 +79,9 @@ class SleepingDashboardFragment : Fragment() {
 
         progressBar = view.findViewById(R.id.progressBar)
         adapter=AdvertismentAdapter(activity!!, "", adsList){ads->
-            viewAdsDialog(Apputils.decodeFromBase64(ads.AdvertisementImage!!))
+            var img = Apputils.decodeFromBase64(ads.AdvertisementImage!!)
+            if(img!=null)
+            viewAdsDialog(img)
 
         }
         val manager = LinearLayoutManager(activity!!, LinearLayout.HORIZONTAL, false)

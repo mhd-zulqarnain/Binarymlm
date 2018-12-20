@@ -461,7 +461,6 @@ class InboxFragment : Fragment() {
                 val arr = getRealPathFromURI(activity!!, imageUri).split("/")
                 filename = arr[arr.size - 1]
             } catch (e: Exception) {
-
             }
 
             img_it_support!!.setText(filename)

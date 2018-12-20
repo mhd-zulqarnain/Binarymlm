@@ -744,9 +744,15 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         var code: Int = response!!.code()
                         if (code == 200) {
                             print("success")
-                            var obj: NewUserRegistration = response.body()!!
-                            SharedPrefs.getInstance()!!.setUser(this@DrawerActivity, obj)
-                            makeView()
+                            try {
+                                var obj: NewUserRegistration = response.body()!!
+                                SharedPrefs.getInstance()!!.setUser(this@DrawerActivity, obj)
+                                makeView()
+                            }
+                            catch (e:Exception){
+                                tokenExpire()
+                            }
+
                         } else {
                             print("error")
                         }
@@ -754,11 +760,18 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     }
                 })
     }
+    fun tokenExpire() {
+        Apputils.showMsg(this@DrawerActivity,"Session Expired")
+        mPref!!.clearToken(this@DrawerActivity)
+        mPref!!.clearUser(this@DrawerActivity)
+        startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
+        this@DrawerActivity.finish()
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)
         fragment!!.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == PRFILE_UPDATE_REQ && resultCode == Activity.RESULT_OK) {
             makeView()
         }
