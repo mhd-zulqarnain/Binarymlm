@@ -297,6 +297,7 @@ interface RetrofiltService {
     fun getsentmessagessponsorsupport(@Path("userId") userId: Int): Observable<ArrayList<Messages>>
     //</editor-fold>
 
+    //<editor-fold desc="it support messages">
     @POST("deleteinboxmsgitsupport/{userid}")
     @Headers("Content-Type:application/json")
     fun deleteinboxmsgitsupport(@Path("userid") userid: Int): Call<Response>
@@ -316,6 +317,7 @@ interface RetrofiltService {
     @POST("inboxitsupport")
     @Headers("Content-Type:application/json")
     fun newMessageItSupport(@Body obj: Messages): Call<Response>
+    //</editor-fold>
 
     @POST("updateFcm")
     @Headers("Content-Type:application/json")
@@ -336,6 +338,12 @@ interface RetrofiltService {
     fun getpayoutwithdrawinprocess(@Path("userid") userid: Int): Observable<ArrayList<Report>>
     //</editor-fold>
 
+    @POST("updatePassword/{passord}/{uid}")
+    @Headers("Content-Type:application/json")
+    fun updatePassword(@Path("passord") password: String,@Path("uid") uid: Int ): Call<Response>
+
+
+
     @GET("getalluserwithdrawfund/{userid}")
     @Headers("Content-Type:application/json")
     fun getalluserwithdrawfund(@Path("userid") userid: Int): Call<Withdrawfund>
@@ -345,6 +353,7 @@ interface RetrofiltService {
     fun submitwithdrawalfundRequest(@Path("userId") userid: Int, @Body obj: EWalletWithdrawalFundModel): Call<Response>
 
 
+    //<editor-fold desc="vedios">
     @GET("getvideocategories")
     @Headers("Content-Type:application/json")
     fun getvideocategories(@Header("Authorization") auth: String): Observable<ArrayList<VedioCategory>>
@@ -353,6 +362,7 @@ interface RetrofiltService {
     @Headers("Content-Type:application/json")
     fun getvideolist(@Header("Authorization") auth: String, @Path("userpackageid") userpackageid: String,
                      @Path("cat_id") cat_id: Int): Observable<ArrayList<PackVideo>>
+    //</editor-fold>
 
 
     @POST("sendmatchingtablecommissionrequest/{id}")

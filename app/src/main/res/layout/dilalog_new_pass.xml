@@ -46,6 +46,8 @@
         android:textColorHint="#DDAAAAAA"
         android:maxLines="1"
         android:singleLine="true"
+        android:maxLength="15"
+
         />
     <EditText
         android:id="@+id/ed_confirm_pass"
@@ -60,6 +62,7 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:singleLine="true"
+        android:maxLength="15"
         />
     <Button
         android:id="@+id/btn_verify"

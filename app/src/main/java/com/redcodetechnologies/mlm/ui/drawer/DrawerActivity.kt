@@ -270,6 +270,12 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
                 return true
             }
+            R.id.action_password -> {
+
+                showChangePasswordDialog()
+
+                return true
+            }
 
             else -> return super.onOptionsItemSelected(item)
         }
@@ -684,6 +690,70 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
     //</editor-fold>
 
+    //<editor-fold desc="password change">
+    private fun showChangePasswordDialog() {
+        val view: View = LayoutInflater.from(this@DrawerActivity).inflate(R.layout.dilalog_new_pass, null)
+        val alertBox = AlertDialog.Builder(this@DrawerActivity)
+        alertBox.setView(view)
+        alertBox.setCancelable(true)
+        val dialog = alertBox.create()
+        var mPassword = mPref!!.getUser(this@DrawerActivity).password
+        val uid = mPref!!.getUser(this@DrawerActivity).userId
+
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent);
+        val ed_old_pass: EditText = view.findViewById(R.id.ed_old_pass)
+        val ed_new_pass: EditText = view.findViewById(R.id.ed_new_pass)
+        val ed_confirm_pass: EditText = view.findViewById(R.id.ed_confirm_pass)
+        val btn_verify: Button = view.findViewById(R.id.btn_verify)
+        btn_verify.setOnClickListener {
+            if (ed_old_pass.text.toString() == mPassword && ed_old_pass.text.toString().trim() != "") {
+                if (ed_new_pass.text.toString().trim() != "" && ed_confirm_pass.text.toString().trim() != "") {
+                    if (ed_new_pass.text.toString().trim() == ed_confirm_pass.text.toString().trim()) {
+                        if (ed_new_pass.text.toString().trim { it <= ' ' }.length < 8) {
+                            Apputils.showMsg(this@DrawerActivity, "Password should be greater than 8")
+                        } else {
+                            mPassword = ed_confirm_pass.text.toString()
+
+                            ApiClint.getInstance()?.getService()?.updatePassword(mPassword!!, uid!!)
+                                    ?.enqueue(object : Callback<Response> {
+                                        override fun onFailure(call: Call<Response>?, t: Throwable?) {
+                                            println("error")
+                                        }
+
+                                        override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
+                                            print("object success ")
+                                            val code: Int = response!!.code()
+                                            if (code == 200) {
+                                                Apputils.showMsg(this@DrawerActivity, "Password  updated")
+
+                                            } else {
+                                                Apputils.showMsg(this@DrawerActivity, "Failed")
+
+                                            }
+
+                                        }
+                                    })
+
+                            dialog.dismiss()
+
+                        }
+                    } else {
+                        Apputils.showMsg(this@DrawerActivity, "Password not matched")
+
+                    }
+
+                } else {
+                    Apputils.showMsg(this@DrawerActivity, "Fill all fields")
+                }
+
+            } else {
+                Apputils.showMsg(this@DrawerActivity, "Old Password is wrong")
+            }
+        }
+        dialog.show()
+    }
+    //</editor-fold>
+
     fun saveNotification(obj: MyNotification, service: ServiceListener<String>) {
 
         if (!Apputils.isNetworkAvailable(this@DrawerActivity)) {
@@ -748,8 +818,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                                 var obj: NewUserRegistration = response.body()!!
                                 SharedPrefs.getInstance()!!.setUser(this@DrawerActivity, obj)
                                 makeView()
-                            }
-                            catch (e:Exception){
+                            } catch (e: Exception) {
                                 tokenExpire()
                             }
 
@@ -760,8 +829,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     }
                 })
     }
+
     fun tokenExpire() {
-        Apputils.showMsg(this@DrawerActivity,"Session Expired")
+        Apputils.showMsg(this@DrawerActivity, "Session Expired")
         mPref!!.clearToken(this@DrawerActivity)
         mPref!!.clearUser(this@DrawerActivity)
         startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
