@@ -216,7 +216,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         val tvtitle: TextView = view.findViewById(R.id.tv_title)
         val tvdescription: TextView = view.findViewById(R.id.tv_des)
 
-        var obj = Gson().fromJson<Messages>(message, Messages::class.java)
+        val obj = Gson().fromJson<Messages>(message, Messages::class.java)
 
         tvtitle.setText(obj.Sender_Name)
         tvdescription.setText(obj.Message)

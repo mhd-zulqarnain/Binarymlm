@@ -685,7 +685,7 @@ class ProfileActivity : AppCompatActivity() {
 
                         val bitmap = MediaStore.Images.Media.getBitmap(this@ProfileActivity.getContentResolver(), imageUri);
                         try {
-                            val arr = getRealPathFromURI(this@ProfileActivity, imageUri).split("/")
+                            val arr = getRealPathFromURI(this@ProfileActivity, imageUri!!).split("/")
                             filename = arr[arr.size - 1]
                         } catch (e: Exception) {
                         }
@@ -696,7 +696,7 @@ class ProfileActivity : AppCompatActivity() {
                     }
                 SELECT_CAMERA_IMAGE ->
                     try {
-                        var bitmap = data.extras.get("data") as Bitmap?
+                        val bitmap = data.extras!!.get("data") as Bitmap?
                         profileImg = imageTostring(bitmap!!)
                         profile_image!!.setImageBitmap(bitmap)
                     } catch (e: Exception) {
@@ -732,7 +732,7 @@ class ProfileActivity : AppCompatActivity() {
                         var filename = "No Image found"
                         val bitmap = MediaStore.Images.Media.getBitmap(this@ProfileActivity.getContentResolver(), imageUri);
                         try {
-                            val arr = getRealPathFromURI(this@ProfileActivity, imageUri).split("/")
+                            val arr = getRealPathFromURI(this@ProfileActivity, imageUri!!).split("/")
                             filename = arr[arr.size - 1]
                         } catch (e: Exception) {
                         }
@@ -750,8 +750,8 @@ class ProfileActivity : AppCompatActivity() {
 
     fun stringtoImage(encodedString: String): Bitmap? {
         try {
-            var encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            var bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
+            val encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            val bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
             return bitmap;
 
         } catch (e: Exception) {

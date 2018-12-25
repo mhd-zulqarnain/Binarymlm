@@ -182,7 +182,7 @@ class InboxFragment : Fragment() {
         val rep_message: EditText = v.findViewById(R.id.rep_message)
 
         message.text = inbox.Message
-        if(inbox.IsRead == false)
+        if (inbox.IsRead == false)
             updateMessageStatus(inbox.Id!!)
         inbox.IsRead = true
 
@@ -245,6 +245,7 @@ class InboxFragment : Fragment() {
             reciverId = 0;
             view_it.visibility = View.VISIBLE
             view_sponser.visibility = View.GONE
+            btn_submit.text = "OK"
         } else {
             view_it.visibility = View.GONE
             view_sponser.visibility = View.VISIBLE
@@ -260,28 +261,31 @@ class InboxFragment : Fragment() {
         spinner_receiver.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                    reciverId = user.sponsorId!!
+                reciverId = user.sponsorId!!
             }
         })
 
         btn_submit.setOnClickListener {
-            if (rep_message.text.toString().trim() != "") {
-                if (frgementType == SPONSER_INBOX) {
-                    val msg = Messages(null, null, user.username, user.userId,
-                            reciverId, rep_message.text.toString())
+            if (frgementType == IT_INBOX) {
+                dialog.dismiss();
+            } else {
+                if (rep_message.text.toString().trim() != "") {
+                    if (frgementType == SPONSER_INBOX) {
+                        val msg = Messages(null, null, user.username, user.userId,
+                                reciverId, rep_message.text.toString())
 
-                    newMessageSponser(msg)
-                } else if (frgementType == IT_INBOX) {
-                    val msg = Messages(null, null, user.username, user.userId,
-                            reciverId, rep_message.text.toString(), null, null, supportImage)
+                        newMessageSponser(msg)
+                    } else if (frgementType == IT_INBOX) {
+                        val msg = Messages(null, null, user.username, user.userId,
+                                reciverId, rep_message.text.toString(), null, null, supportImage)
 
-                    newMessageItSupport(msg)
-                }
-                dialog.dismiss()
-            } else
-                Apputils.showMsg(activity!!, "Message could not be empty!!")
+                        newMessageItSupport(msg)
+                    }
+                    dialog.dismiss()
+                } else
+                    Apputils.showMsg(activity!!, "Message could not be empty!!")
+            }
         }
-
         dialog.show()
     }
 
@@ -421,7 +425,7 @@ class InboxFragment : Fragment() {
     }
     //</editor-fold>
 
-    private fun updateMessageStatus(id : Int) {
+    private fun updateMessageStatus(id: Int) {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()

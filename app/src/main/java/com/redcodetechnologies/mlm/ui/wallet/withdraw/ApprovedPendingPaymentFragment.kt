@@ -39,6 +39,7 @@ class ApprovedPendingPaymentFragment : Fragment() {
     var recylcer_wd: RecyclerView? = null
     var adapter: WithdrawRequestAdapter? = null
     private var isViewShown = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_withdrawlayout, container, false)
         if (!isViewShown) {
@@ -58,7 +59,6 @@ class ApprovedPendingPaymentFragment : Fragment() {
 
         return view
     }
-
     private fun initView(view: View?) {
         tv_no_data = view!!.findViewById(R.id.tv_no_data)
         tv_req_type = view.findViewById(R.id.tv_req_type)
@@ -70,8 +70,6 @@ class ApprovedPendingPaymentFragment : Fragment() {
 
         getApprovedPendingWdRequest()
     }
-
-
     fun getApprovedPendingWdRequest() {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {

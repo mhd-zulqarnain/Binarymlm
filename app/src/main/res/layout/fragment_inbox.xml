@@ -37,10 +37,11 @@
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
-            android:background="#bbf4c026"
+            android:background="#cac41111"
             android:drawableRight="@drawable/ic_add_black_24dp"
             android:gravity="center"
             android:padding="3dp"
+            android:textColor="#fff"
             android:text="Compose" />
 
         <LinearLayout

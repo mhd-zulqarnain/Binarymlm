@@ -122,7 +122,7 @@ interface RetrofiltService {
     fun checkIfNewMemeberLeftChild(@Path("userid") userid: Int): Call<Response>
 
 
-    @GET("checkifnewmemeberright/{userid}")
+    @GET("checkifnewmemeberrightchild/{userid}")
     @Headers("Content-Type:application/json")
     fun checkIfNewMemeberRight(@Path("userid") userid: Int): Call<Response>
 
