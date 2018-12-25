@@ -11,6 +11,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -55,6 +56,7 @@ import com.redcodetechnologies.mlm.utils.SharedPrefs
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -119,6 +121,13 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         getUserObject()
         askPermission(Manifest.permission.CAMERA, 1)
         askPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 4)
+        swipeRefreshLayout.setOnRefreshListener {
+            object : SwipeRefreshLayout.OnRefreshListener {
+                override fun onRefresh() {
+                    getUserObject()
+                }
+            }
+        }
     }
 
     fun makeView() {
@@ -314,7 +323,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 if (id == 0L) {
                     // for non-child parents
                     drawer_layout.closeDrawer(GravityCompat.START)
-
+                    getUserObject()
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, DashBoardFragment()).commit()
 
 
@@ -547,6 +556,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 if (id == 0L) {
                     // for non-child parents
                     drawer_layout.closeDrawer(GravityCompat.START)
+                    getUserObject()
 
                     supportFragmentManager.beginTransaction().replace(R.id.main_layout, SleepingDashboardFragment()).commit()
 
@@ -768,7 +778,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     }
 
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
-                        //var code: Int = response!!.code()
                         val msg = response!!.message()
                         service.success(msg)
                     }
@@ -805,7 +814,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 ?.enqueue(object : Callback<NewUserRegistration> {
                     override fun onFailure(call: Call<NewUserRegistration>?, t: Throwable?) {
                         println("error")
-
+                        swipeRefreshLayout.setRefreshing(false);
 
                     }
 
@@ -825,7 +834,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         } else {
                             print("error")
                         }
-
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 })
     }
@@ -837,7 +846,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         startActivity(Intent(this@DrawerActivity, SignInActivity::class.java))
         this@DrawerActivity.finish()
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val fragment = supportFragmentManager.findFragmentById(R.id.main_layout)

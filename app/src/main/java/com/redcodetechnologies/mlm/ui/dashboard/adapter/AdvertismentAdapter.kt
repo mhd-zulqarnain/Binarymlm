@@ -51,4 +51,8 @@ class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayLis
             }
         }
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 }

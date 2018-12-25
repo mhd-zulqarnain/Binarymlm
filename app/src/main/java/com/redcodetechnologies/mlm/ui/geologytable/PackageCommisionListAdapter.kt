@@ -46,7 +46,7 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
         var btn_ok: Button? = null
         fun bindView(packagecommisionlist: TransactionModal, typ: String, ctx: Context) {
 
-            var isWithdrawalOn = SharedPrefs.getInstance()!!.getUser(ctx).isWithdrawalOpen
+            val isWithdrawalOn =if(SharedPrefs.getInstance()!!.getUser(ctx).isWithdrawalOpen==null) false else SharedPrefs.getInstance()!!.getUser(ctx).isWithdrawalOpen
 
             tv_source = itemView.findViewById(R.id.tran_source)
             tv_name = itemView.findViewById(R.id.tran_name)

@@ -51,7 +51,7 @@ class DownMemberAdapter(var ctx: Context, var type: String, var list: ArrayList<
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var tv_name: TextView? = null
-        var tv_phone: TextView? = null
+       // var tv_phone: TextView? = null
         var tv_bank: TextView? = null
         var tv_sponser: TextView? = null
         var tv_paid: TextView? = null
@@ -63,7 +63,7 @@ class DownMemberAdapter(var ctx: Context, var type: String, var list: ArrayList<
 //            itemView.setClickable(true);
 
             tv_name = itemView.findViewById(R.id.tv_name)
-            tv_phone = itemView.findViewById(R.id.tv_phone)
+          //  tv_phone = itemView.findViewById(R.id.tv_phone)
             card_members = itemView.findViewById(R.id.card_members)
             tv_bank = itemView.findViewById(R.id.tv_bank)
             tv_sponser = itemView.findViewById(R.id.tv_sponser)
@@ -76,14 +76,14 @@ class DownMemberAdapter(var ctx: Context, var type: String, var list: ArrayList<
                 tv_sponser!!.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
                 tv_name!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.35f)
                 tv_paid!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.35f)
-                tv_phone!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.9f)
+              //  tv_phone!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.9f)
                 tv_bank!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.35f)
             }
 
             if (users.Username != null)
                 tv_name!!.text = users.Username
             if (users.Phone != null)
-                tv_phone!!.text = users.Phone
+//                tv_phone!!.text = users.Phone
             if (users.BankName != null)
                 tv_bank!!.text = users.BankName!!
             if (users.SponsorName != null)

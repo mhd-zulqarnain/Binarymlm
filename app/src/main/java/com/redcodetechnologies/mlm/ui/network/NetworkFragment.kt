@@ -200,7 +200,7 @@ class NetworkFragment : Fragment() {
             tv_sponser!!.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
             tv_username!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.35f)
             tv_paid_amount!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.35f)
-            tv_phone!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.9f)
+//            tv_phone!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.9f)
             tv_bank_name!!.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT,1.35f)
             fragment_title!!.text = "Add new Member"
             (activity as DrawerActivity).getSupportActionBar()?.setTitle("Add new Member")
