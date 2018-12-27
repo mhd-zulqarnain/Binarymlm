@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:clickable="true"
+                app:cardElevation="16dp"
                 android:foreground="@drawable/custom_ripple_view"
                 android:padding="10dp">
 
@@ -70,6 +71,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:clickable="true"
+                app:cardElevation="16dp"
                 android:foreground="@drawable/custom_ripple_view"
                 android:padding="10dp"
 
@@ -116,8 +118,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-
-
+                app:cardElevation="16dp"
                 android:clickable="true"
                 android:foreground="@drawable/custom_ripple_view"
 
@@ -173,7 +174,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:clickable="true"
-
+                app:cardElevation="16dp"
                 android:foreground="@drawable/custom_ripple_view"
                 android:padding="10dp"
                 app:cardBackgroundColor="@color/colorGray">
@@ -218,6 +219,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                app:cardElevation="16dp"
                 android:id="@+id/dashboardbalance"
                 android:clickable="true"
                 android:foreground="@drawable/custom_ripple_view"
@@ -264,6 +266,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:clickable="true"
+                app:cardElevation="16dp"
                 android:foreground="@drawable/custom_ripple_view"
                 android:padding="10dp"
 

@@ -60,13 +60,12 @@ class MemberDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_member_detail)
 
 
-        var json = intent.getStringExtra("object")
+        val json = intent.getStringExtra("object")
         prefs = SharedPrefs.getInstance()!!
         this.getSupportActionBar()?.setTitle("Details")
 
         if (json != null)
             user = Gson().fromJson(json, Users::class.java);
-
 
         initView()
         btn_back.setOnClickListener {
@@ -112,7 +111,7 @@ class MemberDetailActivity : AppCompatActivity() {
 
                         override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                             print("object success ")
-                            var code: Int = response!!.code()
+                            val code: Int = response!!.code()
 
                             if (code == 401) {
                                 Apputils.showMsg(this@MemberDetailActivity, "Token Expired")
@@ -121,11 +120,11 @@ class MemberDetailActivity : AppCompatActivity() {
                             }
                             if (code == 200) {
                                 print("success")
-                                var obj: Response = response.body()!!
+                                val obj: Response = response.body()!!
 
 
                                 if (obj.message != null) {
-                                    var img = obj.message
+                                    val img = obj.message
                                     if (img != "" && img != "null")
                                         profile_image_downliner.setImageBitmap(stringtoImage(img.toString()))
                                 }
@@ -139,11 +138,10 @@ class MemberDetailActivity : AppCompatActivity() {
                     })
         }
 
-
     fun stringtoImage(encodedString: String): Bitmap? {
         try {
-            var encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            var bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
+            val encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            val bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
             return bitmap;
 
         } catch (e: Exception) {
@@ -214,7 +212,7 @@ class MemberDetailActivity : AppCompatActivity() {
             showPrgressbar()
 
             val observer = getObserver()
-            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token!!, user!!.UserId!!.toInt())
+            val observable: Observable<ArrayList<Users>> = MyApiRxClint.getInstance()!!.getService()!!.getAllDownlineMembersRight("bearer " + token, user!!.UserId!!.toInt())
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer)

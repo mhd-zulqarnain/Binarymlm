@@ -89,8 +89,6 @@ class DashBoardFragment : Fragment() {
     private fun initView(view: View) {
 
         balance_card = view.findViewById(R.id.dashboardbalance) as CardView;
-
-
         recycler_adds = view.findViewById(R.id.recylcer_adds)
         tv_show_ads = view.findViewById(R.id.tv_show_ads)
         progressbar_dash = view.findViewById(R.id.progressbar_dash)
@@ -112,7 +110,7 @@ class DashBoardFragment : Fragment() {
         val manager =  LinearLayoutManager((activity as Context?)!!, LinearLayout.HORIZONTAL, false)
         recycler_adds!!.layoutManager = manager
         adapter = AdvertismentAdapter(activity!!, frgement_type, adsList){ads->
-            var img = Apputils.decodeFromBase64(ads.AdvertisementImage!!)
+            val img = Apputils.decodeFromBase64(ads.AdvertisementImage!!)
             if(img!=null)
             viewAdsDialog(img)
         }
@@ -199,7 +197,7 @@ class DashBoardFragment : Fragment() {
         progressbar_add!!.visibility = View.VISIBLE
         recycler_adds!!.visibility = View.GONE
         val adsObserver = getadvertismentObserver()
-        var adsObservable: Observable<ArrayList<Advertisement>> = MyApiRxClint.getInstance()?.getService()?.getCoinData()!!
+        val adsObservable: Observable<ArrayList<Advertisement>> = MyApiRxClint.getInstance()?.getService()?.getCoinData()!!
         adsObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(adsObserver)
@@ -302,11 +300,8 @@ class DashBoardFragment : Fragment() {
 
                             if (obj.GetTotalremainingrightamount != null)
                                 GetTotalremainingrightamount!!.text = obj.GetTotalremainingrightamount!!.split(".")[0]+" PKR"
-
-
                         }
                         progressbar_dash!!.visibility = View.GONE
-
 
                     }
                 })
@@ -331,7 +326,5 @@ class DashBoardFragment : Fragment() {
         adsdisposable?.dispose()
         super.onDestroyView()
     }
-
-
-
+;;;;;;;;;''
 }
