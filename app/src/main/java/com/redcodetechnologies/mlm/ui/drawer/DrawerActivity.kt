@@ -11,7 +11,6 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -35,7 +34,7 @@ import com.redcodetechnologies.mlm.ui.dashboard.DashBoardFragment
 import com.redcodetechnologies.mlm.ui.dashboard.SleepingDashboardFragment
 import com.redcodetechnologies.mlm.ui.geologytable.GeneologyTableFragment
 import com.redcodetechnologies.mlm.ui.network.NetworkFragment
-import com.redcodetechnologies.mlm.ui.network.downliners.DirectMemberFragment
+import com.redcodetechnologies.mlm.ui.network.DirectMemberFragment
 import com.redcodetechnologies.mlm.ui.network.downliners.DownlinerStatusFragment
 import com.redcodetechnologies.mlm.ui.network.UpgradePackageFragment
 import com.redcodetechnologies.mlm.ui.notification.NoficationListFragment
@@ -56,7 +55,6 @@ import com.redcodetechnologies.mlm.utils.SharedPrefs
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -117,17 +115,19 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             supportFragmentManager.beginTransaction().add(R.id.main_layout, SleepingDashboardFragment()).commit()
         }
         getSupportActionBar()!!.setTitle("Dashboard")
-
+        makeView()
         getUserObject()
         askPermission(Manifest.permission.CAMERA, 1)
         askPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 4)
+
+        /*
         swipeRefreshLayout.setOnRefreshListener {
             object : SwipeRefreshLayout.OnRefreshListener {
                 override fun onRefresh() {
-                    getUserObject()
+
                 }
             }
-        }
+        }*/
     }
 
     fun makeView() {
@@ -137,8 +137,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         val obj = mPref!!.getUser(this@DrawerActivity);
         if (obj.username != null)
             headerView.findViewById<TextView>(R.id.tv_username).setText(obj.username);
-        if (obj.email != null)
+        if (obj.email != null){
             headerView.findViewById<TextView>(R.id.tv_email).setText(obj.email);
+
+        }
         if (obj.userDesignation != null)
             headerView.findViewById<TextView>(R.id.tv_designation).setText(obj.userDesignation.toString());
         if (obj.phone != null)
@@ -320,6 +322,8 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             override fun onGroupClick(parent: ExpandableListView, v: View,
                                       groupPosition: Int, id: Long): Boolean {
 
+
+                //swipeRefreshLayout.setRefreshing(false);
                 if (id == 0L) {
                     // for non-child parents
                     drawer_layout.closeDrawer(GravityCompat.START)
@@ -351,7 +355,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             override fun onChildClick(parent: ExpandableListView, v: View,
                                       groupPosition: Int, childPosition: Int, id: Long): Boolean {
                 drawer_layout.closeDrawer(GravityCompat.START)
-
+                //swipeRefreshLayout.setRefreshing(false);
                 var args: Bundle = Bundle();
 
                 if (groupPosition == 1) {
@@ -372,10 +376,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         args.putString("Fragment", "Paid-unPaid Downliners")
                         gt.arguments = args
                         supportFragmentManager.beginTransaction().replace(R.id.main_layout, DownlinerStatusFragment()).commit()
-                    } else if (childPosition == 4) {
-                        args.putString("Fragment", "upgrade ")
-                        gt.arguments = args
-                        supportFragmentManager.beginTransaction().replace(R.id.main_layout, UpgradePackageFragment()).commit()
                     }
                 } else if (groupPosition == 2) {
 
@@ -422,6 +422,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         }
                         5 -> {
                             supportFragmentManager.beginTransaction().replace(R.id.main_layout, MyWithdrawalRequestFragment()).commit()
+                        }
+                        6->{
+                            args.putString("Fragment", "upgrade ")
+                            gt.arguments = args
+                            supportFragmentManager.beginTransaction().replace(R.id.main_layout, UpgradePackageFragment()).commit()
                         }
                     }
                 } else if (groupPosition == 5) {
@@ -491,12 +496,12 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         network.add("Down-line Members")
         network.add("Direct Members")
         network.add("Paid-unPaid Downliners")
-        network.add("Upgrage Package")
+
 
         val gtable = ArrayList<String>()
-        gtable.add("My Package Commision List")
-        gtable.add("My Direct Commision List")
-        gtable.add("My Table Commision List")
+        gtable.add("Package Commision List")
+        gtable.add("Sale Commission List")
+        gtable.add("Table Commision List")
 
         val ewallet = ArrayList<String>()
         ewallet.add("E-Wallet Summary")
@@ -504,8 +509,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         ewallet.add("E-Wallet Credits")
         ewallet.add("E-Wallet Debits")
         ewallet.add("Withdrawal Fund")
-
         ewallet.add("My Withdrawal Request")
+        ewallet.add("Upgrage Package")
+
         val reports = ArrayList<String>()
         reports.add("Active Payout")
         reports.add("Payout History")
@@ -671,7 +677,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         // Adding child data
         val gtable = ArrayList<String>()
-        gtable.add("My Package Commision List")
+        gtable.add("Package Commision List")
         val ewallet = ArrayList<String>()
         ewallet.add("E-Wallet Summary")
         ewallet.add("Transactions")
@@ -814,7 +820,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 ?.enqueue(object : Callback<NewUserRegistration> {
                     override fun onFailure(call: Call<NewUserRegistration>?, t: Throwable?) {
                         println("error")
-                        swipeRefreshLayout.setRefreshing(false);
+                     //   swipeRefreshLayout.setRefreshing(false);
 
                     }
 
@@ -834,7 +840,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                         } else {
                             print("error")
                         }
-                        swipeRefreshLayout.setRefreshing(false);
+                       // swipeRefreshLayout.setRefreshing(false);
                     }
                 })
     }
@@ -856,12 +862,30 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     override fun onBackPressed() {
+        val fragmentCurrent = supportFragmentManager.findFragmentById(R.id.main_layout)
+
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+
+            if (category == "Sales") {
+                if (fragmentCurrent !is DashBoardFragment) {
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, DashBoardFragment()).addToBackStack(null).commit();
+                } else {
+                    finish()
+                }
+            } else if (category == "Sleeping") {
+                if (fragmentCurrent !is SleepingDashboardFragment) {
+                    supportFragmentManager.beginTransaction().replace(R.id.main_layout, SleepingDashboardFragment()).addToBackStack(null).commit();
+                } else {
+                    finish()
+                }
+            }
+
+
         }
     }
+
 
 
 }

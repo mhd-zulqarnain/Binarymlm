@@ -17,6 +17,7 @@ data class EWalletWithdrawalFundModel(
         var IsActive :String?=null,
         var IsPending :String?=null,
         var IsApproved :String?=null,
+        var IsWithdrawlRequestApproved :Boolean?=null,
         var IsPaid :String?=null,
         var IsRejected :String?=null,
         var UserName :String?=null

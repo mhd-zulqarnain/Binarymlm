@@ -43,7 +43,7 @@ class WalletAdapter(var ctx: Context, var type: String, var list: ArrayList<Tran
 
             tv_source!!.text =walletmodal.TransactionSource
             tv_name!!.text =walletmodal.TransactionName
-            tv_amount!!.text =walletmodal.Amount
+            tv_amount!!.text =walletmodal.Amount!!.split(".")[0]
             tv_date!!.text = walletmodal.TransactionDate!!.split("T")[0]
 
 

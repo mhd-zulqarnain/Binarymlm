@@ -144,7 +144,6 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
             return
         }
 
-
         ApiClint.getInstance()?.getService()?.deleteSponserinboxmsg(message.Id!!)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
@@ -158,7 +157,7 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
                         var code: Int = response!!.code()
                         if (code == 200) {
                             datalist.removeAt(currPosition)
-                            notifyItemRemoved(currPosition)
+                            notifyDataSetChanged()
                         }
 
                         if (code != 200) {
@@ -193,7 +192,7 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
                         var msg = response.body()!!.message
                         if (code == 200) {
                             datalist.removeAt(currPosition)
-                            notifyItemRemoved(currPosition)
+                            notifyDataSetChanged()
                         }
 
                         if (code != 200) {
@@ -228,7 +227,7 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
                         var msg = response.body()!!.message
                         if (code == 200) {
                             datalist.removeAt(currPosition)
-                            notifyItemRemoved(currPosition)
+                            notifyDataSetChanged()
                         }
 
                         if (code != 200) {
@@ -263,7 +262,8 @@ class MessageAdapter(var ctx: Context, var datalist: ArrayList<Messages>, var ty
                         var msg = response.body()!!.message
                         if (code == 200) {
                             datalist.removeAt(currPosition)
-                            notifyItemRemoved(currPosition)
+                            notifyDataSetChanged()
+
                         }
 
                         if (code != 200) {

@@ -54,8 +54,6 @@ class VideoDetailActivity : AppCompatActivity() {
     lateinit var progressdialog: android.app.AlertDialog
 
     val VEDIO_BASE_URL = "https://www.sleepingpartnermanagementportalrct.com/VideosPack/"
-
-
     //vedio player
     companion object {
         private const val KEY_PLAY_WHEN_READY = "play_when_ready"
@@ -64,8 +62,6 @@ class VideoDetailActivity : AppCompatActivity() {
     }
 
     private val playerView: PlayerView by lazy { findViewById<PlayerView>(R.id.player_view) }
-
-
     private var shouldAutoPlay: Boolean = true
     private var trackSelector: DefaultTrackSelector? = null
     private var lastSeenTrackGroupArray: TrackGroupArray? = null
@@ -177,7 +173,6 @@ class VideoDetailActivity : AppCompatActivity() {
         return object : Observer<ArrayList<PackVideo>> {
             override fun onComplete() {
                 progressdialog.dismiss()
-
 
             }
 

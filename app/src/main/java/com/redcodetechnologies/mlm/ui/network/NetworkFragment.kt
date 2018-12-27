@@ -270,7 +270,7 @@ class NetworkFragment : Fragment() {
                                 tv_rightRemaingAmount!!.text = obj.rightRemaingAmount!!.split(".")[0]+" PKR"
 
                             if (obj.totalLeftUsers != null)
-                                tv_totalLeftUsers!!.text = obj.totalLeftUsers!!.split(".")[0]+" PKR"
+                                tv_totalLeftUsers!!.text = obj.totalLeftUsers!!.split(".")[0]
 
                             if (obj.totalRightUsers != null)
                                 tv_totalRightUsers!!.text = obj.totalRightUsers!!.split(".")[0]

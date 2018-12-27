@@ -46,7 +46,7 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
         var btn_ok: Button? = null
         fun bindView(packagecommisionlist: TransactionModal, typ: String, ctx: Context) {
 
-            val isWithdrawalOn =if(SharedPrefs.getInstance()!!.getUser(ctx).isWithdrawalOpen==null) false else SharedPrefs.getInstance()!!.getUser(ctx).isWithdrawalOpen
+            val isWithdrawalOn =if(packagecommisionlist.isWithdrawalOpen==null) false else packagecommisionlist.isWithdrawalOpen
 
             tv_source = itemView.findViewById(R.id.tran_source)
             tv_name = itemView.findViewById(R.id.tran_name)
@@ -68,15 +68,21 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
             } else {
                 btn_ok!!.visibility = View.INVISIBLE
             }
-            
+           /* if(packagecommisionlist.isWithdrawalOpen!!){
+                btn_ok!!.visibility = View.VISIBLE
+
+            }else
+                btn_ok!!.visibility = View.INVISIBLE
+
+*/
+
             if (typ == MY_DIRECT_COMMISTION_LIST || typ == MY_TABLE_COMMISTION_LIST) {
                 tv_amount!!.text = packagecommisionlist.Amount!!.split(".")[0]+" PKR"
                 tv_source!!.text = packagecommisionlist.TransactionSource
 
                 if (packagecommisionlist.IsWithdrawlRequestByUser == "false") {
                     tv_name!!.text = "You can send request"
-                    if (isWithdrawalOn)
-                    btn_ok!!.visibility = View.VISIBLE
+
                     tv_name!!.setTextColor(Color.parseColor("#FFA10A1C"));
 
                 } else {
@@ -86,13 +92,14 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
                 }
 
                 if (packagecommisionlist.IsWithdrawlPaidByAdmin == "false") {
-                    tv_date!!.setTextColor(Color.parseColor("#FFA10A1C"));
-                    tv_date!!.text = "Payment Pending"
-                    if(packagecommisionlist.IsWithdrawlRequestByUser == "false"){
-                        tv_date!!.text = "Not Requested"
-                    }
+                        tv_date!!.setTextColor(Color.parseColor("#FFA10A1C"));
+                        tv_date!!.text = "Payment Pending"
+                        if(packagecommisionlist.IsWithdrawlRequestByUser == "false"){
+                            tv_date!!.text = "Not Requested"
+                        }
                 } else {
                     tv_date!!.text = "Paid"
+                    tv_name!!.text = "Paid"
                     tv_date!!.setTextColor(Color.parseColor("#FF307B44"));
                 }
 

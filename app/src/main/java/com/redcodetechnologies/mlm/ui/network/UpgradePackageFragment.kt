@@ -297,8 +297,11 @@ class UpgradePackageFragment : Fragment() {
 
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
                         print("object success ")
-                        val balance: String = response!!.body()!!.message!!
-                        tv_balance.setText("Ewallet Balance:($balance PKR)")
+                        if(response!!.body()!!.message!=null){
+                            val balance: String = response.body()!!.message!!.split(".")[0]
+                            tv_balance.setText("Ewallet Balance:($balance PKR)")
+
+                        }
 
                     }
                 })

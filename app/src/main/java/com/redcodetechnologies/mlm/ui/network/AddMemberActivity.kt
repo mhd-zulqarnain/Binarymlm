@@ -370,7 +370,7 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.downlineMemberId = if (downlineMemberId == null) null else downlineMemberId.toString()
         userModel.documentImage = if(userdocumentImage==null) null else userdocumentImage //from spinner
 
-        confirmationDialog()
+            confirmationDialog()
 
     }
 
@@ -613,9 +613,8 @@ class AddMemberActivity : AppCompatActivity() {
                             isVerified = false
                             btn_ok.isEnabled = false
                             alert_text.visibility = View.VISIBLE
-                            val mmsg = "Account not verfied"
+                            val mmsg = "Already exists on $msg of this person"
                             alert_text.text = "($mmsg)"
-                            Apputils.showMsg(this@AddMemberActivity, mmsg!!)
                         }
 
                     }
@@ -667,10 +666,8 @@ class AddMemberActivity : AppCompatActivity() {
                             isVerified = false
                             btn_ok.isEnabled = false
                             alert_text.visibility = View.VISIBLE
-
-                            val mmsg = "Account not verfied"
+                            val mmsg = "Already exists on $msg of this person"
                             alert_text.text = "($mmsg)"
-                            Apputils.showMsg(this@AddMemberActivity, mmsg!!)
                         }
 
                     }

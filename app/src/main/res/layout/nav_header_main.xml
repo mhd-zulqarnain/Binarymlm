@@ -57,13 +57,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/oswald_bold"
-                android:text="Mr Khan"
+                android:text="Username"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textSize="15sp" />
             <TextView
                 android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/oswald_regular"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:text="android.studio@android.com"
                 android:textSize="15sp" />
         <TextView

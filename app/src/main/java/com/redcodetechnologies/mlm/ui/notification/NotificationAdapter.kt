@@ -25,6 +25,10 @@ class NotificationAdapter (var ctx: Context, var list: ArrayList<MyNotification>
 
     override fun onBindViewHolder(p0: MyViewHolder, p1: Int) {
         p0.bindView(list[p1])
+        p0.itemView.setOnClickListener {
+            onClick(list[p1])
+        }
+
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

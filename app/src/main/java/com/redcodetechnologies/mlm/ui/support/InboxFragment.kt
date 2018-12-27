@@ -205,19 +205,25 @@ class InboxFragment : Fragment() {
             tv_sender_name.text = "Support:"
             tv_reply.visibility = View.GONE
             sc_reply_view.visibility = View.GONE
+            btn_submit.text = "OK"
+
         } else {
             tv_sender_name.text = inbox.Sender_Name + ":"
         }
         btn_submit.setOnClickListener {
-            if (rep_message.text.toString().trim() != "") {
 
-                replymessagesponsor(rep_message.text.toString(), inbox.UserId!!)
+            if (frgementType == IT_INBOX) {
+                dialog.dismiss();
+            } else {
+                if (rep_message.text.toString().trim() != "") {
 
-                dialog.dismiss()
-            } else
-                Apputils.showMsg(activity!!, "Message could not be empty!!")
+                    replymessagesponsor(rep_message.text.toString(), inbox.UserId!!)
+
+                    dialog.dismiss()
+                } else
+                    Apputils.showMsg(activity!!, "Message could not be empty!!")
+            }
         }
-
         dialog.show()
 
     }
@@ -245,7 +251,6 @@ class InboxFragment : Fragment() {
             reciverId = 0;
             view_it.visibility = View.VISIBLE
             view_sponser.visibility = View.GONE
-            btn_submit.text = "OK"
         } else {
             view_it.visibility = View.GONE
             view_sponser.visibility = View.VISIBLE
@@ -266,9 +271,7 @@ class InboxFragment : Fragment() {
         })
 
         btn_submit.setOnClickListener {
-            if (frgementType == IT_INBOX) {
-                dialog.dismiss();
-            } else {
+
                 if (rep_message.text.toString().trim() != "") {
                     if (frgementType == SPONSER_INBOX) {
                         val msg = Messages(null, null, user.username, user.userId,
@@ -285,7 +288,7 @@ class InboxFragment : Fragment() {
                 } else
                     Apputils.showMsg(activity!!, "Message could not be empty!!")
             }
-        }
+
         dialog.show()
     }
 
