@@ -72,6 +72,10 @@ class GeneologyTableFragment : Fragment() {
         tv_date = view.findViewById(R.id.tv_tran_date)
         txt_warning = view.findViewById(R.id.txt_warning)
         progressBar = view.findViewById(R.id.progressBar)
+        showViews()
+    }
+
+    fun showViews() {
 
         recylcer_down!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = PackageCommisionListAdapter(activity!!, frgement_type, commitionlist) { obj ->
@@ -86,10 +90,7 @@ class GeneologyTableFragment : Fragment() {
             txt_warning.visibility = View.VISIBLE
         }
         recylcer_down!!.adapter = adapter
-        showViews()
-    }
 
-    fun showViews() {
         if (frgement_type == MY_PKG_COMMISTION_LIST) {
             tv_action.visibility = View.GONE
             tv_name.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
@@ -97,7 +98,7 @@ class GeneologyTableFragment : Fragment() {
             tv_amount.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
             tv_date.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1.75f)
             tv_action.layoutParams = LinearLayout.LayoutParams(0, 0, 0f)
-            tv_header.text = " My Package Commision List"
+            tv_header.text = "Package Commision List"
             tv_date.setText("Transaction Date")
             tv_name.setText("Transaction Name")
             getPackageCommisionList()
@@ -107,10 +108,10 @@ class GeneologyTableFragment : Fragment() {
 
 
             if (frgement_type == MY_TABLE_COMMISTION_LIST) {
-                tv_header.text = " My Table Commision List"
+                tv_header.text = "Table Commision List"
                 getMyTableCommsionList()
             } else {
-                tv_header.text = " My Direct Commision List"
+                tv_header.text = "Sale Commission List"
                 getMyDirectCommsionList()
 
             }
@@ -213,11 +214,16 @@ class GeneologyTableFragment : Fragment() {
             return
         }
 
+        if(!commitionlist.isEmpty()){
+            commitionlist.clear()
+        }
+        progressBar.visibility = View.VISIBLE
 
         ApiClint.getInstance()?.getService()?.sendmatchingtablecommissionrequest(id)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         println("error")
+                        progressBar.visibility = View.GONE
                         Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
 
                     }
@@ -234,6 +240,7 @@ class GeneologyTableFragment : Fragment() {
                             Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
 
                         }
+                        showViews()
 
                     }
                 })
@@ -246,13 +253,17 @@ class GeneologyTableFragment : Fragment() {
             return
         }
 
+        if(!commitionlist.isEmpty()){
+            commitionlist.clear()
+        }
+        progressBar.visibility = View.VISIBLE
 
         ApiClint.getInstance()?.getService()?.senddirectsalecommissionrequest(id)
                 ?.enqueue(object : Callback<Response> {
                     override fun onFailure(call: Call<Response>?, t: Throwable?) {
                         println("error")
                         Toast.makeText(activity!!, " Network error ", Toast.LENGTH_SHORT).show()
-
+                        progressBar.visibility = View.GONE
                     }
 
                     override fun onResponse(call: Call<Response>?, response: retrofit2.Response<Response>?) {
@@ -266,6 +277,8 @@ class GeneologyTableFragment : Fragment() {
                             Toast.makeText(activity!!, " Failed ", Toast.LENGTH_SHORT).show()
 
                         }
+                        showViews()
+
 
                     }
                 })

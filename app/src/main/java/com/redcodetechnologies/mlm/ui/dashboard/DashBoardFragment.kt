@@ -112,7 +112,9 @@ class DashBoardFragment : Fragment() {
         val manager =  LinearLayoutManager((activity as Context?)!!, LinearLayout.HORIZONTAL, false)
         recycler_adds!!.layoutManager = manager
         adapter = AdvertismentAdapter(activity!!, frgement_type, adsList){ads->
-            viewAdsDialog(Apputils.decodeFromBase64(ads.AdvertisementImage!!))
+            var img = Apputils.decodeFromBase64(ads.AdvertisementImage!!)
+            if(img!=null)
+            viewAdsDialog(img)
         }
         if (prefs.getUser(activity!!).userId != null) {
             id = prefs.getUser(activity!!).userId
@@ -264,30 +266,30 @@ class DashBoardFragment : Fragment() {
                             val obj: DasboardData = response.body()!!
 
                             if (obj.totaldirectcommission != null)
-                                totaldirectcommission!!.text = obj.totaldirectcommission!!.split(".")[0];
+                                totaldirectcommission!!.text = obj.totaldirectcommission!!.split(".")[0]+" PKR";
 
                             if (obj.GetEwalletCredit != null)
-                                GetEwalletCredit!!.text = obj.GetEwalletCredit!!.split(".")[0]
+                                GetEwalletCredit!!.text = obj.GetEwalletCredit!!.split(".")[0]+" PKR"
 
                             if (obj.GetEWalletDebitSum != null)
-                                GetEWalletDebitSum!!.text = obj.GetEWalletDebitSum!!.split(".")[0]
+                                GetEWalletDebitSum!!.text = obj.GetEWalletDebitSum!!.split(".")[0]+" PKR"
 
                             if (obj.GetPaymentsInProcessSum != null)
-                                GetPaymentsInProcessSum!!.text = obj.GetPaymentsInProcessSum!!.split(".")[0]
+                                GetPaymentsInProcessSum!!.text = obj.GetPaymentsInProcessSum!!.split(".")[0]+" PKR"
                             if (obj.GetUserTotalPackageCommission != null)
-                                GetUserTotalPackageCommission!!.text = obj.GetUserTotalPackageCommission!!.split(".")[0]
+                                GetUserTotalPackageCommission!!.text = obj.GetUserTotalPackageCommission!!.split(".")[0]+" PKR"
 
                             if (obj.GetUserDownlineMembers != null)
                                 GetUserDownlineMembers!!.text = obj.GetUserDownlineMembers!!.split(".")[0]
 
                             if (obj.GetPayoutHistorySum != null)
-                                GetPayoutHistorySum!!.text = obj.GetPayoutHistorySum!!.split(".")[0]
+                                GetPayoutHistorySum!!.text = obj.GetPayoutHistorySum!!.split(".")[0]+" PKR"
 
                             if (obj.GetUserTotalMatchingCommission != null)
-                                GetUserTotalMatchingCommission!!.text = obj.GetUserTotalMatchingCommission!!.split(".")[0]
+                                GetUserTotalMatchingCommission!!.text = obj.GetUserTotalMatchingCommission!!.split(".")[0]+" PKR"
 
                             if (obj.GetEWalletSummarySponsorBonus != null)
-                                GetEWalletSummarySponsorBonus!!.text = obj.GetEWalletSummarySponsorBonus!!.split(".")[0]
+                                GetEWalletSummarySponsorBonus!!.text = obj.GetEWalletSummarySponsorBonus!!.split(".")[0]+" PKR"
 
                             if (obj.GetAllTotalLeftUserPV != null)
                                 GetAllTotalLeftUserPV!!.text = obj.GetAllTotalLeftUserPV!!.split(".")[0]
@@ -296,10 +298,10 @@ class DashBoardFragment : Fragment() {
                                 GetAllTotalRightUserPV!!.text = obj.GetAllTotalRightUserPV!!.split(".")[0]
 
                             if (obj.GetTotalremainingleftamount != null)
-                                GetTotalremainingleftamount!!.text = obj.GetTotalremainingleftamount!!.split(".")[0]
+                                GetTotalremainingleftamount!!.text = obj.GetTotalremainingleftamount!!.split(".")[0]+" PKR"
 
                             if (obj.GetTotalremainingrightamount != null)
-                                GetTotalremainingrightamount!!.text = obj.GetTotalremainingrightamount!!.split(".")[0]
+                                GetTotalremainingrightamount!!.text = obj.GetTotalremainingrightamount!!.split(".")[0]+" PKR"
 
 
                         }

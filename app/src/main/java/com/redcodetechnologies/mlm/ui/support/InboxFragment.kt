@@ -182,7 +182,7 @@ class InboxFragment : Fragment() {
         val rep_message: EditText = v.findViewById(R.id.rep_message)
 
         message.text = inbox.Message
-        if(inbox.IsRead == false)
+        if (inbox.IsRead == false)
             updateMessageStatus(inbox.Id!!)
         inbox.IsRead = true
 
@@ -205,19 +205,25 @@ class InboxFragment : Fragment() {
             tv_sender_name.text = "Support:"
             tv_reply.visibility = View.GONE
             sc_reply_view.visibility = View.GONE
+            btn_submit.text = "OK"
+
         } else {
             tv_sender_name.text = inbox.Sender_Name + ":"
         }
         btn_submit.setOnClickListener {
-            if (rep_message.text.toString().trim() != "") {
 
-                replymessagesponsor(rep_message.text.toString(), inbox.UserId!!)
+            if (frgementType == IT_INBOX) {
+                dialog.dismiss();
+            } else {
+                if (rep_message.text.toString().trim() != "") {
 
-                dialog.dismiss()
-            } else
-                Apputils.showMsg(activity!!, "Message could not be empty!!")
+                    replymessagesponsor(rep_message.text.toString(), inbox.UserId!!)
+
+                    dialog.dismiss()
+                } else
+                    Apputils.showMsg(activity!!, "Message could not be empty!!")
+            }
         }
-
         dialog.show()
 
     }
@@ -256,31 +262,32 @@ class InboxFragment : Fragment() {
 
         val arrayAdapter = ArrayAdapter.createFromResource(activity!!, R.array.compose_sponsor_spinner, R.layout.support_simple_spinner_dropdown_item)
         spinner_receiver.adapter = arrayAdapter
-        spinner_receiver.setSelection(1)
+        spinner_receiver.setSelection(0)
         spinner_receiver.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                    reciverId = user.sponsorId!!
+                reciverId = user.sponsorId!!
             }
         })
 
         btn_submit.setOnClickListener {
-            if (rep_message.text.toString().trim() != "") {
-                if (frgementType == SPONSER_INBOX) {
-                    val msg = Messages(null, null, user.username, user.userId,
-                            reciverId, rep_message.text.toString())
 
-                    newMessageSponser(msg)
-                } else if (frgementType == IT_INBOX) {
-                    val msg = Messages(null, null, user.username, user.userId,
-                            reciverId, rep_message.text.toString(), null, null, supportImage)
+                if (rep_message.text.toString().trim() != "") {
+                    if (frgementType == SPONSER_INBOX) {
+                        val msg = Messages(null, null, user.username, user.userId,
+                                reciverId, rep_message.text.toString())
 
-                    newMessageItSupport(msg)
-                }
-                dialog.dismiss()
-            } else
-                Apputils.showMsg(activity!!, "Message could not be empty!!")
-        }
+                        newMessageSponser(msg)
+                    } else if (frgementType == IT_INBOX) {
+                        val msg = Messages(null, null, user.username, user.userId,
+                                reciverId, rep_message.text.toString(), null, null, supportImage)
+
+                        newMessageItSupport(msg)
+                    }
+                    dialog.dismiss()
+                } else
+                    Apputils.showMsg(activity!!, "Message could not be empty!!")
+            }
 
         dialog.show()
     }
@@ -421,7 +428,7 @@ class InboxFragment : Fragment() {
     }
     //</editor-fold>
 
-    private fun updateMessageStatus(id : Int) {
+    private fun updateMessageStatus(id: Int) {
 
         if (!Apputils.isNetworkAvailable(activity!!)) {
             Toast.makeText(activity, " Network error ", Toast.LENGTH_SHORT).show()

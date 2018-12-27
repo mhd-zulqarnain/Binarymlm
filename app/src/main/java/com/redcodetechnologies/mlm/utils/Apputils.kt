@@ -57,10 +57,15 @@ class Apputils {
             return netInfo != null && netInfo.isConnectedOrConnecting
         }
 
-        fun decodeFromBase64(img: String): Bitmap {
-            var imageBytes = Base64.decode(img, Base64.DEFAULT)
-            val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-            return decodedImage
+        fun decodeFromBase64(img: String): Bitmap? {
+            try {
+                var imageBytes = Base64.decode(img, Base64.DEFAULT)
+                val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                return decodedImage
+
+            }catch (e:Exception){
+                return null
+            }
         }
 
         fun updateFcm(ctx: Activity) {

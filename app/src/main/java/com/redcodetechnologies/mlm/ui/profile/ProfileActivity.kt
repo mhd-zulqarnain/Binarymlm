@@ -62,6 +62,8 @@ class ProfileActivity : AppCompatActivity() {
     var name: EditText? = null
     var username: EditText? = null
     var address: EditText? = null
+    var ed_cnic: EditText? = null
+    var ed_banktitle: EditText? = null
     var ed_upload_document: EditText? = null
     var ed_upload_nic: EditText? = null
     var ed_upload_nic_backside: EditText? = null
@@ -134,6 +136,8 @@ class ProfileActivity : AppCompatActivity() {
         ed_upload_nic = findViewById(R.id.ed_upload_nic)
         ed_upload_nic_backside = findViewById(R.id.ed_upload_nic_backside)
         spinner_country = findViewById(R.id.spinner_country)
+        ed_cnic = findViewById(R.id.ed_cnic)
+        ed_banktitle = findViewById(R.id.ed_banktitle)
         profile_image = findViewById(R.id.profile_image)
         pref = SharedPrefs.getInstance()
 
@@ -181,32 +185,62 @@ class ProfileActivity : AppCompatActivity() {
         ed_username!!.setOnClickListener {
             showChangeUsernameDialog()
 
+
         }
+
         ed_accountnumber.addTextChangedListener(object : TextWatcher {
+            var state = 0
             override fun afterTextChanged(editable: Editable?) {
-                if (editable!!.length == 4 || editable.length == 15) {
-                    editable.append('-');
+
+                if (state == 0) {
+                    if (editable!!.length == 4) {
+                        editable.append("-");
+                        state = 1;
+                    }
                 }
-            }
+                if (state == 1) {
+                    if (editable!!.length == 15) {
+                        state = 2;
+                        editable.append("-");
+                    }
+                }
+                if (editable!!.length < 4) {
+                    state = 0;
+                }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
 
-        /*       setOnTouchListener(object : View.OnTouchListener {
-           override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-               val DRAWABLE_RIGHT = 2
-               if (event!!.getAction() === MotionEvent.ACTION_UP) {
-                   if (event!!.getRawX() >= (ed_password!!.getRight() - ed_password!!.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                       return true
-                   }
-               }
-               return false
-           }
-       })*/
+        ed_cnic!!.addTextChangedListener(object : TextWatcher {
+            var state = 0
+            override fun afterTextChanged(editable: Editable?) {
+
+                if (state == 0) {
+                    if (editable!!.length == 5) {
+                        editable.append("-");
+                        state = 1;
+                    }
+                }
+                if (state == 1) {
+                    if (editable!!.length == 13) {
+                        state = 2;
+                        editable.append("-");
+                    }
+                }
+                if (editable!!.length < 5) {
+                    state = 0;
+                }
+
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+
+
 
         ed_upload_document!!.setOnClickListener {
             pickImage(SELECT_DOCUMENT_PHOTO)
@@ -234,9 +268,13 @@ class ProfileActivity : AppCompatActivity() {
             val u_address = if (obj.address.toString() == "null") "" else obj.address.toString()
             val u_bank = if (obj.bankName.toString() == "null") "" else obj.bankName.toString()
             val u_account = if (obj.accountNumber.toString() == "null") "" else obj.accountNumber.toString()
+            val nic = if (obj.cnic.toString() == "null") "" else obj.cnic.toString()
+            val title = if (obj.accountTitle.toString() == "null") "" else obj.accountTitle.toString()
 
             ed_password!!.setText(obj.password.toString())
+            ed_cnic!!.setText(nic)
             bankname!!.setText(u_bank)
+            ed_banktitle!!.setText(title)
             accountnumber!!.setText(u_account)
             email!!.setText(u_email)
             mPassword = pref!!.getUser(this@ProfileActivity).password!!
@@ -320,6 +358,9 @@ class ProfileActivity : AppCompatActivity() {
         } else if (email!!.text.toString().trim(' ').length < 1) {
             email!!.error = Html.fromHtml("<font color='#E0796C'>Email address could not be empty</font>")
             email!!.requestFocus()
+        } else if (ed_banktitle!!.text.toString().trim(' ').length < 1) {
+            ed_banktitle!!.error = Html.fromHtml("<font color='#E0796C'>This field could not be empty</font>")
+            ed_banktitle!!.requestFocus()
         } else if (!Apputils.isValidEmail(email!!.text.toString()) || email!!.text.toString() == "") {
             email!!.error = Html.fromHtml("<font color='#E0796C'>Not a Proper email Address</font>")
             email!!.requestFocus()
@@ -333,6 +374,12 @@ class ProfileActivity : AppCompatActivity() {
         } else if (accountnumber!!.text.toString().trim(' ').length < 16) {
             accountnumber!!.error = Html.fromHtml("<font color='#E0796C'>Account number must contain 16 characters</font>")
             accountnumber!!.requestFocus()
+        } else if (ed_cnic!!.text.toString().trim(' ').length < 1) {
+            ed_cnic!!.error = Html.fromHtml("<font color='#E0796C'>This filed could not be empty</font>")
+            ed_cnic!!.requestFocus()
+        } else if (ed_cnic!!.text.toString().trim(' ').length < 12) {
+            ed_cnic!!.error = Html.fromHtml("<font color='#E0796C'>Invalid entry</font>")
+            ed_cnic!!.requestFocus()
         } else {
 
             if (name!!.text.toString().trim(' ').length < 1) {
@@ -384,15 +431,16 @@ class ProfileActivity : AppCompatActivity() {
             profileSetup.Email = email!!.text.toString();
             profileSetup.BankName = bankname!!.text.toString();
             profileSetup.AccountNumber = accountnumber!!.text.toString();
+            profileSetup.CNICNumber = ed_cnic!!.text.toString();
 
             profileSetup.NICImage1 = nicImg1;
             profileSetup.NICImage = nicImg;
             profileSetup.ProfileImage = profileImg;
+            profileSetup.AccountTitle = ed_banktitle!!.text.toString();
 
             print(profileSetup)
             updateProfile()
 
-            Toast.makeText(this@ProfileActivity, "Privacy has been Updated!", Toast.LENGTH_LONG).show()
         }
 
     }
@@ -637,7 +685,7 @@ class ProfileActivity : AppCompatActivity() {
 
                         val bitmap = MediaStore.Images.Media.getBitmap(this@ProfileActivity.getContentResolver(), imageUri);
                         try {
-                            val arr = getRealPathFromURI(this@ProfileActivity, imageUri).split("/")
+                            val arr = getRealPathFromURI(this@ProfileActivity, imageUri!!).split("/")
                             filename = arr[arr.size - 1]
                         } catch (e: Exception) {
                         }
@@ -648,7 +696,7 @@ class ProfileActivity : AppCompatActivity() {
                     }
                 SELECT_CAMERA_IMAGE ->
                     try {
-                        var bitmap = data.extras.get("data") as Bitmap?
+                        val bitmap = data.extras!!.get("data") as Bitmap?
                         profileImg = imageTostring(bitmap!!)
                         profile_image!!.setImageBitmap(bitmap)
                     } catch (e: Exception) {
@@ -684,7 +732,7 @@ class ProfileActivity : AppCompatActivity() {
                         var filename = "No Image found"
                         val bitmap = MediaStore.Images.Media.getBitmap(this@ProfileActivity.getContentResolver(), imageUri);
                         try {
-                            val arr = getRealPathFromURI(this@ProfileActivity, imageUri).split("/")
+                            val arr = getRealPathFromURI(this@ProfileActivity, imageUri!!).split("/")
                             filename = arr[arr.size - 1]
                         } catch (e: Exception) {
                         }
@@ -702,8 +750,8 @@ class ProfileActivity : AppCompatActivity() {
 
     fun stringtoImage(encodedString: String): Bitmap? {
         try {
-            var encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            var bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
+            val encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            val bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size);
             return bitmap;
 
         } catch (e: Exception) {

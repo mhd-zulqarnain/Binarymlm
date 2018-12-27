@@ -10,433 +10,430 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:weightSum="6">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:clickable="true"
-
-                android:foreground="@drawable/custom_ripple_view"
-                android:padding="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:weightSum="3.5"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/left_arrow" />
-
-                    <TextView
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.5"
-                        android:gravity="center"
-                        android:text="Left Amount Remaing" />
-
-                    <TextView
-                        android:id="@+id/tv_leftRemaingAmount"
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="0 PKR"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-
-                android:clickable="true"
-                android:foreground="@drawable/custom_ripple_view"
-                android:padding="10dp"
-
-                app:cardBackgroundColor="@color/colorGray">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:weightSum="3.5"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/right_arrow" />
-
-                    <TextView
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.5"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Right Remaining Amount" />
-
-                    <TextView
-                        android:id="@+id/tv_rightRemaingAmount"
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="0"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-
-
-                android:clickable="true"
-                android:foreground="@drawable/custom_ripple_view"
-
-                android:padding="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:weightSum="3.5"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/multiple_users_silhouette" />
-
-                    <TextView
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.5"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Total Left Users" />
-
-                    <TextView
-                        android:id="@+id/tv_totalLeftUsers"
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="0"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:weightSum="6">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:clickable="true"
-
-                android:foreground="@drawable/custom_ripple_view"
-                android:padding="10dp"
-                app:cardBackgroundColor="@color/colorGray">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:weightSum="3.5"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/multiple_users_silhouette" />
-
-                    <TextView
-
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.5"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Total Right Users" />
-
-                    <TextView
-                        android:id="@+id/tv_totalRightUsers"
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="0 "
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-
-
-                android:clickable="true"
-                android:foreground="@drawable/custom_ripple_view"
-
-                android:padding="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:weightSum="3.5"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/money_bag" />
-
-                    <TextView
-
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.5"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Total Amount Right Users" />
-
-                    <TextView
-                        android:id="@+id/tv_totalAmountRightUsers"
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="0"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:clickable="true"
-
-
-                android:foreground="@drawable/custom_ripple_view"
-                android:padding="10dp"
-
-                app:cardBackgroundColor="@color/colorGray">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:weightSum="3.5"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/money_bag" />
-
-                    <TextView
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.5"
-                        android:gravity="center"
-                        android:text="Total Amount Left Users" />
-
-                    <TextView
-                        android:id="@+id/tv_totalAmountLeftUsers"
-                        style="@style/CustomBlacktextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="0"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/fragment_title"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".8"
-            android:fontFamily="@font/ralewayregular"
-            android:gravity="center_vertical"
-            android:text="Reffered Member"
-            android:textColor="@color/colorRed"
-            android:textSize="14sp" />
-
-  <!--      <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".7"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.SearchView
-                android:id="@+id/search_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@drawable/border_theme_red"
-                android:clickable="true"
-                android:theme="@style/SeachViewStyle"
-                app:defaultQueryHint="Search.." />
-        </LinearLayout>
--->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5.1"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="6">
+            android:weightSum="10">
 
             <LinearLayout
-                android:id="@+id/seller_table_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:weightSum="6">
 
-                android:orientation="vertical">
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:clickable="true"
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:background="#50000000" />
+                    android:foreground="@drawable/custom_ripple_view"
+                    android:padding="10dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="2dp"
-                    android:weightSum="2">
-
-                    <TextView
-                        style="@style/CustomHeaderBlacktextStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:textSize="15sp"
-                        android:text="Userame" />
+                        android:orientation="vertical"
+                        android:weightSum="3.5">
 
-                    <TextView
-                        style="@style/CustomHeaderBlacktextStyle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:src="@drawable/left_arrow" />
+
+                        <TextView
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.5"
+                            android:gravity="center"
+                            android:text="Left Amount Remaing" />
+
+                        <TextView
+                            android:id="@+id/tv_leftRemaingAmount"
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="0 PKR"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+
+                    android:clickable="true"
+                    android:foreground="@drawable/custom_ripple_view"
+                    android:padding="10dp"
+
+                    app:cardBackgroundColor="@color/colorGray">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:textSize="15sp"
-                        android:text="Paid Amount" />
+                        android:orientation="vertical"
+                        android:weightSum="3.5">
 
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:src="@drawable/right_arrow" />
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:background="#50000000" />
+                        <TextView
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.5"
+                            android:gravity="center"
+                            android:text="Right Remaining Amount" />
+
+                        <TextView
+                            android:id="@+id/tv_rightRemaingAmount"
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+
+
+                    android:clickable="true"
+                    android:foreground="@drawable/custom_ripple_view"
+
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="3.5">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:src="@drawable/multiple_users_silhouette" />
+
+                        <TextView
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.5"
+                            android:gravity="center"
+                            android:text="Total Left Users" />
+
+                        <TextView
+                            android:id="@+id/tv_totalLeftUsers"
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:clickable="true"
+
+                    android:foreground="@drawable/custom_ripple_view"
+                    android:padding="10dp"
+                    app:cardBackgroundColor="@color/colorGray">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="3.5">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:src="@drawable/multiple_users_silhouette" />
+
+                        <TextView
+
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.5"
+                            android:gravity="center"
+                            android:text="Total Right Users" />
+
+                        <TextView
+                            android:id="@+id/tv_totalRightUsers"
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="0 "
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+
+
+                    android:clickable="true"
+                    android:foreground="@drawable/custom_ripple_view"
+
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="3.5">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:src="@drawable/money_bag" />
+
+                        <TextView
+
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.5"
+                            android:gravity="center"
+                            android:text="Total Amount Right Users" />
+
+                        <TextView
+                            android:id="@+id/tv_totalAmountRightUsers"
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:clickable="true"
+
+
+                    android:foreground="@drawable/custom_ripple_view"
+                    android:padding="10dp"
+
+                    app:cardBackgroundColor="@color/colorGray">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:weightSum="3.5">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:src="@drawable/money_bag" />
+
+                        <TextView
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.5"
+                            android:gravity="center"
+                            android:text="Total Amount Left Users" />
+
+                        <TextView
+                            android:id="@+id/tv_totalAmountLeftUsers"
+                            style="@style/CustomBlacktextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_no_data"
-                android:layout_gravity="center"
+                android:id="@+id/fragment_title"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4"
-                android:visibility="gone"
-                android:fontFamily="@font/oswald_regular"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:text="No member found"
-                android:textColor="#cac4c4"
-                />
+                android:layout_marginLeft="8dp"
+                android:layout_weight=".8"
+                android:fontFamily="@font/ralewayregular"
+                android:gravity="center_vertical"
+                android:text="Reffered Member"
+                android:textColor="@color/colorRed"
+                android:textSize="14sp" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recylcer_down_member"
+            <!--      <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="0dp"
+                      android:layout_weight=".7"
+                      android:gravity="center"
+                      android:orientation="horizontal">
+
+                      <android.support.v7.widget.SearchView
+                          android:id="@+id/search_view"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="3dp"
+                          android:background="@drawable/border_theme_red"
+                          android:clickable="true"
+                          android:theme="@style/SeachViewStyle"
+                          app:defaultQueryHint="Search.." />
+                  </LinearLayout>
+          -->
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5"
-                android:layout_margin="2dp"
+                android:layout_margin="5dp"
+                android:layout_weight="5.2"
+                android:orientation="vertical"
+                android:weightSum="6">
 
-                android:scrollbars="horizontal" />
+                <LinearLayout
+                    android:id="@+id/seller_table_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:background="#50000000" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            style="@style/CustomHeaderBlacktextStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Userame"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            style="@style/CustomHeaderBlacktextStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Paid Amount"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:background="#50000000" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_no_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/oswald_regular"
+                    android:gravity="center"
+                    android:text="No member found"
+                    android:textColor="#cac4c4"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recylcer_down_member"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    />
+
+            </LinearLayout>
 
 
         </LinearLayout>
-
-
-    </LinearLayout>
 
         <LinearLayout
             android:id="@+id/progressbar_direct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:background="#d4121111"
+            android:gravity="center"
+            android:visibility="gone"
 
             >
+
             <ProgressBar
                 android:layout_width="50dp"
-                android:gravity="center"
                 android:layout_height="50dp"
-                />
+                android:gravity="center" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

@@ -1,8 +1,11 @@
 package com.redcodetechnologies.mlm.ui.network
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -49,7 +52,6 @@ class AddMemberActivity : AppCompatActivity() {
     var listPackages: ArrayList<Packages> = ArrayList()
     var userModel: UserTree = UserTree()
     var downlinerAdapter: DownlinerSpinnerAdapter? = null;
-    var packageAdapter: PackageSpinnerAdapter? = null;
 
     var id: Int? = null
     lateinit var prefs: SharedPrefs
@@ -130,7 +132,7 @@ class AddMemberActivity : AppCompatActivity() {
 
         }
         btn_add_image.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, REQUSET_GALLERY_CODE)
         }
@@ -332,12 +334,12 @@ class AddMemberActivity : AppCompatActivity() {
             return
         }
 
-        if (userdocumentImage == null) {
+       /* if (userdocumentImage == null) {
             btn_add_image.error = Html.fromHtml("<font color='white'>Please Upload document image!</font>")
             btn_add_image.requestFocus()
             return
         }
-
+*/
         /*if (package_price == null || userPackage == null) {
             Apputils.showMsg(this@AddMemberActivity, "Please select package")
             return
@@ -366,9 +368,9 @@ class AddMemberActivity : AppCompatActivity() {
         userModel.email = ed_email.text.toString()
         userModel.accountNumber = ""
         userModel.downlineMemberId = if (downlineMemberId == null) null else downlineMemberId.toString()
-        userModel.documentImage = userdocumentImage!! //from spinner
+        userModel.documentImage = if(userdocumentImage==null) null else userdocumentImage //from spinner
 
-        confirmationDialog()
+            confirmationDialog()
 
     }
 
@@ -611,9 +613,8 @@ class AddMemberActivity : AppCompatActivity() {
                             isVerified = false
                             btn_ok.isEnabled = false
                             alert_text.visibility = View.VISIBLE
-                            val mmsg = "Account not verfied"
+                            val mmsg = "Already exists on $msg of this person"
                             alert_text.text = "($mmsg)"
-                            Apputils.showMsg(this@AddMemberActivity, mmsg!!)
                         }
 
                     }
@@ -665,10 +666,8 @@ class AddMemberActivity : AppCompatActivity() {
                             isVerified = false
                             btn_ok.isEnabled = false
                             alert_text.visibility = View.VISIBLE
-
-                            val mmsg = "Account not verfied"
+                            val mmsg = "Already exists on $msg of this person"
                             alert_text.text = "($mmsg)"
-                            Apputils.showMsg(this@AddMemberActivity, mmsg!!)
                         }
 
                     }
@@ -716,10 +715,17 @@ class AddMemberActivity : AppCompatActivity() {
             println("data " + data.data)
             val imageUri = data.data
             if (data.data != null) {
-                val f = File(imageUri.getPath())
-                val imageName = f.getPath().split(":")[1]
-                btn_add_image.setText(imageName)
-                userdocumentImage = imageTostring(MediaStore.Images.Media.getBitmap(baseContext.getContentResolver(), data.data))
+
+                try {
+                    userdocumentImage = imageTostring(MediaStore.Images.Media.getBitmap(baseContext.getContentResolver(), data.data))
+                    val arr = getRealPathFromURI(this@AddMemberActivity, imageUri).split("/")
+                    val imageName = arr[arr.size - 1]
+                    btn_add_image.setText(imageName)
+                    btn_add_image.setText(imageName)
+
+                } catch (e: Exception) {
+                    btn_add_image.setText("image selected")
+                }
             }
 
 
@@ -732,6 +738,19 @@ class AddMemberActivity : AppCompatActivity() {
         val imageBytes = outStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
-
+    fun getRealPathFromURI(context: Context, contentUri: Uri): String {
+        var cursor: Cursor? = null
+        try {
+            val proj = arrayOf<String>(MediaStore.Images.Media.DATA)
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null)
+            val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(column_index)
+        } finally {
+            if (cursor != null) {
+                cursor.close()
+            }
+        }
+    }
 
 }

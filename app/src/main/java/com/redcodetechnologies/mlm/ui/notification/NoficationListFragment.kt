@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.google.gson.Gson
 import com.redcodetechnologies.mlm.ui.drawer.DrawerActivity
 import com.redcodetechnologies.mlm.R
 import com.redcodetechnologies.mlm.models.MyNotification
@@ -18,6 +20,8 @@ import com.redcodetechnologies.mlm.models.NotificationModal
 import com.redcodetechnologies.mlm.models.wallet.TransactionModal
 import com.redcodetechnologies.mlm.retrofit.MyApiRxClint
 import com.redcodetechnologies.mlm.utils.Apputils
+import com.redcodetechnologies.mlm.utils.ServiceError
+import com.redcodetechnologies.mlm.utils.ServiceListener
 import com.redcodetechnologies.mlm.utils.SharedPrefs
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -60,7 +64,7 @@ class NoficationListFragment : Fragment() {
 
         recylcer_notification!!.layoutManager = LinearLayoutManager(activity!!, LinearLayout.VERTICAL, false)
         adapter = NotificationAdapter(activity!!, list){obj->
-            //action
+            showNotificationDialog(obj)
         }
         recylcer_notification!!.adapter = adapter
 
@@ -83,6 +87,33 @@ class NoficationListFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer)
     }
+
+
+    private fun showNotificationDialog(obj :MyNotification) {
+
+        val view: View = LayoutInflater.from(activity!!).inflate(R.layout.dialog_notification, null)
+        val alertBox = android.support.v7.app.AlertDialog.Builder(activity!!)
+        alertBox.setView(view)
+        alertBox.setCancelable(false)
+        val dialog = alertBox.create()
+        //dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        val tvtitle: TextView = view.findViewById(R.id.tv_title)
+        val tvdescription: TextView = view.findViewById(R.id.tv_des)
+        val btn_save: Button = view.findViewById(R.id.btn_save)
+        tvtitle.setText(obj.NotificationName)
+        btn_save.visibility = View.INVISIBLE
+        val btn_dismiss: Button = view.findViewById(R.id.btn_dismiss)
+
+        btn_dismiss.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,2f)
+        tvdescription.setText(obj.NotificationDescription)
+        btn_dismiss.setText("OK")
+        btn_dismiss.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+
+    }
+
 
     fun getObserver(): Observer<ArrayList<MyNotification>> {
 
@@ -114,6 +145,7 @@ class NoficationListFragment : Fragment() {
             }
         }
     }
+
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         (activity as DrawerActivity).getSupportActionBar()?.setTitle("Notifications")

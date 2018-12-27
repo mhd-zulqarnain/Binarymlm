@@ -19,6 +19,7 @@
         android:textSize="17sp"
         android:id="@+id/tv_header"
         android:paddingTop="7dp"
+        android:paddingLeft="8dp"
         />
 
     <LinearLayout

@@ -44,10 +44,15 @@ class AdvertismentAdapter(var ctx: Context, var type: String, var list: ArrayLis
         fun bindView(addsmodal: Advertisement ) {
             tv_first_image = itemView.findViewById(R.id.first_image)
 
-            if (addsmodal.AdvertisementImage != null) {
+            if (addsmodal.AdvertisementImage != "" ) {
                 val decodedImage= Apputils.decodeFromBase64(addsmodal.AdvertisementImage!!)
+                if(decodedImage!=null)
                 tv_first_image!!.setImageBitmap(decodedImage)
             }
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 }

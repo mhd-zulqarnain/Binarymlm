@@ -27,7 +27,7 @@
                 android:imeOptions="actionDone"
                 android:paddingLeft="5dp"
                 android:text="Message"
-                android:textColor="#2a2828"
+                android:textColor="#9b2a2828"
                 android:textSize="18sp"
                 android:background="@null"/>
 
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:background="#C42D2D"
+            android:background="#cac42d2d"
             android:fontFamily="@font/ralewayregular"
             android:gravity="center"
             android:text="Ok"

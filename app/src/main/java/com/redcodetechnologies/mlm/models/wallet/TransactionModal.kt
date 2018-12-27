@@ -34,7 +34,8 @@ data class TransactionModal(
 
         var AdminDebit: String? = null,
 
-        var AdminTransactionName: String? = null
+        var AdminTransactionName: String? = null,
+        var isWithdrawalOpen: Boolean? = null
 
 
         )

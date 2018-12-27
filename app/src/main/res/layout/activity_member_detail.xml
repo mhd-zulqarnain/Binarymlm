@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -29,99 +31,104 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+        app:cardElevation="16dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image_downliner"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/executive"
-            android:layout_gravity="center"
-            />
-
-        <TextView
-            android:id="@+id/tv_username"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mr Khan"
-            android:textSize="25sp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/oswald_bold"
-            />
+            android:layout_margin="10dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_phone"
-            style="@style/CustomBlacktextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone : 01234567891"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image_downliner"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/executive" />
 
-        <TextView
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/oswald_bold"
+                android:text="Mr Khan"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/CustomBlacktextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Phone : 01234567891"
+                android:textSize="20sp" />
+
+            <TextView
                 android:id="@+id/tv_BankName"
-            style="@style/CustomBlacktextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bank : Not updated"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            />
+                style="@style/CustomBlacktextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Bank : Not updated"
+                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tv_SponsorName"
-            style="@style/CustomBlacktextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sponser"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            />
-        
+            <TextView
+                android:id="@+id/tv_SponsorName"
+                style="@style/CustomBlacktextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Sponser"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
         <android.support.v7.widget.CardView
             android:id="@+id/view_show_tree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="10dp"
             android:clickable="true"
-            app:cardBackgroundColor="#ede4e4"
             android:foreground="@drawable/custom_ripple_view"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="#ede4e4"
+
+
             >
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp"
-                android:gravity="center"
                 android:layout_gravity="center"
-                >
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <TextView
+                    style="@style/CustomBlacktextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/CustomBlacktextStyle"
                     android:layout_gravity="center"
-                    android:text="View Tree"
-                    android:gravity="center"
                     android:drawableRight="@drawable/tree"
-                    />
+                    android:gravity="center"
+                    android:text="View Tree" />
 
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
-    </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

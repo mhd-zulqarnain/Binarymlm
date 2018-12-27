@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:weightSum="6">
+        android:weightSum="4.5">
 
         <TextView
             android:id="@+id/tv_name"
@@ -26,14 +26,6 @@
             android:gravity="center"
             android:text="Name" />
 
-        <TextView
-            android:id="@+id/tv_phone"
-            style="@style/CustomHeaderBlacktextStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:gravity="center"
-            android:text="Phone" />
 
         <TextView
             android:id="@+id/tv_bank"
@@ -51,7 +43,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="" />
+            android:text="sponsor" />
 
         <TextView
             android:id="@+id/tv_paid"
