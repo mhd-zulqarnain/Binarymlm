@@ -32,15 +32,14 @@ class ViewPagerAdapterWD internal constructor(fm: FragmentManager) : FragmentSta
     override fun getPageTitle(position: Int): CharSequence? {
         var  title = ""
         if (position == 0)
-            title= "Pending Withdrawal Requests"
+            title= "Pending "
         if(position == 1)
-            title =  "Approved - Pending Payment"
+            title =  "Approved"
         if(position == 2)
-            title =  "Approved - Paid"
+            title =  "Paid"
         if(position == 3)
-            title =  "Rejected Requests"
+            title =  "Rejected "
         return title
-
 
 
     }

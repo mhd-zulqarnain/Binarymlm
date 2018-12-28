@@ -326,5 +326,5 @@ class DashBoardFragment : Fragment() {
         adsdisposable?.dispose()
         super.onDestroyView()
     }
-;;;;;;;;;''
+
 }
