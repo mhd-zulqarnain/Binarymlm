@@ -38,6 +38,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="2dp"
                         android:layout_weight="2"
+                        app:cardElevation="16dp"
                         android:clickable="true"
                         android:foreground="@drawable/custom_ripple_view"
                         android:padding="10dp">
@@ -86,7 +87,7 @@
 
                         android:clickable="true"
                         android:foreground="@drawable/custom_ripple_view"
-
+                        app:cardElevation="16dp"
                         android:padding="10dp">
 
                         <LinearLayout
@@ -133,7 +134,7 @@
 
                         android:clickable="true"
                         android:foreground="@drawable/custom_ripple_view"
-
+                        app:cardElevation="16dp"
                         android:padding="10dp">
 
                         <LinearLayout
@@ -188,6 +189,7 @@
                         android:layout_margin="2dp"
                         android:layout_weight="2"
                         android:clickable="true"
+                        app:cardElevation="16dp"
                         android:foreground="@drawable/custom_ripple_view"
                         android:padding="10dp">
 
@@ -235,7 +237,7 @@
 
                         android:clickable="true"
                         android:foreground="@drawable/custom_ripple_view"
-
+                        app:cardElevation="16dp"
                         android:padding="10dp">
 
                         <LinearLayout
@@ -282,7 +284,7 @@
 
                         android:clickable="true"
                         android:foreground="@drawable/custom_ripple_view"
-
+                        app:cardElevation="16dp"
                         android:padding="10dp">
 
                         <LinearLayout
@@ -337,6 +339,7 @@
                         android:layout_margin="2dp"
                         android:layout_weight="2"
                         android:clickable="true"
+                        app:cardElevation="16dp"
                         android:foreground="@drawable/custom_ripple_view"
                         android:padding="10dp">
 
@@ -383,6 +386,7 @@
                         android:layout_margin="2dp"
                         android:layout_weight="2"
                         android:clickable="true"
+                        app:cardElevation="16dp"
                         android:foreground="@drawable/custom_ripple_view"
                         android:padding="10dp">
 
@@ -429,7 +433,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="2dp"
                         android:layout_weight="2"
-
+                        app:cardElevation="16dp"
                         android:clickable="true"
                         android:foreground="@drawable/custom_ripple_view"
 
@@ -508,6 +512,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="2dp"
                         android:layout_weight="2"
+                        app:cardElevation="16dp"
                         android:clickable="true"
                         android:foreground="@drawable/custom_ripple_view"
                         android:padding="10dp">
@@ -558,6 +563,7 @@
                         android:layout_margin="2dp"
                         android:layout_weight="2"
                         android:clickable="true"
+                        app:cardElevation="16dp"
                         android:foreground="@drawable/custom_ripple_view"
                         android:padding="10dp">
 
@@ -604,7 +610,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="2dp"
                         android:layout_weight="2"
-
+                        app:cardElevation="16dp"
                         android:clickable="true"
                         android:foreground="@drawable/custom_ripple_view"
 
@@ -655,10 +661,9 @@
                         android:layout_height="match_parent"
                         android:layout_margin="2dp"
                         android:layout_weight="2"
-
+                        app:cardElevation="16dp"
                         android:clickable="true"
                         android:foreground="@drawable/custom_ripple_view"
-
                         android:padding="10dp">
 
                         <LinearLayout

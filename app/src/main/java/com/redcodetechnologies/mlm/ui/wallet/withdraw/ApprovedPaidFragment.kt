@@ -76,6 +76,11 @@ class ApprovedPaidFragment : Fragment() {
             Apputils.showMsg(activity!!, "Network error")
             return
         }
+
+        if(!wdList.isEmpty()){
+            wdList.clear()
+        }
+
         val thisMonthtransaction = getThisMonthObserver()
         val thismothObservable: Observable<ArrayList<WithdrawalRequestModal>> = MyApiRxClint.getInstance()!!.getService()!!.getApprovedPaid(id!!)
         thismothObservable.subscribeOn(Schedulers.io())

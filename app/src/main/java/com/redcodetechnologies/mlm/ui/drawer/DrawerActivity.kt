@@ -47,7 +47,7 @@ import com.redcodetechnologies.mlm.ui.videos.vediopack.VideoCategoryFragment
 import com.redcodetechnologies.mlm.ui.wallet.EWalletSummaryFragment
 import com.redcodetechnologies.mlm.ui.wallet.TransactionFragment
 import com.redcodetechnologies.mlm.ui.wallet.WithdrawalFundFragment
-import com.redcodetechnologies.mlm.ui.wallet.withdraw.MyWithdrawalRequestFragment
+import com.redcodetechnologies.mlm.ui.wallet.MyWithdrawalRequestFragment
 import com.redcodetechnologies.mlm.utils.Apputils
 import com.redcodetechnologies.mlm.utils.ServiceError
 import com.redcodetechnologies.mlm.utils.ServiceListener

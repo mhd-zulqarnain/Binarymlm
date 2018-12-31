@@ -100,6 +100,7 @@ class PackageCommisionListAdapter(var ctx: Context, var type: String, var list: 
                 } else {
                     tv_date!!.text = "Paid"
                     tv_name!!.text = "Paid"
+                    btn_ok!!.visibility = View.INVISIBLE
                     tv_date!!.setTextColor(Color.parseColor("#FF307B44"));
                 }
 
