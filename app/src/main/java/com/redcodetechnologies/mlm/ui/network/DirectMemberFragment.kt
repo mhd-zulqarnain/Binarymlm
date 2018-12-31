@@ -146,20 +146,20 @@ class DirectMemberFragment : Fragment() {
                             var obj: MakeTableData = response.body()!!
 
                             if (obj.leftRemaingAmount != null)
-                                tv_leftRemaingAmount!!.text = obj.leftRemaingAmount!!.split("")[0];
+                                tv_leftRemaingAmount!!.text = obj.leftRemaingAmount!!.split(".")[0]+" PKR";
 
                             if (obj.rightRemaingAmount != null)
-                                tv_rightRemaingAmount!!.text = obj.rightRemaingAmount!!.split("")[0]
+                                tv_rightRemaingAmount!!.text = obj.rightRemaingAmount!!.split(".")[0]+" PKR"
 
                             if (obj.totalLeftUsers != null)
-                                tv_totalLeftUsers!!.text = obj.totalLeftUsers!!.split("")[0]
+                                tv_totalLeftUsers!!.text = obj.totalLeftUsers!!.split(".")[0]
 
                             if (obj.totalRightUsers != null)
-                                tv_totalRightUsers!!.text = obj.totalRightUsers!!.split("")[0]
+                                tv_totalRightUsers!!.text = obj.totalRightUsers!!.split(".")[0]
                             if (obj.totalAmountLeftUsers != null)
-                                tv_totalAmountRightUsers!!.text = obj.totalAmountLeftUsers!!.split("")[0]
+                                tv_totalAmountRightUsers!!.text = obj.totalAmountLeftUsers!!.split(".")[0]+" PKR"
                             if (obj.totalAmountRightUsers != null)
-                                tv_totalAmountLeftUsers!!.text = obj.totalAmountRightUsers!!.split("")[0]
+                                tv_totalAmountLeftUsers!!.text = obj.totalAmountRightUsers!!.split(".")[0]+" PKR"
 
                         }
                         progrees_direct!!.visibility = View.GONE
